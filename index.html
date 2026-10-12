@@ -206,23 +206,20 @@
           
           <!-- Image (Right on desktop) -->
           <div class="hero-image-wrapper">
-            <!-- WHY ilustrasi SVG, bukan foto: aset hero yang lama
-                 (JPEG 1280x960 267 KB + 8 berkas varian untuk empat lebar)
-                 dibuat hanya supaya satu gambar tetap tajam di semua ukuran
-                 layar. Browser mengunduh satu saja (64 KB untuk 800w WebP),
-                 tapi repo harus menyimpan 644 KB untuk itu. SVG vektor hanya
-                 butuh satu berkas 4,4 KB untuk semua lebar, tetap tajam di
-                 layar retina, dan tidak butuh srcset sama sekali - cukup satu
-                 tag img polos. -->
+            <!-- WHY foto hero: atas permintaan Mas (2026-10-12), hero pakai
+                 foto realistik tugboat towing tongkang, bukan ilustrasi SVG.
+                 srcset + sizes supaya browser unduh varian sesuai lebar layar. -->
             <!-- WHY fetchpriority="high": gambar ini adalah elemen LCP,
                  jadi browser boleh mulai mengunduhnya sebelum CSS dan
                  JavaScript selesai dimuat. -->
             <img
-              src="assets/hero-illustration.svg"
-              alt="Ilustrasi vektor: kapal tugs berwarna biru meng towing tongkang di laut bergelombang, dengan bukit dan matahari di kejauhan"
+              src="assets/hero-tugboat-800w.jpg"
+              srcset="assets/hero-tugboat-400w.webp 400w, assets/hero-tugboat-800w.webp 800w, assets/hero-tugboat.webp 1920w"
+              sizes="(max-width: 768px) 100vw, 50vw"
+              alt="Tugboat merah menarik tongkang muatan di laut saat matahari terbenam"
               class="hero-image"
-              width="1200"
-              height="900"
+              width="1920"
+              height="1280"
               fetchpriority="high"
               decoding="async"
             >
