@@ -1,0 +1,918 @@
+{
+  "assets/vessels/FCB001/main.jpg": {
+    "width": 1600,
+    "height": 914,
+    "variants": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webp": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webpFull": 1600
+  },
+  "assets/vessels/LCT002/gallery-1.jpg": {
+    "width": 1066,
+    "height": 1303,
+    "variants": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webp": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webpFull": 1066
+  },
+  "assets/vessels/LCT002/main.jpg": {
+    "width": 1600,
+    "height": 929,
+    "variants": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webp": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webpFull": 1600
+  },
+  "assets/vessels/TB002/main.jpg": {
+    "width": 1210,
+    "height": 1600,
+    "variants": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webp": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webpFull": 1210
+  },
+  "assets/vessels/TB003/gallery-1.jpg": {
+    "width": 1082,
+    "height": 1600,
+    "variants": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webp": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webpFull": 1082
+  },
+  "assets/vessels/TB003/main.jpg": {
+    "width": 1600,
+    "height": 1222,
+    "variants": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webp": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webpFull": 1600
+  },
+  "assets/vessels/TB004/gallery-1.jpg": {
+    "width": 1600,
+    "height": 1179,
+    "variants": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webp": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webpFull": 1600
+  },
+  "assets/vessels/TB004/gallery-2.jpg": {
+    "width": 1600,
+    "height": 1177,
+    "variants": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webp": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webpFull": 1600
+  },
+  "assets/vessels/TB004/main.jpg": {
+    "width": 1600,
+    "height": 1208,
+    "variants": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webp": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webpFull": 1600
+  },
+  "assets/vessels/TBSET001/gallery-1.jpg": {
+    "width": 1600,
+    "height": 870,
+    "variants": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webp": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webpFull": 1600
+  },
+  "assets/vessels/TBSET001/main.jpg": {
+    "width": 1600,
+    "height": 1563,
+    "variants": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webp": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webpFull": 1600
+  },
+  "assets/vessels/TBSET002/gallery-1.jpg": {
+    "width": 1600,
+    "height": 1182,
+    "variants": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webp": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webpFull": 1600
+  },
+  "assets/vessels/TBSET002/main.jpg": {
+    "width": 1600,
+    "height": 1190,
+    "variants": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webp": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webpFull": 1600
+  },
+  "assets/vessels/TBSET003/gallery-1.jpg": {
+    "width": 1600,
+    "height": 937,
+    "variants": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webp": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webpFull": 1600
+  },
+  "assets/vessels/TBSET003/main.jpg": {
+    "width": 1600,
+    "height": 899,
+    "variants": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webp": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webpFull": 1600
+  },
+  "assets/vessels/TBSET004/gallery-1.jpg": {
+    "width": 1600,
+    "height": 1154,
+    "variants": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webp": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webpFull": 1600
+  },
+  "assets/vessels/TBSET004/gallery-2.jpg": {
+    "width": 1600,
+    "height": 754,
+    "variants": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webp": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webpFull": 1600
+  },
+  "assets/vessels/TBSET004/main.jpg": {
+    "width": 1600,
+    "height": 846,
+    "variants": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webp": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webpFull": 1600
+  },
+  "assets/vessels/TBSET005/gallery-1.jpg": {
+    "width": 1600,
+    "height": 1193,
+    "variants": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webp": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webpFull": 1600
+  },
+  "assets/vessels/TBSET005/gallery-2.jpg": {
+    "width": 1600,
+    "height": 1179,
+    "variants": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webp": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webpFull": 1600
+  },
+  "assets/vessels/TBSET005/gallery-3.jpg": {
+    "width": 1600,
+    "height": 868,
+    "variants": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webp": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webpFull": 1600
+  },
+  "assets/vessels/TBSET005/gallery-4.jpg": {
+    "width": 1600,
+    "height": 931,
+    "variants": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webp": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webpFull": 1600
+  },
+  "assets/vessels/TBSET005/gallery-5.jpg": {
+    "width": 1600,
+    "height": 868,
+    "variants": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webp": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webpFull": 1600
+  },
+  "assets/vessels/TBSET005/gallery-6.jpg": {
+    "width": 1600,
+    "height": 1193,
+    "variants": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webp": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webpFull": 1600
+  },
+  "assets/vessels/TBSET005/gallery-7.jpg": {
+    "width": 1600,
+    "height": 1081,
+    "variants": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webp": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webpFull": 1600
+  },
+  "assets/vessels/TBSET005/main.jpg": {
+    "width": 1600,
+    "height": 1173,
+    "variants": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webp": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webpFull": 1600
+  },
+  "assets/vessels/TBSET006/gallery-1.jpg": {
+    "width": 1600,
+    "height": 1349,
+    "variants": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webp": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webpFull": 1600
+  },
+  "assets/vessels/TBSET006/gallery-2.jpg": {
+    "width": 1037,
+    "height": 1600,
+    "variants": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webp": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webpFull": 1037
+  },
+  "assets/vessels/TBSET006/gallery-3.jpg": {
+    "width": 1600,
+    "height": 1156,
+    "variants": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webp": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webpFull": 1600
+  },
+  "assets/vessels/TBSET006/gallery-4.jpg": {
+    "width": 1600,
+    "height": 788,
+    "variants": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webp": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webpFull": 1600
+  },
+  "assets/vessels/TBSET006/main.jpg": {
+    "width": 1600,
+    "height": 901,
+    "variants": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webp": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webpFull": 1600
+  },
+  "assets/vessels/TK003/gallery-1.jpg": {
+    "width": 1600,
+    "height": 1200,
+    "variants": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webp": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webpFull": 1600
+  },
+  "assets/vessels/TK003/gallery-2.jpg": {
+    "width": 1600,
+    "height": 899,
+    "variants": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webp": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webpFull": 1600
+  },
+  "assets/vessels/TK003/gallery-3.jpg": {
+    "width": 1600,
+    "height": 1200,
+    "variants": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webp": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webpFull": 1600
+  },
+  "assets/vessels/TK003/gallery-4.jpg": {
+    "width": 1600,
+    "height": 1200,
+    "variants": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webp": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webpFull": 1600
+  },
+  "assets/vessels/TK003/gallery-5.jpg": {
+    "width": 1600,
+    "height": 1200,
+    "variants": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webp": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webpFull": 1600
+  },
+  "assets/vessels/TK003/main.jpg": {
+    "width": 1600,
+    "height": 1200,
+    "variants": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webp": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webpFull": 1600
+  },
+  "assets/vessels/TK004/gallery-1.jpg": {
+    "width": 980,
+    "height": 1600,
+    "variants": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webp": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webpFull": 980
+  },
+  "assets/vessels/TK004/main.jpg": {
+    "width": 1600,
+    "height": 900,
+    "variants": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webp": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webpFull": 1600
+  },
+  "assets/vessels/TKSET001/gallery-1.jpg": {
+    "width": 1600,
+    "height": 1200,
+    "variants": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webp": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webpFull": 1600
+  },
+  "assets/vessels/TKSET001/gallery-2.jpg": {
+    "width": 752,
+    "height": 1389,
+    "variants": [
+      150,
+      300,
+      400
+    ],
+    "webp": [
+      150,
+      300,
+      400
+    ],
+    "webpFull": 752
+  },
+  "assets/vessels/TKSET001/main.jpg": {
+    "width": 1600,
+    "height": 983,
+    "variants": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webp": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webpFull": 1600
+  },
+  "assets/vessels/TNK002/main.jpg": {
+    "width": 1600,
+    "height": 889,
+    "variants": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webp": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webpFull": 1600
+  },
+  "assets/hero-vessel.jpg": {
+    "width": 1600,
+    "height": 900,
+    "variants": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webp": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webpFull": 1600
+  },
+  "assets/vessels/TBSET007/main.jpg": {
+    "width": 1536,
+    "height": 1024,
+    "variants": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webp": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webpFull": 1536
+  },
+  "assets/vessels/TBSET008/main.jpg": {
+    "width": 1536,
+    "height": 1024,
+    "variants": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webp": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webpFull": 1536
+  },
+  "assets/vessels/TBSET009/main.jpg": {
+    "width": 1536,
+    "height": 1024,
+    "variants": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webp": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webpFull": 1536
+  },
+  "assets/vessels/TBSET010/main.jpg": {
+    "width": 1600,
+    "height": 868,
+    "variants": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webp": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webpFull": 1600
+  },
+  "assets/vessels/TBSET011/main.jpg": {
+    "width": 1448,
+    "height": 1086,
+    "variants": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webp": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webpFull": 1448
+  },
+  "assets/vessels/TK005/main.jpg": {
+    "width": 1536,
+    "height": 1024,
+    "variants": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webp": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webpFull": 1536
+  },
+  "assets/vessels/TK006/main.jpg": {
+    "width": 1536,
+    "height": 1024,
+    "variants": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webp": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webpFull": 1536
+  },
+  "assets/vessels/TK007/main.jpg": {
+    "width": 1536,
+    "height": 1024,
+    "variants": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webp": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webpFull": 1536
+  },
+  "assets/vessels/TB005/main.jpg": {
+    "width": 1536,
+    "height": 1024,
+    "variants": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webp": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webpFull": 1536
+  },
+  "assets/vessels/TB006/main.jpg": {
+    "width": 1536,
+    "height": 1024,
+    "variants": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webp": [
+      150,
+      300,
+      400,
+      800
+    ],
+    "webpFull": 1536
+  }
+}

@@ -1,0 +1,73 @@
+# WHY file ini ada
+# ------------------------------------------------------------------
+# Padanan .htaccess untuk host yang TIDAK membaca .htaccess:
+# Cloudflare Pages, Netlify, dan sebagian host statis lainnya.
+#
+# PENTING: DEPLOYMENT.md menyebut GitHub Pages sebagai target utama,
+# dan GitHub Pages MENGABAIKAN .htaccess. Kalau nanti pindah ke
+# Cloudflare Pages (yang disebut di DEPLOYMENT.md sebagai masking),
+# header keamanan di .htaccess TIDAK ikut terbawa tanpa file ini.
+# Dua-duanya harus selalu sinkron.
+#
+# Cloudflare Pages dan Netlify sama-sama memakai _headers dengan
+# sintaks hampir identik. Opsi yang tidak didukung salah satu host
+# harus dihapus dari sini, bukan hanya di .htaccess.
+
+/*
+  # ---------- Header keamanan ----------
+  # CSP sengaja TIDAK ditulis di sini: CSP sudah ada per-halaman
+  # sebagai <meta http-equiv> dengan hash untuk inline script
+  # theme-boot. Header CSP dari host akan menggandakan, dan kedua
+  # sumbernya harus cocok persis. Yang TIDAK bisa datang dari meta
+  # adalah frame-ancestors - itu sebabnya header ini ada.
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: SAMEORIGIN
+  Permissions-Policy: geolocation=(), microphone=(), camera=()
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+
+  # ---------- Cache ----------
+  # HTML dan data kapal berubah setiap kali armada diperbarui, jadi
+  # selalu dicek ulang. Aset statis boleh ditahan lebih lama.
+  Cache-Control: public, max-age=0, must-revalidate
+
+/vessel-*.html
+  Cache-Control: public, max-age=3600
+
+/*.webp
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.jpg
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.jpeg
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.png
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.svg
+  Cache-Control: public, max-age=31536000, immutable
+
+/css/*
+  Cache-Control: public, max-age=3600
+
+/js/*
+  Cache-Control: public, max-age=3600
+
+/data/*.json
+  Cache-Control: no-cache
+
+# Manifest PWA. Tipe kontennya harus ditulis eksplisit: beberapa host
+# menyajikannya sebagai application/octet-stream, dan browser mengabaikan
+# manifest dengan tipe seperti itu - pemasangan PWA gagal senyap.
+/manifest.webmanifest
+  Content-Type: application/manifest+json
+  Cache-Control: public, max-age=3600
+
+# Service worker tidak boleh ditahan lama: selama salinan lama masih
+# dianggap segar, pembaruan strategi cache tidak pernah sampai ke
+# pengunjung. Aturan /* di atas sudah must-revalidate; baris ini membuat
+# niatnya eksplisit supaya tidak terhapus saat urutan aturan diubah.
+/sw.js
+  Cache-Control: public, max-age=0, must-revalidate

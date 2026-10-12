@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+
+  <!-- WHY: CSP halaman offline SENGAJA TIDAK memakai hash skrip anti-flash.
+       Halaman ini self-contained dan punya DUA blok skrip inline (anti-flash
+       + logika halaman), sama seperti 404.html. Menurut spesifikasi CSP3,
+       begitu daftar sumber memuat hash, 'unsafe-inline' DIABAIKAN - sehingga
+       blok skrip kedua akan diblokir diam-diam dan tombol tema serta tombol
+       "Coba Lagi" mati tanpa satu pun error yang terlihat.
+       Halaman 8 lainnya memakai hash dan tanpa 'unsafe-inline'; keduanya
+       punya mekanisme yang benar, dan tools/validate-meta.js menjaga agar
+       tidak ada halaman yang memakai keduanya sekaligus. -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; font-src 'self'; base-uri 'self'; object-src 'none'">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <!-- WHY: Dua meta theme-color (terang & gelap). Nilainya harus sama persis
+       dengan applyTheme() di js/theme.js - tools/validate-meta.js menjaga itu. -->
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0f172a">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <!-- WHY: Skrip anti-flash tema, WAJIB inline dan identik byte-per-byte
+       dengan tools/theme-boot.inline.js (disalin oleh skrip, bukan disunting
+       tangan). js/theme.js memakai defer sehingga baru jalan setelah HTML
+       selesai diurai - tanpa skrip ini pengunjung bertema gelap melihat
+       kedipan putih. tools/validate-meta.js membandingkan isinya. -->
+  <script>
+/* WHY: Skrip ini WAJIB inline di <head> dan berjalan sebelum halaman
+ * digambar. js/theme.js memakai defer, jadi baru jalan setelah HTML
+ * selesai diurai - waktu itu cukup untuk menampilkan kedipan putih
+ * pada pengunjung bertema gelap. Skrip ini juga yang menulis theme-color
+ * sesuai tema aktif, sehingga warna address bar tidak sempat salah.
+ * Hash CSP-nya ada di tools/validate-meta.js dan WAJIB ikut diperbarui
+ * setiap kali isi skrip ini berubah. */
+(function () {
+  try {
+    var t = localStorage.getItem('kapalpro-theme');
+    // WHY: Default tetap light, tidak mengikuti sistem (sama seperti
+    // js/theme.js) karena foto kapal & kartu produk dirancang untuk
+    // latar terang.
+    t = (t === 'dark' || t === 'light') ? t : 'light';
+    document.documentElement.setAttribute('data-theme', t);
+    // WHY: Dua meta theme-color (light & dark) membiarkan browser
+    // memilih sendiri sebelum JavaScript jalan. Setelah tema diketahui,
+    // keduanya ditulis ulang agar warna chrome pasti sama dengan tema.
+    var m = document.querySelectorAll('meta[name="theme-color"]');
+    for (var i = 0; i < m.length; i++) {
+      m[i].setAttribute('content', t === 'dark' ? '#0f172a' : '#ffffff');
+    }
+  } catch (e) {}
+})();
+  </script>
+
+  <title>Anda Sedang Offline | KapalPro</title>
+  <meta name="description" content="Koneksi internet terputus. Halaman ini ditampilkan oleh KapalPro saat perangkat Anda sedang offline; sambungkan kembali untuk melanjutkan.">
+  <!-- WHY noindex: halaman ini hanya muncul dari service worker, tidak
+       pernah ditautkan dari navigasi biasa, dan isinya tidak berguna
+       sebagai hasil pencarian. -->
+  <meta name="robots" content="noindex, follow">
+  <!-- CATATAN: <link rel="manifest"> dan apple-touch-icon TIDAK ada di
+       markup, berbeda dari halaman lain. Service worker menyajikan berkas
+       ini pada URL apa pun yang gagal dimuat (mis. /kapalpro/berita/2026),
+       dan keduanya dipasang skrip di akhir halaman begitu akar situs
+       diketahui - persis alasan 404.html juga self-contained.
+       WHY favicon BEDA: browser meminta ikon tab SEBELUM JavaScript
+       jalan (baik dari link di markup maupun /favicon.ico bila tidak ada
+       link sama sekali), sehingga link icon harus statis. Root-absolute
+       (/assets/...) aman di URL sedalam apa pun - yang merusak hanya
+       rujukan RELATIF. Tanpa link ini, setiap kunjungan offline menghasilkan
+       satu error 404 /favicon.ico di console, tepat ketika orang sedang
+       mencari tahu kenapa situs tidak mau terbuka. -->
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+
+  <style>
+    /* ============================================================
+       Halaman offline - gaya self-contained
+       WHY inline: berkas ini disajikan service worker pada URL apa pun,
+       jadi <link rel="stylesheet" href="css/style.css?v=..."> bisa
+       menunjuk path yang tidak ada. Palet di bawah adalah subset dari
+       css/style.css dan sengaja memakai nilai yang sama supaya halaman
+       ini terasa seperti bagian dari situs, bukan halaman error asing.
+       ============================================================ */
+    :root {
+      /* WHY: color-scheme membuat scrollbar dan kontrol native browser
+         ikut gelap, bukan putih. */
+      color-scheme: light;
+
+      /* WHY: Safe-area inset harus dideklarasikan ulang di sini karena
+         css/style.css tidak dimuat. env() selalu 0 di perangkat tanpa
+         notch, jadi deklarasi ini aman di mana saja. */
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-right: env(safe-area-inset-right, 0px);
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+      --safe-left: env(safe-area-inset-left, 0px);
+
+      --primary-50: #eff6ff;
+      --primary-100: #dbeafe;
+      --primary-200: #bfdbfe;
+      --primary-400: #60a5fa;
+      --primary-500: #2563eb;
+      --primary-600: #1d4ed8;
+      --primary-700: #1e40af;
+      --primary-900: #1e3a5f;
+      --gray-50: #f8fafc;
+      --gray-100: #f1f5f9;
+      --gray-200: #e2e8f0;
+      --gray-300: #cbd5e1;
+      --gray-400: #94a3b8;
+      --gray-500: #64748b;
+      --gray-600: #475569;
+      --gray-700: #334155;
+      --gray-800: #1e293b;
+      --gray-900: #0f172a;
+    }
+
+    [data-theme="dark"] {
+      color-scheme: dark;
+
+      --bg: var(--gray-900);
+      --bg-card: var(--gray-800);
+      --text: var(--gray-50);
+      --text-secondary: var(--gray-300);
+      /* WHY gray-400, bukan gray-500: gray-500 di atas kartu gelap
+         (gray-800) hanya 3.07:1 - gagal AA. gray-400 = 5.71:1. */
+      --text-muted: var(--gray-400);
+      --border: var(--gray-700);
+      --badge-bg: var(--primary-900);
+      --badge-text: var(--primary-200);
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+    }
+
+    [data-theme="light"] {
+      color-scheme: light;
+
+      --bg: var(--gray-50);
+      --bg-card: #ffffff;
+      --text: var(--gray-900);
+      --text-secondary: var(--gray-600);
+      /* WHY gray-500, bukan gray-400: gray-400 di atas putih hanya
+         2.56:1 - gagal AA. gray-500 = 4.76:1. */
+      --text-muted: var(--gray-500);
+      --border: var(--gray-200);
+      --badge-bg: var(--primary-100);
+      --badge-text: var(--primary-700);
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { font-size: 16px; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      transition: background-color 200ms ease, color 200ms ease;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: -9999px;
+      top: 0;
+      background: var(--primary-600);
+      color: #fff;
+      padding: 12px 20px;
+      border-radius: 0 0 8px 0;
+      text-decoration: none;
+      z-index: 100;
+    }
+    .skip-link:focus { left: 0; }
+
+    .container {
+      width: 100%; max-width: 1280px; margin: 0 auto;
+      padding-left: max(24px, var(--safe-left));
+      padding-right: max(24px, var(--safe-right));
+    }
+
+    /* Header */
+    .header {
+      background-color: var(--bg-card);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 0;
+      /* WHY: Padding atas memakai inset notch supaya logo tidak tertutup
+         status bar di iPhone. */
+      padding-top: calc(16px + var(--safe-top));
+      transition: background-color 200ms ease;
+    }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; }
+    .logo {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 20px; font-weight: 700; color: var(--text);
+      text-decoration: none; letter-spacing: -0.02em;
+      /* WHY: Padding vertikal + margin negatif membuat logo punya target
+         sentuh 44px tanpa mengubah tinggi header. */
+      padding-block: 8px;
+      margin-block: -8px;
+    }
+    .logo svg { color: var(--primary-500); }
+    .header-actions { display: flex; align-items: center; gap: 8px; }
+    .icon-btn {
+      width: 44px; height: 44px;
+      display: inline-flex; align-items: center; justify-content: center;
+      background: transparent; border: none; border-radius: 8px;
+      color: var(--text); cursor: pointer;
+      transition: background-color 150ms ease;
+    }
+    .icon-btn:hover { background-color: var(--border); }
+    .icon-btn:focus-visible { outline: 2px solid var(--primary-500); outline-offset: 2px; }
+    [data-theme="light"] .icon-moon { display: block; }
+    [data-theme="light"] .icon-sun { display: none; }
+    [data-theme="dark"] .icon-moon { display: none; }
+    [data-theme="dark"] .icon-sun { display: block; }
+
+    /* Kartu offline */
+    .hero-offline {
+      flex: 1;
+      display: flex; align-items: center; justify-content: center;
+      padding: 64px 0;
+    }
+    .hero-offline-inner { text-align: center; max-width: 560px; }
+
+    .status-badge {
+      display: inline-block;
+      padding: 4px 16px;
+      font-size: 13px; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      background: var(--badge-bg); color: var(--badge-text);
+      border-radius: 999px;
+      margin-bottom: 24px;
+    }
+
+    .hero-art { margin: 0 auto 8px; display: block; width: 220px; height: auto; }
+
+    .hero-title {
+      font-size: clamp(24px, 5vw, 32px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+
+    .hero-desc {
+      font-size: 17px;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+    }
+
+    /* WHY: Baris status koneksi. Tinggi minimum dijaga supaya tombol
+       tidak melompat naik-turun saat teksnya muncul. */
+    .connection-hint {
+      min-height: 24px;
+      font-size: 15px;
+      color: var(--text-muted);
+      margin-bottom: 32px;
+    }
+    .connection-hint.is-online { color: var(--primary-500); font-weight: 600; }
+    /* WHY atribut [hidden] perlu aturan sendiri: display default elemen
+       ini block, dan [hidden] kalah olehnya di sebagian browser. */
+    .connection-hint[hidden] { display: none; }
+
+    .hero-actions {
+      display: flex; flex-wrap: wrap; gap: 12px;
+      justify-content: center;
+      margin-bottom: 40px;
+    }
+
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      min-height: 44px;
+      padding: 12px 28px;
+      font-size: 16px; font-weight: 600;
+      border-radius: 10px;
+      text-decoration: none; cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 150ms ease;
+    }
+    .btn:focus-visible { outline: 2px solid var(--primary-500); outline-offset: 2px; }
+    .btn-primary { background: var(--primary-600); color: #ffffff; border-color: var(--primary-600); }
+    .btn-primary:hover { background: var(--primary-500); transform: translateY(-1px); box-shadow: var(--shadow); }
+    .btn-secondary { background: transparent; color: var(--primary-500); border-color: var(--primary-400); }
+    [data-theme="dark"] .btn-secondary { color: var(--primary-400); }
+    .btn-secondary:hover { background: var(--badge-bg); transform: translateY(-1px); }
+
+    .quick-links {
+      display: flex; flex-wrap: wrap; gap: 8px 20px;
+      justify-content: center;
+      font-size: 14px;
+    }
+    /* WHY: Padding vertikal + margin vertikal negatif membuat tiap link
+       punya target sentuh 44px tanpa mengubah jarak antar link. */
+    .quick-links a {
+      color: var(--text-secondary); text-decoration: none;
+      display: inline-block;
+      padding-block: 11px;
+      margin-block: -11px;
+    }
+    .quick-links a:hover { color: var(--primary-500); text-decoration: underline; }
+    .quick-links a:focus-visible { outline: 2px solid var(--primary-500); outline-offset: 2px; border-radius: 4px; }
+
+    /* Footer */
+    .footer {
+      background-color: var(--bg-card);
+      border-top: 1px solid var(--border);
+      padding: 24px 0;
+      /* WHY: Padding bawah memakai inset supaya link terakhir tidak
+         tertutup garis home indicator. */
+      padding-bottom: calc(24px + var(--safe-bottom));
+      transition: background-color 200ms ease;
+    }
+    .footer-inner {
+      display: flex; flex-wrap: wrap; gap: 12px;
+      align-items: center; justify-content: space-between;
+      font-size: 14px; color: var(--text-muted);
+    }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a {
+      color: var(--text-muted); text-decoration: none;
+      display: inline-block;
+      padding-block: 11px;
+      margin-block: -11px;
+    }
+    .footer-links a:hover { color: var(--primary-500); }
+
+    ::selection { background: var(--primary-200); color: var(--primary-900); }
+    [data-theme="dark"] ::selection { background: var(--primary-700); color: var(--primary-50); }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; }
+      .btn:hover { transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Lompat ke konten utama</a>
+
+  <!-- Header -->
+  <header class="header" role="banner">
+    <div class="container header-inner">
+      <!-- WHY href diset ulang oleh skrip: halaman ini bisa disajikan pada
+           URL sedalam apa pun, jadi href relatif belum tentu benar. -->
+      <a href="./" class="logo" id="logo-link" aria-label="KapalPro - Beranda">
+        <svg width="28" height="28" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+          <path d="M4 24h24M8 24V16l8-8 8 8v8M16 8v-4M12 20h8M16 20v4"></path>
+        </svg>
+        <span>KapalPro</span>
+      </a>
+      <div class="header-actions">
+        <button id="theme-toggle" class="icon-btn" aria-label="Ganti ke mode gelap">
+          <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main id="main-content" class="hero-offline" role="main">
+    <div class="container">
+      <div class="hero-offline-inner">
+        <span class="status-badge">Tanpa Jaringan</span>
+
+        <!-- WHY: Kapal di tengah gelombang dengan awan bergaris miring -
+             konsep "tertahan di pelabuhan sampai sinyal kembali".
+             Inline SVG agar halaman tetap self-contained. -->
+        <svg class="hero-art" viewBox="0 0 220 140" fill="none" aria-hidden="true">
+          <!-- awan dan garis putus -->
+          <ellipse cx="45" cy="24" rx="26" ry="9" fill="var(--gray-300)" opacity="0.5"></ellipse>
+          <ellipse cx="170" cy="18" rx="32" ry="10" fill="var(--gray-300)" opacity="0.4"></ellipse>
+          <g stroke="var(--gray-500)" stroke-width="2" stroke-linecap="round" opacity="0.8">
+            <path d="M168 52l24-24"></path>
+            <path d="M192 52l-24-24"></path>
+          </g>
+          <!-- sinyal hilang -->
+          <g stroke="var(--gray-400)" stroke-width="2" stroke-linecap="round" fill="none">
+            <path d="M50 40a18 18 0 0 1 28 0"></path>
+            <path d="M57 48a9 9 0 0 1 14 0"></path>
+          </g>
+          <circle cx="64" cy="56" r="2.5" fill="var(--primary-500)"></circle>
+          <!-- kapal -->
+          <g stroke="var(--gray-500)" stroke-width="2" stroke-linecap="round">
+            <path d="M60 78h100l-14 22H74L60 78z" fill="var(--gray-400)"></path>
+            <line x1="110" y1="78" x2="110" y2="34"></line>
+            <path d="M110 36l26 14-26 14V36z" fill="var(--primary-500)" stroke="none"></path>
+          </g>
+          <!-- gelombang -->
+          <g stroke="var(--primary-500)" stroke-width="3" stroke-linecap="round" opacity="0.7">
+            <path d="M20 112q10-8 20 0t20 0 20 0 20 0 20 0 20 0 20 0 20 0"></path>
+            <path d="M40 126q10-8 20 0t20 0 20 0 20 0 20 0 20 0" opacity="0.5"></path>
+          </g>
+        </svg>
+
+        <h1 class="hero-title">Anda Sedang Offline</h1>
+        <p class="hero-desc">Koneksi internet terputus, jadi halaman ini belum bisa dimuat. Sambungkan kembali perangkat Anda, lalu coba lagi.</p>
+        <p class="hero-desc">Halaman yang pernah Anda buka masih tersimpan di perangkat, beberapa di antaranya mungkin tetap bisa diakses dari tautan di bawah.</p>
+
+        <p class="connection-hint" id="connection-hint" hidden></p>
+
+        <div class="hero-actions">
+          <button type="button" class="btn btn-primary" id="btn-retry">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+              <path d="M21 12a9 9 0 1 1-3-6.7"></path>
+              <polyline points="21 3 21 9 15 9"></polyline>
+            </svg>
+            Coba Lagi
+          </button>
+          <a href="catalog.html" class="btn btn-secondary" id="btn-catalog" data-nav="catalog.html">Lihat Katalog Kapal</a>
+        </div>
+
+        <nav class="quick-links" aria-label="Tautan cepat">
+          <a href="index.html" data-nav="index.html">Beranda</a>
+          <a href="contact.html" data-nav="contact.html">Kontak</a>
+          <a href="about.html" data-nav="about.html">Tentang Kami</a>
+        </nav>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer" role="contentinfo">
+    <div class="container footer-inner">
+      <p>&copy; 2026 KapalPro. Hak cipta dilindungi.</p>
+      <div class="footer-links">
+        <a href="privacy.html" data-nav="privacy.html">Kebijakan Privasi</a>
+        <a href="accessibility.html" data-nav="accessibility.html">Aksesibilitas</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+  /**
+   * Logika halaman offline - self-contained
+   * ============================================================
+   * WHY self-contained: service worker menyajikan halaman ini pada URL
+   * apa pun yang gagal dimuat (mis. /kapalpro/berita/2026), sehingga
+   * rujukan relatif ke css/ dan js/ bisa menunjuk berkas yang tidak ada.
+   * Karena itu gaya dan skrip ada di dalam berkas ini.
+   *
+   * Tidak ada permintaan jaringan di sini: halaman ini justru hanya
+   * muncul ketika jaringan tidak ada, jadi setiap fetch akan menggantung
+   * sampai timeout dan menunda tampilan.
+   */
+  (function () {
+    'use strict';
+
+    var TEXTS = {
+      themeToDark: 'Ganti ke mode gelap',
+      themeToLight: 'Ganti ke mode terang',
+      online: 'Koneksi terdeteksi kembali. Tekan "Coba Lagi" untuk memuat ulang.'
+    };
+
+    /**
+     * Akar situs (dengan garis miring di akhir).
+     *
+     * WHY lewat alamat service worker: halaman ini bisa muncul di URL
+     * sedalam apa pun, dan tidak seperti 404.html kita tidak bisa
+     * menebak lewat robots.txt - offline berarti tidak ada jaringan
+     * sama sekali. Alamat skrip service worker sendiri selalu berada
+     * di akar cakupannya, jadi ia satu-satunya patokan yang tersedia.
+     *
+     * @returns {string} '' bila tidak ada service worker (berkas dibuka
+     *   langsung); dalam hal ini tautan relatif sudah benar apa adanya.
+     */
+    function findSiteRoot() {
+      var nav = navigator.serviceWorker;
+      var url = nav && nav.controller && nav.controller.scriptURL;
+      if (!url) return '';
+      return url.replace(/sw\.js(?:\?.*)?$/i, '');
+    }
+
+    function applyThemeLabels() {
+      var btn = document.getElementById('theme-toggle');
+      if (btn) {
+        btn.setAttribute('aria-label',
+          document.documentElement.getAttribute('data-theme') === 'dark'
+            ? TEXTS.themeToLight : TEXTS.themeToDark);
+      }
+    }
+
+    function fixLinks(root) {
+      if (!root) return;
+      var links = document.querySelectorAll('[data-nav]');
+      for (var i = 0; i < links.length; i++) {
+        links[i].setAttribute('href', root + links[i].getAttribute('data-nav'));
+      }
+      var logo = document.getElementById('logo-link');
+      if (logo) logo.setAttribute('href', root);
+      addRootAssets(root);
+    }
+
+    /**
+     * Apple-touch-icon dan manifest dipasang dari skrip,
+     * bukan ditulis di markup.
+     *
+     * WHY: keduanya harus menunjuk AKAR situs, sedangkan halaman ini bisa
+     * muncul pada URL sedalam apa pun. Menulisnya sebagai rujukan relatif
+     * di markup berarti permintaan ke berkas yang tidak ada setiap kali
+     * pengunjung offline dari halaman dalam - dan kegagalan itu muncul
+     * sebagai error di console, tepat ketika orang sedang mencari tahu
+     * kenapa situs tidak mau terbuka.
+     *
+     * WHY ikon tab TIDAK ikut di sini lagi: link rel="icon" kini statis
+     * di <head> dengan path root-absolute. Browser meminta ikon tab
+     * sebelum skrip ini jalan, jadi ikon yang dipasang di sini terlambat
+     * - dan hanya menghasilkan link ikon duplikat.
+     */
+    function addRootAssets(root) {
+      var apple = document.createElement('link');
+      apple.rel = 'apple-touch-icon';
+      apple.href = root + 'apple-touch-icon.png';
+      document.head.appendChild(apple);
+
+      var manifest = document.createElement('link');
+      manifest.rel = 'manifest';
+      manifest.href = root + 'manifest.webmanifest';
+      document.head.appendChild(manifest);
+    }
+
+    function initTheme() {
+      var btn = document.getElementById('theme-toggle');
+      if (!btn) return;
+      btn.addEventListener('click', function () {
+        var current = document.documentElement.getAttribute('data-theme');
+        var next = current === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', next);
+        try { localStorage.setItem('kapalpro-theme', next); } catch (e) {}
+        // WHY kedua meta theme-color ditulis, bukan hanya yang pertama:
+        // setiap halaman punya satu meta untuk skema terang dan satu untuk
+        // gelap, dan yang dipakai browser ikut skema sistem.
+        var color = next === 'dark' ? '#0f172a' : '#ffffff';
+        var metas = document.querySelectorAll('meta[name="theme-color"]');
+        for (var i = 0; i < metas.length; i++) {
+          metas[i].setAttribute('content', color);
+        }
+        applyThemeLabels();
+      });
+    }
+
+    function initRetry() {
+      var btn = document.getElementById('btn-retry');
+      if (btn) {
+        btn.addEventListener('click', function () {
+          window.location.reload();
+        });
+      }
+
+      // WHY tidak memuat ulang otomatis: memuat ulang di tengah pengunjung
+      // membaca justru memindahkannya dari halaman yang sedang dilihat.
+      // Lebih baik memberi tahu bahwa koneksi sudah ada dan membiarkan
+      // pengunjung yang memutuskan.
+      window.addEventListener('online', function () {
+        var hint = document.getElementById('connection-hint');
+        if (!hint) return;
+        hint.textContent = TEXTS.online;
+        hint.classList.add('is-online');
+        hint.hidden = false;
+      });
+    }
+
+    initTheme();
+    applyThemeLabels();
+    initRetry();
+    // WHY tanpa menunggu DOMContentLoaded: skrip ini berada di akhir body,
+    // jadi seluruh elemen di atasnya sudah ada saat baris ini dijalankan.
+    fixLinks(findSiteRoot());
+  })();
+  </script>
+</body>
+</html>

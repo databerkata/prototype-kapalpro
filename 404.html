@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+
+  <!-- WHY: CSP 404 SENGAJA TIDAK memakai hash sha256 skrip anti-flash.
+       Halaman ini punya 2 blok skrip inline (anti-flash + logika 404-nya)
+       dan hanya mengizinkan 'unsafe-inline'. Menurut spesifikasi CSP3,
+       ketika daftar sumber memuat hash atau nonce, 'unsafe-inline' DIABAIKAN
+       - sehingga blok skrip kedua akan diblokir diam-diam dan tombol
+       bahasa, tema, serta tampilan path mati tanpa error yang terlihat.
+       Halaman 7 lainnya tidak memakai 'unsafe-inline' dan tetap memakai
+       hash, jadi keduanya punya mekanisme yang benar. -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://plausible.io https://docs.google.com; style-src 'self' 'unsafe-inline'; img-src 'self' https: data:; connect-src 'self' https://plausible.io https://docs.google.com; font-src 'self'; base-uri 'self'; object-src 'none'">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <!-- WHY: Dua meta theme-color (terang & gelap) membiarkan browser memilih
+       warna chrome-nya sendiri sebelum JavaScript dieksekusi, sehingga tidak
+       ada kedipan warna salah. Nilai keduanya harus sama persis dengan
+       applyTheme() di js/theme.js - tools/validate-meta.js menjaga itu. -->
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0f172a">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <!-- WHY: Skrip anti-flash tema, WAJIB inline di sini. js/theme.js memakai
+       defer sehingga baru jalan setelah HTML selesai diurai; tanpa skrip ini
+       pengunjung bertema gelap melihat kedipan putih. Hash CSP-nya
+       dihitung dari tools/theme-boot.inline.js oleh tools/validate-meta.js
+       - ubah salah satu dari keduanya tanpa mengubah yang lain akan
+       membuat validator gagal. -->
+  <script>
+/* WHY: Skrip ini WAJIB inline di <head> dan berjalan sebelum halaman
+ * digambar. js/theme.js memakai defer, jadi baru jalan setelah HTML
+ * selesai diurai - waktu itu cukup untuk menampilkan kedipan putih
+ * pada pengunjung bertema gelap. Skrip ini juga yang menulis theme-color
+ * sesuai tema aktif, sehingga warna address bar tidak sempat salah.
+ * Hash CSP-nya ada di tools/validate-meta.js dan WAJIB ikut diperbarui
+ * setiap kali isi skrip ini berubah. */
+(function () {
+  try {
+    var t = localStorage.getItem('kapalpro-theme');
+    // WHY: Default tetap light, tidak mengikuti sistem (sama seperti
+    // js/theme.js) karena foto kapal & kartu produk dirancang untuk
+    // latar terang.
+    t = (t === 'dark' || t === 'light') ? t : 'light';
+    document.documentElement.setAttribute('data-theme', t);
+    // WHY: Dua meta theme-color (light & dark) membiarkan browser
+    // memilih sendiri sebelum JavaScript jalan. Setelah tema diketahui,
+    // keduanya ditulis ulang agar warna chrome pasti sama dengan tema.
+    var m = document.querySelectorAll('meta[name="theme-color"]');
+    for (var i = 0; i < m.length; i++) {
+      m[i].setAttribute('content', t === 'dark' ? '#0f172a' : '#ffffff');
+    }
+  } catch (e) {}
+})();
+  </script>
+  <!-- WHY: CSP 404 sedikit lebih longgar (script 'unsafe-inline') karena
+       halaman ini HARUS self-contained: GitHub Pages menyajikan 404.html
+       di URL path apa pun, sehingga path relatif ke css/js bisa rusak.
+       Tidak ada data sensitif di halaman ini; teks dari URL di-render
+       via textContent (bukan innerHTML) jadi tetap aman dari XSS. -->
+  <title>404 - Halaman Tidak Ditemukan | KapalPro</title>
+  <meta name="description" content="Halaman yang Anda cari tidak ditemukan. Jelajahi katalog kapal KapalPro: tongkang, tugboat, LCT, SPOB, dan tanker.">
+  <meta name="robots" content="noindex, follow">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+  <!-- WHY: Blok script anti-flash tema yang sebelumnya ada di sini sudah
+       dihapus. Skrip yang sama sekarang muncul lebih awal di <head> (di
+       bawah meta apple-mobile-web-app-status-bar-style) sebagai sumber
+       tunggal untuk semua 8 halaman, sehingga tidak ada lagi dua versi
+       yang bisa berbeda satu sama lain. -->
+
+  <style>
+    /* ============================================================
+       404 - Self-contained styles (subset dari design system)
+       WHY inline: 404.html disajikan di path arbitrer, link
+       relatif ke css/style.css tidak bisa diandalkan.
+       ============================================================ */
+    :root {
+      /* WHY: color-scheme membuat scrollbar dan kontrol native browser
+         (checkbox, spinner, date picker) ikut gelap, bukan putih. */
+      color-scheme: light;
+
+      /* WHY: Safe-area inset. 404.html punya CSS inline sendiri, jadi
+         token ini harus dideklarasikan ulang di sini. env() selalu 0 di
+         perangkat tanpa notch, jadi declare ini aman di mana saja. */
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-right: env(safe-area-inset-right, 0px);
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+      --safe-left: env(safe-area-inset-left, 0px);
+
+      --primary-50: #eff6ff;
+      --primary-100: #dbeafe;
+      --primary-200: #bfdbfe;
+      --primary-400: #60a5fa;
+      --primary-500: #2563eb;
+      --primary-600: #1d4ed8;
+      --primary-700: #1e40af;
+      --primary-900: #1e3a5f;
+      --gray-50: #f8fafc;
+      --gray-100: #f1f5f9;
+      --gray-200: #e2e8f0;
+      --gray-300: #cbd5e1;
+      --gray-400: #94a3b8;
+      --gray-500: #64748b;
+      --gray-600: #475569;
+      --gray-700: #334155;
+      --gray-800: #1e293b;
+      --gray-900: #0f172a;
+      --danger-200: #fecaca;
+      --danger-300: #fca5a5;
+      --danger-500: #dc2626;
+    }
+
+    [data-theme="dark"] {
+      color-scheme: dark;
+
+      --bg: var(--gray-900);
+      --bg-card: var(--gray-800);
+      --text: var(--gray-50);
+      --text-secondary: var(--gray-300);
+      /* WHY gray-400, bukan gray-500: gray-500 di atas kartu gelap
+         (gray-800) hanya 3.07:1 - gagal AA. gray-400 = 5.71:1.
+         Nilai lama gray-500 di sini terbalik dengan blok light. */
+      --text-muted: var(--gray-400);
+      --border: var(--gray-700);
+      --badge-bg: var(--primary-900);
+      --badge-text: var(--primary-200);
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+    }
+
+    [data-theme="light"] {
+      --bg: var(--gray-50);
+      --bg-card: #ffffff;
+      --text: var(--gray-900);
+      --text-secondary: var(--gray-600);
+      /* WHY gray-500, bukan gray-400: gray-400 di atas putih hanya
+         2.56:1 - gagal AA. gray-500 = 4.76:1. */
+      --text-muted: var(--gray-500);
+      --border: var(--gray-200);
+      --badge-bg: var(--primary-100);
+      --badge-text: var(--primary-700);
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { font-size: 16px; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      transition: background-color 200ms ease, color 200ms ease;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: -9999px;
+      top: 0;
+      background: var(--primary-600);
+      color: #fff;
+      padding: 12px 20px;
+      border-radius: 0 0 8px 0;
+      text-decoration: none;
+      z-index: 100;
+    }
+    .skip-link:focus { left: 0; }
+
+    .container {
+      width: 100%; max-width: 1280px; margin: 0 auto;
+      /* WHY: Padding horizontal ditambah inset notch. max() menjaga
+         nilai 24px tetap berlaku di perangkat tanpa notch. */
+      padding-left: max(24px, var(--safe-left));
+      padding-right: max(24px, var(--safe-right));
+    }
+
+    /* Header */
+    .header {
+      background-color: var(--bg-card);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 0;
+      /* WHY: Padding atas memakai inset notch supaya logo tidak tertutup
+         status bar di iPhone. */
+      padding-top: calc(16px + var(--safe-top));
+      transition: background-color 200ms ease;
+    }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; }
+    .logo {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 20px; font-weight: 700; color: var(--text);
+      text-decoration: none; letter-spacing: -0.02em;
+      /* WHY: Padding vertikal + margin negatif membuat logo punya
+         target sentuh 44px tanpa mengubah tinggi header. */
+      padding-block: 8px;
+      margin-block: -8px;
+    }
+    .logo svg { color: var(--primary-500); }
+    .header-actions { display: flex; align-items: center; gap: 8px; }
+    .icon-btn {
+      width: 44px; height: 44px;
+      display: inline-flex; align-items: center; justify-content: center;
+      background: transparent; border: none; border-radius: 8px;
+      color: var(--text); cursor: pointer;
+      transition: background-color 150ms ease;
+    }
+    .icon-btn:hover { background-color: var(--border); }
+    .icon-btn:focus-visible { outline: 2px solid var(--primary-500); outline-offset: 2px; }
+    [data-theme="light"] .icon-moon { display: block; }
+    [data-theme="light"] .icon-sun { display: none; }
+    [data-theme="dark"] .icon-moon { display: none; }
+    [data-theme="dark"] .icon-sun { display: block; }
+
+    /* 404 Hero */
+    .hero-404 {
+      flex: 1;
+      display: flex; align-items: center; justify-content: center;
+      padding: 64px 0;
+    }
+    .hero-404-inner { text-align: center; max-width: 560px; }
+
+    .code-badge {
+      display: inline-block;
+      padding: 4px 16px;
+      font-size: 13px; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      background: var(--badge-bg); color: var(--badge-text);
+      border-radius: 999px;
+      margin-bottom: 24px;
+    }
+
+    .hero-art { margin: 0 auto 8px; display: block; width: 220px; height: auto; }
+
+    h1.code-404 {
+      font-size: clamp(72px, 18vw, 120px);
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -0.04em;
+      color: var(--primary-500);
+      margin-bottom: 8px;
+    }
+
+    .hero-title {
+      font-size: clamp(24px, 5vw, 32px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+
+    .hero-desc {
+      font-size: 17px;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+    }
+
+    .attempted-path {
+      display: inline-block;
+      max-width: 100%;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+      font-family: 'SF Mono', ui-monospace, Menlo, Consolas, monospace;
+      font-size: 13px;
+      color: var(--text-muted);
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 6px 14px;
+      margin-bottom: 32px;
+    }
+    /* WHY: atribut [hidden] kalah oleh display:inline-block di atas -
+       rule ini memastikan pil benar-benar hilang saat tidak relevan */
+    .attempted-path[hidden] { display: none; }
+    /* WHY danger-300, bukan danger-500: danger-500 (#dc2626) di atas
+       kartu gelap hanya 3.03:1 - gagal AA. danger-300 = 6.2:1. */
+    [data-theme="dark"] .attempted-path { color: var(--danger-300); }
+
+    .hero-actions {
+      display: flex; flex-wrap: wrap; gap: 12px;
+      justify-content: center;
+      margin-bottom: 40px;
+    }
+
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      min-height: 44px;
+      padding: 12px 28px;
+      font-size: 16px; font-weight: 600;
+      border-radius: 10px;
+      text-decoration: none; cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 150ms ease;
+    }
+    .btn:focus-visible { outline: 2px solid var(--primary-500); outline-offset: 2px; }
+    .btn-primary { background: var(--primary-600); color: #ffffff; border-color: var(--primary-600); }
+    .btn-primary:hover { background: var(--primary-500); transform: translateY(-1px); box-shadow: var(--shadow); }
+    .btn-secondary { background: transparent; color: var(--primary-500); border-color: var(--primary-400); }
+    [data-theme="dark"] .btn-secondary { color: var(--primary-400); }
+    .btn-secondary:hover { background: var(--badge-bg); transform: translateY(-1px); }
+
+    .quick-links {
+      display: flex; flex-wrap: wrap; gap: 8px 20px;
+      justify-content: center;
+      font-size: 14px;
+    }
+    /* WHY: Padding vertikal + margin vertikal negatif membuat tiap link
+       punya target sentuh 44px tanpa mengubah jarak antar link maupun
+       tinggi baris. Tanpa ini link hanya ~22px dan sulit ditekan. */
+    .quick-links a {
+      color: var(--text-secondary); text-decoration: none;
+      display: inline-block;
+      padding-block: 11px;
+      margin-block: -11px;
+    }
+    .quick-links a:hover { color: var(--primary-500); text-decoration: underline; }
+    .quick-links a:focus-visible { outline: 2px solid var(--primary-500); outline-offset: 2px; border-radius: 4px; }
+
+    /* Footer */
+    .footer {
+      background-color: var(--bg-card);
+      border-top: 1px solid var(--border);
+      padding: 24px 0;
+      /* WHY: Padding bawah memakai inset supaya link terakhir tidak
+         tertutup garis home indicator. */
+      padding-bottom: calc(24px + var(--safe-bottom));
+      transition: background-color 200ms ease;
+    }
+    .footer-inner {
+      display: flex; flex-wrap: wrap; gap: 12px;
+      align-items: center; justify-content: space-between;
+      font-size: 14px; color: var(--text-muted);
+    }
+    .footer-links { display: flex; gap: 20px; }
+    /* WHY: Padding vertikal + margin vertikal negatif memperbesar area
+       sentuh tiap link menjadi 44px tanpa mengubah tinggi baris footer
+       maupun jarak antar link. Tanpa ini link footer hanya ~22px dan
+       mustahil ditekan dengan jempol (WCAG 2.5.5). */
+    .footer-links a {
+      color: var(--text-muted); text-decoration: none;
+      display: inline-block;
+      padding-block: 11px;
+      margin-block: -11px;
+    }
+    .footer-links a:hover { color: var(--primary-500); }
+
+    ::selection { background: var(--primary-200); color: var(--primary-900); }
+    [data-theme="dark"] ::selection { background: var(--primary-700); color: var(--primary-50); }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; }
+      .btn:hover { transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Lompat ke konten utama</a>
+
+  <!-- Header -->
+  <header class="header" role="banner">
+    <div class="container header-inner">
+      <a href="/" class="logo" id="logo-link"  aria-label="KapalPro - Beranda">
+        <svg width="28" height="28" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+          <path d="M4 24h24M8 24V16l8-8 8 8v8M16 8v-4M12 20h8M16 20v4"></path>
+        </svg>
+        <span>KapalPro</span>
+      </a>
+      <div class="header-actions">
+        <button id="theme-toggle" class="icon-btn" aria-label="Ganti ke mode gelap">
+          <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main id="main-content" class="hero-404" role="main">
+    <div class="container">
+      <div class="hero-404-inner">
+        <span class="code-badge">Error 404</span>
+
+        <!-- WHY: Kapal berlayar menjauh - konsep "halaman ini telah berlayar".
+             Inline SVG agar self-contained (Section 1.10). -->
+        <svg class="hero-art" viewBox="0 0 220 140" fill="none" aria-hidden="true">
+          <!-- awan -->
+          <ellipse cx="45" cy="24" rx="26" ry="9" fill="var(--gray-300)" opacity="0.5"/>
+          <ellipse cx="170" cy="18" rx="32" ry="10" fill="var(--gray-300)" opacity="0.4"/>
+          <!-- matahari -->
+          <circle cx="185" cy="42" r="14" fill="#fbbf24" opacity="0.9"/>
+          <!-- kapal -->
+          <g stroke="var(--gray-500)" stroke-width="2" stroke-linecap="round">
+            <path d="M60 78h100l-14 22H74L60 78z" fill="var(--gray-400)"/>
+            <line x1="110" y1="78" x2="110" y2="34"/>
+            <path d="M110 36l26 14-26 14V36z" fill="var(--primary-500)" stroke="none"/>
+          </g>
+          <!-- gelombang -->
+          <g stroke="var(--primary-500)" stroke-width="3" stroke-linecap="round" opacity="0.7">
+            <path d="M20 112q10-8 20 0t20 0 20 0 20 0 20 0 20 0 20 0 20 0"/>
+            <path d="M40 126q10-8 20 0t20 0 20 0 20 0 20 0 20 0" opacity="0.5"/>
+          </g>
+        </svg>
+
+        <h1 class="code-404" aria-hidden="true">404</h1>
+        <h2 class="hero-title">Halaman Ini Telah Berlayar</h2>
+        <p class="hero-desc">Halaman yang Anda cari tidak ditemukan atau sudah dipindahkan. Mari kita bawa Anda kembali ke perairan yang aman.</p>
+        <p class="attempted-path" id="attempted-path" hidden></p>
+
+        <div class="hero-actions">
+          <a href="/" class="btn btn-primary" id="btn-home" data-nav="index.html">Kembali ke Beranda</a>
+          <a href="/catalog.html" class="btn btn-secondary" id="btn-catalog" data-nav="catalog.html">Lihat Katalog Kapal</a>
+        </div>
+
+        <nav class="quick-links"  aria-label="Tautan cepat">
+          <a href="/about.html" data-nav="about.html">Tentang Kami</a>
+          <a href="/contact.html" data-nav="contact.html">Kontak</a>
+          <a href="/privacy.html" data-nav="privacy.html">Kebijakan Privasi</a>
+        </nav>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer" role="contentinfo">
+    <div class="container footer-inner">
+      <p>© 2026 KapalPro. Hak cipta dilindungi.</p>
+      <div class="footer-links">
+        <a href="/privacy.html" data-nav="privacy.html">Kebijakan Privasi</a>
+        <a href="/accessibility.html" data-nav="accessibility.html">Aksesibilitas</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+  /**
+   * 404 Page Logic - Self-contained
+   * ============================================================
+   * WHY self-contained: GitHub Pages menyajikan 404.html PADA URL
+   * yang salah (mis. /kapalpro/foo/bar), jadi <link rel="stylesheet"
+   * href="css/style.css?v=bb2f3797"> akan resolve ke /kapalpro/foo/css/... yang
+   * juga 404. CSS di-inline, dan link navigasi diperbaiki runtime
+   * dengan mendeteksi root site via probe robots.txt.
+   *
+   * Robust untuk:
+   * - Custom domain (kapalpro.web.id/)       -> root = '/'
+   * - GitHub project page (user.github.io/kapalpro/) -> root = '/kapalpro/'
+   * - Local server (127.0.0.1:8080/)          -> root = '/'
+   */
+  (function() {
+    'use strict';
+
+    // ============================================================
+    // Label Bahasa Indonesia untuk halaman 404
+    // ============================================================
+    var TEXTS = {
+      homeLink: 'KapalPro - Beranda',
+      quickLinks: 'Tautan cepat',
+      title: '404 - Halaman Tidak Ditemukan | KapalPro',
+      errorBadge: 'Error 404',
+      heroTitle: 'Halaman Ini Telah Berlayar',
+      desc: 'Halaman yang Anda cari tidak ditemukan atau sudah dipindahkan. Mari kita bawa Anda kembali ke perairan yang aman.',
+      ctaHome: 'Kembali ke Beranda',
+      ctaCatalog: 'Lihat Katalog Kapal',
+      linkAbout: 'Tentang Kami',
+      linkContact: 'Kontak',
+      linkPrivacy: 'Kebijakan Privasi',
+      copyright: '© 2026 KapalPro. Hak cipta dilindungi.',
+      themeToDark: 'Ganti ke mode gelap',
+      themeToLight: 'Ganti ke mode terang',
+      pathLabel: 'Path yang tidak ditemukan: '
+    };
+
+    function applyThemeLabels() {
+      var themeBtn = document.getElementById('theme-toggle');
+      if (themeBtn) {
+        themeBtn.setAttribute('aria-label',
+          document.documentElement.getAttribute('data-theme') === 'dark'
+            ? TEXTS.themeToLight : TEXTS.themeToDark);
+      }
+      updatePathLabel();
+    }
+
+    function updatePathLabel() {
+      var el = document.getElementById('attempted-path');
+      if (!el) return;
+      var path = window.location.pathname;
+      // WHY: Sembunyikan jika cuma root (mis. user langsung ke /404.html)
+      if (!path || path === '/' || path.endsWith('/404.html')) {
+        el.hidden = true;
+        return;
+      }
+      el.hidden = false;
+      // WHY: textContent (bukan innerHTML) - path URL tidak boleh
+      // pernah jadi markup (Section 2.2)
+      el.textContent = TEXTS.pathLabel + path;
+    }
+
+    // ============================================================
+    // Theme toggle - perilaku sama dengan js/theme.js
+    // ============================================================
+    function initTheme() {
+      var btn = document.getElementById('theme-toggle');
+      if (!btn) return;
+      btn.addEventListener('click', function() {
+        var current = document.documentElement.getAttribute('data-theme');
+        var next = current === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', next);
+        try { localStorage.setItem('kapalpro-theme', next); } catch (e) {}
+        // WHY: theme-color harus ikut berubah - sama seperti applyTheme()
+        // di js/theme.js. Tanpa ini address bar tetap warna tema lama.
+        // KEDUA meta ditulis, bukan hanya yang pertama: setiap halaman
+        // punya satu meta untuk prefers-color-scheme light dan satu untuk
+        // dark, dan yang/browser pilih ikut skema sistem.
+        var color = next === 'dark' ? '#0f172a' : '#ffffff';
+        var metas = document.querySelectorAll('meta[name="theme-color"]');
+        for (var i = 0; i < metas.length; i++) {
+          metas[i].setAttribute('content', color);
+        }
+        applyThemeLabels();
+      });
+    }
+
+    // ============================================================
+    // Site root detection
+    // WHY: robots.txt ada di root repo dan dikembalikan dengan
+    // status 200 oleh GitHub Pages / python server. Halaman salah
+    // path dikembalikan dengan status 404 (r.ok === false), jadi
+    // probe ini tidak salah mengira 404.html sebagai sukses.
+    // ============================================================
+    function findSiteRoot(callback) {
+      var segs = window.location.pathname.split('/');
+      segs.pop(); // buang segmen terakhir (file/dir saat ini)
+
+      var candidates = [];
+      for (var i = segs.length - 1; i >= 1; i--) {
+        candidates.push(segs.slice(0, i).join('/') + '/');
+      }
+      candidates.push('/');
+
+      var idx = 0;
+      function tryNext() {
+        if (idx >= candidates.length) { callback('/'); return; }
+        var base = candidates[idx++];
+        fetch(base + 'robots.txt', { method: 'GET', cache: 'no-store' })
+          .then(function(r) {
+            if (r.ok) callback(base);
+            else tryNext();
+          })
+          .catch(function() { tryNext(); });
+      }
+      tryNext();
+    }
+
+    function fixLinks(root) {
+      // WHY: Set semua link navigasi ke root + path target, agar
+      // berfungsi dari URL path mana pun (custom domain & project page)
+      document.querySelectorAll('[data-nav]').forEach(function(a) {
+        a.setAttribute('href', root + a.getAttribute('data-nav'));
+      });
+      var logo = document.getElementById('logo-link');
+      if (logo) logo.setAttribute('href', root);
+
+      // WHY: Muat analytics.js dari root agar event 404 ter-track
+      // (consent-gated di dalam modul, jadi aman tanpa banner)
+      if (root !== '/') return; // WHY: hanya perlu injeksi saat root bukan '/'
+      var s = document.createElement('script');
+      s.src = root + 'js/analytics.js';
+      s.defer = true;
+      s.addEventListener('load', function() {
+        if (window.KapalProAnalytics) {
+          window.KapalProAnalytics.track('Page Not Found', {
+            path: window.location.pathname,
+            referrer: document.referrer || 'direct'
+          });
+        }
+      });
+      document.head.appendChild(s);
+    }
+
+    // ============================================================
+    // Init
+    // ============================================================
+    initTheme();
+    applyThemeLabels();
+    updatePathLabel();
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', function() {
+        findSiteRoot(fixLinks);
+      });
+    } else {
+      findSiteRoot(fixLinks);
+    }
+  })();
+  </script>
+</body>
+</html>

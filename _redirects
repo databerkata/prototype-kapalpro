@@ -1,0 +1,25 @@
+# WHY file ini ada
+# ------------------------------------------------------------------
+# Padanan .htaccess untuk host yang tidak membaca .htaccess:
+# Netlify, Cloudflare Pages, dan sebagian host statis lainnya membaca
+# _redirects. Kalau hostmu Apache/LiteSpeed, file ini diabaikan -
+# biarkan .htaccess yang bekerja.
+
+# 1. URL kapal lama -> URL bersih. Dua baris karena pola slash dan
+#    pola query menghasilkan aturan yang berbeda di parser _redirects.
+/vessel.html?id=:id  /vessel-:id.html  301
+/vessel.html/:id    /vessel-:id.html  301
+
+# 1b. Fallback kapal dari /admin (lihat .htaccess aturan 1b). Host
+#     _redirects TIDAK menerapkan aturan ini kalau berkasnya ada, jadi
+#     halaman statis hasil generator tetap dilayani langsung; yang
+#     dialihkan hanya URL yang berkasnya tidak ada.
+/vessel-:id.html  /vessel.html  200
+
+# 2. Tanpa www.
+#    DIHAPUS baris lama "/https://www.kapalpro.web.id/*": pola
+#    _redirects adalah PATH, bukan URL absolut - baris itu tidak pernah
+#    cocok dengan request mana pun, jadi canonicalization www tidak
+#    pernah jalan di host _redirects. Canonical host dikendalikan di
+#    panel host (Netlify: Domain settings; Cloudflare Pages: redirect
+#    function/bulk), bukan di berkas ini.

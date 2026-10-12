@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" width="1600" height="1000" role="img" aria-label="Foto kapal belum tersedia">
+  <!-- WHY: Placeholder netral untuk image yang gagal dimuat. Warna dibuat
+       dari currentColor-independent CSS var lewat style, sehingga menyatu
+       dengan tema terang/gelap (dark mode di Assets/prefers-color-scheme). -->
+  <style>
+    .bg   { fill: #f1f5f9; }
+    .line { fill: none; stroke: #cbd5e1; stroke-width: 8; stroke-linecap: round; stroke-linejoin: round; }
+    .txt  { fill: #94a3b8; font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 44px; font-weight: 600; }
+    @media (prefers-color-scheme: dark) {
+      .bg   { fill: #1e293b; }
+      .line { stroke: #334155; }
+      .txt  { fill: #64748b; }
+    }
+  </style>
+
+  <rect class="bg" width="1600" height="1000"/>
+
+  <!-- WHY: Silhouette kapal sederhana (hull + deckhouse +Cerobong) agar
+       placeholder terbaca sebagai "kapal", bukan kotak abu-abu generik. -->
+  <g transform="translate(800 430)">
+    <path class="line" d="M-420 150 L-360 40 L360 40 L420 150 Z"/>
+    <path class="line" d="M-260 40 L-230 -70 L120 -70 L160 40"/>
+    <path class="line" d="M-150 -70 L-150 -150 L-60 -150 L-60 -70"/>
+    <path class="line" d="M-30 -150 L-30 -210 L20 -210 L20 -150"/>
+    <path class="line" d="M-420 150 L-440 230 L440 230 L420 150"/>
+  </g>
+
+  <!-- WHY: Garis air supaya compose foto kapal, bukan logo datar -->
+  <g class="line" opacity="0.6">
+    <path d="M420 730 q80 -40 160 0 t160 0 t160 0 t160 0"/>
+    <path d="M300 800 q80 -34 160 0 t160 0 t160 0 t160 0"/>
+  </g>
+
+  <text class="txt" x="800" y="900" text-anchor="middle">Foto kapal belum tersedia</text>
+</svg>

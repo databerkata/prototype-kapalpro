@@ -1,0 +1,38 @@
+# Robots.txt for KapalPro
+# https://kapalpro.web.id
+
+User-agent: *
+Allow: /
+
+# Disallow admin and private pages
+# WHY /admin/: path admin aktual. /dashboard/, /api/, /.freebuff/ adalah
+# sisa template yang tidak ada di situs ini.
+Disallow: /admin/
+
+# WHY: 404.html TIDAK di-Disallow di sini. Halaman ini disajikan GitHub
+# Pages pada URL apa pun yang tidak ada, dan 404.html sendiri sudah
+# memakai <meta name="robots" content="noindex, follow">. Kalau 404.html
+# di-Disallow, crawler tidak bisa membaca tag noindex tersebut, sehingga
+# Google bisa menandai URL 404 sebagai "blocked" alih-alih "not found".
+# Correct approach: tetap Allow, andalkan noindex + status HTTP 404.
+
+# Sitemap
+Sitemap: https://kapalpro.web.id/sitemap.xml
+
+# Crawl-delay
+Crawl-delay: 1
+
+# Google
+User-agent: Googlebot
+Allow: /
+
+# Bing
+User-agent: Bingbot
+Allow: /
+
+# Social media crawlers
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
