@@ -713,13 +713,13 @@
     // berubah saat tombol bahasa ditekan.
     var QL = { year: 'Tahun', length: 'Panjang', beam: 'Lebar', engine: 'Mesin', location: 'Lokasi' };
     var quickItems = [
-      { label: QL.year, value: vessel.year_built || '-' },
-      { label: QL.length, value: vessel.length ? vessel.length + ' m' : '-' },
-      { label: QL.beam, value: vessel.beam ? vessel.beam + ' m' : '-' },
-      { label: 'DWT', value: vessel.dwt ? window.VesselData.formatNumber(vessel.dwt) + ' DWT' : '-' },
-      { label: QL.engine, value: vessel.engine_power || '-' },
-      { label: QL.location, value: vessel.location || '-' }
-    ];
+      { label: QL.year, value: vessel.year_built || '' },
+      { label: QL.length, value: vessel.length ? vessel.length + ' m' : '' },
+      { label: QL.beam, value: vessel.beam ? vessel.beam + ' m' : '' },
+      { label: 'DWT', value: vessel.dwt ? window.VesselData.formatNumber(vessel.dwt) + ' DWT' : '' },
+      { label: QL.engine, value: vessel.engine_power || '' },
+      { label: QL.location, value: vessel.location || '' }
+    ].filter(function(item) { return item.value !== ''; });
 
     quickSpecs.innerHTML = quickItems.map(function(item) {
       // WHY: XSS fix - item.value bisa berisi data sheet mentah
@@ -1260,6 +1260,7 @@
               : '') +
             '<h3 class="card-title">' + escapeHtml(v.name) + '</h3>' +
             '<p class="card-price">' + (v.price ? window.VesselData.formatPrice(v.price) : ('Harga Hubungi Kami')) + '</p>' +
+            window.VesselData.buildCardSpecChips(v) +
             '<div class="card-location">' +
               '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">' +
                 '<path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>' +

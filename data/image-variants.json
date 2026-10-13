@@ -914,5 +914,16 @@
       800
     ],
     "webpFull": 1536
+  },
+  "assets/hero-tugboat.jpg": {
+    "150w": "assets/hero-tugboat-150w.jpg",
+    "300w": "assets/hero-tugboat-300w.jpg",
+    "400w": "assets/hero-tugboat-400w.jpg",
+    "800w": "assets/hero-tugboat-800w.jpg",
+    "150w_webp": "assets/hero-tugboat-150w.webp",
+    "300w_webp": "assets/hero-tugboat-300w.webp",
+    "400w_webp": "assets/hero-tugboat-400w.webp",
+    "800w_webp": "assets/hero-tugboat-800w.webp",
+    "webp": "assets/hero-tugboat.webp"
   }
 }

@@ -2598,30 +2598,28 @@ p {
 }
 
 /* === 25. WHATSAPP BUTTON === */
-/* WHY: Warna teks TIDAK putih. Hijau WhatsApp #25d366 terang, jadi teks
-   putih hanya menghasilkan rasio 1,98:1 - jauh di bawah ambang WCAG AA
-   4,5:1 untuk teks normal, padahal tombol ini adalah CTA konversi utama.
-   Hijau tua #0b3d2c di atas #25d366 menghasilkan 6,16:1, jadi brand tetap
-   terjaga sementara teksnya jadi benar-benar terbaca. */
+/* WHY: Gaya outline, bukan solid. Hijau solid #25d366 terlalu dominan dan
+   mengalahkan CTA primer biru. Sebagai secondary CTA, WhatsApp cukup tampil
+   sebagai outline hijau dengan ikon - tetap dikenali tapi tidak berebut
+   perhatian dengan tombol primer. */
 .whatsapp-btn {
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
   padding: var(--space-3) var(--space-6);
-  background-color: #25d366;
+  background-color: transparent;
   color: #0b3d2c;
+  border: 2px solid #25d366;
   font-weight: var(--font-weight-semibold);
   border-radius: var(--radius-md);
   min-height: 44px;
   transition: background-color var(--duration-fast) var(--easing-default);
 }
 
-/* WHY: Di hover latar jadi teal tua (#0f766e) dengan teks putih, rasio
-   5,47:1. Warna lama #128c7e hanya menghasilkan 4,13:1 - masih di bawah
-   ambang 4,5:1 untuk teks normal. */
+/* WHY: Di hover latar jadi hijau muda, teks tetap hijau tua. */
 .whatsapp-btn:hover {
-  background-color: #0f766e;
-  color: #ffffff;
+  background-color: #dcfce7;
+  color: #0b3d2c;
 }
 
 .whatsapp-btn:focus-visible {
@@ -3538,4 +3536,23 @@ html {
 @media print {
   .vessel-faq-q { min-height: 0; }
   .vessel-faq-q::after { display: none; }
+}
+
+/* === LINK-MORE: teks link untuk aksi sekunder === */
+/* WHY: "Lihat Semua" tidak perlu tampil sebagai tombol sejajar dengan
+   "Muat lebih banyak". Sebagai link teks dengan panah, hierarkinya jelas:
+   tombol untuk aksi utama, link untuk navigasi. */
+.link-more {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  color: var(--primary);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--text-base);
+  text-decoration: none;
+  padding: var(--space-3) var(--space-2);
+  min-height: 44px;
+}
+.link-more:hover {
+  text-decoration: underline;
 }
