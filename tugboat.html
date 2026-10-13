@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-tZqmasilAl6RTvAzblDqCwq9l3dtedMk2WUpKo1bvis=' https://plausible.io https://docs.google.com; style-src 'self' 'unsafe-inline'; img-src 'self' https: data:; connect-src 'self' https://plausible.io https://docs.google.com; font-src 'self'; frame-src https://docs.google.com; form-action 'self' https://docs.google.com https://wa.me; base-uri 'self'; object-src 'none'">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <!-- WHY: Dua meta theme-color (terang & gelap) membiarkan browser memilih
+       warna chrome-nya sendiri sebelum JavaScript dieksekusi, sehingga tidak
+       ada kedipan warna salah. Nilai keduanya harus sama persis dengan
+       applyTheme() di js/theme.js - tools/validate-meta.js menjaga itu. -->
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0f172a">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <!-- WHY: Skrip anti-flash tema, WAJIB inline di sini. js/theme.js memakai
+       defer sehingga baru jalan setelah HTML selesai diurai; tanpa skrip ini
+       pengunjung bertema gelap melihat kedipan putih. Hash CSP-nya
+       dihitung dari tools/theme-boot.inline.js oleh tools/validate-meta.js
+       - ubah salah satu dari keduanya tanpa mengubah yang lain akan
+       membuat validator gagal. -->
+  <script>
+/* WHY: Skrip ini WAJIB inline di <head> dan berjalan sebelum halaman
+ * digambar. js/theme.js memakai defer, jadi baru jalan setelah HTML
+ * selesai diurai - waktu itu cukup untuk menampilkan kedipan putih
+ * pada pengunjung bertema gelap. Skrip ini juga yang menulis theme-color
+ * sesuai tema aktif, sehingga warna address bar tidak sempat salah.
+ * Hash CSP-nya ada di tools/validate-meta.js dan WAJIB ikut diperbarui
+ * setiap kali isi skrip ini berubah. */
+(function () {
+  try {
+    var t = localStorage.getItem('kapalpro-theme');
+    // WHY: Default tetap light, tidak mengikuti sistem (sama seperti
+    // js/theme.js) karena foto kapal & kartu produk dirancang untuk
+    // latar terang.
+    t = (t === 'dark' || t === 'light') ? t : 'light';
+    document.documentElement.setAttribute('data-theme', t);
+    // WHY: Dua meta theme-color (light & dark) membiarkan browser
+    // memilih sendiri sebelum JavaScript jalan. Setelah tema diketahui,
+    // keduanya ditulis ulang agar warna chrome pasti sama dengan tema.
+    var m = document.querySelectorAll('meta[name="theme-color"]');
+    for (var i = 0; i < m.length; i++) {
+      m[i].setAttribute('content', t === 'dark' ? '#0f172a' : '#ffffff');
+    }
+  } catch (e) {}
+})();
+  </script>
+  <title>Jual Tugboat Bekas Indonesia | KapalPro</title>
+  <meta name="description" content="Jual tugboat bekas berkualitas di Indonesia: 800-1500 HP. Foto asli, spesifikasi lengkap, harga transparan. Ajukan Letter of Intent sekarang.">
+  <meta name="keywords" content="jual tugboat, tugboat bekas, harga tugboat, tugboat indonesia">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://kapalpro.web.id/tugboat.html">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Jual Tugboat Bekas - KapalPro">
+  <meta property="og:description" content="Kenali KapalPro: platform jual beli kapal marine profesional di Indonesia dengan proses inquiry transparan.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://kapalpro.web.id/tugboat.html">
+  <meta property="og:site_name" content="KapalPro">
+  <meta property="og:locale" content="id_ID">
+  <meta property="og:image" content="https://kapalpro.web.id/assets/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Jual Tugboat Bekas - KapalPro">
+  <meta name="twitter:description" content="Kenali KapalPro: platform jual beli kapal marine profesional di Indonesia dengan proses inquiry transparan.">
+  <meta name="twitter:image" content="https://kapalpro.web.id/assets/og-image.jpg">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="stylesheet" href="css/style.css?v=bb2f3797">
+
+  <!-- WHY schema hanya di halaman ini: index.html sudah punya
+       WebSite plus Organization, tapi hanya sebagai publisher dan
+       tanpa pengenal (@id) yang konsisten. Halaman "Tentang"
+       adalah tempat yang wajar bagi Google mencari tahu perusahaan
+       di balik nama situs, dan di sinilah ContactPoint bisa
+       dinyatakan tanpa diduplikasi di lima halaman lain.
+
+       WHY TIDAK ada field address: alamat fisik tidak ada di
+       js/config.js, dan mengarang kota atau jalan demi mengisi
+       field schema.org menghasilkan structured data yang salah -
+       lebih buruk daripada tidak ada sama sekali. -->
+  <script type="application/ld+json" id="category-schema">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Jual Tugboat Bekas Indonesia",
+    "description": "Katalog tugboat bekas dijual di Indonesia: 800-1500 HP dengan foto asli dan spesifikasi lengkap.",
+    "url": "https://kapalpro.web.id/tugboat.html",
+    "inLanguage": "id-ID",
+    "provider": {"@type": "Organization", "name": "KapalPro", "url": "https://kapalpro.web.id"}
+  }
+  </script>
+
+  <!-- WHY: Pertanyaan yang paling sering masuk lewat WhatsApp
+       dijawab di halaman yang bisa di-crawl, sehingga pertanyaannya
+       bisa muncul langsung di hasil pencarian. Semua jawabannya
+       juga tampil sebagai teks di bawah, karena Google menandai
+       FAQPage yang tidak cocok dengan isi halaman. -->
+  <script type="application/ld+json" id="category-faq">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Berapa harga tugboat bekas di Indonesia?",
+        "acceptedAnswer": {"@type": "Answer", "text": "Harga tugboat bekas di Indonesia berkisar Rp 4,5-25 miliar tergantung tenaga mesin (HP) dan tahun. Tugboat 800 HP mulai Rp 4,5 miliar, 1200-1300 HP Rp 6-8,5 miliar, 1500 HP ke atas Rp 10-25 miliar (data listing KapalPro, Oktober 2026)."}
+      },
+      {
+        "@type": "Question",
+        "name": "Tugboat berapa HP yang cocok untuk menarik tongkang 300ft?",
+        "acceptedAnswer": {"@type": "Answer", "text": "Untuk tongkang 300ft bermuatan penuh, tugboat 1200-1500 HP umumnya mencukupi untuk perairan Indonesia. Untuk jarak jauh atau arus kuat, pertimbangkan 1500 HP ke atas."}
+      },
+      {
+        "@type": "Question",
+        "name": "Apa yang perlu dicek saat survei tugboat bekas?",
+        "acceptedAnswer": {"@type": "Answer", "text": "Cek kondisi mesin utama (engine hours, riwayat overhaul), gearbox, sistem propulsi, lambung, sistem navigasi, dan kelengkapan dokumen (sertifikat CLASS/BKI, surat ukur). Selalu gunakan surveyor independen."}
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <!-- Skip Link (Section 1.9 - Accessibility) -->
+  <a href="#main-content" class="skip-link">Lompat ke konten utama</a>
+
+  <!-- Header -->
+  <header class="header" role="banner">
+    <div class="container header-inner">
+      <!-- Logo -->
+      <a href="index.html" class="logo" aria-label="KapalPro - Beranda">
+        <svg class="logo-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+          <path d="M4 24h24M8 24V16l8-8 8 8v8M16 8v-4M12 20h8M16 20v4"></path>
+        </svg>
+        <span>KapalPro</span>
+      </a>
+
+      <!-- Navigation (Desktop) -->
+      <nav class="nav" role="navigation" aria-label="Navigasi utama">
+        <a href="index.html" class="nav-link">Beranda</a>
+        <a href="catalog.html" class="nav-link active">Katalog</a>
+        <a href="contact.html" class="nav-link">Kontak</a>
+        <a href="about.html" class="nav-link">Tentang Kami</a>
+      </nav>
+
+      <!-- Header Actions -->
+      <div class="header-actions">
+
+
+        <!-- Theme Toggle (Section 1.3) -->
+        <button id="theme-toggle" class="theme-toggle" aria-label="Ganti ke mode gelap">
+          <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+
+        <!-- Mobile Menu Button -->
+        <button id="mobile-menu-btn" class="mobile-menu-btn" aria-label="Buka menu" aria-expanded="false" aria-controls="mobile-menu">
+          <svg class="menu-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+          <svg class="close-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" style="display: none;">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="mobile-menu" role="navigation" aria-label="Navigasi mobile">
+      <a href="index.html" class="mobile-menu-link">Beranda</a>
+      <a href="catalog.html" class="mobile-menu-link">Katalog</a>
+      <a href="contact.html" class="mobile-menu-link">Kontak</a>
+      <a href="about.html" class="mobile-menu-link">Tentang Kami</a>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <nav aria-label="Breadcrumb" class="container" style="padding-top: var(--space-4);">
+      <ol class="breadcrumb">
+        <li><a href="index.html">Beranda</a></li>
+        <li><a href="catalog.html">Katalog</a></li>
+        <li aria-current="page">Tugboat</li>
+      </ol>
+    </nav>
+
+    <section class="section">
+      <div class="container">
+        <h1>Jual Tugboat Bekas di Indonesia</h1>
+        <p class="lead"><strong>KapalPro menjual tugboat bekas berkualitas</strong> dengan tenaga mesin 800-1500 HP, foto asli, spesifikasi lengkap, dan harga transparan mulai Rp 4,5 miliar. Setiap pembelian diawali Letter of Intent, dilanjutkan survei independen, dan diakhiri penandatanganan MOA.</p>
+        <p>Tugboat adalah kapal penarik yang digunakan untuk menarik tongkang bermuatan batubara, pasir, dan material curah. Pemilihan tenaga mesin (HP) yang tepat sangat penting — terlalu kecil membuat operasi tidak efisien, terlalu besar membuat biaya bahan bakar membengkak.</p>
+        <p style="color: var(--text-muted); font-size: 0.9em;">Diperbarui: Oktober 2026</p>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top: 0;">
+      <div class="container">
+        <h2>Panduan Memilih Tenaga Mesin</h2>
+        <div style="overflow-x: auto;">
+        <table class="spec-table">
+          <thead>
+            <tr><th>Tenaga</th><th>Harga Mulai</th><th>Cocok Untuk</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>800 HP</strong></td><td>Rp 4,5 M</td><td>Tongkang kecil, sungai, jarak pendek</td></tr>
+            <tr><td><strong>1200 HP</strong></td><td>Rp 8,5 M</td><td>Tongkang 270-300ft, operasi standar</td></tr>
+            <tr><td><strong>1300 HP</strong></td><td>Rp 6 M</td><td>Tongkang 300ft, serbaguna</td></tr>
+            <tr><td><strong>1500 HP</strong></td><td>Rp 10 M</td><td>Tongkang 300-330ft, jarak jauh</td></tr>
+          </tbody>
+        </table>
+        </div>
+        <p class="text-sm" style="color: var(--text-muted);">Harga berdasarkan listing KapalPro Oktober 2026.</p>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top: 0;">
+      <div class="container">
+        <h2>Tugboat Tersedia</h2>
+        <div class="vessels-grid">
+
+          <a href="vessel-TB002.html" class="vessel-card">
+            <div class="vessel-card-image">
+              <img src="assets/vessels/TB002/main.jpg" alt="Tugboat 1500 HP - Tugboat dijual di KapalPro" loading="lazy">
+            </div>
+            <div class="vessel-card-body">
+              <h3>Tugboat 1500 HP</h3>
+              <p class="vessel-card-price">Rp 4 M</p>
+            </div>
+          </a>
+          <a href="vessel-TB003.html" class="vessel-card">
+            <div class="vessel-card-image">
+              <img src="assets/vessels/TB003/main.jpg" alt="Tugboat 1200 HP 2008 - Tugboat dijual di KapalPro" loading="lazy">
+            </div>
+            <div class="vessel-card-body">
+              <h3>Tugboat 1200 HP 2008</h3>
+              <p class="vessel-card-price">Rp 8 M</p>
+            </div>
+          </a>
+          <a href="vessel-TB004.html" class="vessel-card">
+            <div class="vessel-card-image">
+              <img src="assets/vessels/TB004/main.jpg" alt="Tugboat 300ft 2018 - Tugboat dijual di KapalPro" loading="lazy">
+            </div>
+            <div class="vessel-card-body">
+              <h3>Tugboat 300ft 2018</h3>
+              <p class="vessel-card-price">Rp 25 M</p>
+            </div>
+          </a>
+          <a href="vessel-TB007.html" class="vessel-card">
+            <div class="vessel-card-image">
+              <img src="assets/vessels/TB007/main.jpg" alt="Tugboat 1300 HP 2011 - Tugboat dijual di KapalPro" loading="lazy">
+            </div>
+            <div class="vessel-card-body">
+              <h3>Tugboat 1300 HP 2011</h3>
+              <p class="vessel-card-price">Rp 6 M</p>
+            </div>
+          </a>
+        </div>
+        <p style="margin-top: var(--space-6);"><a href="catalog.html" class="btn btn-secondary">Lihat Semua Kapal</a></p>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top: 0;">
+      <div class="container">
+        <h2>Pertanyaan Umum tentang Tugboat</h2>
+        <div class="vessel-faq">
+          <details class="vessel-faq-item">
+            <summary class="vessel-faq-q">Berapa harga tugboat bekas di Indonesia?</summary>
+            <p class="vessel-faq-a">Harga tugboat bekas di Indonesia berkisar Rp 4,5-25 miliar tergantung tenaga mesin dan tahun. Tugboat 800 HP mulai Rp 4,5 miliar, 1200-1300 HP Rp 6-8,5 miliar, 1500 HP ke atas Rp 10-25 miliar (data listing KapalPro, Oktober 2026).</p>
+          </details>
+          <details class="vessel-faq-item">
+            <summary class="vessel-faq-q">Tugboat berapa HP yang cocok untuk menarik tongkang 300ft?</summary>
+            <p class="vessel-faq-a">Untuk tongkang 300ft bermuatan penuh, tugboat 1200-1500 HP umumnya mencukupi untuk perairan Indonesia. Untuk jarak jauh atau arus kuat, pertimbangkan 1500 HP ke atas.</p>
+          </details>
+          <details class="vessel-faq-item">
+            <summary class="vessel-faq-q">Apa yang perlu dicek saat survei tugboat bekas?</summary>
+            <p class="vessel-faq-a">Cek kondisi mesin utama (engine hours, riwayat overhaul), gearbox, sistem propulsi, lambung, sistem navigasi, dan kelengkapan dokumen (sertifikat CLASS/BKI, surat ukur). Selalu gunakan surveyor independen.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="section cta-section">
+      <div class="container" data-animate>
+        <h2>Tertarik dengan Tugboat Kami?</h2>
+        <p>Ajukan Letter of Intent sekarang, kami respon dalam 1 hari kerja</p>
+        <div class="hero-actions">
+          <a href="contact.html" class="btn btn-primary btn-lg">Ajukan Letter of Intent</a>
+          <a href="https://wa.me/6285648048730" class="btn btn-secondary btn-lg" target="_blank" rel="noopener">Chat WhatsApp</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+<!-- Footer -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <!-- Brand -->
+        <div class="footer-brand">
+          <a href="index.html" class="logo" aria-label="KapalPro - Beranda">
+            <svg class="logo-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <path d="M4 24h24M8 24V16l8-8 8 8v8M16 8v-4M12 20h8M16 20v4"></path>
+            </svg>
+            <span>KapalPro</span>
+          </a>
+          <p>Platform terpercaya untuk jual beli kapal marine di Indonesia.</p>
+        </div>
+
+        <!-- Quick Links -->
+        <div>
+          <h3 class="footer-heading">Tautan Cepat</h3>
+          <nav aria-label="Navigasi footer">
+            <a href="index.html" class="footer-link">Beranda</a>
+            <a href="catalog.html" class="footer-link">Katalog</a>
+            <a href="about.html" class="footer-link">Tentang Kami</a>
+            <a href="contact.html" class="footer-link">Kontak</a>
+          </nav>
+        </div>
+
+        <!-- Contact -->
+        <div>
+          <h3 class="footer-heading">Kontak</h3>
+          <a href="tel:+6285648048730" class="footer-link" data-tel>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" style="margin-right: 8px;">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+            </svg>
+            <span data-phone-text>+62 856-4804-8730</span>
+          </a>
+          <a href="mailto:info@kapalpro.web.id" class="footer-link">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" style="margin-right: 8px;">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+              <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+            info@kapalpro.web.id
+          </a>
+        </div>
+
+        <!-- Legal -->
+        <div>
+          <h3 class="footer-heading">Legal</h3>
+          <a href="privacy.html" class="footer-link">Kebijakan Privasi</a>
+          <a href="accessibility.html" class="footer-link">Aksesibilitas</a>
+        </div>
+      </div>
+
+      <!-- Footer Bottom -->
+      <div class="footer-bottom">
+        <p class="footer-copyright">© 2026 KapalPro. Hak cipta dilindungi.</p>
+        <div class="footer-legal">
+          <button type="button" class="footer-link" data-manage-cookies style="background:none;border:0;cursor:pointer;padding:0;">Kelola Cookie</button>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Cookie Consent (Section 10.3) -->
+  <div id="cookie-consent" class="cookie-consent" role="dialog" aria-label="Persetujuan cookie">
+    <div class="cookie-consent-inner">
+      <p class="cookie-consent-text">
+        Website ini menggunakan cookies untuk analitik dan pengalaman yang lebih baik.
+        Dengan menggunakan website ini, Anda menyetujui penggunaan cookies.
+      </p>
+      <div class="cookie-consent-actions">
+        <button class="btn btn-primary btn-sm cookie-accept">Terima</button>
+        <button class="btn btn-ghost btn-sm cookie-decline">Tolak</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- Scripts (deferred for performance) -->
+  <script src="js/config.js?v=bb2f3797" defer></script>
+  <!-- WHY: data.js WAJIB sebelum about.js - about.js memanggil
+       VesselData.getVessels() untuk stats & daftar kota. Tanpa ini
+       modul gagal diam-diam dan angka statis di HTML dipakai. -->
+  <script src="js/data.js?v=bb2f3797" defer></script>
+  <script src="js/about.js?v=bb2f3797" defer></script>
+  <script src="js/theme.js?v=bb2f3797" defer></script>
+  <script src="js/app.js?v=bb2f3797" defer></script>
+  <script src="js/anim.js?v=bb2f3797" defer></script>
+  <script src="js/analytics.js?v=bb2f3797" defer></script>
+  <script src="js/perf.js?v=bb2f3797" defer></script>
+
+</body>
+</html>

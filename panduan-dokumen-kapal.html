@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-tZqmasilAl6RTvAzblDqCwq9l3dtedMk2WUpKo1bvis=' https://plausible.io https://docs.google.com; style-src 'self' 'unsafe-inline'; img-src 'self' https: data:; connect-src 'self' https://plausible.io https://docs.google.com; font-src 'self'; frame-src https://docs.google.com; form-action 'self' https://docs.google.com https://wa.me; base-uri 'self'; object-src 'none'">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <!-- WHY: Dua meta theme-color (terang & gelap) membiarkan browser memilih
+       warna chrome-nya sendiri sebelum JavaScript dieksekusi, sehingga tidak
+       ada kedipan warna salah. Nilai keduanya harus sama persis dengan
+       applyTheme() di js/theme.js - tools/validate-meta.js menjaga itu. -->
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0f172a">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <!-- WHY: Skrip anti-flash tema, WAJIB inline di sini. js/theme.js memakai
+       defer sehingga baru jalan setelah HTML selesai diurai; tanpa skrip ini
+       pengunjung bertema gelap melihat kedipan putih. Hash CSP-nya
+       dihitung dari tools/theme-boot.inline.js oleh tools/validate-meta.js
+       - ubah salah satu dari keduanya tanpa mengubah yang lain akan
+       membuat validator gagal. -->
+  <script>
+/* WHY: Skrip ini WAJIB inline di <head> dan berjalan sebelum halaman
+ * digambar. js/theme.js memakai defer, jadi baru jalan setelah HTML
+ * selesai diurai - waktu itu cukup untuk menampilkan kedipan putih
+ * pada pengunjung bertema gelap. Skrip ini juga yang menulis theme-color
+ * sesuai tema aktif, sehingga warna address bar tidak sempat salah.
+ * Hash CSP-nya ada di tools/validate-meta.js dan WAJIB ikut diperbarui
+ * setiap kali isi skrip ini berubah. */
+(function () {
+  try {
+    var t = localStorage.getItem('kapalpro-theme');
+    // WHY: Default tetap light, tidak mengikuti sistem (sama seperti
+    // js/theme.js) karena foto kapal & kartu produk dirancang untuk
+    // latar terang.
+    t = (t === 'dark' || t === 'light') ? t : 'light';
+    document.documentElement.setAttribute('data-theme', t);
+    // WHY: Dua meta theme-color (light & dark) membiarkan browser
+    // memilih sendiri sebelum JavaScript jalan. Setelah tema diketahui,
+    // keduanya ditulis ulang agar warna chrome pasti sama dengan tema.
+    var m = document.querySelectorAll('meta[name="theme-color"]');
+    for (var i = 0; i < m.length; i++) {
+      m[i].setAttribute('content', t === 'dark' ? '#0f172a' : '#ffffff');
+    }
+  } catch (e) {}
+})();
+  </script>
+  <title>Cara Cek Dokumen dan Klasifikasi Kapal (BKI) | KapalPro</title>
+  <meta name="description" content="Panduan memeriksa kelengkapan dokumen kapal sebelum membeli: sertifikat CLASS BKI, surat ukur, sertifikat keselamatan, dan cara verifikasi keasliannya.">
+  <meta name="keywords" content="cek dokumen kapal, sertifikat BKI, klasifikasi kapal, surat ukur kapal">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://kapalpro.web.id/panduan-dokumen-kapal.html">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Cara Cek Dokumen dan Klasifikasi Kapal (BKI)">
+  <meta property="og:description" content="Kenali KapalPro: platform jual beli kapal marine profesional di Indonesia dengan proses inquiry transparan.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://kapalpro.web.id/panduan-dokumen-kapal.html">
+  <meta property="og:site_name" content="KapalPro">
+  <meta property="og:locale" content="id_ID">
+  <meta property="og:image" content="https://kapalpro.web.id/assets/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Cara Cek Dokumen dan Klasifikasi Kapal (BKI)">
+  <meta name="twitter:description" content="Kenali KapalPro: platform jual beli kapal marine profesional di Indonesia dengan proses inquiry transparan.">
+  <meta name="twitter:image" content="https://kapalpro.web.id/assets/og-image.jpg">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="stylesheet" href="css/style.css?v=bb2f3797">
+
+  <!-- WHY schema hanya di halaman ini: index.html sudah punya
+       WebSite plus Organization, tapi hanya sebagai publisher dan
+       tanpa pengenal (@id) yang konsisten. Halaman "Tentang"
+       adalah tempat yang wajar bagi Google mencari tahu perusahaan
+       di balik nama situs, dan di sinilah ContactPoint bisa
+       dinyatakan tanpa diduplikasi di lima halaman lain.
+
+       WHY TIDAK ada field address: alamat fisik tidak ada di
+       js/config.js, dan mengarang kota atau jalan demi mengisi
+       field schema.org menghasilkan structured data yang salah -
+       lebih buruk daripada tidak ada sama sekali. -->
+
+
+  <!-- WHY: Pertanyaan yang paling sering masuk lewat WhatsApp
+       dijawab di halaman yang bisa di-crawl, sehingga pertanyaannya
+       bisa muncul langsung di hasil pencarian. Semua jawabannya
+       juga tampil sebagai teks di bawah, karena Google menandai
+       FAQPage yang tidak cocok dengan isi halaman. -->
+
+  <script type="application/ld+json" id="article-schema">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Cara Cek Dokumen dan Klasifikasi Kapal (BKI)",
+    "description": "Panduan memeriksa kelengkapan dokumen kapal sebelum membeli: sertifikat CLASS BKI, surat ukur, sertifikat keselamatan, dan cara verifikasi keasliannya.",
+    "url": "https://kapalpro.web.id/panduan-dokumen-kapal.html",
+    "inLanguage": "id-ID",
+    "datePublished": "2026-10-13",
+    "dateModified": "2026-10-13",
+    "author": {"@type": "Organization", "name": "KapalPro", "url": "https://kapalpro.web.id"},
+    "publisher": {"@type": "Organization", "name": "KapalPro", "url": "https://kapalpro.web.id"}
+  }
+  </script>
+  <script type="application/ld+json" id="guide-faq">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Apa itu BKI?",
+        "acceptedAnswer": {"@type": "Answer", "text": "Biro Klasifikasi Indonesia (BKI) adalah badan klasifikasi kapal nasional Indonesia yang menetapkan standar keselamatan konstruksi kapal. Sertifikat BKI wajib untuk kapal berbendera Indonesia."}
+      },
+      {
+        "@type": "Question",
+        "name": "Bagaimana jika sertifikat CLASS sudah kedaluwarsa?",
+        "acceptedAnswer": {"@type": "Answer", "text": "Kapal harus menjalani survei ulang (renewal survey) oleh BKI sebelum bisa beroperasi kembali. Biaya dan waktu tergantung kondisi kapal — ini bisa menjadi bahan negosiasi harga."}
+      },
+      {
+        "@type": "Question",
+        "name": "Apakah KapalPro membantu verifikasi dokumen?",
+        "acceptedAnswer": {"@type": "Answer", "text": "Ya, sebagai bagian dari proses transaksi kami membantu memfasilitasi verifikasi dokumen kapal ke BKI dan Syahbandar."}
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <!-- Skip Link (Section 1.9 - Accessibility) -->
+  <a href="#main-content" class="skip-link">Lompat ke konten utama</a>
+
+  <!-- Header -->
+  <header class="header" role="banner">
+    <div class="container header-inner">
+      <!-- Logo -->
+      <a href="index.html" class="logo" aria-label="KapalPro - Beranda">
+        <svg class="logo-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+          <path d="M4 24h24M8 24V16l8-8 8 8v8M16 8v-4M12 20h8M16 20v4"></path>
+        </svg>
+        <span>KapalPro</span>
+      </a>
+
+      <!-- Navigation (Desktop) -->
+      <nav class="nav" role="navigation" aria-label="Navigasi utama">
+        <a href="index.html" class="nav-link">Beranda</a>
+        <a href="catalog.html" class="nav-link">Katalog</a>
+        <a href="contact.html" class="nav-link">Kontak</a>
+        <a href="about.html" class="nav-link">Tentang Kami</a>
+      </nav>
+
+      <!-- Header Actions -->
+      <div class="header-actions">
+
+
+        <!-- Theme Toggle (Section 1.3) -->
+        <button id="theme-toggle" class="theme-toggle" aria-label="Ganti ke mode gelap">
+          <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+
+        <!-- Mobile Menu Button -->
+        <button id="mobile-menu-btn" class="mobile-menu-btn" aria-label="Buka menu" aria-expanded="false" aria-controls="mobile-menu">
+          <svg class="menu-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+          <svg class="close-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" style="display: none;">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="mobile-menu" role="navigation" aria-label="Navigasi mobile">
+      <a href="index.html" class="mobile-menu-link">Beranda</a>
+      <a href="catalog.html" class="mobile-menu-link">Katalog</a>
+      <a href="contact.html" class="mobile-menu-link">Kontak</a>
+      <a href="about.html" class="mobile-menu-link">Tentang Kami</a>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <nav aria-label="Breadcrumb" class="container" style="padding-top: var(--space-4);">
+      <ol class="breadcrumb">
+        <li><a href="index.html">Beranda</a></li>
+        <li aria-current="page">Panduan</li>
+      </ol>
+    </nav>
+
+    <article class="section">
+      <div class="container" style="max-width: 800px;">
+        <h1>Cara Cek Dokumen dan Klasifikasi Kapal (BKI)</h1>
+        <p class="lead">Dokumen kapal adalah bukti legalitas dan kelayakan operasi. Membeli kapal dengan dokumen bermasalah bisa berujung pada kapal tidak bisa beroperasi atau sengketa kepemilikan. Panduan ini menjelaskan dokumen apa saja yang wajib ada dan cara memverifikasinya.</p>
+        <p style="color: var(--text-muted); font-size: 0.9em;">Diperbarui: Oktober 2026 | Waktu baca: 8 menit</p>
+        
+      <section>
+        <h2>1. Sertifikat CLASS (BKI)</h2>
+        <p><strong>Sertifikat CLASS adalah dokumen terpenting.</strong> Di Indonesia, Biro Klasifikasi Indonesia (BKI) adalah badan klasifikasi nasional. Sertifikat CLASS membuktikan kapal memenuhi standar keselamatan konstruksi dan peralatan.</p><p>Cek: masa berlaku sertifikat, catatan rekomendasi (recommendation) yang belum dipenuhi, dan riwayat survei tahunan. Sertifikat yang kedaluwarsa berarti kapal tidak layak operasi hingga survei ulang dilakukan.</p>
+      </section>
+      <section>
+        <h2>2. Surat Ukur (Tonnage Certificate)</h2>
+        <p><strong>Surat ukur menetapkan GT (Gross Tonnage) dan NT (Net Tonnage) kapal.</strong> Dokumen ini diterbitkan oleh Ditjen Perhubungan Laut dan menjadi dasar perhitungan pajak, biaya pelabuhan, dan persyaratan awak kapal.</p><p>Pastikan angka di surat ukur sesuai dengan kondisi fisik kapal. Ketidaksesuaian bisa mengindikasikan modifikasi ilegal.</p>
+      </section>
+      <section>
+        <h2>3. Sertifikat Keselamatan</h2>
+        <p><strong>Meliputi sertifikat keselamatan konstruksi, peralatan, dan radio.</strong> Untuk kapal niaga, ada juga SMC (Safety Management Certificate) dan ISSC (International Ship Security Certificate) untuk kapal yang berlayar internasional.</p><p>Semua sertifikat harus masih berlaku pada saat serah terima. Minta salinannya sebelum survei agar bisa diverifikasi.</p>
+      </section>
+      <section>
+        <h2>4. Bukti Kepemilikan</h2>
+        <p><strong>Pastikan rantai kepemilikan jelas dan tidak terputus.</strong> Minta akta jual beli sebelumnya, dan cek apakah kapal sedang diagunkan (hipotik) ke bank atau lembaga keuangan.</p><p>Kapal dengan hipotik aktif memerlukan surat pelunasan atau persetujuan kreditur sebelum balik nama dapat dilakukan.</p>
+      </section>
+      <section>
+        <h2>5. Cara Verifikasi</h2>
+        <p><strong>Jangan percaya dokumen begitu saja — verifikasi ke sumbernya.</strong> Hubungi BKI untuk konfirmasi status CLASS, cek ke Syahbandar untuk status surat ukur dan hipotik, dan minta bantuan notaris/PPAT untuk proses balik nama.</p><p>Di KapalPro, kami membantu memfasilitasi verifikasi dokumen sebagai bagian dari proses transaksi.</p>
+      </section>
+
+        <h2>Pertanyaan Umum</h2>
+        <div class="vessel-faq">
+          
+          <details class="vessel-faq-item">
+            <summary class="vessel-faq-q">Apa itu BKI?</summary>
+            <p class="vessel-faq-a">Biro Klasifikasi Indonesia (BKI) adalah badan klasifikasi kapal nasional Indonesia yang menetapkan standar keselamatan konstruksi kapal. Sertifikat BKI wajib untuk kapal berbendera Indonesia.</p>
+          </details>
+          <details class="vessel-faq-item">
+            <summary class="vessel-faq-q">Bagaimana jika sertifikat CLASS sudah kedaluwarsa?</summary>
+            <p class="vessel-faq-a">Kapal harus menjalani survei ulang (renewal survey) oleh BKI sebelum bisa beroperasi kembali. Biaya dan waktu tergantung kondisi kapal — ini bisa menjadi bahan negosiasi harga.</p>
+          </details>
+          <details class="vessel-faq-item">
+            <summary class="vessel-faq-q">Apakah KapalPro membantu verifikasi dokumen?</summary>
+            <p class="vessel-faq-a">Ya, sebagai bagian dari proses transaksi kami membantu memfasilitasi verifikasi dokumen kapal ke BKI dan Syahbandar.</p>
+          </details>
+        </div>
+
+        <div style="margin-top: var(--space-8); padding: var(--space-6); background: var(--bg-secondary); border-radius: var(--radius-lg);">
+          <h3>Siap Membeli Kapal?</h3>
+          <p>Jelajahi katalog kami atau ajukan Letter of Intent langsung.</p>
+          <div class="hero-actions">
+            <a href="catalog.html" class="btn btn-primary">Lihat Katalog</a>
+            <a href="contact.html" class="btn btn-secondary">Ajukan LOI</a>
+          </div>
+        </div>
+      </div>
+    </article>
+  </main>
+
+<!-- Footer -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <!-- Brand -->
+        <div class="footer-brand">
+          <a href="index.html" class="logo" aria-label="KapalPro - Beranda">
+            <svg class="logo-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <path d="M4 24h24M8 24V16l8-8 8 8v8M16 8v-4M12 20h8M16 20v4"></path>
+            </svg>
+            <span>KapalPro</span>
+          </a>
+          <p>Platform terpercaya untuk jual beli kapal marine di Indonesia.</p>
+        </div>
+
+        <!-- Quick Links -->
+        <div>
+          <h3 class="footer-heading">Tautan Cepat</h3>
+          <nav aria-label="Navigasi footer">
+            <a href="index.html" class="footer-link">Beranda</a>
+            <a href="catalog.html" class="footer-link">Katalog</a>
+            <a href="about.html" class="footer-link">Tentang Kami</a>
+            <a href="contact.html" class="footer-link">Kontak</a>
+          </nav>
+        </div>
+
+        <!-- Contact -->
+        <div>
+          <h3 class="footer-heading">Kontak</h3>
+          <a href="tel:+6285648048730" class="footer-link" data-tel>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" style="margin-right: 8px;">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+            </svg>
+            <span data-phone-text>+62 856-4804-8730</span>
+          </a>
+          <a href="mailto:info@kapalpro.web.id" class="footer-link">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" style="margin-right: 8px;">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+              <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+            info@kapalpro.web.id
+          </a>
+        </div>
+
+        <!-- Legal -->
+        <div>
+          <h3 class="footer-heading">Legal</h3>
+          <a href="privacy.html" class="footer-link">Kebijakan Privasi</a>
+          <a href="accessibility.html" class="footer-link">Aksesibilitas</a>
+        </div>
+      </div>
+
+      <!-- Footer Bottom -->
+      <div class="footer-bottom">
+        <p class="footer-copyright">© 2026 KapalPro. Hak cipta dilindungi.</p>
+        <div class="footer-legal">
+          <button type="button" class="footer-link" data-manage-cookies style="background:none;border:0;cursor:pointer;padding:0;">Kelola Cookie</button>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Cookie Consent (Section 10.3) -->
+  <div id="cookie-consent" class="cookie-consent" role="dialog" aria-label="Persetujuan cookie">
+    <div class="cookie-consent-inner">
+      <p class="cookie-consent-text">
+        Website ini menggunakan cookies untuk analitik dan pengalaman yang lebih baik.
+        Dengan menggunakan website ini, Anda menyetujui penggunaan cookies.
+      </p>
+      <div class="cookie-consent-actions">
+        <button class="btn btn-primary btn-sm cookie-accept">Terima</button>
+        <button class="btn btn-ghost btn-sm cookie-decline">Tolak</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- Scripts (deferred for performance) -->
+  <script src="js/config.js?v=bb2f3797" defer></script>
+  <!-- WHY: data.js WAJIB sebelum about.js - about.js memanggil
+       VesselData.getVessels() untuk stats & daftar kota. Tanpa ini
+       modul gagal diam-diam dan angka statis di HTML dipakai. -->
+  <script src="js/data.js?v=bb2f3797" defer></script>
+  <script src="js/about.js?v=bb2f3797" defer></script>
+  <script src="js/theme.js?v=bb2f3797" defer></script>
+  <script src="js/app.js?v=bb2f3797" defer></script>
+  <script src="js/anim.js?v=bb2f3797" defer></script>
+  <script src="js/analytics.js?v=bb2f3797" defer></script>
+  <script src="js/perf.js?v=bb2f3797" defer></script>
+
+</body>
+</html>
