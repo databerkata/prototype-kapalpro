@@ -390,15 +390,6 @@
     // Breadcrumbs
     set('breadcrumb-name', vessel.name);
 
-    // WHY: Paragraf deskripsi juga ditulis statis oleh
-    // tools/generate-vessel-pages.js. Runtime tetap mengisinya supaya
-    // vessel.html?id=... (yang tidak di-build) tidak menampilkan
-    // seksi "Deskripsi" dengan badan kosong.
-    var descText = document.getElementById('vessel-description-text');
-    if (descText && vessel.description) {
-      descText.textContent = vessel.description;
-    }
-
     // Badges - hanya ditampilkan bila membawa informasi baru.
     // Status 'available' adalah default semua kapal, dan jenis sudah
     // tertulis di nama kapal pada hampir semua kasus.
