@@ -7,16 +7,16 @@
 
 KapalPro adalah platform dan broker jual beli kapal yang mempertemukan pemilik kapal dengan pembeli di Indonesia. Kami membantu proses negosiasi, mengarahkan survei kapal, hingga penandatanganan Memorandum of Agreement (MOA).
 
-- Website: https://kapalpro.web.id
+- Website: https://databerkata.github.io/prototype-kapalpro
 - WhatsApp: +62 856-4804-8730
 - Bahasa: Indonesia
 
 ## Halaman Utama
 
-- [Beranda](https://kapalpro.web.id/index.html): katalog kapal unggulan dan pencarian
-- [Katalog Kapal](https://kapalpro.web.id/catalog.html): 34 listing kapal — filter berdasarkan tipe, status Tersedia/Terjual
-- [Tentang Kami](https://kapalpro.web.id/about.html): profil KapalPro + FAQ (termasuk FAQ Letter of Intent)
-- [Kontak](https://kapalpro.web.id/contact.html): form Letter of Intent — pilih kapal, cantumkan harga penawaran
+- [Beranda](https://databerkata.github.io/prototype-kapalpro/index.html): katalog kapal unggulan dan pencarian
+- [Katalog Kapal](https://databerkata.github.io/prototype-kapalpro/catalog.html): 34 listing kapal — filter berdasarkan tipe, status Tersedia/Terjual
+- [Tentang Kami](https://databerkata.github.io/prototype-kapalpro/about.html): profil KapalPro + FAQ (termasuk FAQ Letter of Intent)
+- [Kontak](https://databerkata.github.io/prototype-kapalpro/contact.html): form Letter of Intent — pilih kapal, cantumkan harga penawaran
 
 ## Cara Membeli Kapal
 

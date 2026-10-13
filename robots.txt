@@ -1,5 +1,5 @@
 # Robots.txt for KapalPro
-# https://kapalpro.web.id
+# https://databerkata.github.io/prototype-kapalpro
 
 User-agent: *
 Allow: /
@@ -17,7 +17,7 @@ Disallow: /admin/
 # Correct approach: tetap Allow, andalkan noindex + status HTTP 404.
 
 # Sitemap
-Sitemap: https://kapalpro.web.id/sitemap.xml
+Sitemap: https://databerkata.github.io/prototype-kapalpro/sitemap.xml
 
 # Crawl-delay
 Crawl-delay: 1
