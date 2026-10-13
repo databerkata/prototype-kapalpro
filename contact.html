@@ -188,8 +188,8 @@
           <!-- Form (Left, wider) -->
           <div class="card" data-animate="fade" style="grid-column: 1 / -1;">
             <div class="card-body">
-              <h2 id="form-title" style="margin-bottom: var(--space-2);">Kirim Pesan</h2>
-              <p style="color: var(--text-secondary); margin-bottom: var(--space-6);">Isi form di bawah, kami akan merespon dalam 1 hari kerja.</p>
+              <h2 id="form-title" style="margin-bottom: var(--space-2);">Kirim Letter of Intent</h2>
+              <p style="color: var(--text-secondary); margin-bottom: var(--space-6);">Isi form di bawah untuk menyatakan minat resmi Anda terhadap kapal kami. Kami akan merespon dalam 1 hari kerja.</p>
 
               <!-- WHY: novalidate karena validasi custom di js/contact.js
                    dengan pesan error yang ter-i18n (bukan pesan browser) -->
@@ -220,6 +220,19 @@
                 </div>
 
                 <div class="form-group">
+                  <label for="contact-vessel" class="form-label">Kapal yang Diminati</label>
+                  <select id="contact-vessel" name="vessel" class="form-select">
+                    <option value="">Pilih kapal...</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="contact-offer-price" class="form-label">Harga Penawaran (Rp)</label>
+                  <input type="number" id="contact-offer-price" name="offer_price" class="form-input" min="0" step="100000000" placeholder="Contoh: 23000000000">
+                  <p class="text-sm" style="color: var(--text-muted); margin-top: var(--space-2);">Kosongkan jika belum yakin dengan harga</p>
+                </div>
+
+                <div class="form-group">
                   <label for="contact-subject" class="form-label">Perihal</label>
                   <select id="contact-subject" name="subject" class="form-select">
                     <option value="membeli">Saya ingin membeli kapal</option>
@@ -236,7 +249,7 @@
                 </div>
 
                 <button type="submit" id="contact-submit" class="btn btn-primary btn-lg">
-                  <span>Kirim Pesan</span>
+                  <span>Kirim Letter of Intent</span>
                 </button>
               </form>
             </div>
