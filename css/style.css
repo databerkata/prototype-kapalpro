@@ -1069,7 +1069,7 @@ p {
 }
 
 @media (min-width: 1100px) {
-  .catalog-grid { grid-template-columns: repeat(3, 1fr); }
+  .catalog-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
 .catalog-card {
@@ -3555,4 +3555,13 @@ html {
 }
 .link-more:hover {
   text-decoration: underline;
+}
+
+/* === CATALOG: 2 kolom, bukan 3 === */
+/* WHY: #vessels-grid hanya ada di catalog.html (ID unik), jadi override
+   ini tidak menyentuh grid 3 kolom di homepage dan halaman kapal. */
+@media (min-width: 1024px) {
+  #vessels-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
