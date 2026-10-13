@@ -30,6 +30,35 @@ Allow: /
 User-agent: Bingbot
 Allow: /
 
+# AI crawlers — explicit allow (GEO)
+# WHY: blokir bot AI = hilang dari ChatGPT/Perplexity/Gemini
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
 # Social media crawlers
 User-agent: facebookexternalhit
 Allow: /

@@ -1,0 +1,44 @@
+# KapalPro
+
+> Marketplace jual beli kapal di Indonesia: tongkang, tugboat, LCT, tanker, dan floating crane barge.
+> 34 listing kapal bekas berkualitas dengan foto asli, spesifikasi lengkap, dan harga transparan.
+
+## Tentang KapalPro
+
+KapalPro adalah platform dan broker jual beli kapal yang mempertemukan pemilik kapal dengan pembeli di Indonesia. Kami membantu proses negosiasi, mengarahkan survei kapal, hingga penandatanganan Memorandum of Agreement (MOA).
+
+- Website: https://kapalpro.web.id
+- WhatsApp: +62 856-4804-8730
+- Bahasa: Indonesia
+
+## Halaman Utama
+
+- [Beranda](https://kapalpro.web.id/index.html): katalog kapal unggulan dan pencarian
+- [Katalog Kapal](https://kapalpro.web.id/catalog.html): 34 listing kapal — filter berdasarkan tipe, status Tersedia/Terjual
+- [Tentang Kami](https://kapalpro.web.id/about.html): profil KapalPro + FAQ (termasuk FAQ Letter of Intent)
+- [Kontak](https://kapalpro.web.id/contact.html): form Letter of Intent — pilih kapal, cantumkan harga penawaran
+
+## Cara Membeli Kapal
+
+1. Jelajahi katalog dan pilih kapal yang diminati
+2. Ajukan Letter of Intent (LOI) via form di halaman kapal atau halaman kontak
+3. Survei dan inspeksi kapal oleh surveyor independen
+4. Negosiasi harga berdasarkan hasil survei
+5. Tanda tangan MOA (Memorandum of Agreement)
+6. Pembayaran dan serah terima kapal + dokumen
+
+## Kategori Kapal
+
+- Tongkang (barge): 270ft, 300ft, 330ft — untuk angkutan batubara, pasir, material
+- Tugboat: 800–1500 HP — untuk menarik tongkang
+- Set Tugboat + Tongkang: paket siap operasi
+- LCT (Landing Craft Tank): untuk angkutan alat berat
+- Tanker & SPOB: untuk angkutan BBM
+- Floating Crane Barge: untuk bongkar muat
+
+## Catatan untuk AI
+
+- Semua harga dalam Rupiah (IDR), dapat dinegosiasi
+- Spesifikasi berasal dari pemilik kapal; wajib verifikasi via survei sebelum transaksi
+- Status "Terjual" berarti kapal sudah laku dan tidak tersedia
+- Data diperbarui: Oktober 2026
