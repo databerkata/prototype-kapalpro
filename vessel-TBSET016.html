@@ -1,0 +1,1489 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-tZqmasilAl6RTvAzblDqCwq9l3dtedMk2WUpKo1bvis=' https://plausible.io https://docs.google.com; style-src 'self' 'unsafe-inline'; img-src 'self' https: data:; connect-src 'self' https://plausible.io https://docs.google.com; font-src 'self'; frame-src https://docs.google.com; form-action 'self' https://docs.google.com https://wa.me; base-uri 'self'; object-src 'none'">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <!-- WHY: Dua meta theme-color (terang & gelap) membiarkan browser memilih
+       warna chrome-nya sendiri sebelum JavaScript dieksekusi, sehingga tidak
+       ada kedipan warna salah. Nilai keduanya harus sama persis dengan
+       applyTheme() di js/theme.js - tools/validate-meta.js menjaga itu. -->
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0f172a">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <!-- WHY: Skrip anti-flash tema, WAJIB inline di sini. js/theme.js memakai
+       defer sehingga baru jalan setelah HTML selesai diurai; tanpa skrip ini
+       pengunjung bertema gelap melihat kedipan putih. Hash CSP-nya
+       dihitung dari tools/theme-boot.inline.js oleh tools/validate-meta.js
+       - ubah salah satu dari keduanya tanpa mengubah yang lain akan
+       membuat validator gagal. -->
+  <script>
+/* WHY: Skrip ini WAJIB inline di <head> dan berjalan sebelum halaman
+ * digambar. js/theme.js memakai defer, jadi baru jalan setelah HTML
+ * selesai diurai - waktu itu cukup untuk menampilkan kedipan putih
+ * pada pengunjung bertema gelap. Skrip ini juga yang menulis theme-color
+ * sesuai tema aktif, sehingga warna address bar tidak sempat salah.
+ * Hash CSP-nya ada di tools/validate-meta.js dan WAJIB ikut diperbarui
+ * setiap kali isi skrip ini berubah. */
+(function () {
+  try {
+    var t = localStorage.getItem('kapalpro-theme');
+    // WHY: Default tetap light, tidak mengikuti sistem (sama seperti
+    // js/theme.js) karena foto kapal & kartu produk dirancang untuk
+    // latar terang.
+    t = (t === 'dark' || t === 'light') ? t : 'light';
+    document.documentElement.setAttribute('data-theme', t);
+    // WHY: Dua meta theme-color (light & dark) membiarkan browser
+    // memilih sendiri sebelum JavaScript jalan. Setelah tema diketahui,
+    // keduanya ditulis ulang agar warna chrome pasti sama dengan tema.
+    var m = document.querySelectorAll('meta[name="theme-color"]');
+    for (var i = 0; i < m.length; i++) {
+      m[i].setAttribute('content', t === 'dark' ? '#0f172a' : '#ffffff');
+    }
+  } catch (e) {}
+})();
+  </script>
+  <!-- WHY: Blok di bawah diisi ulang oleh tools/generate-vessel-pages.js
+       untuk setiap kapal menjadi berkas statis terpisah (vessel-<ID>.html).
+       Halaman ini sendiri tetap berfungsi penuh lewat ?id=, sehingga
+       generator boleh membaca vessel.html sebagai satu-satunya sumber
+       markup - tidak ada template terpisah yang bisa drifted. -->
+  <title id="page-title">Tugboat + Tongkang Set 300ft 2010 | Tongkang - KapalPro</title>
+  <meta name="description" id="page-description" content="Tugboat + Tongkang Set 300ft 2010 - Tongkang di Samarinda">
+  <meta name="keywords" id="page-keywords" content="Tugboat + Tongkang Set 300ft 2010, Tongkang, kapal, Samarinda">
+  <link rel="canonical" id="page-canonical" href="https://kapalpro.web.id/vessel-TBSET016.html">
+  <!-- WHY: Halaman ini adalah URL lama. Pengunjung yang tidak
+       menjalankan JavaScript akan mendarat di sini, dan isinya kosong
+       karena data kapal hanya bisa dimuat lewat JS. noindex mencegah
+       halaman kosong itu masuk indeks; follow tetap dipakai supaya
+       Google menelusuri tautan ke/dari vessel.html.
+
+       WHY hanya SATU tag robots di sini: sebelumnya ada dua, yaitu
+       "index, follow" (baris 56) lalu "noindex, follow" di bawah.
+       Dua tag yang bertentangan itu membuat niat tidak bisa
+       ditentukan dari sumber: search engine bisa memperlakukan
+       halaman ini sebagai indexable, dan setiap pemeriksaan yang
+       hanya membaca satu tag akan melihat hal berbeda.
+       Satu tag dengan satu niat lebih bisa dipertanggungjawabkan. -->
+  <meta name="robots" content="index, follow">
+  
+  <!-- Open Graph (updated by JS) -->
+  <meta property="og:title" id="og-title" content="Tugboat + Tongkang Set 300ft 2010 - KapalPro">
+  <meta property="og:description" id="og-description" content="Tugboat + Tongkang Set 300ft 2010 - Tongkang di Samarinda">
+  <meta property="og:type" content="product">
+  <meta property="og:url" id="og-url" content="https://kapalpro.web.id/vessel-TBSET016.html">
+  <meta property="og:image" id="og-image" content="https://kapalpro.web.id/assets/vessels/TBSET016/main.jpg">
+  <!-- WHY: Dimensi og:image ditulis ulang oleh js/vessel.js agar cocok
+       dengan foto kapal yang sedang dibuka. Nilai di bawah hanya
+       placeholders untuk gambar bawaan. -->
+  <meta property="og:image:width" id="og-image-width" content="1651">
+  <meta property="og:image:height" id="og-image-height" content="953">
+  <meta property="og:site_name" content="KapalPro">
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" id="tw-title" content="Tugboat + Tongkang Set 300ft 2010 - KapalPro">
+  <meta name="twitter:description" id="tw-description" content="Tugboat + Tongkang Set 300ft 2010 - Tongkang di Samarinda">
+  <meta name="twitter:image" id="tw-image" content="https://kapalpro.web.id/assets/vessels/TBSET016/main.jpg">
+  <script type="application/ld+json" id="vessel-schema">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "Tugboat + Tongkang Set 300ft 2010",
+  "description": "Tugboat + Tongkang Set 300ft 2010 - Tongkang",
+  "sku": "TBSET016",
+  "url": "https://kapalpro.web.id/vessel-TBSET016.html",
+  "image": [
+    "https://kapalpro.web.id/assets/vessels/TBSET016/main.jpg",
+    "https://kapalpro.web.id/assets/vessels/TBSET016/gallery-1.jpg",
+    "https://kapalpro.web.id/assets/vessels/TBSET016/gallery-2.jpg",
+    "https://kapalpro.web.id/assets/vessels/TBSET016/gallery-3.jpg"
+  ],
+  "category": "Tongkang",
+  "offers": {
+    "@type": "Offer",
+    "url": "https://kapalpro.web.id/vessel-TBSET016.html",
+    "priceCurrency": "IDR",
+    "price": 15000000000,
+    "priceSpecification": [
+      {
+        "@type": "UnitPriceSpecification",
+        "priceCurrency": "IDR",
+        "price": 15000000000
+      }
+    ],
+    "availability": "https://schema.org/InStock",
+    "itemCondition": "https://schema.org/UsedCondition",
+    "seller": {
+      "@type": "Organization",
+      "name": "KapalPro",
+      "url": "https://kapalpro.web.id"
+    }
+  },
+  "additionalProperty": [
+    {
+      "@type": "PropertyValue",
+      "name": "Tahun Pembuatan",
+      "value": "2010"
+    },
+    {
+      "@type": "PropertyValue",
+      "name": "Panjang",
+      "value": "91.44 m"
+    },
+    {
+      "@type": "PropertyValue",
+      "name": "Lebar (Beam)",
+      "value": "24.38 m"
+    },
+    {
+      "@type": "PropertyValue",
+      "name": "Kedalaman (Depth)",
+      "value": "5.49 m"
+    },
+    {
+      "@type": "PropertyValue",
+      "name": "Draft",
+      "value": "4.29 m"
+    },
+    {
+      "@type": "PropertyValue",
+      "name": "Gross Tonnage",
+      "value": "3145 GT"
+    },
+    {
+      "@type": "PropertyValue",
+      "name": "Net Tonnage",
+      "value": "944 NT"
+    },
+    {
+      "@type": "PropertyValue",
+      "name": "Tipe Mesin",
+      "value": "Yanmar 6RY17-PGV"
+    },
+    {
+      "@type": "PropertyValue",
+      "name": "Daya Mesin",
+      "value": "2 x 1030 HP"
+    },
+    {
+      "@type": "PropertyValue",
+      "name": "Bendera",
+      "value": "Indonesia"
+    },
+    {
+      "@type": "PropertyValue",
+      "name": "Klasifikasi",
+      "value": "BKI"
+    }
+  ],
+  "mpn": "TBSET016"
+}
+  </script>
+  <script type="application/ld+json" id="vessel-breadcrumb">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Beranda",
+      "item": "https://kapalpro.web.id/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Katalog Kapal",
+      "item": "https://kapalpro.web.id/catalog.html"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Tugboat + Tongkang Set 300ft 2010",
+      "item": "https://kapalpro.web.id/vessel-TBSET016.html"
+    }
+  ]
+}
+  </script>
+  <script type="application/ld+json" id="vessel-faq">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Bagaimana proses pembelian tongkang?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Lima tahap: penawaran, survei dan inspeksi, penandatanganan MOA, pembayaran DP, lalu serah terima. MOA adalah dokumen mengikat yang ditandatangani kedua belah pihak."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Apakah saya bisa melihat kondisi kapal sebelum dibeli?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Ya. Tahap kedua alur transaksi adalah survei dan inspeksi oleh surveyor independen di lokasi kapal. Laporan hasil survei dibagikan kepada kedua pihak sebelum MOA ditandatangani."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Kapal ini punya kelas klasifikasi apa?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Kelas BKI. Rating kelas menunjukkan bahwa badan kapal dan seawasnya secara berkala. Nomor sertifikatnya dapat disediakan atas permintaan."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Dokumen apa saja yang bisa saya lihat?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sertifikat registry, sertifikat klasifikasi, laporan survey marina, dokumen kepemilikan, dan sertifikat builder dapat disediakan atas permintaan setelah penawaran dibahas, dengan persetujuan pemilik kapal."
+      }
+    }
+  ]
+}
+  </script>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  
+  <!-- Resource Hints -->
+  <link rel="dns-prefetch" href="https://docs.google.com">
+  <link rel="dns-prefetch" href="https://wa.me">
+  
+  <!-- Critical CSS (inlined for FCP) -->
+  <style>
+    :root{--color-primary-500:#2563eb;--color-primary-600:#1d4ed8;--color-gray-50:#f8fafc;--color-gray-900:#0f172a;--bg-primary:var(--color-gray-50);--bg-secondary:#fff;--text-primary:var(--color-gray-900);--text-secondary:#475569;--border-primary:#e2e8f0;--font-body:"SF Pro Text",-apple-system,sans-serif;--font-display:"SF Pro Display",-apple-system,sans-serif}
+    [data-theme="dark"]{--bg-primary:var(--color-gray-900);--bg-secondary:#1e293b;--text-primary:var(--color-gray-50);--text-secondary:#cbd5e1;--border-primary:#334155}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:var(--font-body);line-height:1.5;color:var(--text-primary);background:var(--bg-primary)}
+    .header{position:sticky;top:0;z-index:200;background:var(--bg-secondary);border-bottom:1px solid var(--border-primary)}
+    .header-inner{display:flex;align-items:center;justify-content:space-between;height:72px;max-width:1280px;margin:0 auto;padding:0 24px}
+    .vessel-detail{padding:32px 0 64px}
+    .vessel-gallery{display:grid;gap:16px;margin-bottom:32px}
+    @media(min-width:768px){.vessel-gallery{grid-template-columns:2fr 1fr}}
+    /* WHY aspect-ratio di sini SAMA dengan --ratio-photo, bukan token:
+       blok ini critical CSS yang di-inline di <head> dan<link
+       stylesheet> masih bisa terlambat, jadi token yang belum terdefinisi
+       akan membuat foto melebar penuh sebentar lalu menyusut - persis
+       layout shift yang critical CSS ini harus cegah. */
+    .vessel-main-image{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:12px;background:#f1f5f9}
+  </style>
+  
+  <link rel="stylesheet" href="css/style.css?v=bb2f3797">
+  <!-- WHY: Redirect ke URL bersih harus jalan SEBELUM halaman digambar.
+         Kalau script-nya defer, pengunjung sempat melihat "Loading..."
+         lalu lompat - perceptible flash pada koneksi lambat. File
+         eksternal, bukan inline, supaya tidak perlu menambah hash baru
+         ke CSP. .htaccess dan _redirects melakukan 301 sejati lebih
+         dulu, jadi ini hanya cadangan untuk host tanpa konfigurasi. -->
+  <script src="js/vessel-redirect.js?v=bb2f3797"></script>
+</head>
+<body data-vessel-id="TBSET016">
+  <!-- Skip Link -->
+  <a href="#main-content" class="skip-link">Lompat ke konten utama</a>
+
+  <!-- Header -->
+  <header class="header" role="banner">
+    <div class="container header-inner">
+      <a href="index.html" class="logo" aria-label="KapalPro - Beranda">
+        <svg class="logo-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+          <path d="M4 24h24M8 24V16l8-8 8 8v8M16 8v-4M12 20h8M16 20v4"></path>
+        </svg>
+        <span>KapalPro</span>
+      </a>
+      <nav class="nav" role="navigation" aria-label="Navigasi utama">
+        <a href="index.html" class="nav-link">Beranda</a>
+        <a href="catalog.html" class="nav-link active">Katalog</a>
+        <a href="contact.html" class="nav-link">Kontak</a>
+        <a href="about.html" class="nav-link">Tentang Kami</a>
+      </nav>
+      <div class="header-actions">
+        <button id="theme-toggle" class="theme-toggle" aria-label="Ganti ke mode gelap">
+          <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+        <button id="mobile-menu-btn" class="mobile-menu-btn" aria-label="Buka menu" aria-expanded="false" aria-controls="mobile-menu">
+          <svg class="menu-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+          <svg class="close-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" style="display: none;">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+    <div id="mobile-menu" class="mobile-menu" role="navigation" aria-label="Navigasi mobile">
+      <a href="index.html" class="mobile-menu-link">Beranda</a>
+      <a href="catalog.html" class="mobile-menu-link">Katalog</a>
+      <a href="contact.html" class="mobile-menu-link">Kontak</a>
+      <a href="about.html" class="mobile-menu-link">Tentang Kami</a>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main id="main-content" role="main">
+    <div class="vessel-detail">
+      <div class="container">
+
+        <!-- breadcrumb -->
+        <nav class="vessel-breadcrumb" aria-label="Breadcrumb">
+          <a href="index.html">Beranda</a>
+          <span class="vessel-breadcrumb-separator" aria-hidden="true">/</span>
+          <a href="catalog.html">Katalog</a>
+          <span class="vessel-breadcrumb-separator" aria-hidden="true">/</span>
+          <span id="breadcrumb-name" aria-current="page">Tugboat + Tongkang Set 300ft 2010</span>
+        </nav>
+
+        <!-- Gallery -->
+        <div class="vessel-gallery" id="vessel-gallery" data-animate="fade">
+          <!-- WHY: <picture>, bukan <div>. Elemen <source> hanya dibaca browser
+             jika induknya <picture>; kalau hanya <div>, browsers diam-diam
+             mengabaikan WebP dan mengunduh JPEG 1600px yang jauh lebih
+             besar. Styling tidak berubah karena CSS tetap menyasar
+             .vessel-main-image-wrapper. -->
+          <picture class="vessel-main-image-wrapper">
+            <source
+              id="vessel-main-webp"
+              type="image/webp"
+              sizes="(max-width: 768px) 100vw, 66vw"
+              srcset="assets/vessels/TBSET016/main-150w.webp 150w, assets/vessels/TBSET016/main-300w.webp 300w, assets/vessels/TBSET016/main-400w.webp 400w, assets/vessels/TBSET016/main-800w.webp 800w, assets/vessels/TBSET016/main.webp 1651w"
+            >
+            <img
+              id="vessel-main-image"
+              src="assets/vessels/TBSET016/main.jpg"
+              srcset="assets/vessels/TBSET016/main-150w.jpg 150w, assets/vessels/TBSET016/main-300w.jpg 300w, assets/vessels/TBSET016/main-400w.jpg 400w, assets/vessels/TBSET016/main-800w.jpg 800w, assets/vessels/TBSET016/main.jpg 1651w"
+              sizes="(max-width: 768px) 100vw, 66vw"
+              alt="Tugboat + Tongkang Set 300ft 2010 - Tongkang di Samarinda"
+              class="vessel-main-image"
+              loading="eager"
+              fetchpriority="high"
+              decoding="async"
+              width="1651"
+              height="1238"
+            >
+          </picture>
+          <div class="vessel-thumbnails" id="vessel-thumbnails">
+            <!-- Thumbnails populated by JS -->
+          </div>
+        </div>
+
+        <!-- Info Grid -->
+        <div class="vessel-info" data-animate>
+          <!-- Left: Details -->
+          <div class="vessel-details">
+            <!-- Title & Badges -->
+            <div id="vessel-badges" style="display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3); margin-bottom: var(--space-4);">
+              <span class="badge badge-primary" id="vessel-type-badge" hidden>-</span>
+              <span class="badge badge-success" id="vessel-status-badge" hidden>-</span>
+              <span class="text-sm" style="color: var(--text-muted);" id="vessel-year">Tahun 2010</span>
+            </div>
+
+            <h1 id="vessel-title" style="margin-bottom: var(--space-4);">Tugboat + Tongkang Set 300ft 2010</h1>
+
+            <div class="card-location" style="margin-bottom: var(--space-6);">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>
+              <span id="vessel-location">Samarinda</span>
+            </div>
+
+            <div class="card-location" id="vessel-port-row" hidden style="margin-bottom: var(--space-6);">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+              </svg>
+              <span id="vessel-port">Samarinda</span>
+            </div>
+
+            <!-- Highlights -->
+            <section style="margin-bottom: var(--space-8);">
+              <h2 style="font-size: var(--text-xl); margin-bottom: var(--space-4);">Keunggulan</h2>
+            <div id="vessel-highlights" style="display: flex; flex-wrap: wrap; gap: var(--space-2);">
+                            <span class="badge">2010</span>
+              <span class="badge">BKI</span>
+              <span class="badge">3145 GT</span>
+              <span class="badge">Bendera Indonesia</span>
+            </div>
+            </section>
+
+            <!-- Specifications -->
+            <section class="vessel-specs" style="margin-bottom: var(--space-8);">
+              <h2 style="font-size: var(--text-xl); margin-bottom: var(--space-4);">Spesifikasi</h2>
+              <div class="card" style="overflow: hidden;">
+                <table id="vessel-specs-table">
+                  <tbody>
+                                        <tr>
+                      <th scope="row" style="text-align: left; padding: var(--space-3) var(--space-4); font-weight: 500; color: var(--text-secondary);">Tahun Pembuatan</th>
+                      <td style="padding: var(--space-3) var(--space-4); font-weight: 600;">2010</td>
+                    </tr>
+                    <tr>
+                      <th scope="row" style="text-align: left; padding: var(--space-3) var(--space-4); font-weight: 500; color: var(--text-secondary);">Panjang</th>
+                      <td style="padding: var(--space-3) var(--space-4); font-weight: 600;">91.44 m</td>
+                    </tr>
+                    <tr>
+                      <th scope="row" style="text-align: left; padding: var(--space-3) var(--space-4); font-weight: 500; color: var(--text-secondary);">Lebar (Beam)</th>
+                      <td style="padding: var(--space-3) var(--space-4); font-weight: 600;">24.38 m</td>
+                    </tr>
+                    <tr>
+                      <th scope="row" style="text-align: left; padding: var(--space-3) var(--space-4); font-weight: 500; color: var(--text-secondary);">Kedalaman (Depth)</th>
+                      <td style="padding: var(--space-3) var(--space-4); font-weight: 600;">5.49 m</td>
+                    </tr>
+                    <tr>
+                      <th scope="row" style="text-align: left; padding: var(--space-3) var(--space-4); font-weight: 500; color: var(--text-secondary);">Draft</th>
+                      <td style="padding: var(--space-3) var(--space-4); font-weight: 600;">4.29 m</td>
+                    </tr>
+                    <tr>
+                      <th scope="row" style="text-align: left; padding: var(--space-3) var(--space-4); font-weight: 500; color: var(--text-secondary);">Gross Tonnage</th>
+                      <td style="padding: var(--space-3) var(--space-4); font-weight: 600;">3145 GT</td>
+                    </tr>
+                    <tr>
+                      <th scope="row" style="text-align: left; padding: var(--space-3) var(--space-4); font-weight: 500; color: var(--text-secondary);">Net Tonnage</th>
+                      <td style="padding: var(--space-3) var(--space-4); font-weight: 600;">944 NT</td>
+                    </tr>
+                    <tr>
+                      <th scope="row" style="text-align: left; padding: var(--space-3) var(--space-4); font-weight: 500; color: var(--text-secondary);">Tipe Mesin</th>
+                      <td style="padding: var(--space-3) var(--space-4); font-weight: 600;">Yanmar 6RY17-PGV</td>
+                    </tr>
+                    <tr>
+                      <th scope="row" style="text-align: left; padding: var(--space-3) var(--space-4); font-weight: 500; color: var(--text-secondary);">Daya Mesin</th>
+                      <td style="padding: var(--space-3) var(--space-4); font-weight: 600;">2 x 1030 HP</td>
+                    </tr>
+                    <tr>
+                      <th scope="row" style="text-align: left; padding: var(--space-3) var(--space-4); font-weight: 500; color: var(--text-secondary);">Bendera</th>
+                      <td style="padding: var(--space-3) var(--space-4); font-weight: 600;">Indonesia</td>
+                    </tr>
+                    <tr>
+                      <th scope="row" style="text-align: left; padding: var(--space-3) var(--space-4); font-weight: 500; color: var(--text-secondary);">Klasifikasi</th>
+                      <td style="padding: var(--space-3) var(--space-4); font-weight: 600;">BKI</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </section>
+
+            <!-- Documents and Classification -->
+            <!-- WHY blok ini ada: untuk kapal bekas, hal yang benar-benar
+                 menentukan layak atau tidaknya dibeli adalah kelas
+                 klasifikasinya. Rating kelas (BKI, RINA) tidak diberikan
+                 kepada kapal yang tidak bisa diawasi, dan pembeli yang
+                 sudah biasa bertransaksi tahu hal itu. Menampilkan
+                 kelas dan dokumen yang bisa disediakan adalah tanda
+                 bahwa listing ini dikelola, bukan sekadar foto di laut. -->
+            <section class="vessel-docs" id="vessel-docs" style="margin-bottom: var(--space-8);">
+              <h2 style="font-size: var(--text-xl); margin-bottom: var(--space-2);">Dokumen dan Klasifikasi</h2>
+              <p style="color: var(--text-secondary); margin-bottom: var(--space-4); font-size: var(--text-sm);">Setiap listing didukung catatan kelas dan bendera. Dokumen di bawah ini dapat disediakan atas permintaan setelah penawaran mulai dibahas.</p>
+                            <div class="docs-grid">
+              <div class="docs-item">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><polyline points="9 15 11 17 15 13"></polyline></svg>
+                <div class="docs-item-body">
+                  <div class="docs-item-name">Sertifikat Registry</div>
+                  <div class="docs-item-note">Bendera: Indonesia</div>
+                </div>
+              </div>
+              <div class="docs-item">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><polyline points="9 15 11 17 15 13"></polyline></svg>
+                <div class="docs-item-body">
+                  <div class="docs-item-name">Sertifikat Klasifikasi</div>
+                  <div class="docs-item-note">Kelas: BKI</div>
+                </div>
+              </div>
+              <div class="docs-item">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><polyline points="9 15 11 17 15 13"></polyline></svg>
+                <div class="docs-item-body">
+                  <div class="docs-item-name">Laporan Survey Marina</div>
+                  <div class="docs-item-note">Tersedia atas permintaan</div>
+                </div>
+              </div>
+              <div class="docs-item">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><polyline points="9 15 11 17 15 13"></polyline></svg>
+                <div class="docs-item-body">
+                  <div class="docs-item-name">Dokumen Kepemilikan</div>
+                  <div class="docs-item-note">Tersedia atas permintaan</div>
+                </div>
+              </div>
+              <div class="docs-item">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><polyline points="9 15 11 17 15 13"></polyline></svg>
+                <div class="docs-item-body">
+                  <div class="docs-item-name">Sertifikat Pembangun</div>
+                  <div class="docs-item-note">Tersedia atas permintaan</div>
+                </div>
+              </div>
+              </div>
+              <p class="docs-disclaimer">Salinan dokumen di atas bisa dibagikan sebelum survei, dengan persetujuan pemilik kapal.</p>
+              <p class="docs-disclaimer">Spesifikasi berasal dari pemilik dan sewaktu-waktu dapat berubah. Cocokkan seluruh angka dengan laporan survei sebelum menandatangani MOA.</p>
+            </section>
+
+            <!-- FAQ kapal -->
+            <!-- WHY: pertanyaan yang hampir selalu muncul sebelum
+                 orang menawar kapal. Menjawab MOA, biaya survey, dan
+                 syarat dokumen DI HALAMAN INI mengurangi satu putaran
+                 tanya-jawab sebelum WhatsApp, dan memberi FAQPage
+                 schema yang isinya benar-benar ada di halaman yang
+                 terlihat - syarat minimum Google agar structured
+                 data tidak ditandai tidak sesuai.
+
+                 <details> dipakai agar 15 halaman statis tetap ringkas
+                 secara visual, tapi isinya tetap terbaca penuh oleh
+                 crawler dan mode no-JS, sama seperti blok alur
+                 transaksi di atas. -->
+            <section class="vessel-faq-section" style="margin-bottom: var(--space-8);">
+              <h2 style="font-size: var(--text-xl); margin-bottom: var(--space-4);">Pertanyaan Umum</h2>
+                            <div class="vessel-faq">
+              <details class="vessel-faq-item">
+                <summary class="vessel-faq-q">Bagaimana proses pembelian tongkang?</summary>
+                <p class="vessel-faq-a">Lima tahap: penawaran, survei dan inspeksi, penandatanganan MOA, pembayaran DP, lalu serah terima. MOA adalah dokumen mengikat yang ditandatangani kedua belah pihak.</p>
+              </details>
+              <details class="vessel-faq-item">
+                <summary class="vessel-faq-q">Apakah saya bisa melihat kondisi kapal sebelum dibeli?</summary>
+                <p class="vessel-faq-a">Ya. Tahap kedua alur transaksi adalah survei dan inspeksi oleh surveyor independen di lokasi kapal. Laporan hasil survei dibagikan kepada kedua pihak sebelum MOA ditandatangani.</p>
+              </details>
+              <details class="vessel-faq-item">
+                <summary class="vessel-faq-q">Kapal ini punya kelas klasifikasi apa?</summary>
+                <p class="vessel-faq-a">Kelas BKI. Rating kelas menunjukkan bahwa badan kapal dan seawasnya secara berkala. Nomor sertifikatnya dapat disediakan atas permintaan.</p>
+              </details>
+              <details class="vessel-faq-item">
+                <summary class="vessel-faq-q">Dokumen apa saja yang bisa saya lihat?</summary>
+                <p class="vessel-faq-a">Sertifikat registry, sertifikat klasifikasi, laporan survey marina, dokumen kepemilikan, dan sertifikat builder dapat disediakan atas permintaan setelah penawaran dibahas, dengan persetujuan pemilik kapal.</p>
+              </details>
+              </div>
+            </section>
+
+            <!-- Inquiry Form -->
+            <section class="inquiry-form" id="inquiry-section">
+              <h2 class="inquiry-form-title">Ajukan Penawaran Kapal</h2>
+              <p class="inquiry-subtitle">Isi form ini untuk mengajukan penawaran dan menjadwalkan survei. Penawaran ini akan dituangkan dalam MOA (Memorandum of Agreement) setelah kapal lolos inspeksi.</p>
+
+              <!-- WHY alur transaksi ditulis lengkap, bukan hanya form:
+                   "Letter of Intent" adalah istilah yang tidak dikenal di
+                   industri maritim. Yang baku adalah MOA (Memorandum of
+                   Agreement, form NSF) dan tahap survei/inspeksi. Pembeli
+                   mancanegara yang mencari kapal bekas mengikuti alur ini,
+                   dan calon pembeli yang bisa melihat alurnya jauh lebih
+                   mungkin mengisi form daripada menebak apa yang terjadi
+                   setelah tombol ditekan. -->
+              <details class="process-explainer" id="process-explainer">
+                <summary class="process-explainer-summary">Alur Transaksi</summary>
+                <p class="process-intro">Jual beli kapal bekas mengikuti alur yang sudah baku di industri maritim. Lima tahap berikut berlaku juga untuk transaksi antara pihak Indonesia dan pembeli mancanegara.</p>
+                <ol class="process-steps">
+                  <li class="process-step">
+                    <span class="process-step-num" aria-hidden="true">1</span>
+                    <div class="process-step-body">
+                      <h3 class="process-step-title">Ajukan Penawaran</h3>
+                      <p>Kirim identitas, nomor telepon, dan harga tawaran Anda melalui form ini atau WhatsApp. Kami akan menghubungi Anda kembali untuk konfirmasi.</p>
+                    </div>
+                  </li>
+                  <li class="process-step">
+                    <span class="process-step-num" aria-hidden="true">2</span>
+                    <div class="process-step-body">
+                      <h3 class="process-step-title">Survei dan Inspeksi</h3>
+                      <p>Kapal diperiksa oleh surveyor atau inspektur independen untuk memastikan kondisi sesuai deskripsi dan menaksir nilai pasarnya. Laporan inspeksi diberikan kepada kedua belah pihak.</p>
+                    </div>
+                  </li>
+                  <li class="process-step">
+                    <span class="process-step-num" aria-hidden="true">3</span>
+                    <div class="process-step-body">
+                      <h3 class="process-step-title">MOA Ditandatangani</h3>
+                      <p>Kedua pihak menandatangani Memorandum of Agreement (MOA) yang memuat harga, jadwal, kondisi penyerahan, dan klausul inspeksi. MOA adalah dokumen yang mengikat secara hukum.</p>
+                    </div>
+                  </li>
+                  <li class="process-step">
+                    <span class="process-step-num" aria-hidden="true">4</span>
+                    <div class="process-step-body">
+                      <h3 class="process-step-title">Uang Muka (DP)</h3>
+                      <p>Pembayaran uang muka sesuai ketentuan MOA. Dana dipegang sampai kapal selesai diperiksa dan siap diserahterimakan.</p>
+                    </div>
+                  </li>
+                  <li class="process-step">
+                    <span class="process-step-num" aria-hidden="true">5</span>
+                    <div class="process-step-body">
+                      <h3 class="process-step-title">Serah Terima</h3>
+                      <p>Kapal diserahkan setelah seluruh kewajiban terpenuhi, lengkap dengan dokumen sertifikat, riwayat CLASS, dan bukti kepemilikan.</p>
+                    </div>
+                  </li>
+                </ol>
+              </details>
+
+              <form id="inquiry-form" novalidate>
+                <input type="hidden" id="inquiry-vessel-name" name="vessel_name" value="Tugboat + Tongkang Set 300ft 2010">
+                <input type="hidden" id="inquiry-vessel-type" name="vessel_type" value="tongkang">
+
+                <div style="display: grid; grid-template-columns: 1fr; gap: var(--space-6);">
+                  <!-- Name -->
+                  <div class="form-group">
+                    <label for="inquiry-name" class="form-label"><span>Nama Lengkap</span> <span style="color: var(--text-danger);">*</span></label>
+                    <input 
+                      type="text" 
+                      id="inquiry-name" 
+                      name="nama_lengkap" 
+                      class="form-input" 
+                      required 
+                      maxlength="120"
+                      autocomplete="name"
+                      placeholder="Masukkan nama lengkap"
+                    >
+                  </div>
+
+                  <!-- Email & Phone -->
+                  <div style="display: grid; grid-template-columns: 1fr; gap: var(--space-6);">
+                    <div class="form-group">
+                      <label for="inquiry-email" class="form-label">Email <span style="color: var(--text-danger);">*</span></label>
+                      <input 
+                        type="email" 
+                        id="inquiry-email" 
+                        name="email" 
+                        class="form-input" 
+                        required 
+                        autocomplete="email"
+                        placeholder="email@perusahaan.com"
+                      >
+                    </div>
+                    <div class="form-group">
+                      <label for="inquiry-phone" class="form-label"><span>Nomor Telepon</span> <span style="color: var(--text-danger);">*</span></label>
+                      <input 
+                        type="tel" 
+                        id="inquiry-phone" 
+                        name="telepon" 
+                        class="form-input" 
+                        required 
+                        autocomplete="tel"
+                        placeholder="+62 856-4804-8730"
+                      >
+                    </div>
+                  </div>
+
+                  <!-- Company -->
+                  <div class="form-group">
+                    <label for="inquiry-company" class="form-label">Nama Perusahaan</label>
+                    <input 
+                      type="text" 
+                      id="inquiry-company" 
+                      name="perusahaan" 
+                      class="form-input" 
+                      autocomplete="organization"
+                      placeholder="PT Nusantara Shipping"
+                    >
+                  </div>
+
+                  <!-- Vessel Type -->
+                  <div class="form-group">
+                    <label for="inquiry-vessel-type-select" class="form-label">Jenis Kapal</label>
+                    <select id="inquiry-vessel-type-select" name="jenis_kapal" class="form-input form-select">
+                      <option value="">Pilih jenis kapal</option>
+                      <option value="tongkang" selected>Tongkang</option>
+                      <option value="tugboat">Tugboat</option>
+                      <option value="lct">LCT</option>
+                      <option value="spob">SPOB</option>
+                      <option value="tanker">Tanker</option>
+                      <option value="other">Lainnya</option>
+                    </select>
+                  </div>
+
+                  <!-- Message -->
+                  <div class="form-group">
+                    <label for="inquiry-message" class="form-label"><span>Pesan</span> <span style="color: var(--text-danger);">*</span></label>
+                    <textarea 
+                      id="inquiry-message" 
+                      name="pesan" 
+                      class="form-input form-textarea" 
+                      required 
+                      rows="4"
+                      maxlength="1000"
+                      placeholder="Ceritakan kebutuhan Anda, pertanyaan, atau detail tambahan..."
+                    ></textarea>
+                  </div>
+
+                  <!-- Survey Date & Offer Price -->
+                  <div style="display: grid; grid-template-columns: 1fr; gap: var(--space-6);">
+                    <div class="form-group">
+                      <label for="inquiry-survey-date" class="form-label">Tanggal Survey</label>
+                      <input 
+                        type="date" 
+                        id="inquiry-survey-date" 
+                        name="tanggal_survey" 
+                        class="form-input"
+                      >
+                    </div>
+                    <div class="form-group">
+                      <label for="inquiry-offer-price" class="form-label">Harga Tawaran</label>
+                      <input 
+                        type="number" 
+                        id="inquiry-offer-price" 
+                        name="offering_price" 
+                        class="form-input" 
+                        min="0"
+                        step="100000000"
+                        placeholder="Contoh: 10000000000"
+                      >
+                      <p class="text-sm" style="color: var(--text-muted); margin-top: var(--space-2);">Kosongkan jika belum yakin dengan harga</p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Submit -->
+                <div style="display: flex; flex-wrap: wrap; gap: var(--space-4); margin-top: var(--space-8);">
+                  <button type="submit" class="btn btn-primary btn-lg" id="inquiry-submit">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                      <line x1="22" y1="2" x2="11" y2="13"></line>
+                      <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                    </svg>
+                    <span>Kirim Inquiry</span>
+                  </button>
+                  <!-- WHY: href wa.me asli (bukan "#") sebagai fallback bila JS gagal;
+                       renderWhatsApp() menggantinya dengan pesan spesifik kapal. -->
+                  <a href="https://wa.me/6285648048730" class="whatsapp-btn btn-lg" id="inquiry-whatsapp" target="_blank" rel="noopener noreferrer">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                    </svg>
+                    Chat WhatsApp
+                  </a>
+                </div>
+              </form>
+            </section>
+          </div>
+
+          <!-- Right: Sidebar -->
+          <div class="vessel-sidebar" data-animate="right">
+            <div class="vessel-sidebar-card">
+              <p class="vessel-sidebar-price" id="sidebar-price">Rp 15 Milyar</p>
+              <p class="text-sm" style="color: var(--text-muted); margin-bottom: var(--space-4);" id="sidebar-negotiable">Harga negotiable</p>
+              <div class="vessel-sidebar-status" id="sidebar-status">
+                <span class="badge badge-success">Tersedia</span>
+              </div>
+              <!-- WHY: Ringkasan dalam bentuk tabel sederhana supaya
+                   nilainya ada sebagai TEKS di sumber, bukan hanya
+                   digambar lewat JS. -->
+              <p class="text-sm" style="color: var(--text-secondary); margin-top: var(--space-4);">
+                <strong>Tongkang</strong> - Samarinda, tahun 2010
+              </p>
+              <div class="vessel-sidebar-actions">
+                <a href="#inquiry-section" class="btn btn-primary" style="width: 100%;">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                    <polyline points="22,6 12,13 2,6"></polyline>
+                  </svg>
+                  <span>Ajukan Penawaran Kapal</span>
+                </a>
+                <a href="https://wa.me/6285648048730" class="whatsapp-btn" id="sidebar-whatsapp" target="_blank" rel="noopener noreferrer" style="width: 100%; justify-content: center;">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                  </svg>
+                  Chat WhatsApp
+                </a>
+                <a href="tel:+6285648048730" class="btn btn-secondary" style="width: 100%; justify-content: center;" data-tel>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                  </svg>
+                  Telepon
+                </a>
+                <button
+                  type="button"
+                  class="btn btn-ghost save-btn"
+                  id="save-vessel"
+                  data-vessel-id=""
+                  aria-pressed="false"
+                  style="width: 100%; justify-content: center;"
+                >
+                  <svg class="save-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+                  </svg>
+                  <span class="save-label">Simpan Kapal</span>
+                </button>
+                <!-- WHY tombol cetak: setiap shipbroker menyerahkan spec sheet
+                     cetak kepada surveyor, asuransi, atau bank. Bank dan
+                     perusahaan shipping hampir selalu meminta dokumen dalam
+                     bentuk berkas, bukan tautan. window.print() membuka
+                     dialog "Save as PDF" di Chrome dan Safari, jadi ini
+                     menggantikan fitur unduh PDF tanpa backend sama sekali. -->
+                <button type="button" class="btn btn-ghost" id="print-vessel" style="width: 100%; justify-content: center;">
+                  <svg class="sticky-cta-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <polyline points="6 9 6 2 18 2 18 9"></polyline>
+                    <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+                    <rect x="6" y="14" width="12" height="8"></rect>
+                  </svg>
+                  <span>Cetak / Simpan PDF</span>
+                </button>
+                <p class="text-xs" style="color: var(--text-muted); text-align: center; margin-top: var(--space-1);">Cetak lembar spesifikasi lengkap untuk dikirim ke surveyor, asuransi, atau bank.</p>
+              </div>
+            </div>
+
+            <!-- Quick Specs -->
+            <div class="vessel-sidebar-card" style="margin-top: var(--space-6);">
+              <h3 style="font-size: var(--text-base); font-weight: var(--font-weight-semibold); margin-bottom: var(--space-4);">Spesifikasi Singkat</h3>
+              <div id="sidebar-quick-specs">
+                <!-- Quick specs populated by JS -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Related Vessels -->
+        <section style="margin-top: var(--space-16); padding-top: var(--space-8); border-top: 1px solid var(--border-primary);">
+          <div class="section-header">
+            <h2 style="font-size: var(--text-xl);">Kapal Sejenis</h2>
+          </div>
+          <div class="vessels-grid" id="related-vessels" data-animate-group>
+                        <article class="card" style="overflow: hidden;">
+              <a href="vessel-FCB001.html" style="display: block;">
+                <picture>
+                  <source type="image/webp" srcset="assets/vessels/FCB001/main-150w.webp 150w, assets/vessels/FCB001/main-300w.webp 300w, assets/vessels/FCB001/main-400w.webp 400w, assets/vessels/FCB001/main-800w.webp 800w, assets/vessels/FCB001/main.webp 1600w" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px">
+                  <img class="card-image" src="assets/vessels/FCB001/main.jpg" srcset="assets/vessels/FCB001/main-150w.jpg 150w, assets/vessels/FCB001/main-300w.jpg 300w, assets/vessels/FCB001/main-400w.jpg 400w, assets/vessels/FCB001/main-800w.jpg 800w, assets/vessels/FCB001/main.jpg 1600w" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px" alt="Floating Crane Barge 20M - Lainnya" loading="lazy" decoding="async" width="1600" height="1200">
+                </picture>
+                <div class="card-body">
+                  <h3 style="font-size: var(--text-base); margin-bottom: var(--space-1);">Floating Crane Barge 20M</h3>
+                  <p class="text-sm" style="color: var(--text-secondary);">Lainnya - Indonesia</p>
+                  <p style="font-weight: 700; color: var(--text-accent); margin-top: var(--space-2);">Rp 20 Milyar</p>
+                  <div class="catalog-card-chips" style="margin-top: var(--space-2);"><span class="catalog-card-chip">1.515 GT</span><span class="catalog-card-chip">Thn 2003</span></div>
+                </div>
+              </a>
+            </article>
+            <article class="card" style="overflow: hidden;">
+              <a href="vessel-LCT002.html" style="display: block;">
+                <picture>
+                  <source type="image/webp" srcset="assets/vessels/LCT002/main-150w.webp 150w, assets/vessels/LCT002/main-300w.webp 300w, assets/vessels/LCT002/main-400w.webp 400w, assets/vessels/LCT002/main-800w.webp 800w, assets/vessels/LCT002/main.webp 1600w" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px">
+                  <img class="card-image" src="assets/vessels/LCT002/main.jpg" srcset="assets/vessels/LCT002/main-150w.jpg 150w, assets/vessels/LCT002/main-300w.jpg 300w, assets/vessels/LCT002/main-400w.jpg 400w, assets/vessels/LCT002/main-800w.jpg 800w, assets/vessels/LCT002/main.jpg 1600w" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px" alt="LCT 250 DWT - LCT" loading="lazy" decoding="async" width="1600" height="1200">
+                </picture>
+                <div class="card-body">
+                  <h3 style="font-size: var(--text-base); margin-bottom: var(--space-1);">LCT 250 DWT</h3>
+                  <p class="text-sm" style="color: var(--text-secondary);">LCT - Samarinda</p>
+                  <p style="font-weight: 700; color: var(--text-accent); margin-top: var(--space-2);">Rp 6,5 Milyar</p>
+                  <div class="catalog-card-chips" style="margin-top: var(--space-2);"><span class="catalog-card-chip">367 GT</span><span class="catalog-card-chip">252 DWT</span><span class="catalog-card-chip">Thn 2008</span></div>
+                </div>
+              </a>
+            </article>
+            <article class="card" style="overflow: hidden;">
+              <a href="vessel-TB002.html" style="display: block;">
+                <picture>
+                  <source type="image/webp" srcset="assets/vessels/TB002/main-150w.webp 150w, assets/vessels/TB002/main-300w.webp 300w, assets/vessels/TB002/main-400w.webp 400w, assets/vessels/TB002/main-800w.webp 800w, assets/vessels/TB002/main.webp 1210w" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px">
+                  <img class="card-image" src="assets/vessels/TB002/main.jpg" srcset="assets/vessels/TB002/main-150w.jpg 150w, assets/vessels/TB002/main-300w.jpg 300w, assets/vessels/TB002/main-400w.jpg 400w, assets/vessels/TB002/main-800w.jpg 800w, assets/vessels/TB002/main.jpg 1210w" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px" alt="Tugboat 1500 HP - Tugboat" loading="lazy" decoding="async" width="1210" height="908">
+                </picture>
+                <div class="card-body">
+                  <h3 style="font-size: var(--text-base); margin-bottom: var(--space-1);">Tugboat 1500 HP</h3>
+                  <p class="text-sm" style="color: var(--text-secondary);">Tugboat - Jambi</p>
+                  <p style="font-weight: 700; color: var(--text-accent); margin-top: var(--space-2);">Rp 4,5 Milyar</p>
+                  <div class="catalog-card-chips" style="margin-top: var(--space-2);"><span class="catalog-card-chip">92 GT</span></div>
+                </div>
+              </a>
+            </article>
+            <article class="card" style="overflow: hidden;">
+              <a href="vessel-TBSET001.html" style="display: block;">
+                <picture>
+                  <source type="image/webp" srcset="assets/vessels/TBSET001/main-150w.webp 150w, assets/vessels/TBSET001/main-300w.webp 300w, assets/vessels/TBSET001/main-400w.webp 400w, assets/vessels/TBSET001/main-800w.webp 800w, assets/vessels/TBSET001/main.webp 1600w" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px">
+                  <img class="card-image" src="assets/vessels/TBSET001/main.jpg" srcset="assets/vessels/TBSET001/main-150w.jpg 150w, assets/vessels/TBSET001/main-300w.jpg 300w, assets/vessels/TBSET001/main-400w.jpg 400w, assets/vessels/TBSET001/main-800w.jpg 800w, assets/vessels/TBSET001/main.jpg 1600w" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px" alt="Tugboat + Tongkang Set 120ft 2025 - Tongkang" loading="lazy" decoding="async" width="1600" height="1200">
+                </picture>
+                <div class="card-body">
+                  <h3 style="font-size: var(--text-base); margin-bottom: var(--space-1);">Tugboat + Tongkang Set 120ft 2025</h3>
+                  <p class="text-sm" style="color: var(--text-secondary);">Tongkang - Tegal</p>
+                  <p style="font-weight: 700; color: var(--text-accent); margin-top: var(--space-2);">Rp 11 Milyar</p>
+                  <div class="catalog-card-chips" style="margin-top: var(--space-2);"><span class="catalog-card-chip">207 GT</span><span class="catalog-card-chip">Thn 2025</span></div>
+                </div>
+              </a>
+            </article>
+            <article class="card" style="overflow: hidden;">
+              <a href="vessel-TBSET002.html" style="display: block;">
+                <picture>
+                  <source type="image/webp" srcset="assets/vessels/TBSET002/main-150w.webp 150w, assets/vessels/TBSET002/main-300w.webp 300w, assets/vessels/TBSET002/main-400w.webp 400w, assets/vessels/TBSET002/main-800w.webp 800w, assets/vessels/TBSET002/main.webp 1600w" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px">
+                  <img class="card-image" src="assets/vessels/TBSET002/main.jpg" srcset="assets/vessels/TBSET002/main-150w.jpg 150w, assets/vessels/TBSET002/main-300w.jpg 300w, assets/vessels/TBSET002/main-400w.jpg 400w, assets/vessels/TBSET002/main-800w.jpg 800w, assets/vessels/TBSET002/main.jpg 1600w" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px" alt="Tugboat + Tongkang Set 230ft 2010 - Tongkang" loading="lazy" decoding="async" width="1600" height="1200">
+                </picture>
+                <div class="card-body">
+                  <h3 style="font-size: var(--text-base); margin-bottom: var(--space-1);">Tugboat + Tongkang Set 230ft 2010</h3>
+                  <p class="text-sm" style="color: var(--text-secondary);">Tongkang - Pontianak</p>
+                  <p style="font-weight: 700; color: var(--text-accent); margin-top: var(--space-2);">Rp 17 Milyar</p>
+                  <div class="catalog-card-chips" style="margin-top: var(--space-2);"><span class="catalog-card-chip">1.383 GT</span><span class="catalog-card-chip">Thn 2010</span></div>
+                </div>
+              </a>
+            </article>
+            <article class="card" style="overflow: hidden;">
+              <a href="vessel-TBSET003.html" style="display: block;">
+                <picture>
+                  <source type="image/webp" srcset="assets/vessels/TBSET003/main-150w.webp 150w, assets/vessels/TBSET003/main-300w.webp 300w, assets/vessels/TBSET003/main-400w.webp 400w, assets/vessels/TBSET003/main-800w.webp 800w, assets/vessels/TBSET003/main.webp 1600w" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px">
+                  <img class="card-image" src="assets/vessels/TBSET003/main.jpg" srcset="assets/vessels/TBSET003/main-150w.jpg 150w, assets/vessels/TBSET003/main-300w.jpg 300w, assets/vessels/TBSET003/main-400w.jpg 400w, assets/vessels/TBSET003/main-800w.jpg 800w, assets/vessels/TBSET003/main.jpg 1600w" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px" alt="Tugboat + Oil Barge 1.100 KL - Oil Barge" loading="lazy" decoding="async" width="1600" height="1200">
+                </picture>
+                <div class="card-body">
+                  <h3 style="font-size: var(--text-base); margin-bottom: var(--space-1);">Tugboat + Oil Barge 1.100 KL</h3>
+                  <p class="text-sm" style="color: var(--text-secondary);">Oil Barge - Samarinda</p>
+                  <p style="font-weight: 700; color: var(--text-accent); margin-top: var(--space-2);">Rp 25 Milyar</p>
+                  <div class="catalog-card-chips" style="margin-top: var(--space-2);"><span class="catalog-card-chip">559 GT</span><span class="catalog-card-chip">Thn 2011</span></div>
+                </div>
+              </a>
+            </article>
+            <article class="card" style="overflow: hidden;">
+              <a href="vessel-TBSET004.html" style="display: block;">
+                <picture>
+                  <source type="image/webp" srcset="assets/vessels/TBSET004/main-150w.webp 150w, assets/vessels/TBSET004/main-300w.webp 300w, assets/vessels/TBSET004/main-400w.webp 400w, assets/vessels/TBSET004/main-800w.webp 800w, assets/vessels/TBSET004/main.webp 1600w" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px">
+                  <img class="card-image" src="assets/vessels/TBSET004/main.jpg" srcset="assets/vessels/TBSET004/main-150w.jpg 150w, assets/vessels/TBSET004/main-300w.jpg 300w, assets/vessels/TBSET004/main-400w.jpg 400w, assets/vessels/TBSET004/main-800w.jpg 800w, assets/vessels/TBSET004/main.jpg 1600w" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px" alt="Tugboat + Tongkang Set 270ft - Tongkang" loading="lazy" decoding="async" width="1600" height="1200">
+                </picture>
+                <div class="card-body">
+                  <h3 style="font-size: var(--text-base); margin-bottom: var(--space-1);">Tugboat + Tongkang Set 270ft</h3>
+                  <p class="text-sm" style="color: var(--text-secondary);">Tongkang - Batam</p>
+                  <p style="font-weight: 700; color: var(--text-accent); margin-top: var(--space-2);">Rp 21 Milyar</p>
+                  <div class="catalog-card-chips" style="margin-top: var(--space-2);"><span class="catalog-card-chip">2.445 GT</span><span class="catalog-card-chip">6.000 DWT</span><span class="catalog-card-chip">Thn 2010</span></div>
+                </div>
+              </a>
+            </article>
+            <article class="card" style="overflow: hidden;">
+              <a href="vessel-TBSET005.html" style="display: block;">
+                <picture>
+                  <source type="image/webp" srcset="assets/vessels/TBSET005/main-150w.webp 150w, assets/vessels/TBSET005/main-300w.webp 300w, assets/vessels/TBSET005/main-400w.webp 400w, assets/vessels/TBSET005/main-800w.webp 800w, assets/vessels/TBSET005/main.webp 1600w" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px">
+                  <img class="card-image" src="assets/vessels/TBSET005/main.jpg" srcset="assets/vessels/TBSET005/main-150w.jpg 150w, assets/vessels/TBSET005/main-300w.jpg 300w, assets/vessels/TBSET005/main-400w.jpg 400w, assets/vessels/TBSET005/main-800w.jpg 800w, assets/vessels/TBSET005/main.jpg 1600w" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px" alt="Tugboat + Tongkang Set 300ft 2019 - Tongkang" loading="lazy" decoding="async" width="1600" height="1200">
+                </picture>
+                <div class="card-body">
+                  <h3 style="font-size: var(--text-base); margin-bottom: var(--space-1);">Tugboat + Tongkang Set 300ft 2019</h3>
+                  <p class="text-sm" style="color: var(--text-secondary);">Tongkang - Samarinda</p>
+                  <p style="font-weight: 700; color: var(--text-accent); margin-top: var(--space-2);">Rp 26 Milyar</p>
+                  <div class="catalog-card-chips" style="margin-top: var(--space-2);"><span class="catalog-card-chip">3.107 GT</span><span class="catalog-card-chip">7.500 DWT</span><span class="catalog-card-chip">Thn 2019</span></div>
+                </div>
+              </a>
+            </article>
+            <article class="card" style="overflow: hidden;">
+              <a href="vessel-TBSET006.html" style="display: block;">
+                <picture>
+                  <source type="image/webp" srcset="assets/vessels/TBSET006/main-150w.webp 150w, assets/vessels/TBSET006/main-300w.webp 300w, assets/vessels/TBSET006/main-400w.webp 400w, assets/vessels/TBSET006/main-800w.webp 800w, assets/vessels/TBSET006/main.webp 1600w" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px">
+                  <img class="card-image" src="assets/vessels/TBSET006/main.jpg" srcset="assets/vessels/TBSET006/main-150w.jpg 150w, assets/vessels/TBSET006/main-300w.jpg 300w, assets/vessels/TBSET006/main-400w.jpg 400w, assets/vessels/TBSET006/main-800w.jpg 800w, assets/vessels/TBSET006/main.jpg 1600w" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px" alt="Tugboat + Tongkang Set 330ft - Tongkang" loading="lazy" decoding="async" width="1600" height="1200">
+                </picture>
+                <div class="card-body">
+                  <h3 style="font-size: var(--text-base); margin-bottom: var(--space-1);">Tugboat + Tongkang Set 330ft</h3>
+                  <p class="text-sm" style="color: var(--text-secondary);">Tongkang - Samarinda</p>
+                  <p style="font-weight: 700; color: var(--text-accent); margin-top: var(--space-2);">Rp 35 Milyar</p>
+                  <div class="catalog-card-chips" style="margin-top: var(--space-2);"><span class="catalog-card-chip">3.642 GT</span><span class="catalog-card-chip">Thn 2011</span></div>
+                </div>
+              </a>
+            </article>
+            <article class="card" style="overflow: hidden;">
+              <a href="vessel-TNK002.html" style="display: block;">
+                <picture>
+                  <source type="image/webp" srcset="assets/vessels/TNK002/main-150w.webp 150w, assets/vessels/TNK002/main-300w.webp 300w, assets/vessels/TNK002/main-400w.webp 400w, assets/vessels/TNK002/main-800w.webp 800w, assets/vessels/TNK002/main.webp 1600w" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px">
+                  <img class="card-image" src="assets/vessels/TNK002/main.jpg" srcset="assets/vessels/TNK002/main-150w.jpg 150w, assets/vessels/TNK002/main-300w.jpg 300w, assets/vessels/TNK002/main-400w.jpg 400w, assets/vessels/TNK002/main-800w.jpg 800w, assets/vessels/TNK002/main.jpg 1600w" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px" alt="Tanker 3.570 DWT 38M - Tanker" loading="lazy" decoding="async" width="1600" height="1200">
+                </picture>
+                <div class="card-body">
+                  <h3 style="font-size: var(--text-base); margin-bottom: var(--space-1);">Tanker 3.570 DWT 38M</h3>
+                  <p class="text-sm" style="color: var(--text-secondary);">Tanker - Jakarta</p>
+                  <p style="font-weight: 700; color: var(--text-accent); margin-top: var(--space-2);">Rp 38 Milyar</p>
+                  <div class="catalog-card-chips" style="margin-top: var(--space-2);"><span class="catalog-card-chip">2.198 GT</span><span class="catalog-card-chip">3.570 DWT</span><span class="catalog-card-chip">Thn 2003</span></div>
+                </div>
+              </a>
+            </article>
+            <article class="card" style="overflow: hidden;">
+              <a href="vessel-TK003.html" style="display: block;">
+                <picture>
+                  <source type="image/webp" srcset="assets/vessels/TK003/main-150w.webp 150w, assets/vessels/TK003/main-300w.webp 300w, assets/vessels/TK003/main-400w.webp 400w, assets/vessels/TK003/main-800w.webp 800w, assets/vessels/TK003/main.webp 1600w" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px">
+                  <img class="card-image" src="assets/vessels/TK003/main.jpg" srcset="assets/vessels/TK003/main-150w.jpg 150w, assets/vessels/TK003/main-300w.jpg 300w, assets/vessels/TK003/main-400w.jpg 400w, assets/vessels/TK003/main-800w.jpg 800w, assets/vessels/TK003/main.jpg 1600w" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px" alt="Tongkang Barge 230ft 2012 - Tongkang" loading="lazy" decoding="async" width="1600" height="1200">
+                </picture>
+                <div class="card-body">
+                  <h3 style="font-size: var(--text-base); margin-bottom: var(--space-1);">Tongkang Barge 230ft 2012</h3>
+                  <p class="text-sm" style="color: var(--text-secondary);">Tongkang - Pontianak</p>
+                  <p style="font-weight: 700; color: var(--text-accent); margin-top: var(--space-2);">Rp 12,5 Milyar</p>
+                  <div class="catalog-card-chips" style="margin-top: var(--space-2);"><span class="catalog-card-chip">1.383 GT</span><span class="catalog-card-chip">Thn 2012</span></div>
+                </div>
+              </a>
+            </article>
+            <article class="card" style="overflow: hidden;">
+              <a href="vessel-TK004.html" style="display: block;">
+                <picture>
+                  <source type="image/webp" srcset="assets/vessels/TK004/main-150w.webp 150w, assets/vessels/TK004/main-300w.webp 300w, assets/vessels/TK004/main-400w.webp 400w, assets/vessels/TK004/main-800w.webp 800w, assets/vessels/TK004/main.webp 1600w" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px">
+                  <img class="card-image" src="assets/vessels/TK004/main.jpg" srcset="assets/vessels/TK004/main-150w.jpg 150w, assets/vessels/TK004/main-300w.jpg 300w, assets/vessels/TK004/main-400w.jpg 400w, assets/vessels/TK004/main-800w.jpg 800w, assets/vessels/TK004/main.jpg 1600w" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px" alt="Tugboat + Tongkang Set 330ft 2005 - Tongkang" loading="lazy" decoding="async" width="1600" height="1200">
+                </picture>
+                <div class="card-body">
+                  <h3 style="font-size: var(--text-base); margin-bottom: var(--space-1);">Tugboat + Tongkang Set 330ft 2005</h3>
+                  <p class="text-sm" style="color: var(--text-secondary);">Tongkang - Jakarta</p>
+                  <p style="font-weight: 700; color: var(--text-accent); margin-top: var(--space-2);">Rp 34 Milyar</p>
+                  <div class="catalog-card-chips" style="margin-top: var(--space-2);"><span class="catalog-card-chip">3.874 GT</span><span class="catalog-card-chip">Thn 2005</span></div>
+                </div>
+              </a>
+            </article>
+            <article class="card" style="overflow: hidden;">
+              <a href="vessel-TKSET001.html" style="display: block;">
+                <picture>
+                  <source type="image/webp" srcset="assets/vessels/TKSET001/main-150w.webp 150w, assets/vessels/TKSET001/main-300w.webp 300w, assets/vessels/TKSET001/main-400w.webp 400w, assets/vessels/TKSET001/main-800w.webp 800w, assets/vessels/TKSET001/main.webp 1600w" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px">
+                  <img class="card-image" src="assets/vessels/TKSET001/main.jpg" srcset="assets/vessels/TKSET001/main-150w.jpg 150w, assets/vessels/TKSET001/main-300w.jpg 300w, assets/vessels/TKSET001/main-400w.jpg 400w, assets/vessels/TKSET001/main-800w.jpg 800w, assets/vessels/TKSET001/main.jpg 1600w" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px" alt="Paket Tugboat + Tongkang 300ft - Tongkang" loading="lazy" decoding="async" width="1600" height="1200">
+                </picture>
+                <div class="card-body">
+                  <h3 style="font-size: var(--text-base); margin-bottom: var(--space-1);">Paket Tugboat + Tongkang 300ft</h3>
+                  <p class="text-sm" style="color: var(--text-secondary);">Tongkang - Samarinda</p>
+                  <p style="font-weight: 700; color: var(--text-accent); margin-top: var(--space-2);">Rp 25 Milyar</p>
+                  <div class="catalog-card-chips" style="margin-top: var(--space-2);"><span class="catalog-card-chip">3.103 GT</span><span class="catalog-card-chip">7.500 DWT</span><span class="catalog-card-chip">Thn 2018</span></div>
+                </div>
+              </a>
+            </article>
+            <article class="card" style="overflow: hidden;">
+              <a href="vessel-TB003.html" style="display: block;">
+                <picture>
+                  <source type="image/webp" srcset="assets/vessels/TB003/main-150w.webp 150w, assets/vessels/TB003/main-300w.webp 300w, assets/vessels/TB003/main-400w.webp 400w, assets/vessels/TB003/main-800w.webp 800w, assets/vessels/TB003/main.webp 1600w" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px">
+                  <img class="card-image" src="assets/vessels/TB003/main.jpg" srcset="assets/vessels/TB003/main-150w.jpg 150w, assets/vessels/TB003/main-300w.jpg 300w, assets/vessels/TB003/main-400w.jpg 400w, assets/vessels/TB003/main-800w.jpg 800w, assets/vessels/TB003/main.jpg 1600w" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px" alt="Tugboat 1200 HP 2008 - Tugboat" loading="lazy" decoding="async" width="1600" height="1200">
+                </picture>
+                <div class="card-body">
+                  <h3 style="font-size: var(--text-base); margin-bottom: var(--space-1);">Tugboat 1200 HP 2008</h3>
+                  <p class="text-sm" style="color: var(--text-secondary);">Tugboat - Batam</p>
+                  <p style="font-weight: 700; color: var(--text-accent); margin-top: var(--space-2);">Rp 8,5 Milyar</p>
+                  <div class="catalog-card-chips" style="margin-top: var(--space-2);"><span class="catalog-card-chip">288 GT</span><span class="catalog-card-chip">Thn 2008</span></div>
+                </div>
+              </a>
+            </article>
+            <article class="card" style="overflow: hidden;">
+              <a href="vessel-TB004.html" style="display: block;">
+                <picture>
+                  <source type="image/webp" srcset="assets/vessels/TB004/main-150w.webp 150w, assets/vessels/TB004/main-300w.webp 300w, assets/vessels/TB004/main-400w.webp 400w, assets/vessels/TB004/main-800w.webp 800w, assets/vessels/TB004/main.webp 1600w" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px">
+                  <img class="card-image" src="assets/vessels/TB004/main.jpg" srcset="assets/vessels/TB004/main-150w.jpg 150w, assets/vessels/TB004/main-300w.jpg 300w, assets/vessels/TB004/main-400w.jpg 400w, assets/vessels/TB004/main-800w.jpg 800w, assets/vessels/TB004/main.jpg 1600w" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px" alt="Tugboat 300ft 2018 - Tugboat" loading="lazy" decoding="async" width="1600" height="1200">
+                </picture>
+                <div class="card-body">
+                  <h3 style="font-size: var(--text-base); margin-bottom: var(--space-1);">Tugboat 300ft 2018</h3>
+                  <p class="text-sm" style="color: var(--text-secondary);">Tugboat - Samarinda</p>
+                  <p style="font-weight: 700; color: var(--text-accent); margin-top: var(--space-2);">Rp 25 Milyar</p>
+                  <div class="catalog-card-chips" style="margin-top: var(--space-2);"><span class="catalog-card-chip">208 GT</span><span class="catalog-card-chip">Thn 2018</span></div>
+                </div>
+              </a>
+            </article>
+            <article class="card" style="overflow: hidden;">
+              <a href="vessel-TBSET007.html" style="display: block;">
+                <picture>
+                  <source type="image/webp" srcset="assets/vessels/TBSET007/main-150w.webp 150w, assets/vessels/TBSET007/main-300w.webp 300w, assets/vessels/TBSET007/main-400w.webp 400w, assets/vessels/TBSET007/main-800w.webp 800w, assets/vessels/TBSET007/main.webp 1536w" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px">
+                  <img class="card-image" src="assets/vessels/TBSET007/main.jpg" srcset="assets/vessels/TBSET007/main-150w.jpg 150w, assets/vessels/TBSET007/main-300w.jpg 300w, assets/vessels/TBSET007/main-400w.jpg 400w, assets/vessels/TBSET007/main-800w.jpg 800w, assets/vessels/TBSET007/main.jpg 1536w" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px" alt="Tugboat + Oil Barge Set 2012 - Oil Barge" loading="lazy" decoding="async" width="1536" height="1152">
+                </picture>
+                <div class="card-body">
+                  <h3 style="font-size: var(--text-base); margin-bottom: var(--space-1);">Tugboat + Oil Barge Set 2012</h3>
+                  <p class="text-sm" style="color: var(--text-secondary);">Oil Barge - Batam</p>
+                  <p style="font-weight: 700; color: var(--text-accent); margin-top: var(--space-2);">Rp 10 Milyar</p>
+                  <div class="catalog-card-chips" style="margin-top: var(--space-2);"><span class="catalog-card-chip">307 GT</span><span class="catalog-card-chip">500 DWT</span><span class="catalog-card-chip">Thn 2012</span></div>
+                </div>
+              </a>
+            </article>
+            <article class="card" style="overflow: hidden;">
+              <a href="vessel-TBSET008.html" style="display: block;">
+                <picture>
+                  <source type="image/webp" srcset="assets/vessels/TBSET008/main-150w.webp 150w, assets/vessels/TBSET008/main-300w.webp 300w, assets/vessels/TBSET008/main-400w.webp 400w, assets/vessels/TBSET008/main-800w.webp 800w, assets/vessels/TBSET008/main.webp 1536w" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px">
+                  <img class="card-image" src="assets/vessels/TBSET008/main.jpg" srcset="assets/vessels/TBSET008/main-150w.jpg 150w, assets/vessels/TBSET008/main-300w.jpg 300w, assets/vessels/TBSET008/main-400w.jpg 400w, assets/vessels/TBSET008/main-800w.jpg 800w, assets/vessels/TBSET008/main.jpg 1536w" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px" alt="Tugboat + Tongkang Set 270ft - Tongkang" loading="lazy" decoding="async" width="1536" height="1152">
+                </picture>
+                <div class="card-body">
+                  <h3 style="font-size: var(--text-base); margin-bottom: var(--space-1);">Tugboat + Tongkang Set 270ft</h3>
+                  <p class="text-sm" style="color: var(--text-secondary);">Tongkang - Balikpapan</p>
+                  <p style="font-weight: 700; color: var(--text-accent); margin-top: var(--space-2);">Rp 12 Milyar</p>
+                  <div class="catalog-card-chips" style="margin-top: var(--space-2);"><span class="catalog-card-chip">2.084 GT</span><span class="catalog-card-chip">Thn 2008</span></div>
+                </div>
+              </a>
+            </article>
+            <article class="card" style="overflow: hidden;">
+              <a href="vessel-TBSET009.html" style="display: block;">
+                <picture>
+                  <source type="image/webp" srcset="assets/vessels/TBSET009/main-150w.webp 150w, assets/vessels/TBSET009/main-300w.webp 300w, assets/vessels/TBSET009/main-400w.webp 400w, assets/vessels/TBSET009/main-800w.webp 800w, assets/vessels/TBSET009/main.webp 1536w" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px">
+                  <img class="card-image" src="assets/vessels/TBSET009/main.jpg" srcset="assets/vessels/TBSET009/main-150w.jpg 150w, assets/vessels/TBSET009/main-300w.jpg 300w, assets/vessels/TBSET009/main-400w.jpg 400w, assets/vessels/TBSET009/main-800w.jpg 800w, assets/vessels/TBSET009/main.jpg 1536w" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px" alt="Tugboat + Tongkang Set 270ft 2013 - Tongkang" loading="lazy" decoding="async" width="1536" height="1152">
+                </picture>
+                <div class="card-body">
+                  <h3 style="font-size: var(--text-base); margin-bottom: var(--space-1);">Tugboat + Tongkang Set 270ft 2013</h3>
+                  <p class="text-sm" style="color: var(--text-secondary);">Tongkang - Jakarta</p>
+                  <p style="font-weight: 700; color: var(--text-accent); margin-top: var(--space-2);">Rp 21 Milyar</p>
+                  <div class="catalog-card-chips" style="margin-top: var(--space-2);"><span class="catalog-card-chip">2.523 GT</span><span class="catalog-card-chip">5.500 DWT</span><span class="catalog-card-chip">Thn 2013</span></div>
+                </div>
+              </a>
+            </article>
+            <article class="card" style="overflow: hidden;">
+              <a href="vessel-TBSET010.html" style="display: block;">
+                <picture>
+                  <source type="image/webp" srcset="assets/vessels/TBSET010/main-150w.webp 150w, assets/vessels/TBSET010/main-300w.webp 300w, assets/vessels/TBSET010/main-400w.webp 400w, assets/vessels/TBSET010/main-800w.webp 800w, assets/vessels/TBSET010/main.webp 1600w" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px">
+                  <img class="card-image" src="assets/vessels/TBSET010/main.jpg" srcset="assets/vessels/TBSET010/main-150w.jpg 150w, assets/vessels/TBSET010/main-300w.jpg 300w, assets/vessels/TBSET010/main-400w.jpg 400w, assets/vessels/TBSET010/main-800w.jpg 800w, assets/vessels/TBSET010/main.jpg 1600w" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px" alt="Tugboat + Tongkang Set 300ft 2007 - Tongkang" loading="lazy" decoding="async" width="1600" height="1200">
+                </picture>
+                <div class="card-body">
+                  <h3 style="font-size: var(--text-base); margin-bottom: var(--space-1);">Tugboat + Tongkang Set 300ft 2007</h3>
+                  <p class="text-sm" style="color: var(--text-secondary);">Tongkang - Batam</p>
+                  <p style="font-weight: 700; color: var(--text-accent); margin-top: var(--space-2);">Rp 15 Milyar</p>
+                  <div class="catalog-card-chips" style="margin-top: var(--space-2);"><span class="catalog-card-chip">3.100 GT</span><span class="catalog-card-chip">8.000 DWT</span><span class="catalog-card-chip">Thn 2007</span></div>
+                </div>
+              </a>
+            </article>
+            <article class="card" style="overflow: hidden;">
+              <a href="vessel-TBSET011.html" style="display: block;">
+                <picture>
+                  <source type="image/webp" srcset="assets/vessels/TBSET011/main-150w.webp 150w, assets/vessels/TBSET011/main-300w.webp 300w, assets/vessels/TBSET011/main-400w.webp 400w, assets/vessels/TBSET011/main-800w.webp 800w, assets/vessels/TBSET011/main.webp 1448w" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px">
+                  <img class="card-image" src="assets/vessels/TBSET011/main.jpg" srcset="assets/vessels/TBSET011/main-150w.jpg 150w, assets/vessels/TBSET011/main-300w.jpg 300w, assets/vessels/TBSET011/main-400w.jpg 400w, assets/vessels/TBSET011/main-800w.jpg 800w, assets/vessels/TBSET011/main.jpg 1448w" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px" alt="Tugboat + Tongkang Set 300ft 2013 - Tongkang" loading="lazy" decoding="async" width="1448" height="1086">
+                </picture>
+                <div class="card-body">
+                  <h3 style="font-size: var(--text-base); margin-bottom: var(--space-1);">Tugboat + Tongkang Set 300ft 2013</h3>
+                  <p class="text-sm" style="color: var(--text-secondary);">Tongkang - Tanjung Pinang</p>
+                  <p style="font-weight: 700; color: var(--text-accent); margin-top: var(--space-2);">Rp 33 Milyar</p>
+                  <div class="catalog-card-chips" style="margin-top: var(--space-2);"><span class="catalog-card-chip">3.039 GT</span><span class="catalog-card-chip">Thn 2013</span></div>
+                </div>
+              </a>
+            </article>
+            <article class="card" style="overflow: hidden;">
+              <a href="vessel-TK005.html" style="display: block;">
+                <picture>
+                  <source type="image/webp" srcset="assets/vessels/TK005/main-150w.webp 150w, assets/vessels/TK005/main-300w.webp 300w, assets/vessels/TK005/main-400w.webp 400w, assets/vessels/TK005/main-800w.webp 800w, assets/vessels/TK005/main.webp 1536w" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px">
+                  <img class="card-image" src="assets/vessels/TK005/main.jpg" srcset="assets/vessels/TK005/main-150w.jpg 150w, assets/vessels/TK005/main-300w.jpg 300w, assets/vessels/TK005/main-400w.jpg 400w, assets/vessels/TK005/main-800w.jpg 800w, assets/vessels/TK005/main.jpg 1536w" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px" alt="Tongkang 180ft 2012 - Tongkang" loading="lazy" decoding="async" width="1536" height="1152">
+                </picture>
+                <div class="card-body">
+                  <h3 style="font-size: var(--text-base); margin-bottom: var(--space-1);">Tongkang 180ft 2012</h3>
+                  <p class="text-sm" style="color: var(--text-secondary);">Tongkang - Batam</p>
+                  <p style="font-weight: 700; color: var(--text-accent); margin-top: var(--space-2);">Rp 7,5 Milyar</p>
+                  <div class="catalog-card-chips" style="margin-top: var(--space-2);"><span class="catalog-card-chip">755 GT</span><span class="catalog-card-chip">Thn 2012</span></div>
+                </div>
+              </a>
+            </article>
+            <article class="card" style="overflow: hidden;">
+              <a href="vessel-TK006.html" style="display: block;">
+                <picture>
+                  <source type="image/webp" srcset="assets/vessels/TK006/main-150w.webp 150w, assets/vessels/TK006/main-300w.webp 300w, assets/vessels/TK006/main-400w.webp 400w, assets/vessels/TK006/main-800w.webp 800w, assets/vessels/TK006/main.webp 1536w" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px">
+                  <img class="card-image" src="assets/vessels/TK006/main.jpg" srcset="assets/vessels/TK006/main-150w.jpg 150w, assets/vessels/TK006/main-300w.jpg 300w, assets/vessels/TK006/main-400w.jpg 400w, assets/vessels/TK006/main-800w.jpg 800w, assets/vessels/TK006/main.jpg 1536w" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px" alt="Tongkang 300ft 2000 - Tongkang" loading="lazy" decoding="async" width="1536" height="1152">
+                </picture>
+                <div class="card-body">
+                  <h3 style="font-size: var(--text-base); margin-bottom: var(--space-1);">Tongkang 300ft 2000</h3>
+                  <p class="text-sm" style="color: var(--text-secondary);">Tongkang - Indonesia</p>
+                  <p style="font-weight: 700; color: var(--text-accent); margin-top: var(--space-2);">Rp 6 Milyar</p>
+                  <div class="catalog-card-chips" style="margin-top: var(--space-2);"><span class="catalog-card-chip">3.136 GT</span><span class="catalog-card-chip">Thn 2000</span></div>
+                </div>
+              </a>
+            </article>
+            <article class="card" style="overflow: hidden;">
+              <a href="vessel-TK007.html" style="display: block;">
+                <picture>
+                  <source type="image/webp" srcset="assets/vessels/TK007/main-150w.webp 150w, assets/vessels/TK007/main-300w.webp 300w, assets/vessels/TK007/main-400w.webp 400w, assets/vessels/TK007/main-800w.webp 800w, assets/vessels/TK007/main.webp 1536w" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px">
+                  <img class="card-image" src="assets/vessels/TK007/main.jpg" srcset="assets/vessels/TK007/main-150w.jpg 150w, assets/vessels/TK007/main-300w.jpg 300w, assets/vessels/TK007/main-400w.jpg 400w, assets/vessels/TK007/main-800w.jpg 800w, assets/vessels/TK007/main.jpg 1536w" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px" alt="Tongkang 300ft 2007 - Tongkang" loading="lazy" decoding="async" width="1536" height="1152">
+                </picture>
+                <div class="card-body">
+                  <h3 style="font-size: var(--text-base); margin-bottom: var(--space-1);">Tongkang 300ft 2007</h3>
+                  <p class="text-sm" style="color: var(--text-secondary);">Tongkang - Kalimantan Timur</p>
+                  <p style="font-weight: 700; color: var(--text-accent); margin-top: var(--space-2);">Rp 8,5 Milyar</p>
+                  <div class="catalog-card-chips" style="margin-top: var(--space-2);"><span class="catalog-card-chip">3.241 GT</span><span class="catalog-card-chip">7.904 DWT</span><span class="catalog-card-chip">Thn 2007</span></div>
+                </div>
+              </a>
+            </article>
+            <article class="card" style="overflow: hidden;">
+              <a href="vessel-TB005.html" style="display: block;">
+                <picture>
+                  <source type="image/webp" srcset="assets/vessels/TB005/main-150w.webp 150w, assets/vessels/TB005/main-300w.webp 300w, assets/vessels/TB005/main-400w.webp 400w, assets/vessels/TB005/main-800w.webp 800w, assets/vessels/TB005/main.webp 1536w" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px">
+                  <img class="card-image" src="assets/vessels/TB005/main.jpg" srcset="assets/vessels/TB005/main-150w.jpg 150w, assets/vessels/TB005/main-300w.jpg 300w, assets/vessels/TB005/main-400w.jpg 400w, assets/vessels/TB005/main-800w.jpg 800w, assets/vessels/TB005/main.jpg 1536w" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px" alt="Tugboat 1000 HP 2007 - Tugboat" loading="lazy" decoding="async" width="1536" height="1152">
+                </picture>
+                <div class="card-body">
+                  <h3 style="font-size: var(--text-base); margin-bottom: var(--space-1);">Tugboat 1000 HP 2007</h3>
+                  <p class="text-sm" style="color: var(--text-secondary);">Tugboat - Samarinda</p>
+                  <p style="font-weight: 700; color: var(--text-accent); margin-top: var(--space-2);">Rp 5 Milyar</p>
+                  <div class="catalog-card-chips" style="margin-top: var(--space-2);"><span class="catalog-card-chip">124 GT</span><span class="catalog-card-chip">287 DWT</span><span class="catalog-card-chip">Thn 2007</span></div>
+                </div>
+              </a>
+            </article>
+            <article class="card" style="overflow: hidden;">
+              <a href="vessel-TB006.html" style="display: block;">
+                <picture>
+                  <source type="image/webp" srcset="assets/vessels/TB006/main-150w.webp 150w, assets/vessels/TB006/main-300w.webp 300w, assets/vessels/TB006/main-400w.webp 400w, assets/vessels/TB006/main-800w.webp 800w, assets/vessels/TB006/main.webp 1536w" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px">
+                  <img class="card-image" src="assets/vessels/TB006/main.jpg" srcset="assets/vessels/TB006/main-150w.jpg 150w, assets/vessels/TB006/main-300w.jpg 300w, assets/vessels/TB006/main-400w.jpg 400w, assets/vessels/TB006/main-800w.jpg 800w, assets/vessels/TB006/main.jpg 1536w" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px" alt="Tugboat 1440 HP 2010 - Tugboat" loading="lazy" decoding="async" width="1536" height="1152">
+                </picture>
+                <div class="card-body">
+                  <h3 style="font-size: var(--text-base); margin-bottom: var(--space-1);">Tugboat 1440 HP 2010</h3>
+                  <p class="text-sm" style="color: var(--text-secondary);">Tugboat - Samarinda</p>
+                  <p style="font-weight: 700; color: var(--text-accent); margin-top: var(--space-2);">Rp 7,8 Milyar</p>
+                  <div class="catalog-card-chips" style="margin-top: var(--space-2);"><span class="catalog-card-chip">133 GT</span><span class="catalog-card-chip">Thn 2010</span></div>
+                </div>
+              </a>
+            </article>
+            <article class="card" style="overflow: hidden;">
+              <a href="vessel-FCB002.html" style="display: block;">
+                <picture>
+                  <source type="image/webp" srcset="assets/vessels/FCB002/main-150w.webp 150w, assets/vessels/FCB002/main-300w.webp 300w, assets/vessels/FCB002/main-400w.webp 400w, assets/vessels/FCB002/main-800w.webp 800w, assets/vessels/FCB002/main.webp 1694w" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px">
+                  <img class="card-image" src="assets/vessels/FCB002/main.jpg" srcset="assets/vessels/FCB002/main-150w.jpg 150w, assets/vessels/FCB002/main-300w.jpg 300w, assets/vessels/FCB002/main-400w.jpg 400w, assets/vessels/FCB002/main-800w.jpg 800w, assets/vessels/FCB002/main.jpg 1694w" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px" alt="Floating Crane Barge 75M 2013 - Lainnya" loading="lazy" decoding="async" width="1694" height="1271">
+                </picture>
+                <div class="card-body">
+                  <h3 style="font-size: var(--text-base); margin-bottom: var(--space-1);">Floating Crane Barge 75M 2013</h3>
+                  <p class="text-sm" style="color: var(--text-secondary);">Lainnya - Bunati</p>
+                  <p style="font-weight: 700; color: var(--text-accent); margin-top: var(--space-2);">Rp 75 Milyar</p>
+                  <div class="catalog-card-chips" style="margin-top: var(--space-2);"><span class="catalog-card-chip">4.448 GT</span><span class="catalog-card-chip">Thn 2013</span></div>
+                </div>
+              </a>
+            </article>
+            <article class="card" style="overflow: hidden;">
+              <a href="vessel-TBSET012.html" style="display: block;">
+                <picture>
+                  <source type="image/webp" srcset="assets/vessels/TBSET012/main-150w.webp 150w, assets/vessels/TBSET012/main-300w.webp 300w, assets/vessels/TBSET012/main-400w.webp 400w, assets/vessels/TBSET012/main-800w.webp 800w, assets/vessels/TBSET012/main.webp 1444w" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px">
+                  <img class="card-image" src="assets/vessels/TBSET012/main.jpg" srcset="assets/vessels/TBSET012/main-150w.jpg 150w, assets/vessels/TBSET012/main-300w.jpg 300w, assets/vessels/TBSET012/main-400w.jpg 400w, assets/vessels/TBSET012/main-800w.jpg 800w, assets/vessels/TBSET012/main.jpg 1444w" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px" alt="Tugboat + Tongkang Set 230ft 2010 - Tongkang" loading="lazy" decoding="async" width="1444" height="1083">
+                </picture>
+                <div class="card-body">
+                  <h3 style="font-size: var(--text-base); margin-bottom: var(--space-1);">Tugboat + Tongkang Set 230ft 2010</h3>
+                  <p class="text-sm" style="color: var(--text-secondary);">Tongkang - Pontianak</p>
+                  <p style="font-weight: 700; color: var(--text-accent); margin-top: var(--space-2);">Rp 17 Milyar</p>
+                  <div class="catalog-card-chips" style="margin-top: var(--space-2);"><span class="catalog-card-chip">1.383 GT</span><span class="catalog-card-chip">Thn 2010</span></div>
+                </div>
+              </a>
+            </article>
+            <article class="card" style="overflow: hidden;">
+              <a href="vessel-TK008.html" style="display: block;">
+                <picture>
+                  <source type="image/webp" srcset="assets/vessels/TK008/main-150w.webp 150w, assets/vessels/TK008/main-300w.webp 300w, assets/vessels/TK008/main-400w.webp 400w, assets/vessels/TK008/main-800w.webp 800w, assets/vessels/TK008/main.webp 1840w" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px">
+                  <img class="card-image" src="assets/vessels/TK008/main.jpg" srcset="assets/vessels/TK008/main-150w.jpg 150w, assets/vessels/TK008/main-300w.jpg 300w, assets/vessels/TK008/main-400w.jpg 400w, assets/vessels/TK008/main-800w.jpg 800w, assets/vessels/TK008/main.jpg 1840w" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px" alt="Tongkang 300ft Jumbo 2021 - Tongkang" loading="lazy" decoding="async" width="1840" height="1380">
+                </picture>
+                <div class="card-body">
+                  <h3 style="font-size: var(--text-base); margin-bottom: var(--space-1);">Tongkang 300ft Jumbo 2021</h3>
+                  <p class="text-sm" style="color: var(--text-secondary);">Tongkang - Batam</p>
+                  <p style="font-weight: 700; color: var(--text-accent); margin-top: var(--space-2);">Rp 26 Milyar</p>
+                  <div class="catalog-card-chips" style="margin-top: var(--space-2);"><span class="catalog-card-chip">3.451 GT</span><span class="catalog-card-chip">9.000 DWT</span><span class="catalog-card-chip">Thn 2021</span></div>
+                </div>
+              </a>
+            </article>
+            <article class="card" style="overflow: hidden;">
+              <a href="vessel-TBSET013.html" style="display: block;">
+                <picture>
+                  <source type="image/webp" srcset="assets/vessels/TBSET013/main-150w.webp 150w, assets/vessels/TBSET013/main-300w.webp 300w, assets/vessels/TBSET013/main-400w.webp 400w, assets/vessels/TBSET013/main-800w.webp 800w, assets/vessels/TBSET013/main.webp 1395w" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px">
+                  <img class="card-image" src="assets/vessels/TBSET013/main.jpg" srcset="assets/vessels/TBSET013/main-150w.jpg 150w, assets/vessels/TBSET013/main-300w.jpg 300w, assets/vessels/TBSET013/main-400w.jpg 400w, assets/vessels/TBSET013/main-800w.jpg 800w, assets/vessels/TBSET013/main.jpg 1395w" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px" alt="Tugboat + Tongkang Set 300ft 2014 - Tongkang" loading="lazy" decoding="async" width="1395" height="1046">
+                </picture>
+                <div class="card-body">
+                  <h3 style="font-size: var(--text-base); margin-bottom: var(--space-1);">Tugboat + Tongkang Set 300ft 2014</h3>
+                  <p class="text-sm" style="color: var(--text-secondary);">Tongkang - Batam</p>
+                  <p style="font-weight: 700; color: var(--text-accent); margin-top: var(--space-2);">Rp 25 Milyar</p>
+                  <div class="catalog-card-chips" style="margin-top: var(--space-2);"><span class="catalog-card-chip">3.054 GT</span><span class="catalog-card-chip">7.500 DWT</span><span class="catalog-card-chip">Thn 2014</span></div>
+                </div>
+              </a>
+            </article>
+            <article class="card" style="overflow: hidden;">
+              <a href="vessel-TB007.html" style="display: block;">
+                <picture>
+                  <source type="image/webp" srcset="assets/vessels/TB007/main-150w.webp 150w, assets/vessels/TB007/main-300w.webp 300w, assets/vessels/TB007/main-400w.webp 400w, assets/vessels/TB007/main-800w.webp 800w, assets/vessels/TB007/main.webp 1440w" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px">
+                  <img class="card-image" src="assets/vessels/TB007/main.jpg" srcset="assets/vessels/TB007/main-150w.jpg 150w, assets/vessels/TB007/main-300w.jpg 300w, assets/vessels/TB007/main-400w.jpg 400w, assets/vessels/TB007/main-800w.jpg 800w, assets/vessels/TB007/main.jpg 1440w" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px" alt="Tugboat 1300 HP 2011 - Tugboat" loading="lazy" decoding="async" width="1440" height="1080">
+                </picture>
+                <div class="card-body">
+                  <h3 style="font-size: var(--text-base); margin-bottom: var(--space-1);">Tugboat 1300 HP 2011</h3>
+                  <p class="text-sm" style="color: var(--text-secondary);">Tugboat - Banjarmasin</p>
+                  <p style="font-weight: 700; color: var(--text-accent); margin-top: var(--space-2);">Rp 6 Milyar</p>
+                  <div class="catalog-card-chips" style="margin-top: var(--space-2);"><span class="catalog-card-chip">50 GT</span><span class="catalog-card-chip">Thn 2011</span></div>
+                </div>
+              </a>
+            </article>
+            <article class="card" style="overflow: hidden;">
+              <a href="vessel-TBSET014.html" style="display: block;">
+                <picture>
+                  <source type="image/webp" srcset="assets/vessels/TBSET014/main-150w.webp 150w, assets/vessels/TBSET014/main-300w.webp 300w, assets/vessels/TBSET014/main-400w.webp 400w, assets/vessels/TBSET014/main-800w.webp 800w, assets/vessels/TBSET014/main.webp 1680w" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px">
+                  <img class="card-image" src="assets/vessels/TBSET014/main.jpg" srcset="assets/vessels/TBSET014/main-150w.jpg 150w, assets/vessels/TBSET014/main-300w.jpg 300w, assets/vessels/TBSET014/main-400w.jpg 400w, assets/vessels/TBSET014/main-800w.jpg 800w, assets/vessels/TBSET014/main.jpg 1680w" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px" alt="Tugboat + Tongkang Set 300ft 2019 - Tongkang" loading="lazy" decoding="async" width="1680" height="1260">
+                </picture>
+                <div class="card-body">
+                  <h3 style="font-size: var(--text-base); margin-bottom: var(--space-1);">Tugboat + Tongkang Set 300ft 2019</h3>
+                  <p class="text-sm" style="color: var(--text-secondary);">Tongkang - Samarinda</p>
+                  <p style="font-weight: 700; color: var(--text-accent); margin-top: var(--space-2);">Rp 26 Milyar</p>
+                  <div class="catalog-card-chips" style="margin-top: var(--space-2);"><span class="catalog-card-chip">3.107 GT</span><span class="catalog-card-chip">7.500 DWT</span><span class="catalog-card-chip">Thn 2019</span></div>
+                </div>
+              </a>
+            </article>
+            <article class="card" style="overflow: hidden;">
+              <a href="vessel-TK009.html" style="display: block;">
+                <picture>
+                  <source type="image/webp" srcset="assets/vessels/TK009/main-150w.webp 150w, assets/vessels/TK009/main-300w.webp 300w, assets/vessels/TK009/main-400w.webp 400w, assets/vessels/TK009/main-800w.webp 800w, assets/vessels/TK009/main.webp 1440w" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px">
+                  <img class="card-image" src="assets/vessels/TK009/main.jpg" srcset="assets/vessels/TK009/main-150w.jpg 150w, assets/vessels/TK009/main-300w.jpg 300w, assets/vessels/TK009/main-400w.jpg 400w, assets/vessels/TK009/main-800w.jpg 800w, assets/vessels/TK009/main.jpg 1440w" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px" alt="Tongkang 300ft Jumbo 2019 - Tongkang" loading="lazy" decoding="async" width="1440" height="1080">
+                </picture>
+                <div class="card-body">
+                  <h3 style="font-size: var(--text-base); margin-bottom: var(--space-1);">Tongkang 300ft Jumbo 2019</h3>
+                  <p class="text-sm" style="color: var(--text-secondary);">Tongkang - Batam</p>
+                  <p style="font-weight: 700; color: var(--text-accent); margin-top: var(--space-2);">Rp 26 Milyar</p>
+                  <div class="catalog-card-chips" style="margin-top: var(--space-2);"><span class="catalog-card-chip">3.447 GT</span><span class="catalog-card-chip">8.500 DWT</span><span class="catalog-card-chip">Thn 2019</span></div>
+                </div>
+              </a>
+            </article>
+            <article class="card" style="overflow: hidden;">
+              <a href="vessel-FCB003.html" style="display: block;">
+                <picture>
+                  <source type="image/webp" srcset="assets/vessels/FCB003/main-150w.webp 150w, assets/vessels/FCB003/main-300w.webp 300w, assets/vessels/FCB003/main-400w.webp 400w, assets/vessels/FCB003/main-800w.webp 800w, assets/vessels/FCB003/main.webp 1675w" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px">
+                  <img class="card-image" src="assets/vessels/FCB003/main.jpg" srcset="assets/vessels/FCB003/main-150w.jpg 150w, assets/vessels/FCB003/main-300w.jpg 300w, assets/vessels/FCB003/main-400w.jpg 400w, assets/vessels/FCB003/main-800w.jpg 800w, assets/vessels/FCB003/main.jpg 1675w" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px" alt="Floating Crane Barge 75M 2014 - Lainnya" loading="lazy" decoding="async" width="1675" height="1256">
+                </picture>
+                <div class="card-body">
+                  <h3 style="font-size: var(--text-base); margin-bottom: var(--space-1);">Floating Crane Barge 75M 2014</h3>
+                  <p class="text-sm" style="color: var(--text-secondary);">Lainnya - Bunati</p>
+                  <p style="font-weight: 700; color: var(--text-accent); margin-top: var(--space-2);">Rp 75 Milyar</p>
+                  <div class="catalog-card-chips" style="margin-top: var(--space-2);"><span class="catalog-card-chip">4.703 GT</span><span class="catalog-card-chip">Thn 2014</span></div>
+                </div>
+              </a>
+            </article>
+          </div>
+          <!-- WHY: js/vessel.js mengganti #related-vessels dengan maksimal
+               3 kartu sejenis. Tanpa daftar teks di bawah ini, jalur
+               crawl antar kapal hilang begitu JavaScript berjalan - dan
+               justru crawler yang paling patuh adalah yang menjalankan
+               JavaScript. Daftar ini tidak pernah disentuh runtime. -->
+          <div id="all-vessels" style="margin-top: var(--space-6);">
+                        <details>
+              <summary style="cursor: pointer; font-size: var(--text-base); font-weight: 600; color: var(--text-secondary);">Daftar semua kapal (34)</summary>
+              <ul style="list-style: none; padding: 0; margin-top: var(--space-2);">
+              <li style="padding: var(--space-2) 0; border-bottom: 1px solid var(--border-primary);"><a href="vessel-FCB001.html" style="color: var(--text-accent);">Floating Crane Barge 20M</a> <span class="text-sm" style="color: var(--text-muted);">- Lainnya, Indonesia - Rp 20 Milyar</span></li>
+              <li style="padding: var(--space-2) 0; border-bottom: 1px solid var(--border-primary);"><a href="vessel-FCB002.html" style="color: var(--text-accent);">Floating Crane Barge 75M 2013</a> <span class="text-sm" style="color: var(--text-muted);">- Lainnya, Bunati - Rp 75 Milyar</span></li>
+              <li style="padding: var(--space-2) 0; border-bottom: 1px solid var(--border-primary);"><a href="vessel-FCB003.html" style="color: var(--text-accent);">Floating Crane Barge 75M 2014</a> <span class="text-sm" style="color: var(--text-muted);">- Lainnya, Bunati - Rp 75 Milyar</span></li>
+              <li style="padding: var(--space-2) 0; border-bottom: 1px solid var(--border-primary);"><a href="vessel-LCT002.html" style="color: var(--text-accent);">LCT 250 DWT</a> <span class="text-sm" style="color: var(--text-muted);">- LCT, Samarinda - Rp 6,5 Milyar</span></li>
+              <li style="padding: var(--space-2) 0; border-bottom: 1px solid var(--border-primary);"><a href="vessel-TKSET001.html" style="color: var(--text-accent);">Paket Tugboat + Tongkang 300ft</a> <span class="text-sm" style="color: var(--text-muted);">- Tongkang, Samarinda - Rp 25 Milyar</span></li>
+              <li style="padding: var(--space-2) 0; border-bottom: 1px solid var(--border-primary);"><a href="vessel-TNK002.html" style="color: var(--text-accent);">Tanker 3.570 DWT 38M</a> <span class="text-sm" style="color: var(--text-muted);">- Tanker, Jakarta - Rp 38 Milyar</span></li>
+              <li style="padding: var(--space-2) 0; border-bottom: 1px solid var(--border-primary);"><a href="vessel-TK005.html" style="color: var(--text-accent);">Tongkang 180ft 2012</a> <span class="text-sm" style="color: var(--text-muted);">- Tongkang, Batam - Rp 7,5 Milyar</span></li>
+              <li style="padding: var(--space-2) 0; border-bottom: 1px solid var(--border-primary);"><a href="vessel-TK006.html" style="color: var(--text-accent);">Tongkang 300ft 2000</a> <span class="text-sm" style="color: var(--text-muted);">- Tongkang, Indonesia - Rp 6 Milyar</span></li>
+              <li style="padding: var(--space-2) 0; border-bottom: 1px solid var(--border-primary);"><a href="vessel-TK007.html" style="color: var(--text-accent);">Tongkang 300ft 2007</a> <span class="text-sm" style="color: var(--text-muted);">- Tongkang, Kalimantan Timur - Rp 8,5 Milyar</span></li>
+              <li style="padding: var(--space-2) 0; border-bottom: 1px solid var(--border-primary);"><a href="vessel-TK009.html" style="color: var(--text-accent);">Tongkang 300ft Jumbo 2019</a> <span class="text-sm" style="color: var(--text-muted);">- Tongkang, Batam - Rp 26 Milyar</span></li>
+              <li style="padding: var(--space-2) 0; border-bottom: 1px solid var(--border-primary);"><a href="vessel-TK008.html" style="color: var(--text-accent);">Tongkang 300ft Jumbo 2021</a> <span class="text-sm" style="color: var(--text-muted);">- Tongkang, Batam - Rp 26 Milyar</span></li>
+              <li style="padding: var(--space-2) 0; border-bottom: 1px solid var(--border-primary);"><a href="vessel-TK003.html" style="color: var(--text-accent);">Tongkang Barge 230ft 2012</a> <span class="text-sm" style="color: var(--text-muted);">- Tongkang, Pontianak - Rp 12,5 Milyar</span></li>
+              <li style="padding: var(--space-2) 0; border-bottom: 1px solid var(--border-primary);"><a href="vessel-TBSET003.html" style="color: var(--text-accent);">Tugboat + Oil Barge 1.100 KL</a> <span class="text-sm" style="color: var(--text-muted);">- Oil Barge, Samarinda - Rp 25 Milyar</span></li>
+              <li style="padding: var(--space-2) 0; border-bottom: 1px solid var(--border-primary);"><a href="vessel-TBSET007.html" style="color: var(--text-accent);">Tugboat + Oil Barge Set 2012</a> <span class="text-sm" style="color: var(--text-muted);">- Oil Barge, Batam - Rp 10 Milyar</span></li>
+              <li style="padding: var(--space-2) 0; border-bottom: 1px solid var(--border-primary);"><a href="vessel-TBSET001.html" style="color: var(--text-accent);">Tugboat + Tongkang Set 120ft 2025</a> <span class="text-sm" style="color: var(--text-muted);">- Tongkang, Tegal - Rp 11 Milyar</span></li>
+              <li style="padding: var(--space-2) 0; border-bottom: 1px solid var(--border-primary);"><a href="vessel-TBSET002.html" style="color: var(--text-accent);">Tugboat + Tongkang Set 230ft 2010</a> <span class="text-sm" style="color: var(--text-muted);">- Tongkang, Pontianak - Rp 17 Milyar</span></li>
+              <li style="padding: var(--space-2) 0; border-bottom: 1px solid var(--border-primary);"><a href="vessel-TBSET012.html" style="color: var(--text-accent);">Tugboat + Tongkang Set 230ft 2010</a> <span class="text-sm" style="color: var(--text-muted);">- Tongkang, Pontianak - Rp 17 Milyar</span></li>
+              <li style="padding: var(--space-2) 0; border-bottom: 1px solid var(--border-primary);"><a href="vessel-TBSET004.html" style="color: var(--text-accent);">Tugboat + Tongkang Set 270ft</a> <span class="text-sm" style="color: var(--text-muted);">- Tongkang, Batam - Rp 21 Milyar</span></li>
+              <li style="padding: var(--space-2) 0; border-bottom: 1px solid var(--border-primary);"><a href="vessel-TBSET008.html" style="color: var(--text-accent);">Tugboat + Tongkang Set 270ft</a> <span class="text-sm" style="color: var(--text-muted);">- Tongkang, Balikpapan - Rp 12 Milyar</span></li>
+              <li style="padding: var(--space-2) 0; border-bottom: 1px solid var(--border-primary);"><a href="vessel-TBSET009.html" style="color: var(--text-accent);">Tugboat + Tongkang Set 270ft 2013</a> <span class="text-sm" style="color: var(--text-muted);">- Tongkang, Jakarta - Rp 21 Milyar</span></li>
+              <li style="padding: var(--space-2) 0; border-bottom: 1px solid var(--border-primary);"><a href="vessel-TBSET010.html" style="color: var(--text-accent);">Tugboat + Tongkang Set 300ft 2007</a> <span class="text-sm" style="color: var(--text-muted);">- Tongkang, Batam - Rp 15 Milyar</span></li>
+              <li style="padding: var(--space-2) 0; border-bottom: 1px solid var(--border-primary);"><strong>Tugboat + Tongkang Set 300ft 2010</strong> <span class="text-sm" style="color: var(--text-muted);">- Tongkang, Samarinda - Rp 15 Milyar</span></li>
+              <li style="padding: var(--space-2) 0; border-bottom: 1px solid var(--border-primary);"><a href="vessel-TBSET011.html" style="color: var(--text-accent);">Tugboat + Tongkang Set 300ft 2013</a> <span class="text-sm" style="color: var(--text-muted);">- Tongkang, Tanjung Pinang - Rp 33 Milyar</span></li>
+              <li style="padding: var(--space-2) 0; border-bottom: 1px solid var(--border-primary);"><a href="vessel-TBSET013.html" style="color: var(--text-accent);">Tugboat + Tongkang Set 300ft 2014</a> <span class="text-sm" style="color: var(--text-muted);">- Tongkang, Batam - Rp 25 Milyar</span></li>
+              <li style="padding: var(--space-2) 0; border-bottom: 1px solid var(--border-primary);"><a href="vessel-TBSET005.html" style="color: var(--text-accent);">Tugboat + Tongkang Set 300ft 2019</a> <span class="text-sm" style="color: var(--text-muted);">- Tongkang, Samarinda - Rp 26 Milyar</span></li>
+              <li style="padding: var(--space-2) 0; border-bottom: 1px solid var(--border-primary);"><a href="vessel-TBSET014.html" style="color: var(--text-accent);">Tugboat + Tongkang Set 300ft 2019</a> <span class="text-sm" style="color: var(--text-muted);">- Tongkang, Samarinda - Rp 26 Milyar</span></li>
+              <li style="padding: var(--space-2) 0; border-bottom: 1px solid var(--border-primary);"><a href="vessel-TBSET006.html" style="color: var(--text-accent);">Tugboat + Tongkang Set 330ft</a> <span class="text-sm" style="color: var(--text-muted);">- Tongkang, Samarinda - Rp 35 Milyar</span></li>
+              <li style="padding: var(--space-2) 0; border-bottom: 1px solid var(--border-primary);"><a href="vessel-TK004.html" style="color: var(--text-accent);">Tugboat + Tongkang Set 330ft 2005</a> <span class="text-sm" style="color: var(--text-muted);">- Tongkang, Jakarta - Rp 34 Milyar</span></li>
+              <li style="padding: var(--space-2) 0; border-bottom: 1px solid var(--border-primary);"><a href="vessel-TB005.html" style="color: var(--text-accent);">Tugboat 1000 HP 2007</a> <span class="text-sm" style="color: var(--text-muted);">- Tugboat, Samarinda - Rp 5 Milyar</span></li>
+              <li style="padding: var(--space-2) 0; border-bottom: 1px solid var(--border-primary);"><a href="vessel-TB003.html" style="color: var(--text-accent);">Tugboat 1200 HP 2008</a> <span class="text-sm" style="color: var(--text-muted);">- Tugboat, Batam - Rp 8,5 Milyar</span></li>
+              <li style="padding: var(--space-2) 0; border-bottom: 1px solid var(--border-primary);"><a href="vessel-TB007.html" style="color: var(--text-accent);">Tugboat 1300 HP 2011</a> <span class="text-sm" style="color: var(--text-muted);">- Tugboat, Banjarmasin - Rp 6 Milyar</span></li>
+              <li style="padding: var(--space-2) 0; border-bottom: 1px solid var(--border-primary);"><a href="vessel-TB006.html" style="color: var(--text-accent);">Tugboat 1440 HP 2010</a> <span class="text-sm" style="color: var(--text-muted);">- Tugboat, Samarinda - Rp 7,8 Milyar</span></li>
+              <li style="padding: var(--space-2) 0; border-bottom: 1px solid var(--border-primary);"><a href="vessel-TB002.html" style="color: var(--text-accent);">Tugboat 1500 HP</a> <span class="text-sm" style="color: var(--text-muted);">- Tugboat, Jambi - Rp 4,5 Milyar</span></li>
+              <li style="padding: var(--space-2) 0; border-bottom: 1px solid var(--border-primary);"><a href="vessel-TB004.html" style="color: var(--text-accent);">Tugboat 300ft 2018</a> <span class="text-sm" style="color: var(--text-muted);">- Tugboat, Samarinda - Rp 25 Milyar</span></li>
+              </ul>
+            </details>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-label="Penampil gambar">
+    <button class="lightbox-close" id="lightbox-close" aria-label="Tutup penampil gambar">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+    <button class="lightbox-nav lightbox-prev" id="lightbox-prev" aria-label="Foto sebelumnya">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="15 18 9 12 15 6"></polyline>
+      </svg>
+    </button>
+    <div class="lightbox-zoom-stage" id="lightbox-zoom-stage">
+      <!-- WHY atribut src TIDAK ditulis di sini: gambar lightbox diisi
+           oleh showLightboxImage() di js/vessel.js setiap kali
+           lightbox dibuka. Atribut src yang kosong membuat browser
+           memperlakukannya sebagai URL relatif, sehingga halaman ini
+           meminta ulang dokumennya sendiri - satu request sia-sia
+           di setiap halaman detail kapal. alt juga dibiarkan kosong
+           karena teksnya ikut diisi JS bersama src-nya. -->
+      <img id="lightbox-image" class="lightbox-image is-zoomable" alt="" decoding="async">
+    </div>
+    <button class="lightbox-nav lightbox-next" id="lightbox-next" aria-label="Foto berikutnya">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="9 18 15 12 9 6"></polyline>
+      </svg>
+    </button>
+    <div class="lightbox-counter" id="lightbox-counter" aria-live="polite"></div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="logo" aria-label="KapalPro - Beranda">
+            <svg class="logo-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <path d="M4 24h24M8 24V16l8-8 8 8v8M16 8v-4M12 20h8M16 20v4"></path>
+            </svg>
+            <span>KapalPro</span>
+          </a>
+          <p>Platform terpercaya untuk jual beli kapal marine di Indonesia.</p>
+        </div>
+        <div>
+          <h3 class="footer-heading">Tautan Cepat</h3>
+          <nav aria-label="Navigasi footer">
+            <a href="index.html" class="footer-link">Beranda</a>
+            <a href="catalog.html" class="footer-link">Katalog</a>
+            <a href="about.html" class="footer-link">Tentang Kami</a>
+            <a href="contact.html" class="footer-link">Kontak</a>
+          </nav>
+        </div>
+        <div>
+          <h3 class="footer-heading">Kontak</h3>
+          <a href="tel:+6285648048730" class="footer-link" data-tel><span data-phone-text><span data-phone-text>+62 856-4804-8730</span></span></a>
+          <a href="mailto:info@kapalpro.web.id" class="footer-link">info@kapalpro.web.id</a>
+        </div>
+        <div>
+          <h3 class="footer-heading">Legal</h3>
+          <a href="privacy.html" class="footer-link">Kebijakan Privasi</a>
+          <a href="accessibility.html" class="footer-link">Aksesibilitas</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copyright">© 2026 KapalPro. Hak cipta dilindungi.</p>
+        <div class="footer-legal">
+          <button type="button" class="footer-link" data-manage-cookies style="background:none;border:0;cursor:pointer;padding:0;">Kelola Cookie</button>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Cookie Consent -->
+  <div id="cookie-consent" class="cookie-consent" role="dialog" aria-label="Persetujuan cookie">
+    <div class="cookie-consent-inner">
+      <p class="cookie-consent-text">
+        Website ini menggunakan cookies untuk analitik dan pengalaman yang lebih baik. 
+        Dengan menggunakan website ini, Anda menyetujui penggunaan cookies.
+      </p>
+      <div class="cookie-consent-actions">
+        <button class="btn btn-primary btn-sm cookie-accept">Terima</button>
+        <button class="btn btn-ghost btn-sm cookie-decline">Tolak</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- Bilah aksi tetap di layar ponsel.
+       WHY: form penawaran berada di bawah lipatan dan galeri kapal
+       bisa membuat halaman setinggi beberapa ribu piksel. Tanpa bilah
+       ini, satu-satunya jalan ke WhatsApp adalah menggulir ke bawah
+       atau ke sidebar yang tidak ada di ponsel. CSS menyembunyikannya
+       di atas 768px; kelas has-sticky-cta yang menambah ruang bawah
+       juga di-set oleh JS supaya halaman tanpa JS tidak punya celah
+       kosong. -->
+  <div class="sticky-cta" id="sticky-cta" role="group" aria-label="Aksi cepat kapal">
+    <a href="#inquiry-section" class="btn btn-primary" id="sticky-offer">
+      <span>Ajukan Penawaran Kapal</span>
+    </a>
+    <a href="https://wa.me/6285648048730" class="whatsapp-btn" id="sticky-whatsapp" data-wa target="_blank" rel="noopener noreferrer" style="flex: 1; min-height: 44px; justify-content: center;">
+      <svg class="sticky-cta-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+      </svg>
+      <span>WhatsApp</span>
+    </a>
+  </div>
+
+  <!-- Scripts (deferred for performance) -->
+  <!-- WHY sanitize.js dimuat paling awal di deretan skrip: seluruh
+       halaman membentuk markup dari data kapal lewat escapeHtml, dan
+       semuanya defer, jadi urutan di sini adalah urutan eksekusi.
+       Generator halaman kapal membaca berkas ini sebagai satu-satunya
+       sumber markup, jadi perubahan ini ikut ke 15 vessel-*.html. -->
+  <script src="js/sanitize.js?v=bb2f3797" defer></script>
+  <script src="js/config.js?v=bb2f3797" defer></script>
+  <script src="js/theme.js?v=bb2f3797" defer></script>
+  <script src="js/data.js?v=bb2f3797" defer></script>
+  <script src="js/shortlist.js?v=bb2f3797" defer></script>
+  <script src="js/vessel-actions.js?v=bb2f3797" defer></script>
+  <script src="js/app.js?v=bb2f3797" defer></script>
+  <script src="js/anim.js?v=bb2f3797" defer></script>
+  <script src="js/vessel.js?v=bb2f3797" defer></script>
+  <script src="js/analytics.js?v=bb2f3797" defer></script>
+  <script src="js/perf.js?v=bb2f3797" defer></script>
+</body>
+</html>
