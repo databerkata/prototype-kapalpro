@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-tZqmasilAl6RTvAzblDqCwq9l3dtedMk2WUpKo1bvis=' https://plausible.io https://docs.google.com; style-src 'self' 'unsafe-inline'; img-src 'self' https: data:; connect-src 'self' https://plausible.io https://docs.google.com; font-src 'self'; frame-src https://docs.google.com; form-action 'self' https://docs.google.com https://wa.me; base-uri 'self'; object-src 'none'; frame-ancestors 'self'">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0f172a">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <script>
+/* WHY: Skrip ini WAJIB inline di <head> dan berjalan sebelum halaman
+ * digambar. js/theme.js memakai defer, jadi baru jalan setelah HTML
+ * selesai diurai - waktu itu cukup untuk menampilkan kedipan putih
+ * pada pengunjung bertema gelap. Skrip ini juga yang menulis theme-color
+ * sesuai tema aktif, sehingga warna address bar tidak sempat salah.
+ * Hash CSP-nya ada di tools/validate-meta.js dan WAJIB ikut diperbarui
+ * setiap kali isi skrip ini berubah. */
+(function () {
+  try {
+    var t = localStorage.getItem('kapalpro-theme');
+    // WHY: Default tetap light, tidak mengikuti sistem (sama seperti
+    // js/theme.js) karena foto kapal & kartu produk dirancang untuk
+    // latar terang.
+    t = (t === 'dark' || t === 'light') ? t : 'light';
+    document.documentElement.setAttribute('data-theme', t);
+    // WHY: Dua meta theme-color (light & dark) membiarkan browser
+    // memilih sendiri sebelum JavaScript jalan. Setelah tema diketahui,
+    // keduanya ditulis ulang agar warna chrome pasti sama dengan tema.
+    var m = document.querySelectorAll('meta[name="theme-color"]');
+    for (var i = 0; i < m.length; i++) {
+      m[i].setAttribute('content', t === 'dark' ? '#0f172a' : '#ffffff');
+    }
+  } catch (e) {}
+})();
+  </script>
+  <title>Indeks Harga Kapal Bekas Indonesia 2026 | KapalPro</title>
+  <meta name="description" content="Indeks harga kapal bekas Indonesia Oktober 2026 dari 34 listing KapalPro: tongkang Rp 8,5-35 M, tugboat Rp 4,5-25 M. Data harga penawaran real, metodologi transparan.">
+  <meta name="keywords" content="harga kapal bekas, harga tongkang, harga tugboat, indeks harga kapal indonesia">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://databerkata.github.io/prototype-kapalpro/indeks-harga.html">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Indeks Harga Kapal Bekas Indonesia 2026 - KapalPro">
+  <meta property="og:description" content="Data harga penawaran kapal bekas dari 34 listing real KapalPro: tongkang, tugboat, oil barge, tanker. Metodologi transparan, diperbarui Oktober 2026.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://databerkata.github.io/prototype-kapalpro/indeks-harga.html">
+  <meta property="og:site_name" content="KapalPro">
+  <meta property="og:locale" content="id_ID">
+  <meta property="og:image" content="https://databerkata.github.io/prototype-kapalpro/assets/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Indeks Harga Kapal Bekas Indonesia 2026 - KapalPro">
+  <meta name="twitter:description" content="Data harga penawaran kapal bekas dari 34 listing real KapalPro: tongkang, tugboat, oil barge, tanker.">
+  <meta name="twitter:image" content="https://databerkata.github.io/prototype-kapalpro/assets/og-image.jpg">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="stylesheet" href="css/style.css?v=01f0ea64">
+  <link rel="stylesheet" href="css/search-autocomplete.css?v=01f0ea64">
+
+  <script type="application/ld+json" id="priceindex-schema">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Indeks Harga Kapal Bekas Indonesia 2026",
+    "description": "Agregasi harga penawaran kapal bekas dari 34 listing KapalPro per Oktober 2026: tongkang Rp 8,5-35 miliar, tugboat Rp 4,5-25 miliar.",
+    "url": "https://databerkata.github.io/prototype-kapalpro/indeks-harga.html",
+    "inLanguage": "id-ID",
+    "dateModified": "2026-10-01",
+    "provider": {"@type": "Organization", "name": "KapalPro", "url": "https://databerkata.github.io/prototype-kapalpro"}
+  }
+  </script>
+
+  <script type="application/ld+json" id="priceindex-faq">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Berapa harga tongkang bekas di Indonesia saat ini?",
+        "acceptedAnswer": {"@type": "Answer", "text": "Berdasarkan 16 listing tongkang tersedia di KapalPro per Oktober 2026, harga penawaran berkisar Rp 8,5-35 miliar dengan median Rp 23 miliar. Harga naik mengikuti ukuran: 270ft mulai Rp 8,5 miliar, 300ft Rp 15-26 miliar, 330ft Rp 34-35 miliar."}
+      },
+      {
+        "@type": "Question",
+        "name": "Berapa harga tugboat bekas di Indonesia?",
+        "acceptedAnswer": {"@type": "Answer", "text": "Berdasarkan 4 listing tugboat tersedia di KapalPro per Oktober 2026, harga penawaran berkisar Rp 4,5-25 miliar dengan median Rp 7,25 miliar. Tugboat 2x500 HP tahun 2010-an berada di kisaran Rp 4,5-6 miliar."}
+      },
+      {
+        "@type": "Question",
+        "name": "Apakah harga di indeks ini harga transaksi atau harga penawaran?",
+        "acceptedAnswer": {"@type": "Answer", "text": "Harga di indeks ini adalah harga penawaran (asking price) dari listing KapalPro, bukan harga transaksi final. Harga final biasanya dinegosiasikan setelah survei kapal dan bisa berbeda tergantung kondisi, dokumen, dan kelengkapan."}
+      },
+      {
+        "@type": "Question",
+        "name": "Seberapa sering indeks harga KapalPro diperbarui?",
+        "acceptedAnswer": {"@type": "Answer", "text": "Indeks diperbarui setiap ada perubahan listing: penambahan kapal baru, perubahan harga, atau perubahan status terjual. Tanggal pembaruan selalu dicantumkan di halaman ini."}
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <!-- Skip Link (Section 1.9 - Accessibility) -->
+  <a href="#main-content" class="skip-link">Lompat ke konten utama</a>
+
+  <!-- Header -->
+  <header class="header" role="banner">
+    <div class="container header-inner">
+      <!-- Logo -->
+      <a href="index.html" class="logo" aria-label="KapalPro - Beranda">
+        <svg class="logo-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+          <path d="M4 24h24M8 24V16l8-8 8 8v8M16 8v-4M12 20h8M16 20v4"></path>
+        </svg>
+        <span>KapalPro</span>
+      </a>
+
+      <!-- Navigation (Desktop) -->
+      <nav class="nav" role="navigation" aria-label="Navigasi utama">
+        <a href="index.html" class="nav-link">Beranda</a>
+        <a href="catalog.html" class="nav-link active">Katalog</a>
+        <a href="contact.html" class="nav-link">Kontak</a>
+        <a href="about.html" class="nav-link">Tentang Kami</a>
+      </nav>
+
+      <!-- Header Actions -->
+      <div class="header-actions">
+        <!-- Theme Toggle (Section 1.3) -->
+        <div class="header-search kp-search" data-search-autocomplete data-search-mode="hero">
+          <div class="kp-search-box">
+            <span class="kp-search-icon" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+            </span>
+            <input type="text" class="kp-search-input" placeholder="Cari kapal..." aria-label="Cari kapal">
+          </div>
+        </div>
+        <button id="theme-toggle" class="theme-toggle" aria-label="Ganti ke mode gelap">
+          <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+
+        <!-- Mobile Menu Button -->
+        <button id="mobile-menu-btn" class="mobile-menu-btn" aria-label="Buka menu" aria-expanded="false" aria-controls="mobile-menu">
+          <svg class="menu-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+          <svg class="close-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" style="display: none;">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="mobile-menu" role="navigation" aria-label="Navigasi mobile">
+      <div class="mobile-search kp-search" data-search-autocomplete data-search-mode="hero">
+        <div class="kp-search-box">
+          <span class="kp-search-icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+          </span>
+          <input type="text" class="kp-search-input" placeholder="Cari kapal: tugboat, tongkang, LCT..." aria-label="Cari kapal">
+        </div>
+      </div>
+      
+      <a href="index.html" class="mobile-menu-link">Beranda</a>
+      <a href="catalog.html" class="mobile-menu-link">Katalog</a>
+      <a href="contact.html" class="mobile-menu-link">Kontak</a>
+      <a href="about.html" class="mobile-menu-link">Tentang Kami</a>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <!-- Breadcrumb -->
+    <nav aria-label="Breadcrumb" class="container" style="padding-top: var(--space-4);">
+      <ol class="breadcrumb">
+        <li><a href="index.html">Beranda</a></li>
+        <li aria-current="page">Indeks Harga Kapal</li>
+      </ol>
+    </nav>
+
+    <!-- Answer-first intro -->
+    <section class="section">
+      <div class="container">
+        <h1>Indeks Harga Kapal Bekas Indonesia 2026</h1>
+        <p class="lead"><strong>Harga penawaran tongkang bekas di Indonesia per Oktober 2026 berkisar Rp 8,5-35 miliar</strong> (median Rp 23 miliar dari 16 unit tersedia), sementara <strong>tugboat berkisar Rp 4,5-25 miliar</strong> (median Rp 7,25 miliar dari 4 unit tersedia). Data di bawah diagregasi dari 34 listing real KapalPro.</p>
+        <p>Indeks ini disusun dari harga penawaran yang tercantum di setiap listing KapalPro — bukan estimasi atau harga pasar umum. Setiap angka bisa dilacak ke listing sumbernya di <a href="catalog.html">katalog</a> kami.</p>
+        <p style="color: var(--text-muted); font-size: 0.9em;">Diperbarui: Oktober 2026 &middot; Sampel: 34 listing (26 tersedia, 8 terjual)</p>
+      </div>
+    </section>
+
+    <!-- Price table -->
+    <section class="section" style="padding-top: 0;">
+      <div class="container">
+        <h2>Harga Penawaran per Tipe Kapal</h2>
+        <div style="overflow-x: auto;">
+        <table class="spec-table">
+          <thead>
+            <tr><th scope="col">Tipe Kapal</th><th scope="col">Unit Tersedia</th><th scope="col">Harga Terendah</th><th scope="col">Harga Median</th><th scope="col">Harga Tertinggi</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Tongkang</strong></td><td>16</td><td>Rp 8,5 M</td><td>Rp 23 M</td><td>Rp 35 M</td></tr>
+            <tr><td><strong>Tugboat</strong></td><td>4</td><td>Rp 4,5 M</td><td>Rp 7,25 M</td><td>Rp 25 M</td></tr>
+          </tbody>
+        </table>
+        </div>
+        <p class="text-sm" style="color: var(--text-muted);">M = miliar rupiah. Rentang hanya diterbitkan untuk tipe dengan minimal 4 unit tersedia.</p>
+      </div>
+    </section>
+
+    <!-- Small-sample data points -->
+    <section class="section" style="padding-top: 0;">
+      <div class="container">
+        <h2>Tipe dengan Sampel Kecil</h2>
+        <p>Untuk tipe dengan kurang dari 4 unit tersedia, kami tidak menerbitkan rentang harga — berikut harga penawaran tiap unitnya:</p>
+        <div style="overflow-x: auto;">
+        <table class="spec-table">
+          <thead>
+            <tr><th scope="col">Tipe Kapal</th><th scope="col">Unit</th><th scope="col">Harga Penawaran</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Oil Barge</td><td>2 unit</td><td>Rp 10 M &middot; Rp 25 M</td></tr>
+            <tr><td>Tanker</td><td>1 unit</td><td>Rp 38 M</td></tr>
+            <tr><td>Fast Crew Boat &amp; lainnya</td><td>3 unit</td><td>Rp 20 M &middot; Rp 75 M &middot; Rp 75 M</td></tr>
+          </tbody>
+        </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Methodology -->
+    <section class="section" style="padding-top: 0;">
+      <div class="container">
+        <h2>Metodologi</h2>
+        <ul>
+          <li><strong>Sumber data:</strong> 34 listing kapal di KapalPro per Oktober 2026 (26 tersedia, 8 terjual). Rentang harga dihitung dari unit berstatus tersedia saja.</li>
+          <li><strong>Jenis harga:</strong> harga penawaran (asking price) yang tercantum di listing, bukan harga transaksi final. Harga final dinegosiasikan setelah survei.</li>
+          <li><strong>Batasan:</strong> sampel kecil untuk sebagian tipe; harga dipengaruhi tahun, kondisi, dokumen, dan lokasi kapal. Indeks ini bukan valuasi resmi.</li>
+          <li><strong>Pembaruan:</strong> diperbarui setiap ada perubahan listing (kapal baru, perubahan harga, status terjual).</li>
+        </ul>
+        <p>Jelajahi listing sumbernya: <a href="tongkang.html">katalog tongkang</a>, <a href="tugboat.html">katalog tugboat</a>, atau <a href="catalog.html">semua kapal</a>. Panduan membeli: <a href="panduan-membeli-tongkang.html">panduan membeli tongkang</a>.</p>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section" style="padding-top: 0;">
+      <div class="container">
+        <h2>Pertanyaan Umum tentang Harga Kapal</h2>
+        <div class="vessel-faq">
+          <details class="vessel-faq-item">
+            <summary class="vessel-faq-q">Berapa harga tongkang bekas di Indonesia saat ini?</summary>
+            <p class="vessel-faq-a">Berdasarkan 16 listing tongkang tersedia di KapalPro per Oktober 2026, harga penawaran berkisar Rp 8,5-35 miliar dengan median Rp 23 miliar. Harga naik mengikuti ukuran: 270ft mulai Rp 8,5 miliar, 300ft Rp 15-26 miliar, 330ft Rp 34-35 miliar.</p>
+          </details>
+          <details class="vessel-faq-item">
+            <summary class="vessel-faq-q">Berapa harga tugboat bekas di Indonesia?</summary>
+            <p class="vessel-faq-a">Berdasarkan 4 listing tugboat tersedia di KapalPro per Oktober 2026, harga penawaran berkisar Rp 4,5-25 miliar dengan median Rp 7,25 miliar. Tugboat 2x500 HP tahun 2010-an berada di kisaran Rp 4,5-6 miliar.</p>
+          </details>
+          <details class="vessel-faq-item">
+            <summary class="vessel-faq-q">Apakah harga di indeks ini harga transaksi atau harga penawaran?</summary>
+            <p class="vessel-faq-a">Harga di indeks ini adalah harga penawaran (asking price) dari listing KapalPro, bukan harga transaksi final. Harga final biasanya dinegosiasikan setelah survei kapal dan bisa berbeda tergantung kondisi, dokumen, dan kelengkapan kapal.</p>
+          </details>
+          <details class="vessel-faq-item">
+            <summary class="vessel-faq-q">Seberapa sering indeks harga KapalPro diperbarui?</summary>
+            <p class="vessel-faq-a">Indeks diperbarui setiap ada perubahan listing: penambahan kapal baru, perubahan harga, atau perubahan status terjual. Tanggal pembaruan selalu dicantumkan di halaman ini.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section cta-section">
+      <div class="container" data-animate>
+        <h2>Mau Jual atau Beli Kapal?</h2>
+        <p>Ajukan Letter of Intent sekarang, kami respon dalam 1 hari kerja</p>
+        <div class="hero-actions">
+          <a href="contact.html" class="btn btn-primary btn-lg">Ajukan Letter of Intent</a>
+          <a href="https://wa.me/6285648048730" class="btn btn-secondary btn-lg" target="_blank" rel="noopener">Chat WhatsApp</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+<!-- Footer -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <!-- Brand -->
+        <div class="footer-brand">
+          <a href="index.html" class="logo" aria-label="KapalPro - Beranda">
+            <svg class="logo-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <path d="M4 24h24M8 24V16l8-8 8 8v8M16 8v-4M12 20h8M16 20v4"></path>
+            </svg>
+            <span>KapalPro</span>
+          </a>
+          <p>Platform terpercaya untuk jual beli kapal marine di Indonesia.</p>
+        </div>
+
+        <!-- Quick Links -->
+        <div>
+          <h3 class="footer-heading">Tautan Cepat</h3>
+          <nav aria-label="Navigasi footer">
+            <a href="index.html" class="footer-link">Beranda</a>
+            <a href="catalog.html" class="footer-link">Katalog</a>
+            <a href="about.html" class="footer-link">Tentang Kami</a>
+            <a href="contact.html" class="footer-link">Kontak</a>
+          </nav>
+        </div>
+
+        <!-- Resources -->
+        <div>
+          <h3 class="footer-heading">Sumber Daya</h3>
+          <nav aria-label="Navigasi sumber daya">
+            <a href="indeks-harga.html" class="footer-link">Indeks Harga Kapal</a>
+            <a href="tongkang.html" class="footer-link">Katalog Tongkang</a>
+            <a href="tugboat.html" class="footer-link">Katalog Tugboat</a>
+            <a href="panduan-membeli-tongkang.html" class="footer-link">Panduan Membeli Tongkang</a>
+            <a href="panduan-dokumen-kapal.html" class="footer-link">Panduan Dokumen Kapal</a>
+          </nav>
+        </div>
+
+        <!-- Contact -->
+        <div>
+          <h3 class="footer-heading">Kontak</h3>
+          <a href="tel:+6285648048730" class="footer-link" data-tel>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" style="margin-right: 8px;">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+            </svg>
+            <span data-phone-text>+62 856-4804-8730</span>
+          </a>
+        </div>
+
+        <!-- Legal -->
+        <div>
+          <h3 class="footer-heading">Legal</h3>
+          <a href="privacy.html" class="footer-link">Kebijakan Privasi</a>
+          <a href="accessibility.html" class="footer-link">Aksesibilitas</a>
+        </div>
+      </div>
+
+      <!-- Footer Bottom -->
+      <div class="footer-bottom">
+        <p class="footer-copyright">&copy; 2026 KapalPro. Hak cipta dilindungi.</p>
+        <div class="footer-legal">
+          <button type="button" class="footer-link" data-manage-cookies style="background:none;border:0;cursor:pointer;padding:0;">Kelola Cookie</button>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Cookie Consent (Section 10.3) -->
+  <div id="cookie-consent" class="cookie-consent" role="dialog" aria-label="Persetujuan cookie">
+    <div class="cookie-consent-inner">
+      <p class="cookie-consent-text">
+        Website ini menggunakan cookies untuk analitik dan pengalaman yang lebih baik.
+        Dengan menggunakan website ini, Anda menyetujui penggunaan cookies.
+      </p>
+      <div class="cookie-consent-actions">
+        <button class="btn btn-primary btn-sm cookie-accept">Terima</button>
+        <button class="btn btn-ghost btn-sm cookie-decline">Tolak</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- Scripts (deferred for performance) -->
+  <script src="js/config.js?v=01f0ea64" defer></script>
+  <script src="js/data.js?v=01f0ea64" defer></script>
+  <script src="js/theme.js?v=01f0ea64" defer></script>
+  <script src="js/app.js?v=01f0ea64" defer></script>
+  <script src="js/anim.js?v=01f0ea64" defer></script>
+  <script src="js/analytics.js?v=01f0ea64" defer></script>
+  <script src="js/perf.js?v=01f0ea64" defer></script>
+
+  <script src="js/search-autocomplete.js?v=01f0ea64" defer></script>
+
+</body>
+</html>

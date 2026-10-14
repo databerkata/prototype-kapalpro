@@ -274,14 +274,15 @@
     .vessel-main-image{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:12px;background:#f1f5f9}
   </style>
   
-  <link rel="stylesheet" href="css/style.css?v=648f4b5b">
+  <link rel="stylesheet" href="css/style.css?v=01f0ea64">
+  <link rel="stylesheet" href="css/search-autocomplete.css?v=01f0ea64">
   <!-- WHY: Redirect ke URL bersih harus jalan SEBELUM halaman digambar.
          Kalau script-nya defer, pengunjung sempat melihat "Loading..."
          lalu lompat - perceptible flash pada koneksi lambat. File
          eksternal, bukan inline, supaya tidak perlu menambah hash baru
          ke CSP. .htaccess dan _redirects melakukan 301 sejati lebih
          dulu, jadi ini hanya cadangan untuk host tanpa konfigurasi. -->
-  <script src="js/vessel-redirect.js?v=648f4b5b"></script>
+  <script src="js/vessel-redirect.js?v=01f0ea64"></script>
 </head>
 <body data-vessel-id="TBSET012">
   <!-- Skip Link -->
@@ -303,6 +304,14 @@
         <a href="about.html" class="nav-link">Tentang Kami</a>
       </nav>
       <div class="header-actions">
+        <div class="header-search kp-search" data-search-autocomplete data-search-mode="hero">
+          <div class="kp-search-box">
+            <span class="kp-search-icon" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+            </span>
+            <input type="text" class="kp-search-input" placeholder="Cari kapal..." aria-label="Cari kapal">
+          </div>
+        </div>
         <button id="theme-toggle" class="theme-toggle" aria-label="Ganti ke mode gelap">
           <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
             <circle cx="12" cy="12" r="5"></circle>
@@ -333,6 +342,15 @@
       </div>
     </div>
     <div id="mobile-menu" class="mobile-menu" role="navigation" aria-label="Navigasi mobile">
+      <div class="mobile-search kp-search" data-search-autocomplete data-search-mode="hero">
+        <div class="kp-search-box">
+          <span class="kp-search-icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+          </span>
+          <input type="text" class="kp-search-input" placeholder="Cari kapal: tugboat, tongkang, LCT..." aria-label="Cari kapal">
+        </div>
+      </div>
+      
       <a href="index.html" class="mobile-menu-link">Beranda</a>
       <a href="catalog.html" class="mobile-menu-link">Katalog</a>
       <a href="contact.html" class="mobile-menu-link">Kontak</a>
@@ -1472,16 +1490,18 @@
        semuanya defer, jadi urutan di sini adalah urutan eksekusi.
        Generator halaman kapal membaca berkas ini sebagai satu-satunya
        sumber markup, jadi perubahan ini ikut ke 15 vessel-*.html. -->
-  <script src="js/sanitize.js?v=648f4b5b" defer></script>
-  <script src="js/config.js?v=648f4b5b" defer></script>
-  <script src="js/theme.js?v=648f4b5b" defer></script>
-  <script src="js/data.js?v=648f4b5b" defer></script>
-  <script src="js/shortlist.js?v=648f4b5b" defer></script>
-  <script src="js/vessel-actions.js?v=648f4b5b" defer></script>
-  <script src="js/app.js?v=648f4b5b" defer></script>
-  <script src="js/anim.js?v=648f4b5b" defer></script>
-  <script src="js/vessel.js?v=648f4b5b" defer></script>
-  <script src="js/analytics.js?v=648f4b5b" defer></script>
-  <script src="js/perf.js?v=648f4b5b" defer></script>
+  <script src="js/sanitize.js?v=01f0ea64" defer></script>
+  <script src="js/config.js?v=01f0ea64" defer></script>
+  <script src="js/theme.js?v=01f0ea64" defer></script>
+  <script src="js/data.js?v=01f0ea64" defer></script>
+  <script src="js/shortlist.js?v=01f0ea64" defer></script>
+  <script src="js/vessel-actions.js?v=01f0ea64" defer></script>
+  <script src="js/app.js?v=01f0ea64" defer></script>
+  <script src="js/anim.js?v=01f0ea64" defer></script>
+  <script src="js/vessel.js?v=01f0ea64" defer></script>
+  <script src="js/analytics.js?v=01f0ea64" defer></script>
+  <script src="js/perf.js?v=01f0ea64" defer></script>
+  <script src="js/search-autocomplete.js?v=01f0ea64" defer></script>
+
 </body>
 </html>

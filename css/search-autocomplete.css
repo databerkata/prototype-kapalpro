@@ -194,3 +194,44 @@
   font-size: var(--text-sm);
   font-style: italic;
 }
+
+/* WHY varian header: search pindah ke pojok kanan atas (sejajar nav).
+   Compact 230px/40px di desktop; di mobile (<768px) disembunyikan dan
+   digantikan .mobile-search di dalam menu hamburger. */
+.header-search {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .header-search {
+    display: block;
+    width: 200px;
+    flex-shrink: 0;
+  }
+  .header-search .kp-search-box {
+    height: 40px;
+    border-radius: 10px;
+    padding: 0 var(--space-3);
+    gap: var(--space-2);
+  }
+  .header-search .kp-search-input {
+    font-size: var(--text-sm);
+  }
+  .header-search .kp-search-drop {
+    /* WHY: dropdown di header sticky harus di atas konten hero */
+    z-index: 70;
+  }
+}
+
+/* WHY varian mobile: font 16px mencegah auto-zoom iOS saat fokus. */
+.mobile-search {
+  padding: var(--space-2) var(--space-4) var(--space-3);
+}
+.mobile-search .kp-search-input {
+  font-size: 16px;
+}
+@media (min-width: 768px) {
+  .mobile-search {
+    display: none;
+  }
+}

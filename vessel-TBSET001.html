@@ -255,14 +255,15 @@
     .vessel-main-image{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:12px;background:#f1f5f9}
   </style>
   
-  <link rel="stylesheet" href="css/style.css?v=bb2f3797">
+  <link rel="stylesheet" href="css/style.css?v=01f0ea64">
+  <link rel="stylesheet" href="css/search-autocomplete.css?v=01f0ea64">
   <!-- WHY: Redirect ke URL bersih harus jalan SEBELUM halaman digambar.
          Kalau script-nya defer, pengunjung sempat melihat "Loading..."
          lalu lompat - perceptible flash pada koneksi lambat. File
          eksternal, bukan inline, supaya tidak perlu menambah hash baru
          ke CSP. .htaccess dan _redirects melakukan 301 sejati lebih
          dulu, jadi ini hanya cadangan untuk host tanpa konfigurasi. -->
-  <script src="js/vessel-redirect.js?v=bb2f3797"></script>
+  <script src="js/vessel-redirect.js?v=01f0ea64"></script>
 </head>
 <body data-vessel-id="TBSET001">
   <!-- Skip Link -->
@@ -284,6 +285,14 @@
         <a href="about.html" class="nav-link">Tentang Kami</a>
       </nav>
       <div class="header-actions">
+        <div class="header-search kp-search" data-search-autocomplete data-search-mode="hero">
+          <div class="kp-search-box">
+            <span class="kp-search-icon" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+            </span>
+            <input type="text" class="kp-search-input" placeholder="Cari kapal..." aria-label="Cari kapal">
+          </div>
+        </div>
         <button id="theme-toggle" class="theme-toggle" aria-label="Ganti ke mode gelap">
           <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
             <circle cx="12" cy="12" r="5"></circle>
@@ -314,6 +323,15 @@
       </div>
     </div>
     <div id="mobile-menu" class="mobile-menu" role="navigation" aria-label="Navigasi mobile">
+      <div class="mobile-search kp-search" data-search-autocomplete data-search-mode="hero">
+        <div class="kp-search-box">
+          <span class="kp-search-icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+          </span>
+          <input type="text" class="kp-search-input" placeholder="Cari kapal: tugboat, tongkang, LCT..." aria-label="Cari kapal">
+        </div>
+      </div>
+      
       <a href="index.html" class="mobile-menu-link">Beranda</a>
       <a href="catalog.html" class="mobile-menu-link">Katalog</a>
       <a href="contact.html" class="mobile-menu-link">Kontak</a>
@@ -1162,20 +1180,6 @@
               </a>
             </article>
             <article class="card" style="overflow: hidden;">
-              <a href="vessel-TBSET012.html" style="display: block;">
-                <picture>
-                  <source type="image/webp" srcset="assets/vessels/TBSET012/main-150w.webp 150w, assets/vessels/TBSET012/main-300w.webp 300w, assets/vessels/TBSET012/main-400w.webp 400w, assets/vessels/TBSET012/main-800w.webp 800w, assets/vessels/TBSET012/main.webp 1444w" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px">
-                  <img class="card-image" src="assets/vessels/TBSET012/main.jpg" srcset="assets/vessels/TBSET012/main-150w.jpg 150w, assets/vessels/TBSET012/main-300w.jpg 300w, assets/vessels/TBSET012/main-400w.jpg 400w, assets/vessels/TBSET012/main-800w.jpg 800w, assets/vessels/TBSET012/main.jpg 1444w" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px" alt="Tugboat + Tongkang Set 230ft 2010 - Tongkang" loading="lazy" decoding="async" width="1444" height="1083">
-                </picture>
-                <div class="card-body">
-                  <h3 style="font-size: var(--text-base); margin-bottom: var(--space-1);">Tugboat + Tongkang Set 230ft 2010</h3>
-                  <p class="text-sm" style="color: var(--text-secondary);">Tongkang - Pontianak</p>
-                  <p style="font-weight: 700; color: var(--text-accent); margin-top: var(--space-2);">Rp 17 Milyar</p>
-                  <div class="catalog-card-chips" style="margin-top: var(--space-2);"><span class="catalog-card-chip">1.383 GT</span><span class="catalog-card-chip">Thn 2010</span></div>
-                </div>
-              </a>
-            </article>
-            <article class="card" style="overflow: hidden;">
               <a href="vessel-TK008.html" style="display: block;">
                 <picture>
                   <source type="image/webp" srcset="assets/vessels/TK008/main-150w.webp 150w, assets/vessels/TK008/main-300w.webp 300w, assets/vessels/TK008/main-400w.webp 400w, assets/vessels/TK008/main-800w.webp 800w, assets/vessels/TK008/main.webp 1840w" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px">
@@ -1281,7 +1285,7 @@
                JavaScript. Daftar ini tidak pernah disentuh runtime. -->
           <div id="all-vessels" style="margin-top: var(--space-6);">
                         <details>
-              <summary style="cursor: pointer; font-size: var(--text-base); font-weight: 600; color: var(--text-secondary);">Daftar semua kapal (34)</summary>
+              <summary style="cursor: pointer; font-size: var(--text-base); font-weight: 600; color: var(--text-secondary);">Daftar semua kapal (33)</summary>
               <ul style="list-style: none; padding: 0; margin-top: var(--space-2);">
               <li style="padding: var(--space-2) 0; border-bottom: 1px solid var(--border-primary);"><a href="vessel-FCB001.html" style="color: var(--text-accent);">Floating Crane Barge 20M</a> <span class="text-sm" style="color: var(--text-muted);">- Lainnya, Indonesia - Rp 20 Milyar</span></li>
               <li style="padding: var(--space-2) 0; border-bottom: 1px solid var(--border-primary);"><a href="vessel-FCB002.html" style="color: var(--text-accent);">Floating Crane Barge 75M 2013</a> <span class="text-sm" style="color: var(--text-muted);">- Lainnya, Bunati - Rp 75 Milyar</span></li>
@@ -1299,7 +1303,6 @@
               <li style="padding: var(--space-2) 0; border-bottom: 1px solid var(--border-primary);"><a href="vessel-TBSET007.html" style="color: var(--text-accent);">Tugboat + Oil Barge Set 2012</a> <span class="text-sm" style="color: var(--text-muted);">- Oil Barge, Batam - Rp 10 Milyar</span></li>
               <li style="padding: var(--space-2) 0; border-bottom: 1px solid var(--border-primary);"><strong>Tugboat + Tongkang Set 120ft 2025</strong> <span class="text-sm" style="color: var(--text-muted);">- Tongkang, Tegal - Rp 11 Milyar</span></li>
               <li style="padding: var(--space-2) 0; border-bottom: 1px solid var(--border-primary);"><a href="vessel-TBSET002.html" style="color: var(--text-accent);">Tugboat + Tongkang Set 230ft 2010</a> <span class="text-sm" style="color: var(--text-muted);">- Tongkang, Pontianak - Rp 17 Milyar</span></li>
-              <li style="padding: var(--space-2) 0; border-bottom: 1px solid var(--border-primary);"><a href="vessel-TBSET012.html" style="color: var(--text-accent);">Tugboat + Tongkang Set 230ft 2010</a> <span class="text-sm" style="color: var(--text-muted);">- Tongkang, Pontianak - Rp 17 Milyar</span></li>
               <li style="padding: var(--space-2) 0; border-bottom: 1px solid var(--border-primary);"><a href="vessel-TBSET004.html" style="color: var(--text-accent);">Tugboat + Tongkang Set 270ft</a> <span class="text-sm" style="color: var(--text-muted);">- Tongkang, Batam - Rp 21 Milyar</span></li>
               <li style="padding: var(--space-2) 0; border-bottom: 1px solid var(--border-primary);"><a href="vessel-TBSET008.html" style="color: var(--text-accent);">Tugboat + Tongkang Set 270ft</a> <span class="text-sm" style="color: var(--text-muted);">- Tongkang, Balikpapan - Rp 12 Milyar</span></li>
               <li style="padding: var(--space-2) 0; border-bottom: 1px solid var(--border-primary);"><a href="vessel-TBSET009.html" style="color: var(--text-accent);">Tugboat + Tongkang Set 270ft 2013</a> <span class="text-sm" style="color: var(--text-muted);">- Tongkang, Jakarta - Rp 21 Milyar</span></li>
@@ -1440,16 +1443,18 @@
        semuanya defer, jadi urutan di sini adalah urutan eksekusi.
        Generator halaman kapal membaca berkas ini sebagai satu-satunya
        sumber markup, jadi perubahan ini ikut ke 15 vessel-*.html. -->
-  <script src="js/sanitize.js?v=bb2f3797" defer></script>
-  <script src="js/config.js?v=bb2f3797" defer></script>
-  <script src="js/theme.js?v=bb2f3797" defer></script>
-  <script src="js/data.js?v=bb2f3797" defer></script>
-  <script src="js/shortlist.js?v=bb2f3797" defer></script>
-  <script src="js/vessel-actions.js?v=bb2f3797" defer></script>
-  <script src="js/app.js?v=bb2f3797" defer></script>
-  <script src="js/anim.js?v=bb2f3797" defer></script>
-  <script src="js/vessel.js?v=bb2f3797" defer></script>
-  <script src="js/analytics.js?v=bb2f3797" defer></script>
-  <script src="js/perf.js?v=bb2f3797" defer></script>
+  <script src="js/sanitize.js?v=01f0ea64" defer></script>
+  <script src="js/config.js?v=01f0ea64" defer></script>
+  <script src="js/theme.js?v=01f0ea64" defer></script>
+  <script src="js/data.js?v=01f0ea64" defer></script>
+  <script src="js/shortlist.js?v=01f0ea64" defer></script>
+  <script src="js/vessel-actions.js?v=01f0ea64" defer></script>
+  <script src="js/app.js?v=01f0ea64" defer></script>
+  <script src="js/anim.js?v=01f0ea64" defer></script>
+  <script src="js/vessel.js?v=01f0ea64" defer></script>
+  <script src="js/analytics.js?v=01f0ea64" defer></script>
+  <script src="js/perf.js?v=01f0ea64" defer></script>
+  <script src="js/search-autocomplete.js?v=01f0ea64" defer></script>
+
 </body>
 </html>

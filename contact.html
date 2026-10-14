@@ -66,7 +66,8 @@
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
-  <link rel="stylesheet" href="css/style.css?v=bb2f3797">
+  <link rel="stylesheet" href="css/style.css?v=01f0ea64">
+  <link rel="stylesheet" href="css/search-autocomplete.css?v=01f0ea64">
   <script type="application/ld+json" id="org-schema">
 {
   "@context": "https://schema.org",
@@ -110,6 +111,14 @@
       <div class="header-actions">
 
         <!-- Theme Toggle (Section 1.3) -->
+        <div class="header-search kp-search" data-search-autocomplete data-search-mode="hero">
+          <div class="kp-search-box">
+            <span class="kp-search-icon" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+            </span>
+            <input type="text" class="kp-search-input" placeholder="Cari kapal..." aria-label="Cari kapal">
+          </div>
+        </div>
         <button id="theme-toggle" class="theme-toggle" aria-label="Ganti ke mode gelap">
           <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
             <circle cx="12" cy="12" r="5"></circle>
@@ -144,6 +153,15 @@
 
     <!-- Mobile Menu -->
     <div id="mobile-menu" class="mobile-menu" role="navigation" aria-label="Navigasi mobile">
+      <div class="mobile-search kp-search" data-search-autocomplete data-search-mode="hero">
+        <div class="kp-search-box">
+          <span class="kp-search-icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+          </span>
+          <input type="text" class="kp-search-input" placeholder="Cari kapal: tugboat, tongkang, LCT..." aria-label="Cari kapal">
+        </div>
+      </div>
+      
       <a href="index.html" class="mobile-menu-link">Beranda</a>
       <a href="catalog.html" class="mobile-menu-link">Katalog</a>
       <a href="contact.html" class="mobile-menu-link">Kontak</a>
@@ -314,6 +332,19 @@
             <a href="contact.html" class="footer-link">Kontak</a>
           </nav>
         </div>
+        <!-- Resources -->
+        <div>
+          <h3 class="footer-heading">Sumber Daya</h3>
+          <nav aria-label="Navigasi sumber daya">
+            <a href="indeks-harga.html" class="footer-link">Indeks Harga Kapal</a>
+            <a href="tongkang.html" class="footer-link">Katalog Tongkang</a>
+            <a href="tugboat.html" class="footer-link">Katalog Tugboat</a>
+            <a href="panduan-membeli-tongkang.html" class="footer-link">Panduan Membeli Tongkang</a>
+            <a href="panduan-dokumen-kapal.html" class="footer-link">Panduan Dokumen Kapal</a>
+          </nav>
+        </div>
+
+
 
         <!-- Contact -->
         <div>
@@ -362,13 +393,15 @@
   <div class="toast-container" aria-live="polite" aria-atomic="true"></div>
 
   <!-- Scripts (deferred for performance) -->
-  <script src="js/sanitize.js?v=bb2f3797" defer></script>
-  <script src="js/config.js?v=bb2f3797" defer></script>
-  <script src="js/theme.js?v=bb2f3797" defer></script>
-  <script src="js/app.js?v=bb2f3797" defer></script>
-  <script src="js/anim.js?v=bb2f3797" defer></script>
-  <script src="js/contact.js?v=bb2f3797" defer></script>
-  <script src="js/analytics.js?v=bb2f3797" defer></script>
-  <script src="js/perf.js?v=bb2f3797" defer></script>
+  <script src="js/sanitize.js?v=01f0ea64" defer></script>
+  <script src="js/config.js?v=01f0ea64" defer></script>
+  <script src="js/theme.js?v=01f0ea64" defer></script>
+  <script src="js/app.js?v=01f0ea64" defer></script>
+  <script src="js/anim.js?v=01f0ea64" defer></script>
+  <script src="js/contact.js?v=01f0ea64" defer></script>
+  <script src="js/analytics.js?v=01f0ea64" defer></script>
+  <script src="js/perf.js?v=01f0ea64" defer></script>
+  <script src="js/search-autocomplete.js?v=01f0ea64" defer></script>
+
 </body>
 </html>

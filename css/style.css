@@ -1,0 +1,3568 @@
+/* ============================================================
+   KapalPro - Design System
+   Compliant with RULES.md v3.0
+   ============================================================ */
+
+/* === 1. DESIGN TOKENS (Section 1.3) === */
+:root {
+  /* WHY pengecualian hardcoded: #ffffff dipakai langsung (bukan token)
+     di ~25 tempat sebagai TEKS DI ATAS LATAR GELAP (overlay foto,
+     tombol brand) - nilainya memang harus putih di kedua tema, jadi
+     token yang berubah per-tema justru salah. #25d366/#0b3d2c adalah
+     warna brand WhatsApp (lihat komentar di .whatsapp-btn) - brand
+     pihak ketiga tidak masuk ke token desain. */
+  /* WHY: color-scheme memberi tahu browser bahwa halaman mendukung
+     light DAN dark. Tanpa ini, scrollbar, spinner, checkbox/radio/
+     date picker bawaan browser, dan area overscroll-iOS tetap putih
+     walau site sudah mode gelap. */
+  color-scheme: light;
+
+  /* Safe-area insets (notch + home indicator).
+     WHY: iPhone punya notch di atas dan garis gestur di bawah.
+     Dengan viewport-fit=cover (lihat meta viewport), halaman ikut
+     melebar ke area itu, sehingga konten harus digeser masuk sendiri
+     - tanpa ini, logo tertimpa notch dan tombol terakhir tertutup
+     garis home indicator.
+     Nilai env() selalu 0 di perangkat tanpa notch, jadi setiap
+     declare ini aman di mana saja dan tidak perlu media query. */
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left: env(safe-area-inset-left, 0px);
+
+  /* Brand Colors - Maritime Blue (max 3 brand colors) */
+  --color-primary-50: #eff6ff;
+  --color-primary-100: #dbeafe;
+  --color-primary-200: #bfdbfe;
+  --color-primary-300: #93c5fd;
+  --color-primary-400: #60a5fa;
+  --color-primary-500: #2563eb;
+  --color-primary-600: #1d4ed8;
+  --color-primary-700: #1e40af;
+  --color-primary-800: #1e3a8a;
+  --color-primary-900: #1e3a5f;
+
+  /* Accent - Teal (trust) */
+  --color-accent-50: #f0fdfa;
+  --color-accent-100: #ccfbf1;
+  --color-accent-500: #0d9488;
+  --color-accent-600: #0f766e;
+  --color-accent-700: #115e59;
+
+  /* Status Colors */
+  --color-success-50: #f0fdf4;
+  /* WHY 300/400: badge status hijau dipakai sebagai TEKS di dark mode.
+     success-500 di atas hijau transparan hanya 3.1:1. */
+  --color-success-300: #4ade80;
+  --color-success-400: #22c55e;
+  --color-success-500: #16a34a;
+  --color-success-600: #15803d;
+  --color-warning-50: #fffbeb;
+  /* WHY 300: badge warning kuning dipakai sebagai TEKS di dark mode. */
+  --color-warning-300: #fcd34d;
+  --color-warning-500: #d97706;
+  --color-warning-600: #b45309;
+  --color-danger-50: #fef2f2;
+  /* WHY 200/300 ditambahkan: warna merah dipakai sebagai TEKS di dark
+     mode (pesan validasi, label wajib). Tanpa nilai terang di palet,
+     satu-satunya pilihan di gelap adalah darkened yang tidak terbaca. */
+  --color-danger-200: #fecaca;
+  --color-danger-300: #fca5a5;
+  --color-danger-500: #dc2626;
+  --color-danger-600: #b91c1c;
+
+  /* Neutrals */
+  --color-gray-50: #f8fafc;
+  --color-gray-100: #f1f5f9;
+  --color-gray-200: #e2e8f0;
+  --color-gray-300: #cbd5e1;
+  --color-gray-400: #94a3b8;
+  --color-gray-500: #64748b;
+  --color-gray-600: #475569;
+  --color-gray-700: #334155;
+  --color-gray-800: #1e293b;
+  --color-gray-900: #0f172a;
+
+  /* === Semantic Tokens (NO hardcoded hex in components) === */
+  
+  /* Background */
+  --bg-primary: var(--color-gray-50);
+  --bg-secondary: #ffffff;
+  --bg-card: #ffffff;
+  --bg-card-hover: var(--color-gray-50);
+  --bg-overlay: rgba(0, 0, 0, 0.5);
+  
+  /* Text */
+  --text-primary: var(--color-gray-900);
+  --text-secondary: var(--color-gray-600);
+  /* WHY: gray-400 (#94a3b8) hanya 2.56:1 di atas putih - GAGAL WCAG AA
+     (butuh 4.5:1 untuk teks normal). gray-500 = 4.76:1 di putih dan
+     4.55:1 di #f8fafc, jadi aman di kedua latar yang dipakai. */
+  --text-muted: var(--color-gray-500);
+  --text-inverse: #ffffff;
+  /* WHY: Footer BERLATAR GELAP DI KEDUA TEMA (gray-900), jadi token
+     teks halaman tidak bisa dipakai di dalamnya. --text-muted di light
+     mode bernilai gray-500 (rendah kontras di atas gelap), sementara
+     di dark mode menjadi terang. Satu token khusus yang tidak ikut
+     berubah per tema lebih jujur dan bisa diuji. */
+  --text-on-dark: var(--color-gray-300);
+  --text-on-dark-muted: var(--color-gray-400);
+  --text-link: var(--color-primary-600);
+  --text-link-hover: var(--color-primary-700);
+  /* WHY: Aksen biru yang dipakai sebagai WARNA TEKS (harga, judul
+     hover, ikon) harus punya token sendiri yang ganti per tema.
+     primary-600 hanya 2.18:1 di atas kartu gelap - jauh di bawah
+     ambang AA. primary-300 di gelap = 8.11:1. */
+  --text-accent: var(--color-primary-600);       /* harga, aksen utama */
+  --text-accent-strong: var(--color-primary-700); /* hover, penekanan */
+  /* WHY: Sama seperti --text-accent, warna merah yang dipakai sebagai
+     WARNA TEKS butuh token sendiri. --color-danger-500 (#dc2626) hanya
+     3.68:1 di atas kartu gelap - GAGAL AA. danger-300 di gelap = 6.4:1. */
+  --text-danger: var(--color-danger-600);
+  --text-danger-strong: var(--color-danger-500);
+  
+  /* Border */
+  --border-primary: var(--color-gray-200);
+  --border-secondary: var(--color-gray-100);
+  --border-focus: var(--color-primary-500);
+  --border-error: var(--color-danger-500);
+  
+  /* Button Primary */
+  --btn-primary-bg: var(--color-primary-600);
+  --btn-primary-bg-hover: var(--color-primary-700);
+  --btn-primary-text: #ffffff;
+  --btn-primary-border: var(--color-primary-600);
+  
+  /* Button Secondary */
+  --btn-secondary-bg: transparent;
+  --btn-secondary-bg-hover: var(--color-gray-50);
+  --btn-secondary-text: var(--color-primary-600);
+  --btn-secondary-border: var(--color-primary-600);
+  
+  /* === Typography (Section 1.1 + 4) === */
+  /* WHY: font-display: swap prevents invisible text during font load */
+  --font-display: "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-body: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "SF Mono", "Fira Code", "Cascadia Code", ui-monospace, Menlo, Consolas, monospace;
+  
+  /* Type Scale (Section 1.1)
+     WHY: Skala lama (12/14/16/20/24/32/48) punya rasio tidak konsisten
+     (1.17, 1.14, 1.25, 1.20, 1.33, 1.50) sehingga hierarki antar ukuran
+     terasa "loncat-loncat". Di bawah ini satu ramp 1.200 yang konsisten,
+     di-fluid-kan dengan clamp() supaya TIDAK ada lagi lonjakan ukuran
+     mendadak saat breakpoint desktop ditembus.
+
+     Format: clamp(min, ideal_vw, max)
+     min = ukuran di viewport 360px, max = ukuran di >=1280px. */
+  --text-xs:   0.75rem;                                              /* 12px */
+  --text-sm:   0.875rem;                                             /* 14px */
+  --text-base: 1rem;                                                 /* 16px */
+  --text-lg:   clamp(1.125rem, 1.06rem + 0.34vw, 1.25rem);           /* 18→20 */
+  --text-xl:   clamp(1.25rem, 1.15rem + 0.50vw, 1.5rem);             /* 20→24 */
+  --text-2xl:  clamp(1.5rem, 1.31rem + 0.95vw, 2rem);                /* 24→32 */
+  --text-3xl:  clamp(2rem, 1.65rem + 1.75vw, 3rem);                  /* 32→48 */
+  --text-4xl:  clamp(2.25rem, 1.71rem + 2.90vw, 3.5rem);             /* 36→56 (hero) */
+
+  /* WHY: Panjang baris ideal 60-75 karakter. ch-based max-width
+     mengikat ukuran baris ke ukuran font, jadi tetap proporsional
+     saat skala fluid berubah. */
+  --measure-prose: 68ch;
+  --measure-narrow: 46ch;
+
+  /* Line Height (Section 1.1)
+     WHY: 1.2 terlalu rapat untuk ukuran besar - headline 48px butuh
+     ~1.08 supaya tidak saling "berdempetan". line-height diikat ke
+     ukuran font, bukan satu nilai global. */
+  --line-height-display: 1.08;   /* 36px+ */
+  --line-height-heading:  1.18;   /* 24-32px */
+  --line-height-title:    1.28;   /* 18-20px */
+  --line-height-tight:    1.35;   /* 14-16px, mis. kartu badge */
+  --line-height-normal:   1.6;    /* 16px body - naik dari 1.5, legibility */
+  --line-height-relaxed:  1.75;   /* paragraf panjang */
+
+  /* Font Weight */
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* Tracking (Section 1.1)
+     WHY: Optik. Teks kecil-butuh tracking POSITIF agar tidak rapat;
+     teks besar butuh tracking NEGATIF karena hurufzug baru secara
+     optik lebih rapat pada ukuran besar. Satu nilai global (0.02em)
+     tidak bisa melayani keduanya. */
+  --tracking-tighter:  -0.035em;  /* 48px+ */
+  --tracking-tight:    -0.022em;  /* 24-32px */
+  --tracking-snug:     -0.011em;  /* 18-20px */
+  --tracking-normal:   0;
+  --tracking-wide:     0.02em;    /* 12-14px, badge/label uppercase */
+  --tracking-wider:    0.06em;    /* eyebrow/overline kecil */
+
+  /* === Spacing (Section 1.2 - 8pt grid) === */
+  --space-0: 0;
+  --space-1: 0.25rem;   /* 4px */
+  --space-2: 0.5rem;    /* 8px */
+  --space-3: 0.75rem;   /* 12px */
+  --space-4: 1rem;      /* 16px */
+  --space-5: 1.25rem;   /* 20px */
+  --space-6: 1.5rem;    /* 24px */
+  --space-8: 2rem;      /* 32px */
+  --space-10: 2.5rem;   /* 40px */
+  --space-12: 3rem;     /* 48px */
+  --space-16: 4rem;     /* 64px */
+  --space-20: 5rem;     /* 80px */
+  --space-24: 6rem;     /* 96px */
+  
+  /* Section Padding (Section 1.2) */
+  --section-padding: var(--space-20);  /* 80px desktop */
+  
+  /* Layout (Section 1.2) */
+  --max-width: 1280px;
+  --max-width-sm: 640px;
+  --max-width-md: 768px;
+  --max-width-lg: 1024px;
+  --max-width-xl: 1280px;
+  
+  /* Border Radius (Section 1.12) */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-full: 9999px;
+  
+  /* Shadows (Section 1.12 - max sm) */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  
+  /* Border (Section 1.12) */
+  --border-width: 1px;
+  --border-style: solid;
+  
+  /* === RASIO FOTO PRODUK (universal) ===
+   * WHY 4:3 dan bukan 16:9 atau 16:10: kelima belas foto kapal di repo
+   * punya 15 rasio berbeda, dari 0,756 (TB002, potret) sampai 1,891
+   * (TBSET004).	object-fit:cover dipakai supaya tidak ada satu pun
+   * foto yang hilang bagian penting, tapi pilihan rasio tetap
+   * punya biaya crop. Dihitung terhadap data asli:
+   *   4:3   rata-rata potong 17,8%  terburuk 43,3% (TB002)
+   *   16:10 rata-rata potong 16,4%  terburuk 52,7% (TB002)
+   *   16:9  rata-rata potong 16,3%  terburuk 57,5% (TB002)
+   * Selisih rata-rata antar kandidat hanya ~1,5 poin - tidak berarti
+   * apa-apa. Yang menentukan adalah kasus terburuk: 4:3 memotong
+   * foto potret paling ekstrem 9 poin lebih sedikit, dan itu foto
+   * yang paling rusak kalau dipotong. 4:3 juga rasio paling lazim di
+   * katalog web, jadi tidak terlihat asing.
+   *
+   * object-fit:cover selalu menyertai token ini. Tanpa itu, atribut
+   * width/height di HTML tidak akan dipakai dan gambar akan muncul
+   * dengan rasio aslinya - layout pecah setiap kali ada foto baru
+   * dengan rasio berbeda.
+   */
+  --ratio-photo: 4 / 3;
+  
+  /* Backdrop Blur (Section 1.12 - max 8px) */
+  --backdrop-blur: blur(8px);
+  
+  /* === Motion (Section 1.5) === */
+  --duration-fast: 150ms;
+  --duration-normal: 200ms;
+  --duration-slow: 300ms;
+  --easing-default: cubic-bezier(0.22, 1, 0.36, 1);
+  /* WHY didefinisikan di sini: tiga variabel ini dipakai via var() dengan
+     fallback di beberapa tempat, tapi tidak pernah didefinisikan -
+     definisi eksplisit menghindari kebingungan maintainer. */
+  --transition-fast: 150ms;
+  --animate-delay: 0ms;
+  --color-gray-950: #020617;
+  
+  /* === Z-Index === */
+  --z-dropdown: 100;
+  --z-sticky: 200;
+  --z-modal: 300;
+  --z-toast: 400;
+}
+
+/* === Dark Mode (Section 1.3) === */
+[data-theme="dark"] {
+  /* WHY: lihat catatan color-scheme di :root */
+  color-scheme: dark;
+
+  --bg-primary: var(--color-gray-900);
+  --bg-secondary: var(--color-gray-800);
+  --bg-card: var(--color-gray-800);
+  --bg-card-hover: var(--color-gray-700);
+  --bg-overlay: rgba(0, 0, 0, 0.7);
+  
+  --text-primary: var(--color-gray-50);
+  --text-secondary: var(--color-gray-300);
+  /* WHY: gray-500 hanya 3.75:1 di #0f172a dan 3.07:1 di kartu #1e293b
+     - GAGAL AA. gray-400 = 6.96:1 / 5.71:1, lolos di kedua latar. */
+  --text-muted: var(--color-gray-400);
+  /* WHY tetap putih di dark mode: semua pemakaian token ini di atas
+     latar BIRU SOLID (primary-600) - .skip-link dan .cta-section.
+     Nilai lama gray-900 (hitam) membuat teks skip-link hanya
+     2.66:1 di atas biru tua - hampir tak terbaca, dan skip-link
+     justru kontrol yang paling dibutuhkan pengguna keyboard.
+     'Inverse' di sini berarti 'terhadap latar biru', bukan
+     'terhadap latar halaman'. */
+  --text-inverse: #ffffff;
+  --text-link: var(--color-primary-400);
+  --text-link-hover: var(--color-primary-300);
+  --text-accent: var(--color-primary-300);
+  --text-accent-strong: var(--color-primary-200);
+  --text-danger: var(--color-danger-300);
+  --text-danger-strong: var(--color-danger-200);
+  
+  --border-primary: var(--color-gray-700);
+  --border-secondary: var(--color-gray-800);
+  --border-focus: var(--color-primary-500);
+  
+  --btn-primary-bg: var(--color-primary-600);
+  --btn-primary-bg-hover: var(--color-primary-500);
+  --btn-primary-text: #ffffff;
+  --btn-primary-border: var(--color-primary-600);
+  
+  --btn-secondary-bg: transparent;
+  --btn-secondary-bg-hover: var(--color-gray-700);
+  --btn-secondary-text: var(--color-primary-400);
+  --btn-secondary-border: var(--color-primary-400);
+  
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -2px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -4px rgba(0, 0, 0, 0.3);
+}
+
+/* === 2. RESET & BASE === */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* Respect prefers-reduced-motion (Section 1.5) */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: var(--line-height-normal);
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* WHY: Font ini sudah punya optical sizing + tabular figures di
+     SF Pro/Segoe UI. Menaktifkannya memberi spasi angka rata (penting
+     untuk harga & tabel spesifikasi) dan ligatur standar tanpa
+     mengubah bobot teks. */
+  font-feature-settings: "kern" 1, "liga" 1, "calt" 1, "tnum" 1;
+  /* WHY: tabular-nums saja - "proportional-nums" adalah kebalikan dari
+     tabular-nums; menulis keduanya membuat yang terakhir menang dan
+     membatalkan tabular. Harga & spesifikasi butuh angka rata. */
+  font-variant-numeric: tabular-nums;
+  font-kerning: normal;
+  /* WHY: Cegah scroll ke bawah membuka celah 1px di kanan pada
+     beberapa browser karena lebar subpixel pada body. */
+  overflow-wrap: break-word;
+}
+
+/* WHY: Paragraf panjang jauh lebih nyaman dibaca dengan "pretty"
+     (hindari baris yatim panjang di akhir) daripada default. */
+p {
+  text-wrap: pretty;
+}
+
+/* WHY: Angka harus rata untuk kolom harga, spesifikasi, dan input
+   angka. Tanpa ini digit "1" dan "8" lebarnya berbeda sehingga tabel
+   terlihat bergeser-geser. Body sudah punya tabular-nums; aturan ini
+   memastikan elemen numerik tidak mewarisi tracking teks yang terlalu
+   longgar dari helper .text-*. */
+.price,
+.card-price,
+input[type="number"],
+input[type="tel"] {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1, "kern" 1;
+  letter-spacing: 0;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+a {
+  color: var(--text-link);
+  text-decoration: none;
+  transition: color var(--duration-fast) var(--easing-default);
+}
+
+a:hover {
+  color: var(--text-link-hover);
+}
+
+ul, ol {
+  list-style: none;
+}
+
+button {
+  font-family: inherit;
+  font-size: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+input, textarea, select {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+/* === 3. TYPOGRAPHY (Section 1.1 + 4) === */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-heading);
+  color: var(--text-primary);
+  /* WHY: "balance" membagi tinggi baris secara optimal sehingga
+     headline 2-3 baris tidak berakhir dengan satu kata sendirian
+     (widow) - penyebab utama judul terlihat "bukan profesional". */
+  text-wrap: balance;
+  /* WHY: Jangan aktifkan hyphens untuk bahasa Indonesia; pemenggalan
+     kata akan terlihat salah eja. Headline hanya boleh terpotong
+     bila kata benar-benar lebih panjang dari lebar baris. */
+  hyphens: none;
+}
+
+/* WHY: Setiap ukuran punya pasangan line-height + tracking sendiri.
+   Menyalin tracking h1 ke h6 adalah kesalahan optik: h1 48px butuh
+   -0.022em, h6 16px justru butuh tracking longgar. */
+h1 {
+  font-size: var(--text-4xl);
+  line-height: var(--line-height-display);
+  letter-spacing: var(--tracking-tight);
+}
+
+/* WHY: h2 = judul seksi, bukan judul halaman. Ditahan di 28-36px
+   supaya hierarki h1 (36-56) > h2 (28-36) tetap jelas di layar lebar. */
+h2 {
+  font-size: clamp(1.75rem, 1.53rem + 1.10vw, 2.25rem);
+  line-height: var(--line-height-display);
+  letter-spacing: var(--tracking-tight);
+}
+
+h3 {
+  font-size: var(--text-2xl);
+  line-height: var(--line-height-heading);
+  letter-spacing: var(--tracking-snug);
+}
+
+h4 {
+  font-size: var(--text-xl);
+  line-height: var(--line-height-title);
+  letter-spacing: var(--tracking-snug);
+}
+
+h5 {
+  font-size: var(--text-lg);
+  line-height: var(--line-height-title);
+  letter-spacing: var(--tracking-normal);
+}
+
+h6 {
+  font-size: var(--text-base);
+  line-height: var(--line-height-title);
+  letter-spacing: var(--tracking-wide);
+  /* WHY: h6 sering dipakai sebagai label kategori - uppercase kecil
+     dengan tracking longgar terbaca jauh lebih rapi. */
+  text-transform: uppercase;
+}
+
+h4 {
+  font-size: var(--text-lg);
+}
+
+p {
+  max-width: 65ch;  /* Readable line length */
+  margin-bottom: var(--space-4);
+}
+
+/* WHY: Helper ukuran teks sekaligus membawa line-height & tracking
+   yang sesuai untuk ukuran itu. Kalau hanya mengatur font-size, teks
+   kecil ikut mewarisi line-height 1.6 dan terlihat longgar. */
+.text-xs { font-size: var(--text-xs); line-height: var(--line-height-tight); letter-spacing: var(--tracking-wide); }
+.text-sm { font-size: var(--text-sm); line-height: var(--line-height-tight); letter-spacing: 0.005em; }
+.text-base { font-size: var(--text-base); line-height: var(--line-height-normal); }
+.text-lg { font-size: var(--text-lg); line-height: var(--line-height-title); letter-spacing: var(--tracking-snug); }
+.text-xl { font-size: var(--text-xl); line-height: var(--line-height-title); letter-spacing: var(--tracking-snug); }
+/* WHY skala berhenti di .text-xl: .text-2xl dan .text-3xl dihapus karena
+   tidak pernah muncul di markup halaman mana pun (dicek ke seluruh HTML
+   dan JS). Judul besar memakai elemen h1-h3 dengan kelas section sendiri,
+   jadi menambah helper ukuran hanya membuat dua cara menulis hal yang sama. */
+
+/* === 4. LAYOUT (Section 1.2 + 1.7) === */
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin-left: auto;
+  margin-right: auto;
+  /* WHY: Padding minimal --space-6 ditambah inset notch. max() dipakai
+     karena di perangkat tanpa notch inset = 0 dan hasilnya tetap
+     persis --space-6, jadi tidak ada perubahan sama sekali. */
+  padding-left: max(var(--space-6), var(--safe-left));
+  padding-right: max(var(--space-6), var(--safe-right));
+}
+
+.section {
+  padding-top: var(--section-padding);
+  padding-bottom: var(--section-padding);
+}
+
+/* Asymmetric layout (Section 1.7) */
+.layout-asymmetric {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-12);
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  .layout-asymmetric {
+    grid-template-columns: 1.2fr 1fr;
+  }
+}
+
+/* WHY .layout-asymmetric-reverse dihapus: tidak ada halaman yang memakai
+   varian cerminnya (hero beranda memakai .layout-asymmetric biasa).
+   Duplikat cermin seperti ini yang paling mudah basi - hanya satu varian
+   yang ikut diperbarui saat grid berubah. */
+
+/* === 5. SKIP LINK (Section 1.9) === */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: var(--space-4);
+  padding: var(--space-3) var(--space-6);
+  background-color: var(--color-primary-600);
+  color: var(--text-inverse);
+  font-weight: var(--font-weight-semibold);
+  border-radius: var(--radius-md);
+  z-index: var(--z-toast);
+  transition: top var(--duration-fast) var(--easing-default);
+}
+
+.skip-link:focus {
+  top: var(--space-4);
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+}
+
+/* === 6. HEADER === */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-sticky);
+  background-color: var(--bg-secondary);
+  border-bottom: var(--border-width) var(--border-style) var(--border-primary);
+  /* WHY: Header menempel ke atas layar, jadi di iPhone ber-notch ia
+     akan tertutup status bar. Padding-top memakai inset agar isinya
+     turun ke bawah notch. Total tinggi header jadi 72px + inset. */
+  padding-top: var(--safe-top);
+  /* WHY: backdrop-filter SENGAJA dihapus. Nilai --bg-secondary sudah
+     opaque penuh (#ffffff / gray-800), jadi efek blur di belakang
+     header tidak pernah terlihat - tetapi ia membuat header menjadi
+     containing block, sehingga .mobile-menu (position: fixed; top: 72px;
+     bottom: 0) dihitung relatif header 72px, bukan viewport. Akibatnya
+     panel menu mobile hanya setinggi ~48px dan teks hero tampak
+     menembus link menu. */
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 72px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+  text-decoration: none;
+  /* WHY: Target sentuh minimum 44px (WCAG 2.5.5). Padding vertikal
+     tidak mengubah tinggi header karena .header-inner punya
+     height tetap 72px dan align-items: center. */
+  padding-block: 6px;
+}
+
+.logo:hover {
+  color: var(--text-primary);
+}
+
+.logo-icon {
+  width: 32px;
+  height: 32px;
+  color: var(--text-accent);
+}
+
+.nav {
+  display: none;
+  align-items: center;
+  gap: var(--space-8);
+}
+
+@media (min-width: 768px) {
+  .nav {
+    display: flex;
+  }
+}
+
+.nav-link {
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-secondary);
+  transition: color var(--duration-fast) var(--easing-default);
+  padding: var(--space-2) 0;
+  min-height: 44px;  /* Section 1.6: 44x44px touch target */
+  display: flex;
+  align-items: center;
+  white-space: nowrap; /* WHY: search header 230px menyempitkan ruang nav; cegah "Tentang Kami" wrap dua baris */
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: var(--text-primary);
+}
+
+.nav-link:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* Header Actions */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+/* WHY flex-shrink: 0: tombol ikon ini berukuran tetap 44px dan tidak
+   boleh pernah menyusut. Saat tombol "Pasang Aplikasi" (lebar, teks
+   panjang) ikut masuk .header-actions, Flexbox menyusut KETIGA anak
+   secara proporsional pada lebar 390px - dan tombol ikon menyusut ke
+   36-39px, di bawah target sentuh minimum WCAG 2.5.5. Tombol teks
+   yang boleh menyusut dan membungkus; tombol ikon tidak. */
+.header-actions > button:not(#pwa-install-btn) {
+  flex-shrink: 0;
+}
+
+/* WHY 44px, bukan 36px bawaan .btn-sm: aturan target sentuh yang sama
+   berlaku untuk tombol ini, dan tinggi adalah satu-satunya dimensinya
+   yang tidak tercukupi pada lebar tablet (teksnya muat satu baris). */
+#pwa-install-btn {
+  min-height: 44px;
+}
+
+/* Theme Toggle (Section 1.3) */
+.theme-toggle {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  color: var(--text-secondary);
+  transition: all var(--duration-fast) var(--easing-default);
+}
+
+.theme-toggle:hover {
+  background-color: var(--bg-card-hover);
+  color: var(--text-primary);
+}
+
+.theme-toggle:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+}
+
+.theme-toggle .icon-sun {
+  display: none;
+}
+
+.theme-toggle .icon-moon {
+  display: block;
+}
+
+[data-theme="dark"] .theme-toggle .icon-sun {
+  display: block;
+}
+
+[data-theme="dark"] .theme-toggle .icon-moon {
+  display: none;
+}
+
+/* Mobile Menu Button */
+.mobile-menu-btn {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  color: var(--text-secondary);
+  transition: all var(--duration-fast) var(--easing-default);
+}
+
+@media (min-width: 768px) {
+  .mobile-menu-btn {
+    display: none;
+  }
+}
+
+.mobile-menu-btn:hover {
+  background-color: var(--bg-card-hover);
+  color: var(--text-primary);
+}
+
+.mobile-menu-btn:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+}
+
+/* Mobile Menu */
+.mobile-menu {
+  display: none;
+  position: fixed;
+  /* WHY: 72px + inset atas. Nilai ini harus sama persis dengan tinggi
+     .header-inner (72px) ditambah padding-top .header, kalau tidak
+     panel menu akan sedikit menimpa header atau meninggalkan celah. */
+  top: calc(72px + var(--safe-top));
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--bg-secondary);
+  /* WHY: Padding bawah memakai inset supaya link terakhir tidak tertutup
+     garis home indicator saat panel di-scroll ke bawah. */
+  padding: var(--space-6);
+  padding-bottom: calc(var(--space-6) + var(--safe-bottom));
+  /* WHY: z-index harus di atas .header (--z-sticky) kalau menu dibuka:
+     panel dimulai tepat di bawah header, tapi saat halaman di-scroll
+     header tetap sticky dan bisa menimpa panel. */
+  z-index: var(--z-sticky);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.mobile-menu.active {
+  display: block;
+}
+
+.mobile-menu-link {
+  display: block;
+  padding: var(--space-4) 0;
+  font-size: var(--text-lg);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-primary);
+  border-bottom: var(--border-width) var(--border-style) var(--border-secondary);
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+}
+
+.mobile-menu-link:hover {
+  color: var(--text-accent);
+}
+
+.mobile-menu-link:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+}
+
+/* === 7. BUTTONS (Section 1.6) === */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-6);
+  font-weight: var(--font-weight-semibold);
+  border-radius: var(--radius-md);
+  min-height: 44px;  /* Section 1.6: 44x44px touch target */
+  transition: all var(--duration-fast) var(--easing-default);
+  cursor: pointer;
+  border: var(--border-width) var(--border-style) transparent;
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+}
+
+/* Primary Button */
+.btn-primary {
+  background-color: var(--btn-primary-bg);
+  color: var(--btn-primary-text);
+  border-color: var(--btn-primary-border);
+}
+
+.btn-primary:hover {
+  background-color: var(--btn-primary-bg-hover);
+}
+
+/* Secondary Button */
+.btn-secondary {
+  background-color: var(--btn-secondary-bg);
+  color: var(--btn-secondary-text);
+  border-color: var(--btn-secondary-border);
+}
+
+.btn-secondary:hover {
+  background-color: var(--btn-secondary-bg-hover);
+}
+
+/* Ghost Button */
+.btn-ghost {
+  background-color: transparent;
+  color: var(--text-secondary);
+}
+
+.btn-ghost:hover {
+  background-color: var(--bg-card-hover);
+  color: var(--text-primary);
+}
+
+/* Button Sizes */
+.btn-sm {
+  padding: var(--space-2) var(--space-4);
+  font-size: var(--text-sm);
+  min-height: 36px;
+}
+
+.btn-lg {
+  padding: var(--space-4) var(--space-8);
+  font-size: var(--text-lg);
+  min-height: 52px;
+}
+
+/* Button Loading State (Section 1.6) */
+.btn.loading {
+  position: relative;
+  color: transparent;
+  pointer-events: none;
+}
+
+.btn.loading::after {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: var(--radius-full);
+  animation: spin 0.6s linear infinite;
+}
+
+.btn-primary.loading::after {
+  border-color: var(--btn-primary-text);
+  border-right-color: transparent;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* === 8. CARDS (Section 1.4) === */
+.card {
+  background-color: var(--bg-card);
+  border: var(--border-width) var(--border-style) var(--border-primary);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: all var(--duration-normal) var(--easing-default);
+  /* WHY relative: tombol simpan diposisikan absolut di pojok kartu. */
+  position: relative;
+}
+
+/* === 25. SHORTLIST KAPAL === */
+/* WHY tombol simpan ada di luar link kartu: kartu katalog seluruhnya
+   bisa diklik, dan tombol di dalam link akan ikut memicu navigasi
+   ketika ditekan. Tombolnya adalah kontrol, bukan bagian tautan. */
+.save-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  background: none;
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-md);
+  color: var(--text-secondary);
+  cursor: pointer;
+  font: inherit;
+  transition: color var(--duration-fast), border-color var(--duration-fast),
+              background-color var(--duration-fast);
+}
+
+.save-btn:hover {
+  color: var(--color-primary-600);
+  border-color: var(--color-primary-300);
+}
+
+/* WHY keadaan "tersimpan" ditandai isian ikon, bukan hanya warna:
+   warna saja tidak terbaca oleh pengguna buta warna, dan atribut
+   aria-pressed membuat statusnya terdengar oleh pembaca layar. */
+.save-btn.is-saved {
+  color: var(--color-primary-600);
+  border-color: var(--color-primary-300);
+  background: var(--color-primary-50);
+}
+
+.save-btn.is-saved svg {
+  fill: currentColor;
+}
+
+.card-save-btn {
+  position: absolute;
+  top: var(--space-3);
+  right: var(--space-3);
+  z-index: 2;
+  /* 44x44: WCAG 2.5.5 Target Size (Minimum). Tombol 32px terlihat
+     lebih rapi tapi gagal target sentuh di ponsel. */
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  background: var(--bg-card);
+  box-shadow: var(--shadow-sm);
+}
+
+/* WHY offset 18px di kartu katalog: kartu memakai padding 10px, jadi
+   offset bawaan 12px membuat tombol nyaris menempel dengan tepi foto.
+   18px = 10px padding + 8px jarak di dalam foto. */
+.catalog-card .card-save-btn {
+  top: 18px;
+  right: 18px;
+}
+
+.card:hover {
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-primary-200);
+  transform: translateY(-2px);
+}
+
+/* WHY: Card sebagai link utama - judul ikut berubah warna saat hover
+   memberi afordansi klik yang jelas (Section 1.6) */
+.card:hover .card-title a,
+.card:hover .card-title {
+  color: var(--text-accent);
+}
+
+[data-theme="dark"] .card:hover .card-title {
+  color: var(--color-primary-400);
+}
+
+/* WHY: Link di dalam card (Lihat Detail) - panah bergeser saat hover */
+.card-link svg {
+  transition: transform var(--duration-normal) var(--easing-default);
+}
+
+.card-link:hover svg {
+  transform: translateX(3px);
+}
+
+.card-image {
+  width: 100%;
+  /* WHY: token, bukan angka. Semua foto produk di situs ini satu
+     rasio (lihat --ratio-photo), jadi menulis 4 / 3 di sini
+     menjadi sumber kebenaran kedua yang bisa menyimpang. */
+  aspect-ratio: var(--ratio-photo);
+  object-fit: cover;
+  background-color: var(--color-gray-100);
+  background-image: url('../assets/placeholder-vessel.svg');
+  background-size: cover;
+  background-position: center;
+}
+
+.card-body {
+  padding: var(--space-6);
+}
+
+.card-title {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+  margin-bottom: var(--space-2);
+}
+
+/* WHY: Link judul kartu adalah SATU-SATUNYA cara membuka detail kapal
+   dari katalog - kartu itu sendiri bukan tautan. Tanpa padding, area
+   sentuhnya hanya setinggi satu baris teks (~22px), jauh di bawah 44px.
+   Padding-block ditambah margin-block negatif sebesar yang sama
+   memperbesar area sentuh ke 44px TANPA mengubah tinggi baris atau
+   jarak ke harga di bawahnya sama sekali. */
+.card-title a {
+  display: inline-block;
+  padding-block: 11px;
+  margin-block: -11px;
+}
+
+.card-price {
+  font-size: var(--text-xl);
+  font-weight: var(--font-weight-bold);
+  /* WHY: Harga adalah angka panjang ("Rp 38.000.000.000"). Angka
+     tabular + tracking optik lebih rapat supaya tidak melebihi lebar
+     kartu dan tetap rata kiri saat kartu-kartu disejajarkan. */
+  font-variant-numeric: tabular-nums;
+  letter-spacing: var(--tracking-snug);
+  line-height: var(--line-height-title);
+  color: var(--text-accent);
+  margin-bottom: var(--space-2);
+}
+
+.card-location {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  margin-bottom: var(--space-4);
+}
+
+/* --- Kartu katalog: FOTO BESAR di atas, teks ringkas di bawah ---
+   Bentuk ini dipakai di section Katalog Kapal beranda DAN grid
+   katalog.html (keduanya merender markup .catalog-card yang sama).
+   Spesifikasi singkat (GT/DWT/tahun) tidak lagi berupa baris teks di
+   bawah foto: sejak revisi kartu ia tampil sebagai chip overlay DI
+   ATAS foto - lihat .catalog-card-chips / .catalog-card-chip. */
+.catalog-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+}
+
+@media (min-width: 768px) {
+  .catalog-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 1100px) {
+  .catalog-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+.catalog-card {
+  /* WHY relative: acuan positioned bagi stretched link di judul
+     (.catalog-card-title-link::after menutupi seluruh kartu). */
+  position: relative;
+  /* WHY kolom (foto di atas, teks di bawah): foto adalah elemen paling
+     dominan di kartu katalog beranda - target desainnya foto ±65-70%
+     tinggi kartu, teks maksimal sepertiga. */
+  display: flex;
+  flex-direction: column;
+  /* WHY 10px bukan space-3 (12px): foto harus mengisi minimal 65%
+     tinggi kartu - setiap piksel padding vertikal memindahkan proporsi
+     dari foto ke teks (kartu sebaris grid sama tinggi, kartu dengan
+     teks tertinggi menentukan). */
+  padding: 10px;
+  background-color: var(--bg-card);
+  border: var(--border-width) var(--border-style) var(--border-primary);
+  border-radius: var(--radius-lg);
+  transition: border-color var(--duration-normal) var(--easing-default),
+              box-shadow var(--duration-normal) var(--easing-default);
+}
+
+.catalog-card:hover {
+  border-color: var(--color-primary-300);
+  box-shadow: var(--shadow-md);
+}
+
+.catalog-card-media {
+  position: relative;
+  /* WHY 4:3: mayoritas foto kapal di data berukuran landscape
+     (rasio 1,3-1,8). 4:3 memotong paling sedikit dibanding 16:9,
+     dan komposisi kapal tetap utuh. */
+  aspect-ratio: 4 / 3;
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: var(--color-gray-100);
+  background-image: url('../assets/placeholder-vessel.svg');
+  background-size: cover;
+  background-position: center;
+  /* WHY shadow ganda: bayangan lembut membuat foto "pop" dari latar
+     kartu tanpa harus menaikkan border kartu itu sendiri. */
+  box-shadow: var(--shadow-sm);
+}
+
+.catalog-card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.catalog-card-media .catalog-card-badge {
+  /* WHY overlay: badge status (Direservasi/Terjual) menempel di foto,
+     bukan di zona teks, supaya tinggi blok teks di bawah tetap
+     konsisten antar kartu. */
+  position: absolute;
+  top: var(--space-2);
+  left: var(--space-2);
+  z-index: 1;
+  margin-bottom: 0;
+}
+
+.catalog-card-body {
+  min-width: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  /* WHY 10px bukan space-3: setiap piksel padding di sini menggeser
+     foto di bawah porsi 65% tinggi kartu. */
+  padding-top: 10px;
+}
+
+.catalog-card-title {
+  font-size: var(--text-base);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-title);
+  margin-bottom: 2px;
+  /* WHY 1 baris: zona teks dibatasi maksimal sepertiga tinggi kartu
+     (foto 4:3 sudah mengisi ±70%). Nama kapal panjang terpotong;
+     nama lengkap tetap terbaca di halaman detail. */
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.catalog-card-title-link {
+  color: inherit;
+  text-decoration: none;
+  /* WHY padding-block tanpa margin negatif: link ini INLINE, dan
+     padding vertikal pada elemen inline memperbesar area sentuh
+     (getBoundingClientRect ikut menghitungnya) TANPA mengubah tinggi
+     baris judul - zona teks tetap pendek, foto tetap >= 65% kartu.
+     13px x 2 + 18px teks = 44px target sentuh WCAG 2.5.5. Tampang
+     visual dan tinggi kartu tidak berubah sedikit pun. */
+  padding-block: 13px;
+  /* WHY stretched link: satu <a> di dalam judul dibentangkan menutupi
+     seluruh kartu, jadi seluruh kartu klikabel tanpa perlu baris
+     "Lihat Detail" tersendiri yang memakan tinggi zona teks. */
+}
+
+.catalog-card-title-link::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.catalog-card:hover .catalog-card-title-link { color: var(--text-link-hover); }
+
+.catalog-card-price {
+  font-size: var(--text-lg);
+  font-weight: var(--font-weight-bold);
+  font-variant-numeric: tabular-nums;
+  color: var(--text-accent);
+  /* WHY 1.2 bukan line-height global (1.6): harga hanya satu baris
+     angka, dan setiap piksel di sini menggeser foto di bawah porsi
+     65% tinggi kartu (kartu sebaris grid sama tinggi - kartu dengan
+     teks tertinggi menentukan tinggi semuanya). */
+  line-height: 1.2;
+  /* WHY margin pindah ke .catalog-card-price-row: badge lokasi menempel
+     di baris yang sama, jadi jarak ke tepi bawah kartu adalah urusan
+     baris, bukan urusan teks harga saja. */
+  margin-bottom: 0;
+}
+
+/* --- Baris harga + badge lokasi --- */
+/* WHY flex space-between: harga rata kiri, lokasi rata kanan - keduanya
+   muat dalam SATU baris sehingga tinggi zona teks tidak bertambah.
+   Lokasi panjang terpotong dengan ellipsis, bukan menurunkan baris baru. */
+.catalog-card-price-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  min-width: 0;
+  margin-bottom: 6px;
+}
+
+.catalog-card-location {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+  font-size: var(--text-xs);
+  color: var(--text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.catalog-card-location svg {
+  /* WHY flex none: ikon pin tidak boleh ikut menyusut saat nama lokasi
+     panjang - yang menyusut harus teksnya. */
+  flex: none;
+}
+
+/* WHY tidak ada .spec-list: kartu katalog beranda sudah tidak
+   menampilkan spesifikasi singkat (keputusan produk) - kartu murni
+   foto + nama + harga. Perbandingan angka antar kapal ada di halaman
+   detail dan fitur compare catalog.html. */
+
+.catalog-card-badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-semibold);
+  padding: 2px var(--space-2);
+  border-radius: var(--radius-full);
+  /* WHY token 600, bukan 700: palet warning di tema ini hanya punya
+     sampai 600 (50/300/500/600). Menulis 700 akan menghasilkan
+     warna yang diabaikan browser dan teks jadi tak terlihat. */
+  background-color: var(--color-warning-50);
+  color: var(--color-warning-600);
+  margin-bottom: var(--space-2);
+  /* WHY shadow: badge kini overlay di atas foto kartu beranda; tanpa
+     bayangan, badge kuning menyatu dengan foto di bawahnya. */
+  box-shadow: var(--shadow-sm);
+}
+
+.catalog-card-badge.is-sold {
+  background-color: var(--color-danger-50);
+  color: var(--color-danger-600);
+}
+
+/* --- Slide foto (mini carousel) --- */
+/* WHY semua slide absolut: tinggi .catalog-card-media murni ditentukan
+   aspect-ratio 4/3, bukan oleh isi slide - berganti foto tidak pernah
+   menggeser layout (CLS nol). */
+.catalog-card-slide {
+  position: absolute;
+  inset: 0;
+}
+
+.catalog-card-slide[hidden] {
+  display: none;
+}
+
+/* --- Chip spesifikasi singkat: overlay di ATAS FOTO --- */
+/* WHY kembali sebagai chip overlay (bukan zona teks): pembeli membandingkan
+   GT/DWT/tahun sekilas di atas foto, dan overlay tidak menambah tinggi
+   zona teks - foto tetap >= 65% tinggi kartu. */
+.catalog-card-chips {
+  position: absolute;
+  bottom: var(--space-2);
+  left: var(--space-2);
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  /* WHY max-width: chip tidak boleh menabrak thumbnail di pojok kanan
+     atas pada kartu sempit; sisa ruang kanan dibiarkan kosong. */
+  max-width: calc(100% - var(--space-4));
+}
+
+.catalog-card-chip {
+  display: inline-flex;
+  align-items: center;
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-semibold);
+  line-height: 1.4;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  /* WHY warna literal, bukan token: scrim gelap di atas FOTO harus sama
+     di tema terang dan gelap - foto tidak berubah dengan tema. Nilai
+     rgba ini menghasilkan kontras teks putih >= 7:1 di atas foto apa pun
+     setelah alpha blending (diperiksa tools/check-contrast.js). */
+  background-color: rgba(15, 23, 42, 0.78);
+  color: #ffffff;
+  box-shadow: var(--shadow-sm);
+}
+
+/* --- Thumbnail mini carousel: pojok kanan atas foto --- */
+/* WHY pojok kanan atas: pojok kiri atas dipakai badge status, pojok kiri
+   bawah dipakai chip spesifikasi - thumbnail hanya muat di kanan atas,
+   dan tidak menabrak keduanya bahkan di kartu selebar 311px (ponsel). */
+.catalog-card-thumbs {
+  position: absolute;
+  top: var(--space-2);
+  right: var(--space-2);
+  z-index: 2;
+  display: flex;
+  gap: var(--space-1);
+}
+
+.catalog-card-thumb {
+  /* WHY 44px penuh: WCAG 2.5.5 target sentuh; padding visual dikurangi
+     lewat border gambar, bukan dengan mengecilkan tombol. */
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 2px solid rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  background: rgba(15, 23, 42, 0.35);
+  box-shadow: var(--shadow-sm);
+  transition: border-color var(--duration-fast), box-shadow var(--duration-fast);
+}
+
+.catalog-card-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.catalog-card-thumb.is-active {
+  border-color: var(--color-primary-500);
+  box-shadow: var(--shadow-md);
+}
+
+.catalog-card-thumb:focus-visible {
+  outline: 2px solid var(--color-primary-500);
+  outline-offset: 2px;
+}
+
+/* --- Counter posisi slide ("2/3") --- */
+/* WHY pojok kanan bawah: thumbnail menempati kanan atas, chip
+   spesifikasi kiri bawah, badge status kiri atas - hanya kanan bawah
+   yang bebas. Kecil dan tidak menghalangi foto. */
+.catalog-card-slide-count {
+  position: absolute;
+  bottom: var(--space-2);
+  right: var(--space-2);
+  z-index: 2;
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-semibold);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.4;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  /* WHY scrim sama dengan chip spesifikasi: satu keluarga overlay,
+     satu warna, kontras putih >= 7:1 di atas foto apa pun. */
+  background-color: rgba(15, 23, 42, 0.78);
+  color: #ffffff;
+  box-shadow: var(--shadow-sm);
+}
+
+/* --- Toolbar katalog: jumlah hasil + pengurutan --- */
+/* WHY baris sendiri, bukan di dalam .section-header: judul section
+   selalu rata tengah, sedangkan jumlah hasil dan pengurutan butuh
+   rata kanan pada baris yang sama. */
+.catalog-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-bottom: var(--space-6);
+}
+
+.catalog-count {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  /* WHY min-height: teks jumlah hasil berubah isinya saat pengguna
+     menekan "Muat lebih banyak". Tanpa min-height, baris ikut
+     naik-turun dan kartu di bawahnya melompat. */
+  min-height: 1.5em;
+  margin: 0;
+}
+
+.catalog-sort {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.catalog-sort-label {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}
+
+.catalog-sort-select {
+  font-size: var(--text-sm);
+  font-family: inherit;
+  color: var(--text-primary);
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-md);
+  padding: var(--space-2) var(--space-3);
+  /* WHY min-height 44px: target sentuh di ponsel. Select bawaan
+     sering hanya ~32px, di bawah ambang yang bisa ditekan nyaman. */
+  min-height: 44px;
+  cursor: pointer;
+}
+
+.catalog-sort-select:focus-visible {
+  outline: 2px solid var(--color-primary-500);
+  outline-offset: 2px;
+}
+
+/* WHY tombol ditumpuk ke bawah pada layar sempit: "Muat lebih
+   banyak" dan "Lihat Semua" adalah dua aksi yang berbeda, dan
+   ditekan ibu jari bisa salah pilih kalau berdempetan. */
+.catalog-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  margin-top: var(--space-8);
+}
+
+.catalog-empty {
+  text-align: center;
+  color: var(--text-secondary);
+  padding: var(--space-8) 0;
+}
+
+.card-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-link);
+  min-height: 44px;
+}
+
+.card-link:hover {
+  color: var(--text-link-hover);
+  gap: var(--space-3);
+}
+
+.card-link:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* === 9. BADGES === */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-1) var(--space-3);
+  font-size: var(--text-xs);
+  /* WHY: 12px uppercase butuh tracking lebih longgar dari teks
+     normal, kalau tidak hurufnya saling menempel ("TERSEDIA" terbaca
+     "TERSEDI A"). */
+  font-weight: var(--font-weight-semibold);
+  border-radius: var(--radius-full);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  line-height: var(--line-height-tight);
+  font-variant-numeric: tabular-nums;
+}
+
+.badge-primary {
+  background-color: var(--color-primary-100);
+  color: var(--color-primary-700);
+}
+
+[data-theme="dark"] .badge-primary {
+  background-color: var(--color-primary-900);
+  color: var(--color-primary-200);
+}
+
+.badge-success {
+  background-color: var(--color-success-50);
+  color: var(--color-success-600);
+}
+
+[data-theme="dark"] .badge-success {
+  background-color: rgba(22, 163, 74, 0.2);
+  /* WHY success-300, bukan 500: success-500 (#16a34a) di atas hijau 20%
+     cuma 3.1:1 - teks jadi nyaris tidak terlihat. success-300 = 6.4:1. */
+  color: var(--color-success-300);
+}
+
+.badge-warning {
+  background-color: var(--color-warning-50);
+  color: var(--color-warning-600);
+}
+
+[data-theme="dark"] .badge-warning {
+  background-color: rgba(217, 119, 6, 0.2);
+  /* WHY warning-300: warning-500 di atas kuning 20% cuma 3.54:1. */
+  color: var(--color-warning-300);
+}
+
+.badge-danger {
+  background-color: var(--color-danger-50);
+  color: var(--color-danger-600);
+}
+
+[data-theme="dark"] .badge-danger {
+  background-color: rgba(220, 38, 38, 0.2);
+  /* WHY danger-300: danger-500 di atas merah 20% hanya 3.3:1. */
+  color: var(--color-danger-300);
+}
+
+/* WHY: Konsistensi hover badge - micro-feedback saat kursor di atas card */
+.badge {
+  transition: background-color var(--duration-fast) var(--easing-default);
+}
+
+/* === 10. FORMS === */
+.form-group {
+  margin-bottom: var(--space-6);
+}
+
+.form-label {
+  display: block;
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-primary);
+  margin-bottom: var(--space-2);
+}
+
+.form-input,
+.form-select,
+.form-textarea {
+  width: 100%;
+  padding: var(--space-3) var(--space-4);
+  font-size: var(--text-base);
+  color: var(--text-primary);
+  background-color: var(--bg-secondary);
+  border: var(--border-width) var(--border-style) var(--border-primary);
+  border-radius: var(--radius-md);
+  min-height: 44px;  /* Section 1.6 */
+  transition: border-color var(--duration-fast) var(--easing-default),
+              box-shadow var(--duration-fast) var(--easing-default);
+}
+
+.form-input:hover,
+.form-select:hover,
+.form-textarea:hover {
+  border-color: var(--color-gray-300);
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+  outline: none;
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+/* WHY: Keyboard users butuh focus ring yang sama jelasnya dengan
+   mouse users (Section 1.9 - WCAG 2.1 AA) */
+.form-input:focus-visible,
+.form-select:focus-visible,
+.form-textarea:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 1px;
+}
+
+/* WHY: State error untuk validasi form (dipakai js/contact.js) -
+   border merah + aria-invalid yang di-set JS */
+.input-error {
+  border-color: var(--color-danger-500) !important;
+}
+
+.input-error:focus {
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.12);
+}
+
+.form-input[aria-invalid="true"],
+.form-textarea[aria-invalid="true"] {
+  border-color: var(--color-danger-500);
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder {
+  color: var(--text-muted);
+}
+
+.form-textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+/* === 11. HERO SECTION === */
+.hero {
+  padding-top: var(--space-16);
+  padding-bottom: var(--space-16);
+  background-color: var(--bg-primary);
+}
+
+@media (min-width: 768px) {
+  .hero {
+    padding-top: var(--space-24);
+    padding-bottom: var(--space-24);
+  }
+}
+
+.hero-content {
+  max-width: 560px;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  background-color: var(--color-primary-50);
+  color: var(--color-primary-700);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-medium);
+  /* WHY: Eyebrow/overline 14px. Tracking 0.06em + uppercase adalah
+     pola tipografi label profesional; tanpa itu teks kecil ini terlihat
+     seperti kalimat biasa yang di-cap kecil. */
+  letter-spacing: var(--tracking-wider);
+  line-height: var(--line-height-tight);
+  border-radius: var(--radius-full);
+  margin-bottom: var(--space-6);
+}
+
+[data-theme="dark"] .hero-badge {
+  background-color: var(--color-primary-900);
+  color: var(--color-primary-200);
+}
+
+.hero-title {
+  /* WHY: Memakai token --text-4xl (sudah fluid) alih-alih override
+     3rem + media query 3.5rem. Sebelumnya judul meledak dari 48px ke
+     56px tepat di 768px - terasa "melonjak" saat rotasi tablet. */
+  font-size: var(--text-4xl);
+  line-height: var(--line-height-display);
+  letter-spacing: var(--tracking-tighter);
+  text-wrap: balance;
+  margin-bottom: var(--space-6);
+}
+
+.hero-subtitle {
+  font-size: var(--text-lg);
+  color: var(--text-secondary);
+  margin-bottom: var(--space-8);
+  max-width: 480px;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+}
+
+.hero-image {
+  width: 100%;
+  border-radius: var(--radius-lg);
+  /* WHY object-fit: cover, bukan contain: cover + latar biru muda
+     ini ditulis untuk ilustrasi SVG hero yang dipakai lagi sejak
+     5 Oktober 2026 (assets/hero-illustration.svg, viewBox 4:3 persis).
+     Kalau masuk gambar dengan rasio bukan 4:3, cover memotong sedikit
+     tanpa pernah memperlihatkan bidang kosong di tepi - contain akan
+     memperlihatkan letterbox. */
+  object-fit: cover;
+  aspect-ratio: 4 / 3;
+  background-color: var(--color-primary-50);
+}
+
+[data-theme="dark"] .hero-image {
+  background-color: var(--color-gray-800);
+}
+
+/* === 12. FEATURED VESSELS SECTION === */
+.vessels-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+}
+
+@media (min-width: 640px) {
+  .vessels-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .vessels-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* === 13. PROCESS SECTION === */
+.process-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-8);
+}
+
+@media (min-width: 640px) {
+  .process-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .process-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.process-step {
+  text-align: left;
+}
+
+.process-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background-color: var(--color-primary-50);
+  color: var(--text-accent);
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: var(--font-weight-bold);
+  border-radius: var(--radius-full);
+  margin-bottom: var(--space-4);
+}
+
+[data-theme="dark"] .process-number {
+  background-color: var(--color-primary-900);
+  color: var(--color-primary-300);
+}
+
+.process-title {
+  font-size: var(--text-lg);
+  font-weight: var(--font-weight-semibold);
+  margin-bottom: var(--space-2);
+}
+
+.process-desc {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}
+
+/* === 14. CTA SECTION === */
+.cta-section {
+  background-color: var(--color-primary-600);
+  color: var(--text-inverse);
+  text-align: left;
+}
+
+.cta-section h2 {
+  color: var(--text-inverse);
+  margin-bottom: var(--space-4);
+}
+
+.cta-section p {
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: var(--space-8);
+  max-width: 480px;
+}
+
+.cta-section .btn-primary {
+  background-color: #ffffff;
+  color: var(--color-primary-700);
+  border-color: #ffffff;
+}
+
+.cta-section .btn-primary:hover {
+  background-color: var(--color-gray-100);
+}
+
+.cta-section .btn-secondary {
+  border-color: rgba(255, 255, 255, 0.5);
+  color: #ffffff;
+}
+
+.cta-section .btn-secondary:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: #ffffff;
+}
+
+/* === 15. FOOTER === */
+.footer {
+  background-color: var(--color-gray-900);
+  color: var(--text-on-dark);
+  padding-top: var(--space-16);
+  /* WHY: Padding bawah memakai inset supaya link legal footer tidak
+     tertutup garis home indicator di iPhone. */
+  padding-bottom: calc(var(--space-8) + var(--safe-bottom));
+}
+
+[data-theme="dark"] .footer {
+  background-color: var(--color-gray-950, #020617);
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-12);
+  margin-bottom: var(--space-12);
+}
+
+@media (min-width: 640px) {
+  .footer-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .footer-grid {
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+  }
+}
+
+.footer-brand {
+  max-width: 320px;
+}
+
+.footer-brand .logo {
+  color: #ffffff;
+  margin-bottom: var(--space-4);
+}
+
+.footer-brand p {
+  font-size: var(--text-sm);
+  color: var(--color-gray-400);
+  line-height: var(--line-height-relaxed);
+}
+
+.footer-heading {
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-semibold);
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  margin-bottom: var(--space-6);
+}
+
+.footer-link {
+  display: block;
+  font-size: var(--text-sm);
+  color: var(--color-gray-400);
+  padding: var(--space-2) 0;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+}
+
+.footer-link:hover {
+  color: #ffffff;
+}
+
+.footer-link:focus-visible {
+  outline: 2px solid var(--color-primary-500);
+  outline-offset: 2px;
+}
+
+.footer-bottom {
+  padding-top: var(--space-8);
+  border-top: 1px solid var(--color-gray-800);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.footer-copyright {
+  font-size: var(--text-sm);
+  /* WHY --text-on-dark-muted: copyright ada di footer yang BERLATAR
+     GELAP di kedua tema, jadi token teks halaman tidak boleh dipakai.
+     --text-muted bernilai gray-500 di light mode = hanya 3.75:1 di
+     atas gray-900. */
+  color: var(--text-on-dark-muted);
+}
+
+.footer-legal {
+  display: flex;
+  gap: var(--space-6);
+}
+
+/* WHY: Link di footer hanya setinggi ~22px, jauh di bawah target
+   sentuh 44px (WCAG 2.5.5). Padding vertikal memperbesar area
+   sentuh tanpa mengubah jarak antar link secara signifikan. */
+.footer-legal a {
+  padding-block: 11px;
+}
+
+.footer-legal a {
+  font-size: var(--text-sm);
+  color: var(--text-on-dark-muted);
+}
+
+.footer-legal a:hover {
+  color: #ffffff;
+}
+
+/* === 16. SECTION HEADERS === */
+.section-header {
+  margin-bottom: var(--space-12);
+}
+
+.section-header h2 {
+  margin-bottom: var(--space-4);
+}
+
+.section-header p {
+  font-size: var(--text-lg);
+  color: var(--text-secondary);
+  max-width: 560px;
+}
+
+/* === 17. TOAST NOTIFICATIONS (Section 1.13) === */
+.toast-container {
+  position: fixed;
+  /* WHY: Toast menempel di kanan-bawah, jadi dua sisi itu butuh inset
+     agar tidak tertutup tepi melengkung dan garis home indicator. */
+  bottom: calc(var(--space-6) + var(--safe-bottom));
+  right: calc(var(--space-6) + var(--safe-right));
+  z-index: var(--z-toast);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.toast {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-6);
+  background-color: var(--bg-card);
+  border: var(--border-width) var(--border-style) var(--border-primary);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  min-width: 300px;
+  max-width: 400px;
+  animation: slideIn var(--duration-slow) var(--easing-default);
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.toast-success {
+  border-left: 4px solid var(--color-success-500);
+}
+
+.toast-error {
+  border-left: 4px solid var(--color-danger-500);
+}
+
+.toast-info {
+  border-left: 4px solid var(--color-primary-500);
+}
+
+.toast-message {
+  flex: 1;
+  font-size: var(--text-sm);
+  color: var(--text-primary);
+}
+
+.toast-close {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  transition: all var(--duration-fast) var(--easing-default);
+}
+
+.toast-close:hover {
+  background-color: var(--bg-card-hover);
+  color: var(--text-primary);
+}
+
+/* === 18. COOKIE CONSENT (Section 10.3) === */
+.cookie-consent {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: var(--bg-secondary);
+  border-top: var(--border-width) var(--border-style) var(--border-primary);
+  padding: var(--space-6);
+  /* WHY: Banner ini menempel ke dasar layar; tanpa inset bawah,
+     tombolnya jatuh tepat di garis home indicator dan mustahil ditekan. */
+  padding-bottom: calc(var(--space-6) + var(--safe-bottom));
+  z-index: var(--z-modal);
+  display: none;
+}
+
+.cookie-consent.active {
+  display: block;
+}
+
+.cookie-consent-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.cookie-consent-text {
+  flex: 1;
+  min-width: 300px;
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}
+
+.cookie-consent-actions {
+  display: flex;
+  gap: var(--space-3);
+}
+
+/* === 19. UTILITIES === */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.text-center { text-align: center; }
+
+.flex { display: flex; }
+.items-center { align-items: center; }
+.justify-between { justify-content: space-between; }
+
+/* WHY hanya tiga helper utilitas yang tinggal di sini: .text-left,
+   .text-right, .flex-col, .justify-center, .gap-2/4/6/8, dan .mt-4/8 serta
+   .mb-4/8 dihapus - tidak ada satu pun elemen yang memakainya (dicek ke
+   seluruh HTML dan JS). Utilitas yang tidak dipakai tetap ikut terkirim ke
+   setiap pengunjung dan menyamarkan mana yang benar-benar dipakai. */
+
+/* === UTILITAS VISIBILITAS === */
+.hidden { display: none; }
+
+/* WHY: Atribut HTML `hidden` hanya punya stylingsheet UA `display:none`.
+   Begitu sebuah elemen punya `display: flex` / `inline-flex` dari
+   aturan kita sendiri (mis. .badge, wrapper badge kapal), aturan itu
+   MENANG dan `hidden` jadi tidak berfungsi - elemen tetap tampil.
+   Aturan ini memaksa hidden bekerja di element flex/grid tanpa
+   harus menimpa display per-selector. */
+[hidden] { display: none !important; }
+
+/* === 20. RESPONSIVE (Section 7.2) === */
+/* WHY: Semua aturan di bawah ditulis mobile-first (tanpa max-width)
+   kecuali satu blok kecil di paling atas. Pola min-width + max-width
+   (rentang tertutup) adalah bentuk penulisan yang menghasilkan bug
+   breakpoint terbalik di .vessel-thumbnails: nilai hanya berlaku di
+   satu pita, lalu melorot kembali di atas pita itu karena aturan
+   dasarnya menang lagi. Dengan mobile-first, tiap aturan hanya bisa
+   berlaku ke atas dan tidak ada pita tertutup yang bisa terlewat. */
+
+@media (max-width: 480px) {
+  .container {
+    /* WHY: max() menjaga inset notch: di iPhone dengan notch, --safe-left
+       bernilai lebih besar dari --space-4 dan harus menang. */
+    padding-left: max(var(--space-4), var(--safe-left));
+    padding-right: max(var(--space-4), var(--safe-right));
+  }
+
+  /* WHY: Override .hero-title di sini DIHAPUS. Aturan lama ini hanya
+     berlaku di <=480px dan MEMPERKECIL judul tepat di layar kecil -
+     urutan terbalik. `--text-4xl` yang fluid sudah menurunkannya
+     sendiri (36px di 360px viewport), jadi tidak perlu media query. */
+
+  .section {
+    padding-top: var(--space-12);
+    padding-bottom: var(--space-12);
+  }
+}
+
+/* Tablet: 768px ke atas */
+@media (min-width: 768px) {
+  .container {
+    padding-left: max(var(--space-8), var(--safe-left));
+    padding-right: max(var(--space-8), var(--safe-right));
+  }
+}
+
+/* Desktop: 1024px ke atas
+   WHY: Padding container sengaja dikecilkan lagi ke --space-6. Di atas
+   1024px container sudah menyentuh --max-width, jadi ruang kosongnya
+   berada di LUAR container - padding yang besar hanya membuat konten
+   terasa sempit tanpa menambah ruang kosong yang berguna. */
+@media (min-width: 1024px) {
+  .container {
+    padding-left: max(var(--space-6), var(--safe-left));
+    padding-right: max(var(--space-6), var(--safe-right));
+  }
+}
+
+/* === 21. VESSEL DETAIL PAGE === */
+.vessel-detail {
+  padding-top: var(--space-8);
+  padding-bottom: var(--space-16);
+}
+
+.vessel-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+  margin-bottom: var(--space-8);
+}
+
+.vessel-breadcrumb a {
+  color: var(--text-muted);
+  /* WHY: Target sentuh minimal 44px. Breadcrumb pernah setinggi ~22px
+     dan lebarnya cuma 38px ("Home"), padahal ini salah satu cara
+     tercepat kembali ke katalog. Padding ditambah margin negatif
+     sebesar yang sama memperbesar area sentuh tanpa mengubah tinggi
+     baris maupun jarak antar remah roti. */
+  display: inline-block;
+  padding-block: 11px;
+  padding-inline: 4px;
+  margin-block: -11px;
+  margin-inline: -4px;
+}
+
+.vessel-breadcrumb a:hover {
+  color: var(--text-link);
+}
+
+.vessel-breadcrumb-separator {
+  color: var(--text-muted);
+}
+
+/* WHY: <summary> pada daftar semua kapal (ditulis generator di
+   #all-vessels) adalah kontrol sentuh, bukan teks biasa. Tanpa
+   min-height 44px tingginya cuma 42px dan gagal WCAG 2.5.8.
+   Pola yang sama seperti .vessel-breadcrumb a di atas: area sentuh
+   diperbesar tanpa menggeser isi. */
+#all-vessels summary {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  padding-block: var(--space-2);
+}
+
+.vessel-gallery {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+  margin-bottom: var(--space-8);
+}
+
+@media (min-width: 768px) {
+  .vessel-gallery {
+    grid-template-columns: 2fr 1fr;
+  }
+}
+
+/* WHY: Wrapper gambar utama adalah <picture> (bukan <div>) supaya elemen
+   <source type="image/webp"> di dalamnya benar-benar dibaca browser.
+   <picture> secara bawaan display inline; di sini dipaksa block supaya
+   perilakunya sama persis dengan <div> sebelumnya sebagai item grid. */
+.vessel-main-image-wrapper {
+  display: block;
+  line-height: 0;
+}
+
+.vessel-main-image {
+  width: 100%;
+  aspect-ratio: var(--ratio-photo);
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+  background-color: var(--color-gray-100);
+  background-image: url('../assets/placeholder-vessel.svg');
+  background-size: cover;
+  background-position: center;
+}
+
+.vessel-thumbnails {
+  display: grid;
+  /* WHY: 4 kolom di semua ukuran. ATURAN INI tadinya terbalik -
+     query min-width: 768px memaksa 1 kolom di desktop, sehingga
+     galeri 8 thumbnail jadi strip setinggi ~3300px di kolom kanan
+     dan memberi ruang kosong raksasa di kolom kiri. Thumbnails
+     sengaja tetap kecil di mobile karena file-nya varian 150w/300w;
+     2 kolom di mobile akan menaikkan tiap thumbnail jadi ~345px dan
+     memaksa browser upscale gambar buram. */
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-2);
+}
+
+.vessel-thumbnail {
+  width: 100%;
+  /* WHY thumbnail SENGAJA 1:1, tidak ikut --ratio-photo. Empat kolom
+     dalam sidebar sempit: di 4:3 tiap thumbnail akan setinggi ~260px
+     dan galeri 8 foto jadi tinggi 2000px, memaksa scroll panjang di
+     halaman kapal. Kotak 1:1 membuat semua thumbnail sama
+     tinggi tanpa kecuali. */
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: border-color var(--duration-fast) var(--easing-default);
+  background-color: var(--color-gray-100);
+}
+
+.vessel-thumbnail:hover,
+.vessel-thumbnail.active {
+  border-color: var(--color-primary-500);
+}
+
+.vessel-info {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-8);
+}
+
+@media (min-width: 1024px) {
+  .vessel-info {
+    grid-template-columns: 2fr 1fr;
+  }
+}
+
+.vessel-specs {
+  margin-top: var(--space-8);
+}
+
+.vessel-specs table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.vessel-specs th,
+.vessel-specs td {
+  padding: var(--space-3) var(--space-4);
+  text-align: left;
+  border-bottom: var(--border-width) var(--border-style) var(--border-secondary);
+  font-size: var(--text-sm);
+}
+
+.vessel-specs th {
+  font-weight: var(--font-weight-medium);
+  color: var(--text-secondary);
+  width: 40%;
+  /* WHY: Label spesifikasi selalu teks non-angka (Panjang, Beam, DWT)
+     jadi boleh tracking longgar agar label terasa seperti label,
+     bukan seperti isi tabel. */
+  letter-spacing: 0.01em;
+}
+
+.vessel-specs td {
+  color: var(--text-primary);
+  font-weight: var(--font-weight-medium);
+  /* WHY: Kolom nilai berisi angka (95.97 m, 7.500 DWT, 11 kn).
+     Angka tabular membuat kolom lurus vertikal dan mudah dibandingkan
+     antar kapal. */
+  font-variant-numeric: tabular-nums;
+  letter-spacing: var(--tracking-snug);
+}
+
+.vessel-sidebar {
+  position: sticky;
+  top: 96px;
+}
+
+.vessel-sidebar-card {
+  background-color: var(--bg-card);
+  border: var(--border-width) var(--border-style) var(--border-primary);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+}
+
+.vessel-sidebar-price {
+  font-size: var(--text-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-accent);
+  margin-bottom: var(--space-2);
+}
+
+.vessel-sidebar-status {
+  margin-bottom: var(--space-6);
+}
+
+.vessel-sidebar-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+/* === 22. CATALOG PAGE === */
+.catalog-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-8);
+  padding-top: var(--space-8);
+  padding-bottom: var(--space-16);
+}
+
+@media (min-width: 1024px) {
+  .catalog-layout {
+    grid-template-columns: 280px 1fr;
+  }
+}
+
+.catalog-filters {
+  display: none;
+}
+
+/* WHY: Tombol "Filter" hanya relevan di mobile. Di desktop sidebar
+   filter sudah tampil permanen di samping, sehingga tombol ini hanya
+   duplikat. Sebelumnya tombolnya dipaksa tampil lewat style inline
+   display:flex, jadi ikut muncul di desktop. */
+#filter-toggle {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-6);
+}
+
+@media (min-width: 1024px) {
+  .catalog-filters {
+    display: block;
+    position: sticky;
+    top: 96px;
+    align-self: start;
+  }
+
+  #filter-toggle {
+    display: none;
+  }
+}
+
+.catalog-filter-section {
+  margin-bottom: var(--space-6);
+}
+
+.catalog-filter-title {
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+  margin-bottom: var(--space-3);
+}
+
+.catalog-results-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-6);
+}
+
+.catalog-results-count {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}
+
+.catalog-sort {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+/* === 23. INQUIRY FORM === */
+.inquiry-form {
+  background-color: var(--bg-card);
+  border: var(--border-width) var(--border-style) var(--border-primary);
+  border-radius: var(--radius-lg);
+  padding: var(--space-8);
+  margin-top: var(--space-8);
+}
+
+.inquiry-form-title {
+  font-size: var(--text-xl);
+  margin-bottom: var(--space-2);
+}
+
+/* === 23b. ALUR TRANSAKSI KAPAL === */
+/* WHY memakai <details> tertutup secara bawaan: alur lima tahap ini
+   konteks yang membantu menutup POR (purchase order), tapi tidak
+   boleh mendorong form ke bawah layar pada koneksi lambat. Pembeli
+   yang butuh membacanya cukup satu ketukan, dan tidak ada skrip
+   JavaScript yang perlu berjalan untuk itu. */
+.inquiry-subtitle {
+  color: var(--text-secondary);
+  margin-bottom: var(--space-4);
+}
+
+.process-explainer {
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+  margin-bottom: var(--space-6);
+  background: var(--bg-secondary);
+}
+
+.process-explainer-summary {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  font-weight: var(--font-weight-semibold);
+  cursor: pointer;
+}
+
+.process-intro {
+  color: var(--text-secondary);
+  margin-top: var(--space-2);
+  font-size: var(--text-sm);
+}
+
+.process-steps {
+  list-style: none;
+  margin: var(--space-4) 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  counter-reset: none;
+}
+
+/* WHY aturan ini DISEMPIT ke .process-steps: ada dua pola "langkah"
+   di situs ini yang sama-sama memakai kelas .process-step.
+     1. Halaman kapal - pembungkus .process-steps, isinya DUA anak
+        (.process-step-num + .process-step-body). Grid 2rem 1fr
+        tepat: nomor di kolom kiri, isi di kanan.
+     2. Beranda - tanpa .process-steps, isinya TIGA anak
+        (.process-number + .process-title + .process-desc) yang
+        memang diperlakukan sebagai block, bukan grid.
+   Stylesheet ini punya dua blok .process-step dan yang kedua
+   menimpa yang pertama. Dulu aturan grid ini juga berlaku di
+   beranda, dan anak ketiga - .process-desc - jatuh ke kolom 2rem.
+   Akibatnya "Pengalaman bertahun-tahun di industri maritim
+   Indonesia" dirender di kolom selebar 32px menjadi blok setinggi
+   336px dengan teks terpotong jadi "Pen" lalu "gala". Diperbaiki
+   dengan membatasi aturan ini ke pembungkus yang memang memakai
+   markup pola 1. */
+.process-steps .process-step {
+  display: grid;
+  grid-template-columns: 2rem 1fr;
+  gap: var(--space-3);
+  align-items: start;
+}
+
+/* WHY nomor dibuat lewat CSS, bukan angka yang ditulis di HTML:
+   penomoran otomatis ikut aman dari duplikasi dan tidak menambah
+   teks yang perlu diterjemahkan. Markup-nya memakai aria-hidden
+   supaya pembaca layar membacakan kalimatnya saja, bukan
+   "1. 2. 3." di depan setiap judul. */
+.process-step-num {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background: var(--color-primary-100);
+  color: var(--color-primary-700);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-bold);
+  flex-shrink: 0;
+}
+
+.process-step-title {
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-semibold);
+  margin-bottom: var(--space-1);
+}
+
+.process-step-body p {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}
+
+/* === 24. LIGHTBOX === */
+.lightbox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--bg-overlay);
+  z-index: var(--z-modal);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-6);
+  /* WHY: Lightbox menutupi seluruh layar, jadi keempat sisi butuh
+     inset - kontra penutup/panah di kiri & kanan akan berada di
+     area tepi melengkung iPhone. */
+  padding-top: calc(var(--space-6) + var(--safe-top));
+  padding-right: calc(var(--space-6) + var(--safe-right));
+  padding-bottom: calc(var(--space-6) + var(--safe-bottom));
+  padding-left: calc(var(--space-6) + var(--safe-left));
+}
+
+.lightbox.active {
+  display: flex;
+}
+
+.lightbox-image {
+  max-width: 90vw;
+  max-height: 90vh;
+  object-fit: contain;
+  border-radius: var(--radius-md);
+}
+
+/* --- Zoom pada lightbox (pinch + double-tap) --- */
+/* WHY: Wrapper terpisah supaya transform tidak menimpa animasi
+   image-enter di .lightbox-image, dan punya area hit-test sendiri. */
+.lightbox-zoom-stage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  touch-action: none; /* WHY: cegah browser zoom halaman saat pinch gambar */
+  cursor: zoom-in;
+}
+
+.lightbox-zoom-stage.is-zoomed {
+  cursor: grab;
+}
+
+.lightbox-zoom-stage.is-dragging {
+  cursor: grabbing;
+}
+
+/* WHY: Batas zoom 4x; transform hanya, tanpa layout re-flow. */
+.lightbox-image.is-zoomable {
+  transform-origin: center center;
+  transition: transform var(--duration-fast) var(--easing-default);
+  will-change: transform;
+}
+
+/* WHY: saat sedang gesture (pinch/pan) matikan transition agar tidak
+   "mengejar" jari dan terasa laggy. */
+.lightbox-image.is-gesturing {
+  transition: none;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: var(--space-6);
+  right: var(--space-6);
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #ffffff;
+  border-radius: var(--radius-full);
+  transition: background-color var(--duration-fast) var(--easing-default);
+}
+
+.lightbox-close:hover {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.lightbox-close:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
+}
+
+/* === 25. WHATSAPP BUTTON === */
+/* WHY: Gaya outline, bukan solid. Hijau solid #25d366 terlalu dominan dan
+   mengalahkan CTA primer biru. Sebagai secondary CTA, WhatsApp cukup tampil
+   sebagai outline hijau dengan ikon - tetap dikenali tapi tidak berebut
+   perhatian dengan tombol primer. */
+.whatsapp-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-6);
+  background-color: transparent;
+  color: #0b3d2c;
+  border: 2px solid #25d366;
+  font-weight: var(--font-weight-semibold);
+  border-radius: var(--radius-md);
+  min-height: 44px;
+  transition: background-color var(--duration-fast) var(--easing-default);
+}
+
+/* WHY: Di hover latar jadi hijau muda, teks tetap hijau tua. */
+.whatsapp-btn:hover {
+  background-color: #dcfce7;
+  color: #0b3d2c;
+}
+
+.whatsapp-btn:focus-visible {
+  outline: 2px solid #0b3d2c;
+  outline-offset: 2px;
+}
+
+.whatsapp-btn svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* === 26. LOADING SKELETON === */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--color-gray-200) 25%,
+    var(--color-gray-100) 50%,
+    var(--color-gray-200) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: var(--radius-md);
+}
+
+[data-theme="dark"] .skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--color-gray-700) 25%,
+    var(--color-gray-600) 50%,
+    var(--color-gray-700) 75%
+  );
+  background-size: 200% 100%;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* === 27. FILTER DRAWER (Mobile) === */
+.filter-drawer {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: var(--z-modal);
+}
+
+.filter-drawer.active {
+  display: block;
+}
+
+.filter-drawer-backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--bg-overlay);
+  animation: fadeIn var(--duration-normal) var(--easing-default);
+}
+
+.filter-drawer-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  max-height: 85vh;
+  background-color: var(--bg-secondary);
+  border-top-left-radius: var(--radius-xl);
+  border-top-right-radius: var(--radius-xl);
+  padding: var(--space-6);
+  /* WHY: Drawer menempel ke dasar layar - tombol "Terapkan filter"
+     di ujungnya akan tertutup garis home indicator tanpa ini. */
+  padding-bottom: calc(var(--space-6) + var(--safe-bottom));
+  overflow-y: auto;
+  animation: slideUp var(--duration-slow) var(--easing-default);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+/* === 28. PAGINATION === */
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  margin-top: var(--space-8);
+}
+
+.pagination-btn {
+  min-width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-secondary);
+  background-color: var(--bg-card);
+  border: var(--border-width) var(--border-style) var(--border-primary);
+  border-radius: var(--radius-md);
+  transition: all var(--duration-fast) var(--easing-default);
+}
+
+.pagination-btn:hover {
+  background-color: var(--bg-card-hover);
+  color: var(--text-primary);
+}
+
+.pagination-btn.active {
+  background-color: var(--color-primary-600);
+  color: #ffffff;
+  border-color: var(--color-primary-600);
+}
+
+.pagination-btn:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+}
+
+.pagination-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* === 29. FINAL POLISH === */
+
+/* WHY: Pesan error inline (js/contact.js mengisi via .textContent)
+   - tampil sebagai teks kecil merah di bawah field, bukan sr-only
+   saja, agar user sighted juga melihat apa yang salah */
+.field-error-text {
+  display: block;
+  margin-top: var(--space-2);
+  font-size: var(--text-xs);
+  color: var(--color-danger-600);
+}
+
+[data-theme="dark"] .field-error-text {
+  color: var(--color-danger-500);
+}
+
+/* WHY: Smooth theme switch - transisi warna saat toggle dark/light,
+   bukan lompatan kasar. Dimatikan saat reduced-motion. */
+body,
+.card,
+.header,
+.footer,
+.form-input,
+.form-select,
+.form-textarea {
+  transition-property: background-color, border-color, color;
+  transition-duration: var(--duration-normal);
+  transition-timing-function: var(--easing-default);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body,
+  .card,
+  .header,
+  .footer,
+  .form-input,
+  .form-select,
+  .form-textarea {
+    transition: none;
+  }
+
+  .card:hover {
+    transform: none;
+  }
+}
+
+/* WHY: Selection color konsisten dengan brand - detail yang terlihat
+   saat user menyeleksi teks */
+::selection {
+  background-color: var(--color-primary-200);
+  color: var(--color-primary-900);
+}
+
+[data-theme="dark"] ::selection {
+  background-color: var(--color-primary-700);
+  color: var(--color-primary-50);
+}
+
+/* WHY: Scrollbar halus (WebKit) - konsisten dengan tema */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-gray-300);
+  border-radius: var(--radius-full);
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb {
+  background: var(--color-gray-600);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-gray-400);
+}
+
+/* ============================================================
+   ANIMATION LAYER (overhaul)
+   Semua animasi hormat prefers-reduced-motion (rule global di
+   atas file menonaktifkannya otomatis). Fill-mode "backwards"
+   dipilih agar hover transform tidak tertahan fill animation.
+   ============================================================ */
+
+/* --- Keyframes --- */
+@keyframes kapalpro-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes kapalpro-fade-in-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes kapalpro-fade-in-left {
+  from { opacity: 0; transform: translateX(-32px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes kapalpro-fade-in-right {
+  from { opacity: 0; transform: translateX(32px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes kapalpro-zoom-in {
+  from { opacity: 0; transform: scale(0.94); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes kapalpro-ripple {
+  to { transform: scale(4); opacity: 0; }
+}
+@keyframes kapalpro-float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-10px); }
+}
+@keyframes kapalpro-status-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.35); }
+  50%      { box-shadow: 0 0 0 5px rgba(22, 163, 74, 0); }
+}
+@keyframes kapalpro-toast-in {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes kapalpro-cookie-in {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* --- Scroll reveal ---
+   WHY gate di .is-revealed: tanpa JS, konten tampil normal;
+   animasi hanya jalan setelah IntersectionObserver mengabari. */
+.reveal-pending { opacity: 0; }
+
+.is-revealed[data-animate] {
+  animation: kapalpro-fade-in-up 0.55s var(--easing-default) backwards;
+  animation-delay: var(--animate-delay, 0ms);
+}
+.is-revealed[data-animate="fade"]  { animation-name: kapalpro-fade-in; }
+.is-revealed[data-animate="left"]  { animation-name: kapalpro-fade-in-left; }
+.is-revealed[data-animate="right"] { animation-name: kapalpro-fade-in-right; }
+.is-revealed[data-animate="zoom"]  { animation-name: kapalpro-zoom-in; }
+
+/* --- Ripple klik --- */
+.btn,
+.pagination-btn {
+  position: relative;
+  overflow: hidden;
+}
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.45);
+  transform: scale(0);
+  pointer-events: none;
+  animation: kapalpro-ripple 0.6s ease-out forwards;
+}
+
+/* --- Header terangkat saat scroll --- */
+.header {
+  transition: box-shadow var(--duration-normal) var(--easing-default);
+}
+.header.is-scrolled {
+  box-shadow: var(--shadow-sm);
+}
+
+/* --- Hero entrance (berurutan: badge -> judul -> sub -> aksi) --- */
+.hero-badge    { animation: kapalpro-fade-in 0.5s var(--easing-default) backwards; }
+.hero-title    { animation: kapalpro-fade-in-up 0.6s var(--easing-default) backwards 80ms; }
+.hero-subtitle { animation: kapalpro-fade-in-up 0.6s var(--easing-default) backwards 160ms; }
+.hero-actions  { animation: kapalpro-fade-in-up 0.6s var(--easing-default) backwards 240ms; }
+.hero-image-wrapper {
+  animation: kapalpro-fade-in-right 0.7s var(--easing-default) backwards 150ms;
+}
+.hero-image {
+  animation: kapalpro-float 6s ease-in-out 1.2s infinite;
+}
+
+/* --- Hover upgrade: card lift + image zoom --- */
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+}
+.card .card-image {
+  transition: transform 0.45s var(--easing-default);
+}
+.card:hover .card-image {
+  transform: scale(1.05);
+}
+
+/* --- Hover upgrade: nav underline slide --- */
+.nav-link {
+  position: relative;
+}
+.nav-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -4px;
+  height: 2px;
+  background: var(--color-primary-600);
+  border-radius: var(--radius-full);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform var(--duration-normal) var(--easing-default);
+}
+.nav-link:hover::after,
+.nav-link.active::after {
+  transform: scaleX(1);
+}
+
+/* --- Hover upgrade: process number pop --- */
+.process-number {
+  transition: transform var(--duration-normal) var(--easing-default);
+}
+.process-step:hover .process-number {
+  transform: scale(1.12) rotate(-4deg);
+}
+
+/* --- Hover upgrade: gallery thumbnail lift --- */
+.vessel-thumbnail {
+  transition: transform var(--duration-fast) var(--easing-default),
+              box-shadow var(--duration-fast) var(--easing-default);
+}
+.vessel-thumbnail:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+/* --- Gallery: main image fade saat ganti thumbnail --- */
+#vessel-main-image.image-enter {
+  animation: kapalpro-fade-in 0.3s var(--easing-default);
+}
+
+/* --- Active press (umpan balik tombol ditekan) --- */
+.btn:active,
+.pagination-btn:active {
+  transform: translateY(1px) scale(0.98);
+}
+
+/* --- Badge status tersedia: pulse tipis --- */
+.badge-success {
+  animation: kapalpro-status-pulse 2.5s ease-in-out infinite;
+}
+
+/* --- Mobile menu: masuk halus + link ber-stagger --- */
+.mobile-menu.active {
+  animation: kapalpro-fade-in 0.25s var(--easing-default);
+}
+.mobile-menu.active .mobile-menu-link {
+  animation: kapalpro-fade-in-left 0.35s var(--easing-default) backwards;
+}
+.mobile-menu.active .mobile-menu-link:nth-child(2) { animation-delay: 40ms; }
+.mobile-menu.active .mobile-menu-link:nth-child(3) { animation-delay: 100ms; }
+.mobile-menu.active .mobile-menu-link:nth-child(4) { animation-delay: 160ms; }
+.mobile-menu.active .mobile-menu-link:nth-child(5) { animation-delay: 220ms; }
+/* WHY: pengaman jika menu punya link ke-6+ (anak ke-1 adalah .mobile-search) */
+.mobile-menu.active .mobile-menu-link:nth-child(n+6) { animation: none; }
+
+/* --- Lightbox: fade + zoom halus --- */
+.lightbox {
+  opacity: 0;
+  transition: opacity var(--duration-normal) var(--easing-default);
+}
+.lightbox.active {
+  opacity: 1;
+}
+.lightbox-image {
+  animation: kapalpro-zoom-in 0.3s var(--easing-default);
+}
+.lightbox-close {
+  transition: transform var(--duration-fast) var(--easing-default);
+}
+.lightbox-close:hover {
+  transform: rotate(90deg);
+}
+
+/* --- Toast & cookie banner masuk halus --- */
+.toast {
+  animation: kapalpro-toast-in 0.35s var(--easing-default);
+}
+.cookie-consent.active {
+  animation: kapalpro-cookie-in 0.4s var(--easing-default);
+}
+
+/* --- Smooth scroll --- */
+html {
+  scroll-behavior: smooth;
+}
+
+/* --- Lightbox slider (prev/next/counter) --- */
+.lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  cursor: pointer;
+  z-index: 2;
+  transition: background-color var(--duration-fast) var(--easing-default),
+              transform var(--duration-fast) var(--easing-default);
+}
+.lightbox-nav:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateY(-50%) scale(1.08);
+}
+.lightbox-nav:active {
+  transform: translateY(-50%) scale(0.95);
+}
+.lightbox-nav:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
+}
+.lightbox-prev { left: var(--space-4); }
+.lightbox-next { right: var(--space-4); }
+
+.lightbox-counter {
+  position: absolute;
+  bottom: var(--space-5);
+  left: 50%;
+  transform: translateX(-50%);
+  padding: var(--space-1) var(--space-4);
+  border-radius: var(--radius-full);
+  background: rgba(0, 0, 0, 0.55);
+  color: #ffffff;
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: 0.05em;
+  z-index: 2;
+  pointer-events: none;
+}
+
+@media (max-width: 640px) {
+  /* WHY: Tombol ini tetap 44x44, bukan diperkecil jadi 40x40 seperti
+     sebelumnya. Aturan lama justru MEMPERKECIL target sentuh tepat di
+     layar kecil - kelas bug yang sama dengan galeri vessel: layar
+     sempit justru mendapat kontrol yang lebih sulit ditekan. Layar
+     kecil justru paling butuh target sentuh besar, karena satu-satunya
+     cara menunjukannya adalah jempol. Yang dikecilkan hanya jarak dari
+     tepi, supaya tombol tidak menabrak notch (lihat --safe-*). */
+  .lightbox-prev { left: var(--space-2); }
+  .lightbox-next { right: var(--space-2); }
+  .lightbox-counter { bottom: var(--space-3); }
+}
+
+/* ============================================================
+   30. TABEL BANDINGAN KAPAL (COMPARE DRAWER)
+   ============================================================ */
+/* WHY: Shortlist tanpa cara melihat kapal-kapalnya berdampingan
+   hampir tidak berguna. Buyer membandingkan angka, bukan nama.
+   Batas 3 kolom karena lebih dari itu membuat tabel horizontal
+   tidak terbaca di layar ponsel tanpa disengaja. */
+.compare-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 40;
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  padding-bottom: calc(var(--space-3) + var(--safe-bottom));
+  background: var(--bg-card);
+  border-top: 1px solid var(--border-primary);
+  box-shadow: 0 -4px 16px rgba(15, 23, 42, 0.12);
+}
+.compare-bar.is-visible { display: flex; }
+
+.compare-bar-text {
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-primary);
+}
+
+.compare-drawer {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: none;
+}
+.compare-drawer.is-open { display: block; }
+.compare-drawer-backdrop {
+  position: absolute;
+  inset: 0;
+  background: var(--bg-overlay);
+}
+
+.compare-panel {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  max-height: 88vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-card);
+  border-top-left-radius: var(--radius-lg, 12px);
+  border-top-right-radius: var(--radius-lg, 12px);
+  padding-bottom: var(--safe-bottom);
+}
+
+.compare-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  border-bottom: 1px solid var(--border-primary);
+}
+.compare-head h2 {
+  font-size: var(--text-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+  margin: 0;
+}
+.compare-head p {
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+  margin: var(--space-1) 0 0;
+}
+
+.compare-body {
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: var(--space-4);
+}
+
+.compare-empty {
+  padding: var(--space-8) var(--space-4);
+  text-align: center;
+  color: var(--text-muted);
+  font-size: var(--text-sm);
+}
+
+.compare-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--text-sm);
+  /* WHY 400px dan bukan 520px: dua kapal harus muat di 390px tanpa
+     menggulir horizontal. Label baris dipangkas ke 34 persen supaya
+     kolom kapal dapat sisa lebar yang cukup. */
+  min-width: 400px;
+}
+.compare-table th,
+.compare-table td {
+  padding: var(--space-2) var(--space-3);
+  border-bottom: 1px solid var(--border-secondary);
+  text-align: left;
+  vertical-align: top;
+}
+.compare-table thead th {
+  position: sticky;
+  top: 0;
+  background: var(--bg-card);
+  border-bottom: 2px solid var(--border-primary);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+}
+.compare-table tbody th {
+  color: var(--text-muted);
+  font-weight: var(--font-weight-medium);
+  white-space: nowrap;
+  width: 34%;
+}
+.compare-table td {
+  color: var(--text-primary);
+}
+.compare-table td.is-best {
+  background: var(--color-success-50);
+  font-weight: var(--font-weight-semibold);
+}
+[data-theme="dark"] .compare-table td.is-best {
+  background: var(--color-accent-700);
+}
+
+.compare-best-tag {
+  display: inline-block;
+  margin-left: var(--space-2);
+  font-size: var(--text-xs);
+  color: var(--color-success-600);
+}
+[data-theme="dark"] .compare-best-tag {
+  color: var(--color-success-500);
+}
+
+.compare-foot {
+  display: flex;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  border-top: 1px solid var(--border-primary);
+}
+.compare-foot .btn { flex: 1; }
+
+/* WHY: nama kapal dan harga rupiah panjang. Di 390px lebar min
+   400px membuat tabel melebar dan memaksa gulir horizontal, yang
+   persis yang harus dihindari pada tabel perbandingan. Pada layar
+   sempit min-width dinolkan, padding dikecilkan, dan label baris
+   dipangkas lagi - dua kapal masih terbaca, dan tidak ada yang
+   terpotong tanpa sadar. */
+.compare-table thead th { word-break: break-word; }
+
+@media (max-width: 480px) {
+  .compare-table {
+    min-width: 0;
+    font-size: 11px;
+  }
+  .compare-table th,
+  .compare-table td { padding: var(--space-1) var(--space-2); }
+  .compare-table tbody th { width: 30%; }
+  .compare-best-tag { display: block; margin-left: 0; }
+}
+
+/* WHY: tombol tutup harus 44x44 - di drawer sempit ini satu-satunya
+   kontrol yang selalu terjangkau ibu jari. */
+.compare-close {
+  width: 44px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: var(--radius-full);
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.compare-close:hover { background: var(--bg-card-hover); }
+
+/* ============================================================
+   31. DOKUMEN DAN KLASIFIKASI
+   ============================================================ */
+.docs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--space-3);
+}
+.docs-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-secondary);
+  border-radius: var(--radius-md, 8px);
+}
+.docs-item-body { min-width: 0; }
+.docs-item-name {
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-primary);
+}
+.docs-item-note {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  margin-top: var(--space-1);
+}
+.docs-disclaimer {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  margin-top: var(--space-3);
+  padding-left: var(--space-3);
+  border-left: 3px solid var(--border-primary);
+}
+
+/* ============================================================
+   32. BATAS AKSI BAWAH (STICKY CTA MOBILE)
+   ============================================================ */
+/* WHY: Di ponsel form penawaran berada jauh di bawah lipatan, dan
+   itu adalah satu-satunya jalur konversi situs ini. Bilah tetap
+   di bawah membuat WhatsApp selalu satu ketukan dari mana pun.
+   Hanya ditampilkan di bawah 768px: di desktop pengguna desktop tidak butuh
+   tombol sebesar itu dan ia hanya menutupi footer. */
+.sticky-cta {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 45;
+  display: none;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  padding-bottom: calc(var(--space-2) + var(--safe-bottom));
+  background: var(--bg-card);
+  border-top: 1px solid var(--border-primary);
+  box-shadow: 0 -4px 16px rgba(15, 23, 42, 0.12);
+}
+.sticky-cta .btn {
+  flex: 1;
+  min-height: 44px;
+  /* WHY: label penuh "Ajukan Penawaran" tidak muat di tiga kolom
+     390px. min-width:0 + ellipsis mencegah teks meluber dan
+     membuat lebar tombol tidak ikut membesar. */
+  min-width: 0;
+  justify-content: center;
+  padding-left: var(--space-2);
+  padding-right: var(--space-2);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.sticky-cta .sticky-cta-icon { flex-shrink: 0; }
+
+@media (max-width: 767px) {
+  .sticky-cta { display: flex; }
+  /* WHY: ruang bawah sebesar bilah supaya footer tidak tertutup
+     klik terakhir. Tanpa ini tombol "ke atas" dan footer jadi
+     tidak bisa ditekan. */
+  body.has-sticky-cta { padding-bottom: 72px; }
+}
+
+/* ============================================================
+   33. SPESIFIKASI CETAK (PRINT)
+   ============================================================ */
+/* WHY: Setiap shipbroker menyerahkan spec sheet cetak kepada
+   surveyor, asuransi, atau bank. Tanpa aturan print, hasil
+   cetak KapalPro memuat navigasi, form, dan tombol yang tidak
+   berguna, serta membuang kertas untuk hal yang bukan informasi
+   kapal. Aturan ini mengubah halaman kapal menjadi dokumen
+   satu-dua halaman yang bisa langsung dikirim. */
+@media print {
+  /* Sembunyikan navigasi dan kontrol.
+
+     WHY .header dan .footer, bukan .site-header/.site-footer: itu
+     nama yang saya kira ada di HTML. Kelas sebenarnya di vessel.html
+     dan catalog.html adalah .header, .footer, dan .nav, jadi versi
+     pertama aturan ini tidak menyembunyikan apa pun dan spec sheet
+     tercetak lengkap dengan navigasi. Nama kelas di sini selalu
+     dicek ke HTML sebelum ditulis. */
+  .header,
+  .footer,
+  .nav,
+  .mobile-menu,
+  .filter-drawer,
+  .filter-drawer-backdrop,
+  .sticky-cta,
+  .compare-bar,
+  .compare-drawer,
+  .lightbox,
+  .cookie-consent,
+  .theme-toggle,
+  .inquiry-form,
+  .process-explainer,
+  .vessel-sidebar-actions,
+  .vessel-thumbnails,
+  .vessel-breadcrumb,
+  .save-btn,
+  .whatsapp-btn,
+  .btn {
+    display: none !important;
+  }
+
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+    padding-bottom: 0 !important;
+  }
+
+  /* Paksa warna cetak supaya latar abu-abu dan garis tabel tetap
+     terlihat pada printer laser yang hanya mencetak abu-abu. */
+  * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .container {
+    max-width: none;
+    padding: 0;
+  }
+
+  main { padding: 0 !important; }
+
+  /* WHY sidebar TIDAK disembunyikan: kartu harga, status, dan
+     spesifikasi singkat adalah tiga informasi yang paling dicari di
+     spec sheet. Yang disembunyikan hanya tombolnya
+     (.vessel-sidebar-actions), supaya kertas tidak terbuang untuk
+     tombol WhatsApp dan telepon.
+
+     WHY tabel dan kartu tidak boleh terpotong: satu kapal harus
+     terbaca sebagai satu unit. */
+  .vessel-sidebar-card,
+  .docs-item,
+  #vessel-specs-table tr,
+  .docs-grid {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  #vessel-specs-table { font-size: 10pt; width: 100%; }
+  #vessel-specs-table th,
+  #vessel-specs-table td { padding: 4pt 6pt; }
+
+  a[href^="http"]::after {
+    /* WHY: cetak URL supaya spec sheet yang keluar dari printer
+       masih bisa ditelusuri kembali ke listing aslinya. */
+    content: " (" attr(href) ")";
+    font-size: 8pt;
+    color: #555555;
+    word-break: break-all;
+  }
+
+  @page {
+    margin: 14mm;
+  }
+}
+
+/* ============================================================
+   34. FAQ KAPAL
+   ============================================================ */
+/* WHY memakai <details> dan bukan accordion JavaScript: blok ini
+   masuk ke 15 halaman statis, dan <details> bekerja tanpa
+   JavaScript, bisa dicetak, serta isinya tetap terbaca crawler -
+   persis seperti blok alur transaksi. */
+.vessel-faq {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+.vessel-faq-item {
+  border: 1px solid var(--border-secondary);
+  border-radius: var(--radius-md, 8px);
+  background: var(--bg-card);
+}
+
+/* WHY min-height 44px: summary adalah satu-satunya target sentuh
+   untuk membuka FAQ, dan ukurannya sama persis dengan target
+   minimum WCAG 2.5.5. */
+.vessel-faq-q {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  padding: var(--space-3) var(--space-4);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-primary);
+  cursor: pointer;
+  list-style: none;
+}
+.vessel-faq-q::-webkit-details-marker { display: none; }
+
+/* WHY panah sebagai ::after, bukan ikon di dalam <summary>:
+   teks pertanyaan dan jawaban harus tetap terbaca mode no-JS, dan
+   panah dekoratif tidak boleh masuk ke accessibility tree. */
+.vessel-faq-q::after {
+  content: '';
+  margin-left: auto;
+  padding-left: var(--space-3);
+  flex-shrink: 0;
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg);
+  transition: transform var(--transition-fast, 150ms) ease;
+}
+.vessel-faq-item[open] .vessel-faq-q::after {
+  transform: rotate(-135deg);
+}
+
+.vessel-faq-a {
+  padding: 0 var(--space-4) var(--space-4);
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  max-width: var(--measure-prose);
+}
+
+@media print {
+  .vessel-faq-q { min-height: 0; }
+  .vessel-faq-q::after { display: none; }
+}
+
+/* === LINK-MORE: teks link untuk aksi sekunder === */
+/* WHY: "Lihat Semua" tidak perlu tampil sebagai tombol sejajar dengan
+   "Muat lebih banyak". Sebagai link teks dengan panah, hierarkinya jelas:
+   tombol untuk aksi utama, link untuk navigasi. */
+.link-more {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  color: var(--primary);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--text-base);
+  text-decoration: none;
+  padding: var(--space-3) var(--space-2);
+  min-height: 44px;
+}
+.link-more:hover {
+  text-decoration: underline;
+}
+
+/* === CATALOG: 2 kolom, bukan 3 === */
+/* WHY: #vessels-grid hanya ada di catalog.html (ID unik), jadi override
+   ini tidak menyentuh grid 3 kolom di homepage dan halaman kapal. */
+@media (min-width: 1024px) {
+  #vessels-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
