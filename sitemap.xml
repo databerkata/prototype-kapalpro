@@ -10,802 +10,808 @@
 
   <!-- Static pages -->
   <url>
-    <loc>https://databerkata.github.io/prototype-kapalpro/</loc>
-    <lastmod>2026-10-13</lastmod>
+    <loc>https://kapalpro.web.id/</loc>
+    <lastmod>2026-10-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
 
   <url>
-    <loc>https://databerkata.github.io/prototype-kapalpro/catalog.html</loc>
-    <lastmod>2026-10-13</lastmod>
+    <loc>https://kapalpro.web.id/catalog.html</loc>
+    <lastmod>2026-10-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
-    <loc>https://databerkata.github.io/prototype-kapalpro/contact.html</loc>
-    <lastmod>2026-10-13</lastmod>
+    <loc>https://kapalpro.web.id/contact.html</loc>
+    <lastmod>2026-10-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://databerkata.github.io/prototype-kapalpro/about.html</loc>
-    <lastmod>2026-10-13</lastmod>
+    <loc>https://kapalpro.web.id/about.html</loc>
+    <lastmod>2026-10-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
-    <loc>https://databerkata.github.io/prototype-kapalpro/tongkang.html</loc>
-    <lastmod>2026-10-13</lastmod>
+    <loc>https://kapalpro.web.id/tongkang.html</loc>
+    <lastmod>2026-10-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://databerkata.github.io/prototype-kapalpro/tugboat.html</loc>
-    <lastmod>2026-10-13</lastmod>
+    <loc>https://kapalpro.web.id/tugboat.html</loc>
+    <lastmod>2026-10-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://databerkata.github.io/prototype-kapalpro/panduan-membeli-tongkang.html</loc>
-    <lastmod>2026-10-13</lastmod>
+    <loc>https://kapalpro.web.id/panduan-membeli-tongkang.html</loc>
+    <lastmod>2026-10-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://databerkata.github.io/prototype-kapalpro/panduan-dokumen-kapal.html</loc>
-    <lastmod>2026-10-13</lastmod>
+    <loc>https://kapalpro.web.id/indeks-harga.html</loc>
+    <lastmod>2026-10-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://kapalpro.web.id/panduan-dokumen-kapal.html</loc>
+    <lastmod>2026-10-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://databerkata.github.io/prototype-kapalpro/privacy.html</loc>
-    <lastmod>2026-10-11</lastmod>
+    <loc>https://kapalpro.web.id/privacy.html</loc>
+    <lastmod>2026-10-14</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
 
   <url>
-    <loc>https://databerkata.github.io/prototype-kapalpro/accessibility.html</loc>
-    <lastmod>2026-10-11</lastmod>
+    <loc>https://kapalpro.web.id/accessibility.html</loc>
+    <lastmod>2026-10-14</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
 
   <!-- Vessel detail pages (one per record in data/vessels.json) -->
   <url>
-    <loc>https://databerkata.github.io/prototype-kapalpro/vessel-FCB001.html</loc>
-    <lastmod>2026-10-13</lastmod>
+    <loc>https://kapalpro.web.id/vessel-FCB001.html</loc>
+    <lastmod>2026-10-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/FCB001/main.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/FCB001/main.jpg</image:loc>
       <image:title>Floating Crane Barge 20M</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/FCB001/gallery-1.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/FCB001/gallery-1.jpg</image:loc>
       <image:title>Floating Crane Barge 20M</image:title>
     </image:image>
   </url>
 
   <url>
-    <loc>https://databerkata.github.io/prototype-kapalpro/vessel-FCB002.html</loc>
-    <lastmod>2026-10-13</lastmod>
+    <loc>https://kapalpro.web.id/vessel-FCB002.html</loc>
+    <lastmod>2026-10-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/FCB002/main.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/FCB002/main.jpg</image:loc>
       <image:title>Floating Crane Barge 75M 2013</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/FCB002/gallery-1.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/FCB002/gallery-1.jpg</image:loc>
       <image:title>Floating Crane Barge 75M 2013</image:title>
     </image:image>
   </url>
 
   <url>
-    <loc>https://databerkata.github.io/prototype-kapalpro/vessel-FCB003.html</loc>
-    <lastmod>2026-10-13</lastmod>
+    <loc>https://kapalpro.web.id/vessel-FCB003.html</loc>
+    <lastmod>2026-10-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/FCB003/main.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/FCB003/main.jpg</image:loc>
       <image:title>Floating Crane Barge 75M 2014</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/FCB003/gallery-1.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/FCB003/gallery-1.jpg</image:loc>
       <image:title>Floating Crane Barge 75M 2014</image:title>
     </image:image>
   </url>
 
   <url>
-    <loc>https://databerkata.github.io/prototype-kapalpro/vessel-LCT002.html</loc>
-    <lastmod>2026-10-13</lastmod>
+    <loc>https://kapalpro.web.id/vessel-LCT002.html</loc>
+    <lastmod>2026-10-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/LCT002/main.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/LCT002/main.jpg</image:loc>
       <image:title>LCT 250 DWT</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/LCT002/gallery-1.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/LCT002/gallery-1.jpg</image:loc>
       <image:title>LCT 250 DWT</image:title>
     </image:image>
   </url>
 
   <url>
-    <loc>https://databerkata.github.io/prototype-kapalpro/vessel-TB002.html</loc>
-    <lastmod>2026-10-13</lastmod>
+    <loc>https://kapalpro.web.id/vessel-TB002.html</loc>
+    <lastmod>2026-10-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TB002/main.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TB002/main.jpg</image:loc>
       <image:title>Tugboat 1500 HP</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TB002/gallery-1.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TB002/gallery-1.jpg</image:loc>
       <image:title>Tugboat 1500 HP</image:title>
     </image:image>
   </url>
 
   <url>
-    <loc>https://databerkata.github.io/prototype-kapalpro/vessel-TB003.html</loc>
-    <lastmod>2026-10-13</lastmod>
+    <loc>https://kapalpro.web.id/vessel-TB003.html</loc>
+    <lastmod>2026-10-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TB003/main.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TB003/main.jpg</image:loc>
       <image:title>Tugboat 1200 HP 2008</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TB003/gallery-1.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TB003/gallery-1.jpg</image:loc>
       <image:title>Tugboat 1200 HP 2008</image:title>
     </image:image>
   </url>
 
   <url>
-    <loc>https://databerkata.github.io/prototype-kapalpro/vessel-TB004.html</loc>
-    <lastmod>2026-10-13</lastmod>
+    <loc>https://kapalpro.web.id/vessel-TB004.html</loc>
+    <lastmod>2026-10-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TB004/main.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TB004/main.jpg</image:loc>
       <image:title>Tugboat 300ft 2018</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TB004/gallery-1.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TB004/gallery-1.jpg</image:loc>
       <image:title>Tugboat 300ft 2018</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TB004/gallery-2.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TB004/gallery-2.jpg</image:loc>
       <image:title>Tugboat 300ft 2018</image:title>
     </image:image>
   </url>
 
   <url>
-    <loc>https://databerkata.github.io/prototype-kapalpro/vessel-TB005.html</loc>
-    <lastmod>2026-10-13</lastmod>
+    <loc>https://kapalpro.web.id/vessel-TB005.html</loc>
+    <lastmod>2026-10-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TB005/main.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TB005/main.jpg</image:loc>
       <image:title>Tugboat 1000 HP 2007</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TB005/gallery-1.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TB005/gallery-1.jpg</image:loc>
       <image:title>Tugboat 1000 HP 2007</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TB005/gallery-2.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TB005/gallery-2.jpg</image:loc>
       <image:title>Tugboat 1000 HP 2007</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TB005/gallery-3.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TB005/gallery-3.jpg</image:loc>
       <image:title>Tugboat 1000 HP 2007</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TB005/gallery-4.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TB005/gallery-4.jpg</image:loc>
       <image:title>Tugboat 1000 HP 2007</image:title>
     </image:image>
   </url>
 
   <url>
-    <loc>https://databerkata.github.io/prototype-kapalpro/vessel-TB006.html</loc>
-    <lastmod>2026-10-13</lastmod>
+    <loc>https://kapalpro.web.id/vessel-TB006.html</loc>
+    <lastmod>2026-10-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TB006/main.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TB006/main.jpg</image:loc>
       <image:title>Tugboat 1440 HP 2010</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TB006/gallery-1.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TB006/gallery-1.jpg</image:loc>
       <image:title>Tugboat 1440 HP 2010</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TB006/gallery-2.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TB006/gallery-2.jpg</image:loc>
       <image:title>Tugboat 1440 HP 2010</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TB006/gallery-3.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TB006/gallery-3.jpg</image:loc>
       <image:title>Tugboat 1440 HP 2010</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TB006/gallery-4.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TB006/gallery-4.jpg</image:loc>
       <image:title>Tugboat 1440 HP 2010</image:title>
     </image:image>
   </url>
 
   <url>
-    <loc>https://databerkata.github.io/prototype-kapalpro/vessel-TB007.html</loc>
-    <lastmod>2026-10-13</lastmod>
+    <loc>https://kapalpro.web.id/vessel-TB007.html</loc>
+    <lastmod>2026-10-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TB007/main.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TB007/main.jpg</image:loc>
       <image:title>Tugboat 1300 HP 2011</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TB007/gallery-1.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TB007/gallery-1.jpg</image:loc>
       <image:title>Tugboat 1300 HP 2011</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TB007/gallery-2.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TB007/gallery-2.jpg</image:loc>
       <image:title>Tugboat 1300 HP 2011</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TB007/gallery-3.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TB007/gallery-3.jpg</image:loc>
       <image:title>Tugboat 1300 HP 2011</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TB007/gallery-4.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TB007/gallery-4.jpg</image:loc>
       <image:title>Tugboat 1300 HP 2011</image:title>
     </image:image>
   </url>
 
   <url>
-    <loc>https://databerkata.github.io/prototype-kapalpro/vessel-TBSET001.html</loc>
-    <lastmod>2026-10-13</lastmod>
+    <loc>https://kapalpro.web.id/vessel-TBSET001.html</loc>
+    <lastmod>2026-10-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TBSET001/main.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TBSET001/main.jpg</image:loc>
       <image:title>Tugboat + Tongkang Set 120ft 2025</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TBSET001/gallery-1.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TBSET001/gallery-1.jpg</image:loc>
       <image:title>Tugboat + Tongkang Set 120ft 2025</image:title>
     </image:image>
   </url>
 
   <url>
-    <loc>https://databerkata.github.io/prototype-kapalpro/vessel-TBSET002.html</loc>
-    <lastmod>2026-10-13</lastmod>
+    <loc>https://kapalpro.web.id/vessel-TBSET002.html</loc>
+    <lastmod>2026-10-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TBSET002/main.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TBSET002/main.jpg</image:loc>
       <image:title>Tugboat + Tongkang Set 230ft 2010</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TBSET002/gallery-1.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TBSET002/gallery-1.jpg</image:loc>
       <image:title>Tugboat + Tongkang Set 230ft 2010</image:title>
     </image:image>
   </url>
 
   <url>
-    <loc>https://databerkata.github.io/prototype-kapalpro/vessel-TBSET003.html</loc>
-    <lastmod>2026-10-13</lastmod>
+    <loc>https://kapalpro.web.id/vessel-TBSET003.html</loc>
+    <lastmod>2026-10-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TBSET003/main.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TBSET003/main.jpg</image:loc>
       <image:title>Tugboat + Oil Barge 1.100 KL</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TBSET003/gallery-1.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TBSET003/gallery-1.jpg</image:loc>
       <image:title>Tugboat + Oil Barge 1.100 KL</image:title>
     </image:image>
   </url>
 
   <url>
-    <loc>https://databerkata.github.io/prototype-kapalpro/vessel-TBSET004.html</loc>
-    <lastmod>2026-10-13</lastmod>
+    <loc>https://kapalpro.web.id/vessel-TBSET004.html</loc>
+    <lastmod>2026-10-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TBSET004/main.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TBSET004/main.jpg</image:loc>
       <image:title>Tugboat + Tongkang Set 270ft</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TBSET004/gallery-1.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TBSET004/gallery-1.jpg</image:loc>
       <image:title>Tugboat + Tongkang Set 270ft</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TBSET004/gallery-2.jpg</image:loc>
-      <image:title>Tugboat + Tongkang Set 270ft</image:title>
-    </image:image>
-  </url>
-
-  <url>
-    <loc>https://databerkata.github.io/prototype-kapalpro/vessel-TBSET005.html</loc>
-    <lastmod>2026-10-13</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TBSET005/main.jpg</image:loc>
-      <image:title>Tugboat + Tongkang Set 300ft 2019</image:title>
-    </image:image>
-    <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TBSET005/gallery-1.jpg</image:loc>
-      <image:title>Tugboat + Tongkang Set 300ft 2019</image:title>
-    </image:image>
-    <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TBSET005/gallery-2.jpg</image:loc>
-      <image:title>Tugboat + Tongkang Set 300ft 2019</image:title>
-    </image:image>
-    <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TBSET005/gallery-3.jpg</image:loc>
-      <image:title>Tugboat + Tongkang Set 300ft 2019</image:title>
-    </image:image>
-    <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TBSET005/gallery-4.jpg</image:loc>
-      <image:title>Tugboat + Tongkang Set 300ft 2019</image:title>
-    </image:image>
-    <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TBSET005/gallery-5.jpg</image:loc>
-      <image:title>Tugboat + Tongkang Set 300ft 2019</image:title>
-    </image:image>
-    <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TBSET005/gallery-6.jpg</image:loc>
-      <image:title>Tugboat + Tongkang Set 300ft 2019</image:title>
-    </image:image>
-    <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TBSET005/gallery-7.jpg</image:loc>
-      <image:title>Tugboat + Tongkang Set 300ft 2019</image:title>
-    </image:image>
-  </url>
-
-  <url>
-    <loc>https://databerkata.github.io/prototype-kapalpro/vessel-TBSET006.html</loc>
-    <lastmod>2026-10-13</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TBSET006/main.jpg</image:loc>
-      <image:title>Tugboat + Tongkang Set 330ft</image:title>
-    </image:image>
-    <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TBSET006/gallery-1.jpg</image:loc>
-      <image:title>Tugboat + Tongkang Set 330ft</image:title>
-    </image:image>
-    <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TBSET006/gallery-2.jpg</image:loc>
-      <image:title>Tugboat + Tongkang Set 330ft</image:title>
-    </image:image>
-    <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TBSET006/gallery-3.jpg</image:loc>
-      <image:title>Tugboat + Tongkang Set 330ft</image:title>
-    </image:image>
-    <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TBSET006/gallery-4.jpg</image:loc>
-      <image:title>Tugboat + Tongkang Set 330ft</image:title>
-    </image:image>
-  </url>
-
-  <url>
-    <loc>https://databerkata.github.io/prototype-kapalpro/vessel-TBSET007.html</loc>
-    <lastmod>2026-10-13</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TBSET007/main.jpg</image:loc>
-      <image:title>Tugboat + Oil Barge Set 2012</image:title>
-    </image:image>
-    <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TBSET007/gallery-1.jpg</image:loc>
-      <image:title>Tugboat + Oil Barge Set 2012</image:title>
-    </image:image>
-    <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TBSET007/gallery-2.jpg</image:loc>
-      <image:title>Tugboat + Oil Barge Set 2012</image:title>
-    </image:image>
-    <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TBSET007/gallery-3.jpg</image:loc>
-      <image:title>Tugboat + Oil Barge Set 2012</image:title>
-    </image:image>
-    <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TBSET007/gallery-4.jpg</image:loc>
-      <image:title>Tugboat + Oil Barge Set 2012</image:title>
-    </image:image>
-  </url>
-
-  <url>
-    <loc>https://databerkata.github.io/prototype-kapalpro/vessel-TBSET008.html</loc>
-    <lastmod>2026-10-13</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TBSET008/main.jpg</image:loc>
-      <image:title>Tugboat + Tongkang Set 270ft</image:title>
-    </image:image>
-    <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TBSET008/gallery-1.jpg</image:loc>
-      <image:title>Tugboat + Tongkang Set 270ft</image:title>
-    </image:image>
-    <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TBSET008/gallery-2.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TBSET004/gallery-2.jpg</image:loc>
       <image:title>Tugboat + Tongkang Set 270ft</image:title>
     </image:image>
   </url>
 
   <url>
-    <loc>https://databerkata.github.io/prototype-kapalpro/vessel-TBSET009.html</loc>
-    <lastmod>2026-10-13</lastmod>
+    <loc>https://kapalpro.web.id/vessel-TBSET005.html</loc>
+    <lastmod>2026-10-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TBSET009/main.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TBSET005/main.jpg</image:loc>
+      <image:title>Tugboat + Tongkang Set 300ft 2019</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TBSET005/gallery-1.jpg</image:loc>
+      <image:title>Tugboat + Tongkang Set 300ft 2019</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TBSET005/gallery-2.jpg</image:loc>
+      <image:title>Tugboat + Tongkang Set 300ft 2019</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TBSET005/gallery-3.jpg</image:loc>
+      <image:title>Tugboat + Tongkang Set 300ft 2019</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TBSET005/gallery-4.jpg</image:loc>
+      <image:title>Tugboat + Tongkang Set 300ft 2019</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TBSET005/gallery-5.jpg</image:loc>
+      <image:title>Tugboat + Tongkang Set 300ft 2019</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TBSET005/gallery-6.jpg</image:loc>
+      <image:title>Tugboat + Tongkang Set 300ft 2019</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TBSET005/gallery-7.jpg</image:loc>
+      <image:title>Tugboat + Tongkang Set 300ft 2019</image:title>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://kapalpro.web.id/vessel-TBSET006.html</loc>
+    <lastmod>2026-10-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TBSET006/main.jpg</image:loc>
+      <image:title>Tugboat + Tongkang Set 330ft</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TBSET006/gallery-1.jpg</image:loc>
+      <image:title>Tugboat + Tongkang Set 330ft</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TBSET006/gallery-2.jpg</image:loc>
+      <image:title>Tugboat + Tongkang Set 330ft</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TBSET006/gallery-3.jpg</image:loc>
+      <image:title>Tugboat + Tongkang Set 330ft</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TBSET006/gallery-4.jpg</image:loc>
+      <image:title>Tugboat + Tongkang Set 330ft</image:title>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://kapalpro.web.id/vessel-TBSET007.html</loc>
+    <lastmod>2026-10-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TBSET007/main.jpg</image:loc>
+      <image:title>Tugboat + Oil Barge Set 2012</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TBSET007/gallery-1.jpg</image:loc>
+      <image:title>Tugboat + Oil Barge Set 2012</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TBSET007/gallery-2.jpg</image:loc>
+      <image:title>Tugboat + Oil Barge Set 2012</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TBSET007/gallery-3.jpg</image:loc>
+      <image:title>Tugboat + Oil Barge Set 2012</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TBSET007/gallery-4.jpg</image:loc>
+      <image:title>Tugboat + Oil Barge Set 2012</image:title>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://kapalpro.web.id/vessel-TBSET008.html</loc>
+    <lastmod>2026-10-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TBSET008/main.jpg</image:loc>
+      <image:title>Tugboat + Tongkang Set 270ft</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TBSET008/gallery-1.jpg</image:loc>
+      <image:title>Tugboat + Tongkang Set 270ft</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TBSET008/gallery-2.jpg</image:loc>
+      <image:title>Tugboat + Tongkang Set 270ft</image:title>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://kapalpro.web.id/vessel-TBSET009.html</loc>
+    <lastmod>2026-10-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TBSET009/main.jpg</image:loc>
       <image:title>Tugboat + Tongkang Set 270ft 2013</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TBSET009/gallery-1.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TBSET009/gallery-1.jpg</image:loc>
       <image:title>Tugboat + Tongkang Set 270ft 2013</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TBSET009/gallery-2.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TBSET009/gallery-2.jpg</image:loc>
       <image:title>Tugboat + Tongkang Set 270ft 2013</image:title>
     </image:image>
   </url>
 
   <url>
-    <loc>https://databerkata.github.io/prototype-kapalpro/vessel-TBSET010.html</loc>
-    <lastmod>2026-10-13</lastmod>
+    <loc>https://kapalpro.web.id/vessel-TBSET010.html</loc>
+    <lastmod>2026-10-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TBSET010/main.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TBSET010/main.jpg</image:loc>
       <image:title>Tugboat + Tongkang Set 300ft 2007</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TBSET010/gallery-1.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TBSET010/gallery-1.jpg</image:loc>
       <image:title>Tugboat + Tongkang Set 300ft 2007</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TBSET010/gallery-2.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TBSET010/gallery-2.jpg</image:loc>
       <image:title>Tugboat + Tongkang Set 300ft 2007</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TBSET010/gallery-3.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TBSET010/gallery-3.jpg</image:loc>
       <image:title>Tugboat + Tongkang Set 300ft 2007</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TBSET010/gallery-4.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TBSET010/gallery-4.jpg</image:loc>
       <image:title>Tugboat + Tongkang Set 300ft 2007</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TBSET010/gallery-5.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TBSET010/gallery-5.jpg</image:loc>
       <image:title>Tugboat + Tongkang Set 300ft 2007</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TBSET010/gallery-6.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TBSET010/gallery-6.jpg</image:loc>
       <image:title>Tugboat + Tongkang Set 300ft 2007</image:title>
     </image:image>
   </url>
 
   <url>
-    <loc>https://databerkata.github.io/prototype-kapalpro/vessel-TBSET011.html</loc>
-    <lastmod>2026-10-13</lastmod>
+    <loc>https://kapalpro.web.id/vessel-TBSET011.html</loc>
+    <lastmod>2026-10-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TBSET011/main.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TBSET011/main.jpg</image:loc>
       <image:title>Tugboat + Tongkang Set 300ft 2013</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TBSET011/gallery-1.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TBSET011/gallery-1.jpg</image:loc>
       <image:title>Tugboat + Tongkang Set 300ft 2013</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TBSET011/gallery-2.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TBSET011/gallery-2.jpg</image:loc>
       <image:title>Tugboat + Tongkang Set 300ft 2013</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TBSET011/gallery-3.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TBSET011/gallery-3.jpg</image:loc>
       <image:title>Tugboat + Tongkang Set 300ft 2013</image:title>
     </image:image>
   </url>
 
-  <url>
-    <loc>https://databerkata.github.io/prototype-kapalpro/vessel-TBSET012.html</loc>
+<url>
+    <loc>https://kapalpro.web.id/vessel-TBSET012.html</loc>
     <lastmod>2026-10-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TBSET012/main.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TBSET012/main.jpg</image:loc>
       <image:title>Tugboat + Tongkang Set 230ft 2010</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TBSET012/gallery-1.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TBSET012/gallery-1.jpg</image:loc>
       <image:title>Tugboat + Tongkang Set 230ft 2010</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TBSET012/gallery-2.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TBSET012/gallery-2.jpg</image:loc>
       <image:title>Tugboat + Tongkang Set 230ft 2010</image:title>
     </image:image>
   </url>
-
   <url>
-    <loc>https://databerkata.github.io/prototype-kapalpro/vessel-TBSET013.html</loc>
-    <lastmod>2026-10-13</lastmod>
+    <loc>https://kapalpro.web.id/vessel-TBSET013.html</loc>
+    <lastmod>2026-10-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TBSET013/main.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TBSET013/main.jpg</image:loc>
       <image:title>Tugboat + Tongkang Set 300ft 2014</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TBSET013/gallery-1.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TBSET013/gallery-1.jpg</image:loc>
       <image:title>Tugboat + Tongkang Set 300ft 2014</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TBSET013/gallery-2.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TBSET013/gallery-2.jpg</image:loc>
       <image:title>Tugboat + Tongkang Set 300ft 2014</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TBSET013/gallery-3.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TBSET013/gallery-3.jpg</image:loc>
       <image:title>Tugboat + Tongkang Set 300ft 2014</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TBSET013/gallery-4.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TBSET013/gallery-4.jpg</image:loc>
       <image:title>Tugboat + Tongkang Set 300ft 2014</image:title>
     </image:image>
   </url>
 
   <url>
-    <loc>https://databerkata.github.io/prototype-kapalpro/vessel-TBSET014.html</loc>
-    <lastmod>2026-10-13</lastmod>
+    <loc>https://kapalpro.web.id/vessel-TBSET014.html</loc>
+    <lastmod>2026-10-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TBSET014/main.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TBSET014/main.jpg</image:loc>
       <image:title>Tugboat + Tongkang Set 300ft 2019</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TBSET014/gallery-1.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TBSET014/gallery-1.jpg</image:loc>
       <image:title>Tugboat + Tongkang Set 300ft 2019</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TBSET014/gallery-2.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TBSET014/gallery-2.jpg</image:loc>
       <image:title>Tugboat + Tongkang Set 300ft 2019</image:title>
     </image:image>
   </url>
 
   <url>
-    <loc>https://databerkata.github.io/prototype-kapalpro/vessel-TBSET016.html</loc>
-    <lastmod>2026-10-13</lastmod>
+    <loc>https://kapalpro.web.id/vessel-TBSET016.html</loc>
+    <lastmod>2026-10-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TBSET016/main.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TBSET016/main.jpg</image:loc>
       <image:title>Tugboat + Tongkang Set 300ft 2010</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TBSET016/gallery-1.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TBSET016/gallery-1.jpg</image:loc>
       <image:title>Tugboat + Tongkang Set 300ft 2010</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TBSET016/gallery-2.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TBSET016/gallery-2.jpg</image:loc>
       <image:title>Tugboat + Tongkang Set 300ft 2010</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TBSET016/gallery-3.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TBSET016/gallery-3.jpg</image:loc>
       <image:title>Tugboat + Tongkang Set 300ft 2010</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TBSET016/gallery-4.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TBSET016/gallery-4.jpg</image:loc>
       <image:title>Tugboat + Tongkang Set 300ft 2010</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TBSET016/gallery-5.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TBSET016/gallery-5.jpg</image:loc>
       <image:title>Tugboat + Tongkang Set 300ft 2010</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TBSET016/gallery-6.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TBSET016/gallery-6.jpg</image:loc>
       <image:title>Tugboat + Tongkang Set 300ft 2010</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TBSET016/gallery-7.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TBSET016/gallery-7.jpg</image:loc>
       <image:title>Tugboat + Tongkang Set 300ft 2010</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TBSET016/gallery-8.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TBSET016/gallery-8.jpg</image:loc>
       <image:title>Tugboat + Tongkang Set 300ft 2010</image:title>
     </image:image>
   </url>
 
   <url>
-    <loc>https://databerkata.github.io/prototype-kapalpro/vessel-TK003.html</loc>
-    <lastmod>2026-10-13</lastmod>
+    <loc>https://kapalpro.web.id/vessel-TK003.html</loc>
+    <lastmod>2026-10-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TK003/main.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TK003/main.jpg</image:loc>
       <image:title>Tongkang Barge 230ft 2012</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TK003/gallery-1.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TK003/gallery-1.jpg</image:loc>
       <image:title>Tongkang Barge 230ft 2012</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TK003/gallery-2.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TK003/gallery-2.jpg</image:loc>
       <image:title>Tongkang Barge 230ft 2012</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TK003/gallery-3.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TK003/gallery-3.jpg</image:loc>
       <image:title>Tongkang Barge 230ft 2012</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TK003/gallery-4.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TK003/gallery-4.jpg</image:loc>
       <image:title>Tongkang Barge 230ft 2012</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TK003/gallery-5.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TK003/gallery-5.jpg</image:loc>
       <image:title>Tongkang Barge 230ft 2012</image:title>
     </image:image>
   </url>
 
   <url>
-    <loc>https://databerkata.github.io/prototype-kapalpro/vessel-TK004.html</loc>
-    <lastmod>2026-10-13</lastmod>
+    <loc>https://kapalpro.web.id/vessel-TK004.html</loc>
+    <lastmod>2026-10-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TK004/main.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TK004/main.jpg</image:loc>
       <image:title>Tugboat + Tongkang Set 330ft 2005</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TK004/gallery-1.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TK004/gallery-1.jpg</image:loc>
       <image:title>Tugboat + Tongkang Set 330ft 2005</image:title>
     </image:image>
   </url>
 
   <url>
-    <loc>https://databerkata.github.io/prototype-kapalpro/vessel-TK005.html</loc>
-    <lastmod>2026-10-13</lastmod>
+    <loc>https://kapalpro.web.id/vessel-TK005.html</loc>
+    <lastmod>2026-10-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TK005/main.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TK005/main.jpg</image:loc>
       <image:title>Tongkang 180ft 2012</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TK005/gallery-1.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TK005/gallery-1.jpg</image:loc>
       <image:title>Tongkang 180ft 2012</image:title>
     </image:image>
   </url>
 
   <url>
-    <loc>https://databerkata.github.io/prototype-kapalpro/vessel-TK006.html</loc>
-    <lastmod>2026-10-13</lastmod>
+    <loc>https://kapalpro.web.id/vessel-TK006.html</loc>
+    <lastmod>2026-10-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TK006/main.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TK006/main.jpg</image:loc>
       <image:title>Tongkang 300ft 2000</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TK006/gallery-1.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TK006/gallery-1.jpg</image:loc>
       <image:title>Tongkang 300ft 2000</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TK006/gallery-2.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TK006/gallery-2.jpg</image:loc>
       <image:title>Tongkang 300ft 2000</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TK006/gallery-3.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TK006/gallery-3.jpg</image:loc>
       <image:title>Tongkang 300ft 2000</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TK006/gallery-4.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TK006/gallery-4.jpg</image:loc>
       <image:title>Tongkang 300ft 2000</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TK006/gallery-5.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TK006/gallery-5.jpg</image:loc>
       <image:title>Tongkang 300ft 2000</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TK006/gallery-6.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TK006/gallery-6.jpg</image:loc>
       <image:title>Tongkang 300ft 2000</image:title>
     </image:image>
   </url>
 
   <url>
-    <loc>https://databerkata.github.io/prototype-kapalpro/vessel-TK007.html</loc>
-    <lastmod>2026-10-13</lastmod>
+    <loc>https://kapalpro.web.id/vessel-TK007.html</loc>
+    <lastmod>2026-10-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TK007/main.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TK007/main.jpg</image:loc>
       <image:title>Tongkang 300ft 2007</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TK007/gallery-1.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TK007/gallery-1.jpg</image:loc>
       <image:title>Tongkang 300ft 2007</image:title>
     </image:image>
   </url>
 
   <url>
-    <loc>https://databerkata.github.io/prototype-kapalpro/vessel-TK008.html</loc>
-    <lastmod>2026-10-13</lastmod>
+    <loc>https://kapalpro.web.id/vessel-TK008.html</loc>
+    <lastmod>2026-10-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TK008/main.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TK008/main.jpg</image:loc>
       <image:title>Tongkang 300ft Jumbo 2021</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TK008/gallery-1.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TK008/gallery-1.jpg</image:loc>
       <image:title>Tongkang 300ft Jumbo 2021</image:title>
     </image:image>
   </url>
 
   <url>
-    <loc>https://databerkata.github.io/prototype-kapalpro/vessel-TK009.html</loc>
-    <lastmod>2026-10-13</lastmod>
+    <loc>https://kapalpro.web.id/vessel-TK009.html</loc>
+    <lastmod>2026-10-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TK009/main.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TK009/main.jpg</image:loc>
       <image:title>Tongkang 300ft Jumbo 2019</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TK009/gallery-1.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TK009/gallery-1.jpg</image:loc>
       <image:title>Tongkang 300ft Jumbo 2019</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TK009/gallery-2.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TK009/gallery-2.jpg</image:loc>
       <image:title>Tongkang 300ft Jumbo 2019</image:title>
     </image:image>
   </url>
 
   <url>
-    <loc>https://databerkata.github.io/prototype-kapalpro/vessel-TKSET001.html</loc>
-    <lastmod>2026-10-13</lastmod>
+    <loc>https://kapalpro.web.id/vessel-TKSET001.html</loc>
+    <lastmod>2026-10-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TKSET001/main.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TKSET001/main.jpg</image:loc>
       <image:title>Paket Tugboat + Tongkang 300ft</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TKSET001/gallery-1.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TKSET001/gallery-1.jpg</image:loc>
       <image:title>Paket Tugboat + Tongkang 300ft</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TKSET001/gallery-2.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TKSET001/gallery-2.jpg</image:loc>
       <image:title>Paket Tugboat + Tongkang 300ft</image:title>
     </image:image>
   </url>
 
   <url>
-    <loc>https://databerkata.github.io/prototype-kapalpro/vessel-TNK002.html</loc>
-    <lastmod>2026-10-13</lastmod>
+    <loc>https://kapalpro.web.id/vessel-TNK002.html</loc>
+    <lastmod>2026-10-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TNK002/main.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TNK002/main.jpg</image:loc>
       <image:title>Tanker 3.570 DWT 38M</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://databerkata.github.io/prototype-kapalpro/assets/vessels/TNK002/gallery-1.jpg</image:loc>
+      <image:loc>https://kapalpro.web.id/assets/vessels/TNK002/gallery-1.jpg</image:loc>
       <image:title>Tanker 3.570 DWT 38M</image:title>
     </image:image>
   </url>
