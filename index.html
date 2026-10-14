@@ -78,6 +78,7 @@
   
   <!-- Styles -->
   <link rel="stylesheet" href="css/style.css?v=bb2f3797">
+  <link rel="stylesheet" href="css/search-autocomplete.css?v=bb2f3797">
   
   <!-- Resource Hints -->
   <!-- WHY: Preconnect ke Google Fonts DIHAPUS. Tidak ada @font-face
@@ -201,6 +202,16 @@
                    itu hanya banner berisi tombol WhatsApp yang sama, jadi
                    scroll menambah satu langkah tanpa nilai. -->
               <a href="https://wa.me/6285648048730" class="btn btn-secondary btn-lg" target="_blank" rel="noopener noreferrer" data-analytics-event="CTA Click" data-analytics-location="hero-contact" data-wa data-wa-msg="Halo KapalPro, saya tertarik dengan kapal di halaman utama.">Hubungi Kami</a>
+            </div>
+            <!-- Search Autocomplete V1: suggestion dari listing real (js/search-autocomplete.js).
+                 Pilih kapal -> halaman detail; Enter -> katalog dengan query. -->
+            <div class="hero-search kp-search" data-search-autocomplete data-search-mode="hero">
+              <div class="kp-search-box">
+                <span class="kp-search-icon" aria-hidden="true">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+                </span>
+                <input type="text" class="kp-search-input" placeholder="Cari kapal: tugboat, tongkang, LCT..." aria-label="Cari kapal" data-analytics-event="Search" data-analytics-location="hero-search">
+              </div>
             </div>
             <p class="hero-trust" style="margin-top: var(--space-4); font-size: var(--text-sm); color: var(--text-secondary);">✓ Dokumen terverifikasi &nbsp;·&nbsp; ✓ Harga transparan &nbsp;·&nbsp; ✓ Konsultasi gratis</p>
           </div>
@@ -474,6 +485,7 @@
   <script src="js/config.js?v=bb2f3797" defer></script>
   <script src="js/theme.js?v=bb2f3797" defer></script>
   <script src="js/data.js?v=bb2f3797" defer></script>
+  <script src="js/search-autocomplete.js?v=bb2f3797" defer></script>
   <script src="js/app.js?v=bb2f3797" defer></script>
   <script src="js/anim.js?v=bb2f3797" defer></script>
   <script src="js/analytics.js?v=bb2f3797" defer></script>

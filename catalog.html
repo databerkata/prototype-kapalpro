@@ -84,6 +84,7 @@
   </style>
   
   <link rel="stylesheet" href="css/style.css?v=bb2f3797">
+  <link rel="stylesheet" href="css/search-autocomplete.css?v=bb2f3797">
 
   <!-- WHY structured data ditulis di sini, bukan hanya runtime:
        katalog adalah pintu masuk utama lewat organic search, dan
@@ -198,6 +199,10 @@
               style="padding-left: var(--space-12);"
               placeholder="Cari kapal berdasarkan nama, lokasi, atau deskripsi..."
               aria-label="Cari kapal"
+              data-search-autocomplete
+              data-search-mode="catalog"
+              data-analytics-event="Search"
+              data-analytics-location="catalog-search"
             >
           </div>
         </div>
@@ -910,6 +915,7 @@
   <script src="js/config.js?v=bb2f3797" defer></script>
   <script src="js/theme.js?v=bb2f3797" defer></script>
   <script src="js/data.js?v=bb2f3797" defer></script>
+  <script src="js/search-autocomplete.js?v=bb2f3797" defer></script>
   <script src="js/shortlist.js?v=bb2f3797" defer></script>
   <script src="js/compare.js?v=bb2f3797" defer></script>
   <script src="js/app.js?v=bb2f3797" defer></script>
