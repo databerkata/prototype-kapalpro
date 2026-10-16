@@ -1570,57 +1570,6 @@
     ],
     "webpFull": 1694
   },
-  "assets/vessels/TBSET012/gallery-1.jpg": {
-    "width": 1434,
-    "height": 1097,
-    "variants": [
-      150,
-      300,
-      400,
-      800
-    ],
-    "webp": [
-      150,
-      300,
-      400,
-      800
-    ],
-    "webpFull": 1434
-  },
-  "assets/vessels/TBSET012/gallery-2.jpg": {
-    "width": 965,
-    "height": 1225,
-    "variants": [
-      150,
-      300,
-      400,
-      800
-    ],
-    "webp": [
-      150,
-      300,
-      400,
-      800
-    ],
-    "webpFull": 965
-  },
-  "assets/vessels/TBSET012/main.jpg": {
-    "width": 1444,
-    "height": 1089,
-    "variants": [
-      150,
-      300,
-      400,
-      800
-    ],
-    "webp": [
-      150,
-      300,
-      400,
-      800
-    ],
-    "webpFull": 1444
-  },
   "assets/vessels/TK008/gallery-1.jpg": {
     "width": 839,
     "height": 914,
