@@ -1,7 +1,7 @@
 # KapalPro
 
 > Marketplace jual beli kapal di Indonesia: tongkang, tugboat, LCT, tanker, dan floating crane barge.
-> 34 listing kapal bekas berkualitas dengan foto asli, spesifikasi lengkap, dan harga transparan.
+> 33 listing kapal bekas berkualitas dengan foto asli, spesifikasi lengkap, dan harga transparan.
 
 ## Tentang KapalPro
 
@@ -14,8 +14,8 @@ KapalPro adalah platform dan broker jual beli kapal yang mempertemukan pemilik k
 ## Halaman Utama
 
 - [Beranda](https://kapalpro.web.id/index.html): katalog kapal unggulan dan pencarian
-- [Katalog Kapal](https://kapalpro.web.id/catalog.html): 34 listing kapal — filter berdasarkan tipe, status Tersedia/Terjual
-- [Indeks Harga Kapal](https://kapalpro.web.id/indeks-harga.html): agregasi harga penawaran per tipe dari 34 listing (Oktober 2026) + metodologi
+- [Katalog Kapal](https://kapalpro.web.id/catalog.html): 33 listing kapal — filter berdasarkan tipe, status Tersedia/Terjual
+- [Indeks Harga Kapal](https://kapalpro.web.id/indeks-harga.html): agregasi harga penawaran per tipe dari 33 listing (Oktober 2026) + metodologi
 - [Tentang Kami](https://kapalpro.web.id/about.html): profil KapalPro + FAQ (termasuk FAQ Letter of Intent)
 - [Kontak](https://kapalpro.web.id/contact.html): form Letter of Intent — pilih kapal, cantumkan harga penawaran
 
