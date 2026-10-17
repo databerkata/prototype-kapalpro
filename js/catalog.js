@@ -523,9 +523,36 @@
       });
     });
 
+    // WHY preset pills: jalan pintas mengisi min/max lewat jalur filter
+    // yang sama (collectFilters -> applyFilters), bukan logika terpisah.
+    function setPresetActive(selector, activeBtn) {
+      document.querySelectorAll(selector).forEach(function(b) {
+        b.classList.toggle('is-active', b === activeBtn);
+      });
+    }
+    function wirePresets(attr, minId, maxId) {
+      var selector = '[' + attr + ']';
+      document.querySelectorAll(selector).forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          var parts = (btn.getAttribute(attr) || '').split('-');
+          var minEl = document.getElementById(minId);
+          var maxEl = document.getElementById(maxId);
+          if (minEl) minEl.value = parts[0] || '';
+          if (maxEl) maxEl.value = parts[1] || '';
+          setPresetActive(selector, btn);
+          collectFilters();
+          currentPage = 1;
+          applyFilters();
+        });
+      });
+    }
+    wirePresets('data-preset-price', 'price-min', 'price-max');
+    wirePresets('data-preset-year', 'year-min', 'year-max');
+
     // Price inputs
     ['price-min', 'price-max'].forEach(function(id) {
       on(id, 'input', window.App.debounce(function() {
+        setPresetActive('[data-preset-price]', null);
         collectFilters();
         currentPage = 1;
         applyFilters();
@@ -535,6 +562,7 @@
     // Year inputs
     ['year-min', 'year-max'].forEach(function(id) {
       on(id, 'input', window.App.debounce(function() {
+        setPresetActive('[data-preset-year]', null);
         collectFilters();
         currentPage = 1;
         applyFilters();
@@ -968,13 +996,6 @@
 
     filteredVessels.sort(function(a, b) {
       switch (sortValue) {
-        case 'relevant':
-          return 0;
-        case 'is-new':
-          // WHY is_new dulu: "Paling Baru" = listing terbaru, bukan tahun
-          // pembuatan termuda. Sort stabil menjaga urutan existing di
-          // dalam tiap kelompok.
-          return (b.is_new ? 1 : 0) - (a.is_new ? 1 : 0);
         case 'newest':
           return (b.year_built || 0) - (a.year_built || 0);
         case 'oldest':
@@ -1125,6 +1146,13 @@
     // Year
     set('year-min', '');
     set('year-max', '');
+
+    // WHY preset pills: kembalikan ke "Semua" (nilai preset kosong).
+    document.querySelectorAll('[data-preset-price],[data-preset-year]').forEach(function(b) {
+      var v = b.getAttribute('data-preset-price');
+      if (v === null) v = b.getAttribute('data-preset-year');
+      b.classList.toggle('is-active', (v || '') === '');
+    });
 
     // Ukuran
     ['length-min', 'length-max', 'dwt-min', 'dwt-max'].forEach(function(id) {
