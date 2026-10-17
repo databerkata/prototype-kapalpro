@@ -1350,176 +1350,56 @@
       // window.KAPALPRO_CONFIG di test.
       var googleForm = window.KapalProContact && window.KapalProContact.form('inquiry');
 
-      if (googleForm) {
-        // WHY: Submit to Google Forms
-        var params = new URLSearchParams();
-        var formData = new FormData(form);
-
-        formData.forEach(function(value, key) {
-          var formEntry = googleForm.fields[key];
-          if (formEntry && value) {
-            params.append(formEntry, value);
-          }
-        });
-
-        // WHY: Open Google Forms in new tab
-        // WHY 'noopener': tanpa ini tab baru yang dibuka (Google Forms /
-        // wa.me) memegang window.opener dan bisa navigated halaman
-        // ini lewat window.opener.location. js/contact.js sudah
-        // memakai noopener sejak awal - ini menyamakan keduanya.
-        // WHY pilih '?' atau '&': URL Google Forms dari tombol Send sudah
-        // membawa query (?usp=sf_link); '?' kedua membuat seluruh parameter
-        // pre-fill terbaca sebagai nilai usp dan form terbuka kosong.
-        // Samakan dengan js/contact.js.
-        var sep = googleForm.url.indexOf('?') === -1 ? '?' : '&';
-        // WHY cek return value: window.open mengembalikan null jika popup
-        // diblokir - tanpa ini user dapat toast sukses palsu padahal
-        // tidak ada tab terbuka dan data tidak terkirim.
-        var formWin = window.open(googleForm.url + sep + params.toString(), '_blank', 'noopener');
-        if (!formWin) {
-          window.App.showToast('Popup diblokir browser. Izinkan popup untuk situs ini lalu kirim ulang.', 'error');
-        } else {
-          window.App.showToast('Form inquiry terbuka di tab baru', 'success');
-        }
-      } else {
-        // WHY: No Google Forms configured, show WhatsApp fallback
-        var vesselName = fval('inquiry-vessel-name');
-        var vesselType = fval('inquiry-vessel-type');
-        var surveyDate = fval('inquiry-survey-date');
-        var offerPrice = fval('inquiry-offer-price');
-
-        // WHY: Nomor WhatsApp dari js/config.js (sumber tunggal),
-        // dengan fallback bila config.js gagal dimuat.
-        var whatsappNumber = (window.KAPALPRO_CONFIG && window.KAPALPRO_CONFIG.whatsappNumber) || '6285648048730';
-        // WHY: Tampilkan label jenis yang TERBACA orang, bukan key data.
-        // Nilai hidden field berisi key mentah ("tongkang") - di pesan
-        // WhatsApp itu terlihat seperti data mentah yang belum diproses.
-        var typeLabel = window.VesselData.vesselTypeLabel(vesselType);
-
-        // WHY hanya satu himpunan label: dukungan bahasa Inggris dihapus
-        // dari repo, jadi pilihan bahasa tidak ada lagi. Versi lama
-        // membaca `msgLang` yang ikut terhapus waktu i18n dibuang -
-        // ReferenceError di sini terjadi SEBELUM window.open, jadi form
-        // inquiry terlihat terkirim padahal tidak pernah membuka WhatsApp.
-        var L = { name: 'Nama', email: 'Email', phone: 'Telepon', company: 'Perusahaan',
-                  vessel: 'Kapal', type: 'Jenis', message: 'Pesan',
-                  survey: 'Tanggal Survey', offer: 'Harga Tawaran', intro: 'Halo, saya ingin inquiry kapal:' };
-
-        var whatsappMsg = L.intro + '\n\n';
-        whatsappMsg += L.name + ': ' + name + '\n';
-        whatsappMsg += L.email + ': ' + email + '\n';
-        whatsappMsg += L.phone + ': ' + phone + '\n';
-        if (fval('inquiry-company')) {
-          whatsappMsg += L.company + ': ' + fval('inquiry-company') + '\n';
-        }
-        whatsappMsg += '\n' + L.vessel + ': ' + vesselName + '\n';
-        whatsappMsg += L.type + ': ' + typeLabel + '\n';
-        whatsappMsg += L.message + ': ' + message + '\n';
-        if (surveyDate) {
-          whatsappMsg += L.survey + ': ' + surveyDate + '\n';
-        }
-        if (offerPrice) {
-          whatsappMsg += L.offer + ': Rp ' + window.VesselData.formatNumber(parseInt(offerPrice)) + '\n';
-        }
-
-        var encodedMsg = encodeURIComponent(whatsappMsg);
-
-        // WHY: wa.me memuat pesan sebagai query string. Input yang sangat
-        // panjang bisa membuat URL melebihi batas praktis browser/WhatsApp
-        // (~2000 karakter untuk param text) sehingga link tidak terbuka.
-        // Potong pesan user dengan penanda ellipsis, JANGAN potong label
-        // atau nomor - data kontak lebih penting dari kalimat tambahan.
-        //
-        // BUG YANG DIPERBAIKI DI SINI (dua-duanya kehilangan inquiry):
-        //   1. Versi lama memakai room = LIMIT - encodedMsg.length. Saat
-        //      cabang ini dieksekusi, encodedMsg SUDAH > LIMIT, jadi
-        //      room selalu negatif. Akibatnya syarat kedua loop selalu
-        //      true dan pemotongan hanya berhenti di lantai 20 karakter -
-        //      ruang yang tersisa tidak pernah terpakai, pesan pembeli
-        //      terpotong jauh lebih pendek dari yang perlu.
-        //   2. whatsappMsg.replace(message, ...) mengganti kemunculan
-        //      PERTAMA. Kalau teks pesan ikut muncul di field lebih
-        //      awal (mis. nama Testing atau perusahaan), field yang
-        //      terpotong adalah field itu - nama calon pembeli hilang
-        //      sementara pesan tetap panjang.
-        var WA_TEXT_LIMIT = 1800;
-        if (encodedMsg.length > WA_TEXT_LIMIT) {
-          // WHY: allowance dihitung dari selisih total terhadap
-          // contribution message saja. Ini memberi ruang yang BENAR
-          // dan tidak pernah negatif selama overhead (label, kontak)
-          // lebih kecil dari limit.
-          var overhead = encodedMsg.length - encodeURIComponent(message).length;
-          var allowance = WA_TEXT_LIMIT - overhead;
-          // WHY dikurangi 9: penanda "…" ikut masuk URL dan memakan
-          // 9 karakter (%E2%80%A6). Tanpa pengurangan ini, cut sebesar
-          // allowance masih membuat total 9 char TANPA ruang untuk
-          // penandanya - jaring pengaman di bawah akan memotong dari
-          // belakang dan menghilangkan "…" itu sendiri, jadi penerima
-          // tidak tahu pesannya terpotong.
-          var MARKER_LEN = encodeURIComponent('…').length;
-          allowance -= MARKER_LEN;
-          // WHY lantai 20: lebih baik mengirim 20 karakter yang utuh
-          // daripada tidak mengirim pesan sama sekali.
-          if (!(allowance > 20)) allowance = 20;
-
-          var cut = message;
-          // WHY: ukur encodeURIComponent(cut) - karakter multi-byte
-          // seperti emoji/aksara menyumbang 9 char per UTF-16 unit,
-          // jadi memotong berdasarkan .length akan menghasilkan URL kelewat
-          // panjang.
-          while (cut.length > 20 && encodeURIComponent(cut).length > allowance) {
-            cut = cut.slice(0, -1);
-            // PENTING: satu emoji = 2 unit UTF-16. Memotong di tengah
-            // pasangan surrogate menyisakan high-surrogate yatim, dan
-            // encodeURIComponent() akan melempar URIError: URI
-            // malformed -_- form jadi tidak bisa dikirim sama sekali.
-            var last = cut.charCodeAt(cut.length - 1);
-            if (last >= 0xD800 && last <= 0xDBFF) cut = cut.slice(0, -1);
-          }
-
-          // WHY pakai sentinel: message hanya disisipkan satu kali ke
-          // pesan, jadi mengganti SELURUH kemunculannya sama dengan
-          // mengganti yang benar - dan tahan terhadap kasus di mana
-          // teks yang sama muncul lebih dulu di field lain.
-          var SENTINEL = '\u0001LOI_MESSAGE\u0001';
-          var stamped = whatsappMsg.split(message).join(SENTINEL);
-          whatsappMsg = stamped.split(SENTINEL).join(cut + '…');
-          encodedMsg = encodeURIComponent(whatsappMsg);
-
-          // WHY jaring pengaman: bila overhead sendiri sudah melebihi
-          // limit (mis. nama perusahaan sangat panjang), allowance
-          // menyentuh lantai 20 dan hasil potong belum tentu muat.
-          // Potong keras dari belakang supaya URL yang dibentuk WA
-          // selalu dapat dibuka - lebih baik pesan terpotong daripada
-          // link yang tidak terbuka sama sekali.
-          if (encodedMsg.length > WA_TEXT_LIMIT) {
-            while (whatsappMsg.length > 20 && encodeURIComponent(whatsappMsg).length > WA_TEXT_LIMIT) {
-              whatsappMsg = whatsappMsg.slice(0, -1);
-              var t = whatsappMsg.charCodeAt(whatsappMsg.length - 1);
-              if (t >= 0xD800 && t <= 0xDBFF) whatsappMsg = whatsappMsg.slice(0, -1);
-            }
-            // WAJIB hitung ulang: yang dibuka ke wa.me adalah encodedMsg,
-            // bukan whatsappMsg. Tanpa baris ini link yang dibentuk masih
-            // memuat string sebelum pemotongan dan URL tetap kepanjangan.
-            encodedMsg = encodeURIComponent(whatsappMsg);
-          }
-        }
-
-        var waWin = window.open('https://wa.me/' + whatsappNumber + '?text=' + encodedMsg, '_blank', 'noopener');
-        // WHY cek return value: popup diblokir -> null, jangan klaim sukses.
-        if (!waWin) {
-          window.App.showToast('Popup diblokir browser. Izinkan popup untuk situs ini lalu kirim ulang.', 'error');
-        } else {
-          window.App.showToast('WhatsApp terbuka dengan data inquiry', 'success');
+      // WHY restore tombol di satu tempat: loading state harus selalu
+      // selesai, baik kirim sukses maupun gagal.
+      function restoreBtn() {
+        if (submitBtn) {
+          submitBtn.classList.remove('loading');
+          submitBtn.disabled = false;
         }
       }
 
-      // WHY guard: 90 baris di atas sudah di-guard, tapi re-enable di sini
-      // belum - tanpa tombol, inquiry sudah terkirim tapi JS melempar.
-      if (submitBtn) {
-        submitBtn.classList.remove('loading');
-        submitBtn.disabled = false;
+      if (!googleForm) {
+        // WHY tanpa fallback WhatsApp: keputusan owner 2026-10-17, nomor
+        // pribadi tidak dipakai di alur form. Jangan buka tab baru.
+        window.App.showToast('Formulir belum dapat dikirim saat ini. Silakan coba lagi nanti.', 'error');
+        restoreBtn();
+        return;
       }
+
+      // WHY submit LANGSUNG ke Google Forms (POST /formResponse, no-cors):
+      // pola lama membuka pre-fill di tab baru sehingga pembeli harus klik
+      // Submit dua kali - inquiry hilang kalau tab ditutup. Respons fetch
+      // opaque di mode no-cors, tapi Google mencatat data dengan andal;
+      // fetch hanya reject bila network gagal.
+      var params = new URLSearchParams();
+      var formData = new FormData(form);
+
+      formData.forEach(function(value, key) {
+        var formEntry = googleForm.fields[key];
+        if (formEntry && value) {
+          params.append(formEntry, value);
+        }
+      });
+
+      // WHY URL dibangun dari config, bukan hardcode ID:
+      // /viewform -> /formResponse.
+      var submitUrl = googleForm.url.replace(/\/viewform.*$/, '/formResponse');
+
+      fetch(submitUrl, {
+        method: 'POST',
+        mode: 'no-cors',
+        body: params
+      }).then(function() {
+        window.App.showToast('Inquiry terkirim. Kami akan menghubungi Anda segera.', 'success');
+        form.reset();
+        restoreBtn();
+      }).catch(function() {
+        // WHY data TIDAK di-clear saat gagal: pembeli bisa kirim ulang
+        // tanpa mengetik ulang.
+        window.App.showToast('Gagal mengirim. Periksa koneksi internet lalu kirim ulang.', 'error');
+        restoreBtn();
+      });
     });
   }
 

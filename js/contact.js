@@ -1,6 +1,6 @@
 /**
  * Contact Page Logic
- * Handles contact form validation, WhatsApp fallback, and tracking
+ * Handles contact form validation, direct Google Forms submission, and tracking
  * Compliant with RULES.md Sections 1.6, 1.13
  */
 
@@ -9,10 +9,7 @@
   'use strict';
 
   // WHY: Sumber tunggal = js/config.js (window.KAPALPRO_CONFIG).
-  // Fallback di bawah hanya bila config.js gagal dimuat (mis. CSP/CDN),
-  // supaya halaman tetap punya link yang berfungsi.
   var CFG = window.KAPALPRO_CONFIG || {};
-  var WHATSAPP_NUMBER = CFG.whatsappNumber || '6285648048730';
 
   /** Init after DOM ready */
   if (document.readyState === 'loading') {
@@ -122,10 +119,9 @@
     }
 
     // ============================================================
-    // SUBMIT
-    // WHY: Pengiriman diatur dari SATU tempat (js/config.js). Kalau
-    // konfigurasi form belum lengkap, KapalProContact.form() null dan
-    // pengiriman jatuh ke fallback WhatsApp dengan pesan pre-filled.
+    // SUBMIT — langsung ke Google Forms (POST /formResponse, no-cors).
+    // Tanpa tab baru, tanpa WhatsApp (keputusan owner 2026-10-17:
+    // nomor pribadi tidak dipakai di alur form).
     // ============================================================
     var submitBtn = document.getElementById('contact-submit');
     // WHY guard: tanpa tombol, loading state dilewati tapi pengiriman
@@ -135,73 +131,53 @@
       submitBtn.disabled = true;
     }
 
-    // WHY konfigurasi ada di js/config.js (contactFormUrl +
-    // contactFormFields). Selama belum diisi lengkap,
-    // KapalProContact.form() mengembalikan null dan pengiriman jatuh ke
-    // fallback WhatsApp seperti sebelumnya.
     var googleForm = window.KapalProContact && window.KapalProContact.form('contact');
 
-    if (googleForm) {
-      // WHY: Form GET redirect mengisi field Google Forms lalu user submit di sana
-      var params = new URLSearchParams();
-      // WHY subject dikirim sebagai label (bukan key mentah): cabang
-      // WhatsApp memakai subjectLabel(), jadi spreadsheet dan WA konsisten.
-      var formData = {
-        name: data.name,
-        email: data.email,
-        phone: data.phone,
-        company: data.company,
-        vessel: data.vessel,
-        offer_price: data.offer_price,
-        subject: subjectLabel(data.subject),
-        message: data.message
-      };
-      Object.keys(googleForm.fields).forEach(function(key) {
-        var entryId = googleForm.fields[key];
-        // WHY hanya field yang terisi: Google Forms menolak entri kosong
-        // di beberapa konfigurasi, dan mengirim "" hanya menambah baris
-        // kosong di spreadsheet.
-        if (entryId && formData[key]) params.set(entryId, formData[key]);
-      });
-      // WHY pilih '?' atau '&': URL hasil tombol Send Google Forms sudah
-      // membawa query (?usp=sf_link). Menambah '?' kedua menghasilkan
-      // "...viewform?usp=sf_link?entry.X=..." - browser membaca seluruh
-      // sisa sebagai nilai usp, sehingga form terbuka TANPA isian yang
-      // sudah diisi. Pengirim mengira data masuk, isian tidak ke mana-
-      // mana. Bentrok query seperti ini harus ditangani kode, bukan
-      // dititipkan ke catatan setup yang gampang terlewat.
-      var sep = googleForm.url.indexOf('?') === -1 ? '?' : '&';
-      // WHY cek return value: window.open null jika popup diblokir.
-      var formWin = window.open(googleForm.url + sep + params.toString(), '_blank', 'noopener');
-      if (!formWin) {
-        window.App.showToast('Popup diblokir browser. Izinkan popup untuk situs ini lalu kirim ulang.', 'error');
-      } else {
-        window.App.showToast('Formulir siap diisi. Google Forms terbuka di tab baru - klik Submit di sana.', 'success');
-      }
-      resetFormState(form);
-    } else {
-      // Fallback: WhatsApp pre-filled
-      var text =
-        'Halo, saya menghubungi melalui website KapalPro untuk Letter of Intent.\n\n' +
-        'Nama: ' + data.name + '\n' +
-        'Email: ' + data.email + '\n' +
-        'Telepon: ' + data.phone + '\n' +
-        (data.company ? 'Perusahaan: ' + data.company + '\n' : '') +
-        (data.vessel ? 'Kapal diminati: ' + data.vessel + '\n' : '') +
-        (data.offer_price ? 'Harga penawaran: Rp ' + Number(data.offer_price).toLocaleString('id-ID') + '\n' : '') +
-        'Perihal: ' + subjectLabel(data.subject) + '\n\n' +
-        'Pesan:\n' + data.message;
-
-      var waUrl = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(text);
-      // WHY cek return value: popup diblokir -> null, jangan klaim sukses.
-      var waWin = window.open(waUrl, '_blank', 'noopener');
-      if (!waWin) {
-        window.App.showToast('Popup diblokir browser. Izinkan popup untuk situs ini lalu kirim ulang.', 'error');
-      } else {
-        window.App.showToast('Pesan siap dikirim. WhatsApp akan terbuka di tab baru.', 'success');
-      }
-      resetFormState(form);
+    if (!googleForm) {
+      window.App.showToast('Formulir belum dapat dikirim saat ini. Silakan coba lagi nanti.', 'error');
+      resetFormState(form, false);
+      return;
     }
+
+    // WHY: Bangun payload dari mapping config (bukan hardcode entry ID).
+    var params = new URLSearchParams();
+    // WHY subject dikirim sebagai label (bukan key mentah) supaya
+    // spreadsheet konsisten dengan tampilan.
+    var formData = {
+      name: data.name,
+      email: data.email,
+      phone: data.phone,
+      company: data.company,
+      vessel: data.vessel,
+      offer_price: data.offer_price,
+      subject: subjectLabel(data.subject),
+      message: data.message
+    };
+    Object.keys(googleForm.fields).forEach(function(key) {
+      var entryId = googleForm.fields[key];
+      // WHY hanya field yang terisi: mengirim "" hanya menambah sel
+      // kosong di spreadsheet.
+      if (entryId && formData[key]) params.set(entryId, formData[key]);
+    });
+
+    // WHY URL dibangun dari config, bukan hardcode ID:
+    // /viewform -> /formResponse.
+    var submitUrl = googleForm.url.replace(/\/viewform.*$/, '/formResponse');
+
+    // WHY no-cors: Google Forms tidak mengirim header CORS; respons
+    // opaque tapi data tercatat andal. fetch hanya reject bila network
+    // gagal - saat itu data form dipertahankan untuk kirim ulang.
+    fetch(submitUrl, {
+      method: 'POST',
+      mode: 'no-cors',
+      body: params
+    }).then(function() {
+      window.App.showToast('Pesan terkirim. Kami akan menghubungi Anda segera.', 'success');
+      resetFormState(form, true);
+    }).catch(function() {
+      window.App.showToast('Gagal mengirim. Periksa koneksi internet lalu kirim ulang.', 'error');
+      resetFormState(form, false);
+    });
   }
 
   /**
@@ -209,9 +185,11 @@
    * agar tombol tidak pernah tertinggal di kondisi disabled/loading
    * (Section 1.6: loading state harus selalu selesai)
    */
-  function resetFormState(form) {
+  function resetFormState(form, clear) {
     var submitBtn = document.getElementById('contact-submit');
-    if (form) form.reset();
+    // WHY clear=false saat kirim gagal: data dipertahankan supaya user
+    // bisa kirim ulang tanpa mengetik ulang.
+    if (form && clear !== false) form.reset();
     if (submitBtn) {
       submitBtn.classList.remove('loading');
       submitBtn.disabled = false;
