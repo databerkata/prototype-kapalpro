@@ -277,6 +277,13 @@
               <!-- Price Filter -->
               <div class="catalog-filter-section">
                 <h3 class="catalog-filter-title">Harga (Rp)</h3>
+                <div class="filter-presets" role="group" aria-label="Preset rentang harga">
+                  <button type="button" class="filter-preset is-active" data-preset-price="">Semua</button>
+                  <button type="button" class="filter-preset" data-preset-price="0-5000000000">&lt; Rp5 M</button>
+                  <button type="button" class="filter-preset" data-preset-price="5000000000-15000000000">Rp5&ndash;15 M</button>
+                  <button type="button" class="filter-preset" data-preset-price="15000000000-30000000000">Rp15&ndash;30 M</button>
+                  <button type="button" class="filter-preset" data-preset-price="30000000000-">&gt; Rp30 M</button>
+                </div>
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3);">
                   <div>
                     <label for="price-min" class="text-xs" style="color: var(--text-muted);">Minimum</label>
@@ -292,6 +299,12 @@
               <!-- Year Filter -->
               <div class="catalog-filter-section">
                 <h3 class="catalog-filter-title">Tahun</h3>
+                <div class="filter-presets" role="group" aria-label="Preset tahun pembuatan">
+                  <button type="button" class="filter-preset is-active" data-preset-year="">Semua</button>
+                  <button type="button" class="filter-preset" data-preset-year="2015-">2015+</button>
+                  <button type="button" class="filter-preset" data-preset-year="2010-">2010+</button>
+                  <button type="button" class="filter-preset" data-preset-year="2005-">2005+</button>
+                </div>
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3);">
                   <div>
                     <label for="year-min" class="text-xs" style="color: var(--text-muted);">Dari</label>
@@ -388,8 +401,6 @@
               <div class="catalog-sort">
                 <label for="sort-select" class="text-sm" style="color: var(--text-secondary); white-space: nowrap;">Urutkan:</label>
                 <select id="sort-select" class="form-input form-select" style="width: auto; padding: var(--space-2) var(--space-3); font-size: var(--text-sm);">
-                  <option value="relevant" selected>Paling Relevan</option>
-                  <option value="is-new">Paling Baru</option>
                   <option value="newest">Terbaru</option>
                   <option value="oldest">Terlama</option>
                   <option value="price-low">Harga Terendah</option>
