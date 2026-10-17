@@ -968,6 +968,13 @@
 
     filteredVessels.sort(function(a, b) {
       switch (sortValue) {
+        case 'relevant':
+          return 0;
+        case 'is-new':
+          // WHY is_new dulu: "Paling Baru" = listing terbaru, bukan tahun
+          // pembuatan termuda. Sort stabil menjaga urutan existing di
+          // dalam tiap kelompok.
+          return (b.is_new ? 1 : 0) - (a.is_new ? 1 : 0);
         case 'newest':
           return (b.year_built || 0) - (a.year_built || 0);
         case 'oldest':

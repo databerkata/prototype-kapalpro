@@ -1069,12 +1069,25 @@
     // WHY badge hanya untuk status yang informatif: 'available' adalah
     // default semua kapal, jadi badge itu selalu muncul tanpa membawa
     // informasi apa pun.
-    var badge = '';
+    var badges = '';
     if (shouldShowStatus(v)) {
-      badge = '<span class="catalog-card-badge'
+      badges += '<span class="catalog-card-badge'
         + (v.status === 'sold' ? ' is-sold' : '')
         + '">' + Sanitize.escapeHtml(vesselStatusLabel(v.status)) + '</span>';
     }
+    // WHY badge "Baru"/"Turun Harga": sinyal kebaruan & urgensi ala
+    // marketplace kapal internasional; hanya muncul bila flag datanya
+    // ada di vessels.json (is_new / price_drop).
+    if (v.is_new) {
+      badges += '<span class="catalog-card-badge is-new">Baru</span>';
+    }
+    if (v.price_drop) {
+      badges += '<span class="catalog-card-badge is-drop">Turun Harga</span>';
+    }
+    // WHY dibungkus .catalog-card-badges: badge overlay absolute di
+    // media; tanpa wrapper, badge kedua menumpuk tepat di atas badge
+    // pertama (sama-sama top/left).
+    var badge = badges ? '<div class="catalog-card-badges">' + badges + '</div>' : '';
 
     // WHY atribut <img> dirangkai di fungsi kecil, bukan ditulis inline di
     // dalam daftar argumen: baris lanjutan yang diawali "+" di DALAM daftar
