@@ -1258,6 +1258,32 @@ p {
   color: var(--color-danger-600);
 }
 
+/* WHY wrapper: badge overlay absolute di media; beberapa badge butuh
+   wadah flex agar tidak menumpuk. */
+.catalog-card-media .catalog-card-badges {
+  position: absolute;
+  top: var(--space-2);
+  left: var(--space-2);
+  z-index: 1;
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+}
+.catalog-card-media .catalog-card-badges .catalog-card-badge {
+  position: static;
+  margin-bottom: 0;
+}
+
+.catalog-card-badge.is-new {
+  background-color: var(--color-primary-50);
+  color: var(--color-primary-600);
+}
+
+.catalog-card-badge.is-drop {
+  background-color: var(--color-success-50);
+  color: var(--color-success-600);
+}
+
 /* --- Slide foto (mini carousel) --- */
 /* WHY semua slide absolut: tinggi .catalog-card-media murni ditentukan
    aspect-ratio 4/3, bukan oleh isi slide - berganti foto tidak pernah
