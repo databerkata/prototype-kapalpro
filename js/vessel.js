@@ -1280,6 +1280,58 @@
     var form = document.getElementById('inquiry-form');
     if (!form) return;
 
+    // === UX RAPiHAN form inquiry ===
+    // WHY via DOM injection: 33 halaman vessel statis - satu push JS
+    // menjangkau semuanya tanpa edit HTML. Semua idempoten: aman bila
+    // init dipanggil lebih dari sekali.
+    (function enhanceInquiryUX() {
+      // 1. Judul + subline sebelum form. WHY class CSS existing
+      // (.inquiry-form-title/.inquiry-subtitle): konsisten dengan desain
+      // form tanpa menambah CSS baru.
+      if (!document.getElementById('inquiry-form-heading')) {
+        var heading = document.createElement('h2');
+        heading.id = 'inquiry-form-heading';
+        heading.className = 'inquiry-form-title';
+        heading.textContent = 'Ajukan Penawaran';
+        var subline = document.createElement('p');
+        subline.id = 'inquiry-form-subline';
+        subline.className = 'inquiry-subtitle';
+        subline.textContent = 'Isi formulir di bawah ini untuk mengajukan penawaran kapal ini.';
+        form.parentNode.insertBefore(heading, form);
+        form.parentNode.insertBefore(subline, form);
+      }
+
+      // 2. Sembunyikan select "Jenis Kapal" yang redundan (sudah terisi
+      // otomatis sesuai halaman). WHY display:none bukan remove: kode
+      // sinkronisasi dropdown existing tetap jalan dan hidden field
+      // vessel_type tetap terisi. Select tidak required - validasi aman.
+      var typeSel = document.getElementById('inquiry-vessel-type-select');
+      if (typeSel) {
+        var group = typeSel.closest ? typeSel.closest('.form-group') : typeSel.parentNode;
+        if (group) group.style.display = 'none';
+      }
+
+      // 3. Samakan istilah tombol dengan langkah proses: "Ajukan Penawaran".
+      // WHY ganti span saja: tombol berisi SVG ikon yang harus dipertahankan.
+      var submitBtn = document.getElementById('inquiry-submit');
+      if (submitBtn) {
+        var label = submitBtn.querySelector('span');
+        if (label) label.textContent = 'Ajukan Penawaran';
+
+        // 4. Microcopy ekspektasi di bawah tombol. WHY sisip setelah
+        // pembungkus tombol (flex row): <p> jadi blok di bawahnya,
+        // bukan item flex.
+        if (!document.getElementById('inquiry-form-note')) {
+          var note = document.createElement('p');
+          note.id = 'inquiry-form-note';
+          note.className = 'form-note';
+          note.textContent = 'Tim kami akan menghubungimu maksimal 1×24 jam.';
+          var btnRow = submitBtn.parentNode;
+          btnRow.parentNode.insertBefore(note, btnRow.nextSibling);
+        }
+      }
+    })();
+
     // WHY konfigurasi ada di js/config.js: lihat catatan
     // inquiryFormUrl di sana. Selama belum diisi lengkap,
     // KapalProContact.form() mengembalikan null dan pengiriman jatuh ke
@@ -1391,7 +1443,7 @@
         mode: 'no-cors',
         body: params
       }).then(function() {
-        window.App.showToast('Inquiry terkirim. Kami akan menghubungi Anda segera.', 'success');
+        window.App.showToast('Penawaran terkirim. Tim kami akan menghubungimu maksimal 1×24 jam.', 'success');
         form.reset();
         restoreBtn();
       }).catch(function() {

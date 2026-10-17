@@ -24,6 +24,20 @@
 
     form.addEventListener('submit', onSubmit);
 
+    // WHY microcopy ekspektasi di bawah tombol (samakan pola form inquiry):
+    // idempoten bila init dipanggil lebih dari sekali. Tombol adalah anak
+    // langsung <form>, jadi <p> tersisip rapi di bawahnya.
+    (function addExpectationNote() {
+      var submitBtn = document.getElementById('contact-submit');
+      if (submitBtn && !document.getElementById('contact-form-note')) {
+        var note = document.createElement('p');
+        note.id = 'contact-form-note';
+        note.className = 'form-note';
+        note.textContent = 'Tim kami akan menghubungimu maksimal 1×24 jam.';
+        submitBtn.parentNode.insertBefore(note, submitBtn.nextSibling);
+      }
+    })();
+
     // WHY: Populate vessel dropdown dari vessels.json untuk LOI
     populateVesselDropdown();
 
@@ -172,7 +186,7 @@
       mode: 'no-cors',
       body: params
     }).then(function() {
-      window.App.showToast('Pesan terkirim. Kami akan menghubungi Anda segera.', 'success');
+      window.App.showToast('Pesan terkirim. Tim kami akan menghubungimu maksimal 1×24 jam.', 'success');
       resetFormState(form, true);
     }).catch(function() {
       window.App.showToast('Gagal mengirim. Periksa koneksi internet lalu kirim ulang.', 'error');
