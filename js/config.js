@@ -32,7 +32,7 @@ window.KAPALPRO_CONFIG = {
   email: '',
 
   // ---------- Domain (untuk SEO / schema.org) ----------
-  siteUrl: 'https://databerkata.github.io/prototype-kapalpro',
+  siteUrl: 'https://kapalpro.web.id',
 
   // ---------- Pengiriman form ke Google Forms (BELUM DIISI) ----------
   // WHY dikumpulkan di sini: sama seperti nomor, URL form dan ID entri
