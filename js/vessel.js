@@ -1330,6 +1330,24 @@
           btnRow.parentNode.insertBefore(note, btnRow.nextSibling);
         }
       }
+      // 5. Kurangi field wajib: Email & Pesan jadi opsional (keputusan
+      // owner 2026-10-17: turunkan friksi submit). WHY via JS: 33 halaman
+      // statis. Label memakai <span>*</span> terpisah -> hapus span-nya.
+      // Idempoten: aman bila init dipanggil lebih dari sekali.
+      ['inquiry-email', 'inquiry-message'].forEach(function(id) {
+        var input = document.getElementById(id);
+        if (input) input.removeAttribute('required');
+        var label = document.querySelector('label[for="' + id + '"]');
+        if (label) {
+          var stars = label.querySelectorAll('span');
+          Array.prototype.forEach.call(stars, function(sp) {
+            if (sp.textContent.trim() === '*') sp.parentNode.removeChild(sp);
+          });
+          Array.prototype.forEach.call(label.childNodes, function(n) {
+            if (n.nodeType === 3) n.nodeValue = n.nodeValue.replace(/\s*\*\s*$/, '');
+          });
+        }
+      });
     })();
 
     // WHY konfigurasi ada di js/config.js: lihat catatan
@@ -1362,19 +1380,19 @@
         return el ? el.value.trim() : '';
       }
 
-      // WHY: Validate required fields
+      // WHY: Validate required fields (hanya Nama + Telepon yang wajib;
+      // Email & Pesan opsional sejak 2026-10-17 untuk turunkan friksi)
       var name = fval('inquiry-name');
       var email = fval('inquiry-email');
       var phone = fval('inquiry-phone');
-      var message = fval('inquiry-message');
 
-      if (!name || !email || !phone || !message) {
+      if (!name || !phone) {
         window.App.showToast('Mohon lengkapi field yang wajib diisi', 'error');
         return;
       }
 
-      // WHY: Email validation
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      // WHY: Email hanya divalidasi formatnya bila diisi; kosong = lolos.
+      if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
         window.App.showToast('Format email tidak valid', 'error');
         return;
       }

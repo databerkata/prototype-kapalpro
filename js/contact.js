@@ -38,6 +38,24 @@
       }
     })();
 
+    // WHY kurangi field wajib: Email jadi opsional (keputusan owner
+    // 2026-10-17: turunkan friksi). Label form kontak tidak memakai tanda
+    // * - helper tetap defensif bila markup berubah. Idempoten.
+    (function makeEmailOptional() {
+      var input = document.getElementById('contact-email');
+      if (input) input.removeAttribute('required');
+      var label = document.querySelector('label[for="contact-email"]');
+      if (label) {
+        var stars = label.querySelectorAll('span');
+        Array.prototype.forEach.call(stars, function(sp) {
+          if (sp.textContent.trim() === '*') sp.parentNode.removeChild(sp);
+        });
+        Array.prototype.forEach.call(label.childNodes, function(n) {
+          if (n.nodeType === 3) n.nodeValue = n.nodeValue.replace(/\s*\*\s*$/, '');
+        });
+      }
+    })();
+
     // WHY: Populate vessel dropdown dari vessels.json untuk LOI
     populateVesselDropdown();
 
@@ -109,7 +127,8 @@
     var valid = true;
 
     valid = requireField('contact-name', data.name, 'contact.errName') && valid;
-    valid = requireField('contact-email', data.email, 'contact.errEmail') && valid;
+    // WHY Email opsional sejak 2026-10-17: wajib-diisi dihapus, hanya
+    // validasi format bila diisi.
     if (data.email && !isValidEmail(data.email)) {
       showError('contact-email', 'Format email tidak valid');
       valid = false;
