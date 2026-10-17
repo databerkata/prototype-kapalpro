@@ -257,6 +257,11 @@
     // WHY: Boolean-ish
     out.is_negotiable = v.is_negotiable === true || v.is_negotiable === 'TRUE';
 
+    // WHY: Flag promo badge kartu ("Baru"/"Turun Harga") — tanpa ini
+    // badge batch 1 tidak pernah tampil karena sanitizeVessel memutihkan field.
+    out.is_new = v.is_new === true;
+    out.price_drop = v.price_drop === true;
+
     return out;
   }
 
