@@ -3636,9 +3636,7 @@ html {
 
 /* Video teaser section (homepage) — autoplay muted loop, tanpa suara */
 .video-teaser {
-  background: #000;
-  padding-top: 0;
-  padding-bottom: 0;
+  /* transparan: menyatu dengan background halaman (light/dark mengikuti tema) */
 }
 .video-teaser .container {
   max-width: 1200px;
@@ -3647,8 +3645,8 @@ html {
   position: relative;
   border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 24px 80px rgba(29, 78, 216, 0.25);
-  border: 1px solid rgba(37, 99, 235, 0.35);
+  box-shadow: 0 20px 60px rgba(15, 23, 42, 0.16);
+  border: 1px solid rgba(37, 99, 235, 0.25);
 }
 .video-teaser-player {
   display: block;
@@ -3656,12 +3654,6 @@ html {
   aspect-ratio: 16 / 9;
   object-fit: cover;
   background: #000;
-}
-@media (min-width: 641px) and (max-width: 1024px) {
-  /* Tablet: radius sedikit lebih kecil agar proporsional */
-  .video-teaser-frame {
-    border-radius: 12px;
-  }
 }
 @media (max-width: 640px) {
   .video-teaser-frame {
