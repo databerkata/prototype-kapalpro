@@ -936,48 +936,6 @@
   }
 
   /**
-   * Chip spesifikasi singkat (GT/DWT/tahun) untuk kartu katalog.
-   *
-   * WHY di sini dan bukan di js/index.js + js/catalog.js: kedua halaman
-   * merender kartu dengan gaya yang sama, dan dua salinan rumus chip
-   * pasti berbeda begitu salah satunya diubah. Field kosong tidak
-   * dirender sama sekali, jadi tidak ada chip yatim.
-   *
-   * @param {object} v - Data kapal yang sudah lewat sanitizeVessel
-   * @returns {string} Markup .catalog-card-chips, atau '' bila kosong
-   */
-  function buildCardSpecChips(v) {
-    // WHY fallback: jika js/sanitize.js gagal dimuat, situs tidak boleh mati total.
-    var Sanitize = window.KapalProSanitize || {
-      escapeHtml: function(str) {
-        return String(str == null ? '' : str)
-          .replace(/&/g, '&amp;')
-          .replace(/</g, '&lt;')
-          .replace(/>/g, '&gt;')
-          .replace(/"/g, '&quot;')
-          .replace(/'/g, '&#39;');
-      }
-    };
-    var chips = [];
-    if (v.gross_tonnage) {
-      chips.push(formatNumber(v.gross_tonnage) + ' GT');
-    }
-    if (v.dwt) {
-      chips.push(formatNumber(v.dwt) + ' DWT');
-    }
-    if (v.year_built) {
-      chips.push('Thn ' + v.year_built);
-    }
-    if (!chips.length) return '';
-    return '<div class="catalog-card-chips">'
-      + chips.map(function(c) {
-          return '<span class="catalog-card-chip">'
-            + Sanitize.escapeHtml(c) + '</span>';
-        }).join('')
-      + '</div>';
-  }
-
-  /**
    * Badge lokasi kecil untuk baris harga kartu katalog.
    *
    * WHY di samping harga, bukan baris sendiri: baris tambahan menggeser
@@ -1049,7 +1007,7 @@
    * @param {string} opts.sizes - atribut sizes. Grid tiap halaman beda
    *   (beranda 3 kolom ~30vw, katalog ~31vw), jadi pemanggil yang tahu
    *   lebar rendernya - tanpa ini browser memilih kandidat terlalu besar.
-   * @param {boolean} [opts.carousel] - tampilkan thumbnail + counter slide.
+   * @param {boolean} [opts.carousel] - tampilkan thumbnail foto.
    *   Tanpa opsi ini hanya foto utama yang dirender (perilaku katalog).
    * @param {boolean} [opts.saveButton] - tombol simpan shortlist; fitur
    *   khas catalog.html, bukan beranda.
@@ -1125,12 +1083,10 @@
         + '</div>';
     }).join('');
 
-    // Thumbnail + counter: HANYA bila carousel dinyalakan dan memang ada
+    // Thumbnail: HANYA bila carousel dinyalakan dan memang ada
     // lebih dari satu foto. Tombol (bukan <a>) supaya menekannya tidak
-    // menavigasi; slide aktif diumumkan lewat aria-pressed, sehingga counter
-    // cukup dekoratif (aria-hidden).
+    // menavigasi; slide aktif diumumkan lewat aria-pressed.
     var thumbs = '';
-    var counter = '';
     if (options.carousel && photos.length > 1) {
       thumbs = '<div class="catalog-card-thumbs">'
         + photos.map(function(url, i) {
@@ -1154,8 +1110,6 @@
               + '</button>';
           }).join('')
         + '</div>';
-      counter = '<span class="catalog-card-slide-count" aria-hidden="true">'
-        + '1/' + photos.length + '</span>';
     }
 
     // WHY tombol simpan di LUAR link judul: seluruh kartu bisa diklik lewat
@@ -1184,8 +1138,6 @@
       +   '<div class="catalog-card-media">'
       +     badge
       +     slides
-      +     buildCardSpecChips(v)
-      +     counter
       +     thumbs
       +   '</div>'
       +   '<div class="catalog-card-body">'
@@ -1260,7 +1212,6 @@
     loadVariantManifest: loadVariantManifest,
     buildSrcSetWebp: buildSrcSetWebp,
     buildPicture: buildPicture,
-    buildCardSpecChips: buildCardSpecChips,
     buildCardLocationHtml: buildCardLocationHtml,
     buildCardHtml: buildCardHtml,
     // WHY: Lebar varian kartu dan thumbnail punya SATU definisi (di atas,
