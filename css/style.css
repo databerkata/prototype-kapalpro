@@ -1788,6 +1788,29 @@ p {
   color: var(--text-secondary);
 }
 
+/* Panah alur antar-langkah: HANYA di section "Langkah Mudah Bertransaksi".
+   WHY scope via aria-labelledby: .process-grid yang sama dipakai section
+   "Alasan Memilih KapalPro" yang itemnya bukan urutan - di sana panah
+   dilarang muncul. Panah sejajar tengah lingkaran nomor (48px), duduk di
+   celah antar-kolom. Di bawah 1024px grid menumpuk/menyempit sehingga panah
+   disembunyikan - urutan sudah jelas dari nomornya. */
+@media (min-width: 1024px) {
+  section[aria-labelledby="process-title"] .process-step {
+    position: relative;
+  }
+  section[aria-labelledby="process-title"] .process-step:not(:last-child)::after {
+    content: "\2192";
+    position: absolute;
+    top: 12px;
+    right: -26px;
+    font-size: 1.5rem;
+    line-height: 1;
+    font-weight: 700;
+    color: var(--color-primary-600);
+    pointer-events: none;
+  }
+}
+
 /* === 14. CTA SECTION === */
 .cta-section {
   background-color: var(--color-primary-600);
