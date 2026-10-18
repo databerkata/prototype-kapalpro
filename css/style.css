@@ -3633,3 +3633,32 @@ html {
     grid-template-columns: repeat(2, 1fr);
   }
 }
+
+/* Video teaser section (homepage) — autoplay muted loop, tanpa suara */
+.video-teaser {
+  background: #000;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.video-teaser .container {
+  max-width: 1200px;
+}
+.video-teaser-frame {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 24px 80px rgba(29, 78, 216, 0.25);
+  border: 1px solid rgba(37, 99, 235, 0.35);
+}
+.video-teaser-player {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  background: #000;
+}
+@media (max-width: 640px) {
+  .video-teaser-frame {
+    border-radius: 10px;
+  }
+}
