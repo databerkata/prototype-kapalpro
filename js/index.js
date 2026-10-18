@@ -147,7 +147,8 @@
       window.VesselData.getVessels(),
       window.VesselData.loadVariantManifest()
     ]).then(function(res) {
-      allVessels = res[0] || [];
+      // WHY filter sold: katalog beranda hanya menampilkan kapal tersedia.
+      allVessels = (res[0] || []).filter(function(v) { return v && v.status !== 'sold'; });
       render();
     }).catch(function(err) {
       console.error('[Index] Gagal merender katalog kapal:', err);
@@ -173,7 +174,9 @@
 
   if (loadMoreEl) {
     loadMoreEl.addEventListener('click', function() {
-      shown += PAGE_SIZE;
+      // WHY tampilkan semua sekaligus: label tombol "Lihat Semua"
+      // harus benar - bukan tambah 6 per klik.
+      shown = allVessels.length;
       render();
       // WHY fokus dikembalikan ke tombol: setelah grid bertambah,
       // posisi fokus tidak berubah dan pembaca layar tetap tahu
