@@ -73,6 +73,7 @@
   
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="192x192" href="favicon-192x192.png">
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   
@@ -109,6 +110,62 @@
     .hero{padding:64px 24px}
     @media(min-width:768px){.hero{padding:96px 24px}}
   </style>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "Apa itu KapalPro?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "KapalPro adalah platform jual beli kapal di Indonesia — tongkang, tugboat, floating crane barge, LCT, tanker, dan oil barge set. Kami mempertemukan pemilik kapal langsung dengan pembeli, dengan spesifikasi transparan dan dokumen lengkap, tanpa perantara."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Apakah KapalPro menjual kapal secara langsung?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "KapalPro adalah platform dan broker, bukan pemilik kapal. Kami mempertemukan pemilik kapal dengan pembeli, membantu proses negosiasi, dan mengarahkan Anda melakukan survei sebelum penandatanganan Memorandum of Agreement."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Bagaimana cara menawarkan harga kapal?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Kirim nama kapal yang diminati, perusahaan, nomor telepon, dan harga yang Anda tawarkan lewat form di halaman kapal atau WhatsApp. Kami membalas dalam satu hari kerja."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Apakah spesifikasi di halaman kapal sudah pasti?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Spesifikasi berasal dari pemilik dan dapat berubah. Semua angka harus dicocokkan dengan laporan survei sebelum Memorandum of Agreement ditandatangani. Laporan survei dibagikan kepada kedua belah pihak."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Apa itu Letter of Intent (LOI)?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Letter of Intent adalah pernyataan minat resmi dari calon pembeli terhadap kapal tertentu, berisi identitas pembeli, kapal yang diminati, dan harga penawaran indikatif. LOI menjadi dasar negosiasi sebelum survei dan penandatanganan MOA."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Apakah ada biaya untuk mencari kapal?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Tidak ada biaya untuk menjelajahi katalog dan mengajukan penawaran. Biaya survei disepakati terpisah antara kedua belah pihak."
+   }
+  }
+ ]
+}
+</script>
 </head>
 <body>
   <!-- Skip Link (Section 1.9 - Accessibility) -->
@@ -368,6 +425,10 @@
         <h2 id="home-faq-title">Pertanyaan Umum</h2>
         <div class="vessel-faq">
           <details class="vessel-faq-item">
+            <summary class="vessel-faq-q">Apa itu KapalPro?</summary>
+            <p class="vessel-faq-a">KapalPro adalah platform jual beli kapal di Indonesia \u2014 tongkang, tugboat, floating crane barge, LCT, tanker, dan oil barge set. Kami mempertemukan pemilik kapal langsung dengan pembeli, dengan spesifikasi transparan dan dokumen lengkap, tanpa perantara.</p>
+          </details>
+          <details class="vessel-faq-item">
             <summary class="vessel-faq-q">Apakah KapalPro menjual kapal secara langsung?</summary>
             <p class="vessel-faq-a">KapalPro adalah platform dan broker, bukan pemilik kapal. Kami mempertemukan pemilik kapal dengan pembeli, membantu proses negosiasi, dan mengarahkan Anda melakukan survei sebelum penandatanganan Memorandum of Agreement.</p>
           </details>
@@ -619,8 +680,12 @@
     },
     "publisher": {
       "@type": "Organization",
+      "@id": "https://kapalpro.web.id/#organisasi",
       "name": "KapalPro",
+      "alternateName": "KapalPro Indonesia",
       "url": "https://kapalpro.web.id",
+      "slogan": "Jual Beli Kapal Terverifikasi, Siap Survey",
+      "description": "KapalPro adalah platform jual beli kapal di Indonesia \u2014 tongkang, tugboat, floating crane barge, LCT, tanker, dan oil barge set \u2014 yang mempertemukan pemilik kapal langsung dengan pembeli, dengan spesifikasi transparan dan dokumen lengkap.",
       "logo": {
         "@type": "ImageObject",
         "url": "https://kapalpro.web.id/assets/og-image.jpg"
