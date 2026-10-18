@@ -3657,6 +3657,12 @@ html {
   object-fit: cover;
   background: #000;
 }
+@media (min-width: 641px) and (max-width: 1024px) {
+  /* Tablet: radius sedikit lebih kecil agar proporsional */
+  .video-teaser-frame {
+    border-radius: 12px;
+  }
+}
 @media (max-width: 640px) {
   .video-teaser-frame {
     border-radius: 10px;
