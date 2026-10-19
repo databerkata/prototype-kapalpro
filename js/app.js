@@ -385,8 +385,8 @@
     if (!consentBanner) return;
 
     // WHY try/catch: localStorage melempar di private mode / storage
-    // penuh. Tanpa ini init() terhenti dan initServiceWorker() +
-    // initPwaInstall() tidak pernah jalan.
+    // penuh. Tanpa ini init() terhenti dan initServiceWorker()
+    // tidak pernah jalan.
     function readConsent() {
       try { return localStorage.getItem(consentKey); } catch (e) { return null; }
     }
