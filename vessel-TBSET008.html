@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
 
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-tZqmasilAl6RTvAzblDqCwq9l3dtedMk2WUpKo1bvis=' https://plausible.io https://docs.google.com; style-src 'self' 'unsafe-inline'; img-src 'self' https: data:; connect-src 'self' https://plausible.io https://docs.google.com; font-src 'self'; frame-src https://docs.google.com; form-action 'self' https://docs.google.com https://wa.me; base-uri 'self'; object-src 'none'; frame-ancestors 'self'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-tZqmasilAl6RTvAzblDqCwq9l3dtedMk2WUpKo1bvis=' https://plausible.io https://docs.google.com; style-src 'self' 'unsafe-inline'; img-src 'self' https: data:; connect-src 'self' https://plausible.io https://docs.google.com; font-src 'self'; frame-src 'self' https://docs.google.com; form-action 'self' https://docs.google.com https://wa.me; base-uri 'self'; object-src 'none'; frame-ancestors 'self'">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <!-- WHY: Dua meta theme-color (terang & gelap) membiarkan browser memilih
        warna chrome-nya sendiri sebelum JavaScript dieksekusi, sehingga tidak
@@ -269,15 +269,15 @@
     .vessel-main-image{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:12px;background:#f1f5f9}
   </style>
   
-  <link rel="stylesheet" href="css/style.css?v=832baba2">
-  <link rel="stylesheet" href="css/search-autocomplete.css?v=832baba2">
+  <link rel="stylesheet" href="css/style.css?v=20261018d">
+  <link rel="stylesheet" href="css/search-autocomplete.css?v=20261018d">
   <!-- WHY: Redirect ke URL bersih harus jalan SEBELUM halaman digambar.
          Kalau script-nya defer, pengunjung sempat melihat "Loading..."
          lalu lompat - perceptible flash pada koneksi lambat. File
          eksternal, bukan inline, supaya tidak perlu menambah hash baru
          ke CSP. .htaccess dan _redirects melakukan 301 sejati lebih
          dulu, jadi ini hanya cadangan untuk host tanpa konfigurasi. -->
-  <script src="js/vessel-redirect.js?v=832baba2"></script>
+  <script src="js/vessel-redirect.js?v=20261018d"></script>
 </head>
 <body data-vessel-id="TBSET008">
   <!-- Skip Link -->
@@ -490,6 +490,15 @@
                 </table>
               </div>
             </section>
+
+            <!-- Anatomy diagram -->
+            <section class="vessel-anatomy" style="margin-bottom: var(--space-8);">
+              <h2 style="font-size: var(--text-xl); margin-bottom: var(--space-4);">Anatomi Kapal</h2>
+              <div class="card" style="overflow: hidden; padding: var(--space-2);">
+                <iframe src="assets/anatomy/tbset008.html" title="Diagram anatomi kapal TBSET008" loading="lazy" scrolling="no" style="width: 100%; aspect-ratio: 650/653; border: 0; display: block; border-radius: var(--radius-sm); background: #f2f2ef;"></iframe>
+              </div>
+            </section>
+
 
             <!-- Documents and Classification -->
             <!-- WHY blok ini ada: untuk kapal bekas, hal yang benar-benar
@@ -1466,18 +1475,18 @@
        semuanya defer, jadi urutan di sini adalah urutan eksekusi.
        Generator halaman kapal membaca berkas ini sebagai satu-satunya
        sumber markup, jadi perubahan ini ikut ke 15 vessel-*.html. -->
-  <script src="js/sanitize.js?v=832baba2" defer></script>
-  <script src="js/config.js?v=832baba2" defer></script>
-  <script src="js/theme.js?v=832baba2" defer></script>
-  <script src="js/data.js?v=832baba2" defer></script>
-  <script src="js/shortlist.js?v=832baba2" defer></script>
-  <script src="js/vessel-actions.js?v=832baba2" defer></script>
-  <script src="js/app.js?v=832baba2" defer></script>
-  <script src="js/anim.js?v=832baba2" defer></script>
-  <script src="js/vessel.js?v=832baba2" defer></script>
-  <script src="js/analytics.js?v=832baba2" defer></script>
-  <script src="js/perf.js?v=832baba2" defer></script>
-  <script src="js/search-autocomplete.js?v=832baba2" defer></script>
+  <script src="js/sanitize.js?v=20261018d" defer></script>
+  <script src="js/config.js?v=20261018d" defer></script>
+  <script src="js/theme.js?v=20261018d" defer></script>
+  <script src="js/data.js?v=20261018d" defer></script>
+  <script src="js/shortlist.js?v=20261018d" defer></script>
+  <script src="js/vessel-actions.js?v=20261018d" defer></script>
+  <script src="js/app.js?v=20261018d" defer></script>
+  <script src="js/anim.js?v=20261018d" defer></script>
+  <script src="js/vessel.js?v=20261018d" defer></script>
+  <script src="js/analytics.js?v=20261018d" defer></script>
+  <script src="js/perf.js?v=20261018d" defer></script>
+  <script src="js/search-autocomplete.js?v=20261018d" defer></script>
 
 </body>
 </html>
