@@ -3494,6 +3494,15 @@ html {
     display: none !important;
   }
 
+/* WHY 2026-10-19: tombol Telepon dan Simpan Kapal dihapus dari sidebar
+   halaman kapal atas permintaan Mas — tanpa fitur login, tombol simpan
+   tidak ada gunanya. Sembunyi via CSS supaya satu push mencakup 33
+   halaman; footer (data-tel di luar sidebar) tidak ikut tersembunyi. */
+.vessel-sidebar-actions [data-tel],
+.vessel-sidebar-actions #save-vessel {
+  display: none !important;
+}
+
   body {
     background: #ffffff !important;
     color: #000000 !important;
