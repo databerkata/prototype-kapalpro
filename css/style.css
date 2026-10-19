@@ -3558,6 +3558,12 @@ html {
   display: none !important;
 }
 
+/* WHY 2026-10-19: teks penjelasan di bawah tombol cetak dihapus dari
+   sidebar atas permintaan Mas. */
+.vessel-sidebar-actions p.text-xs {
+  display: none !important;
+}
+
 /* ============================================================
    34. FAQ KAPAL
    ============================================================ */
