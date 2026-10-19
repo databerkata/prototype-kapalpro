@@ -509,94 +509,6 @@
   }
 
   /**
-   * Tombol "Pasang Aplikasi" (Tahap 4.4 PWA).
-   *
-   * WHY event-driven, bukan tombol statis: beforeinstallprompt hanya
-   * terpicu di Chromium yang benar-benar memenuhi syarat pemasangan
-   * (manifest valid + service worker + HTTPS). Di luar kondisi itu -
-   * termasuk iOS Safari, yang tidak pernah menembakkan event ini -
-   * tombol pemasangan hanya akan menawarkan sesuatu yang tidak bisa
-   * dilakukan. Jadi tombolnya DIBUAT dan ditampilkan hanya saat event
-   * datang, dan disembunyikan lagi begitu dipakai.
-   *
-   * WHY localStorage: tanpa jejak ini, pengunjung yang menekan Escape
-   * pada dialog pemasangan akan ditawari lagi di setiap kunjungan
-   * berikutnya - perilaku yang oleh pedoman Chrome sendiri dianggap
-   * mengganggu. Satu kunci menyimpan hasil akhirnya ('dismissed' atau
-   * 'installed') dan keduanya berarti: jangan tawarkan lagi.
-   */
-  var INSTALL_STATE_KEY = 'kapalpro-install';
-  var deferredInstall = null;
-  var installBtn = null;
-
-  function readInstallState() {
-    try { return localStorage.getItem(INSTALL_STATE_KEY) || ''; } catch (e) { return ''; }
-  }
-
-  function writeInstallState(value) {
-    try { localStorage.setItem(INSTALL_STATE_KEY, value); } catch (e) {}
-  }
-
-  function initPwaInstall() {
-    function hideButton() {
-      if (installBtn) installBtn.hidden = true;
-    }
-
-    // WHY tombol dibuat saat event pertama, bukan di markup: 23 halaman
-    // harus menulis tombol yang sama persis, dan 99% kunjungan tidak
-    // pernah melihatnya (event tidak terpicu). Satu tempat pembuatan
-    // berarti satu tempat untuk diubah.
-    function ensureButton() {
-      if (installBtn) return installBtn;
-      var host = document.querySelector('.header-actions');
-      if (!host) return null;
-
-      installBtn = document.createElement('button');
-      installBtn.type = 'button';
-      installBtn.id = 'pwa-install-btn';
-      installBtn.className = 'btn btn-primary btn-sm';
-      installBtn.textContent = 'Pasang Aplikasi';
-      installBtn.hidden = true;
-      installBtn.addEventListener('click', function() {
-        if (!deferredInstall) return;
-        var evt = deferredInstall;
-        deferredInstall = null;
-        hideButton();
-        if (typeof evt.prompt !== 'function') return;
-        evt.prompt();
-        var choice = evt.userChoice;
-        if (choice && typeof choice.then === 'function') {
-          choice.then(function(result) {
-            // 'accepted' ditandai oleh event appinstalled di bawah;
-            // yang perlu dicatat di sini hanya penolakan eksplisit.
-            if (result && result.outcome === 'dismissed') writeInstallState('dismissed');
-          });
-        }
-      });
-      host.appendChild(installBtn);
-      return installBtn;
-    }
-
-    window.addEventListener('beforeinstallprompt', function(e) {
-      // WHY preventDefault: tanpa ini Chromium menampilkan mini-infobar
-      // sendiri yang hilang tanpa jejak. Menahannya berarti satu mekanisme
-      // pemasangan saja - tombol yang kita kendalikan - sehingga keadaan
-      // di localStorage selalu mencerminkan apa yang benar-benar terjadi.
-      e.preventDefault();
-      if (readInstallState()) return;
-      deferredInstall = e;
-      var btn = ensureButton();
-      if (btn) btn.hidden = false;
-    });
-
-    window.addEventListener('appinstalled', function() {
-      writeInstallState('installed');
-      deferredInstall = null;
-      hideButton();
-    });
-  }
-
-  /**
    * Initialize all components
    */
   function init() {
@@ -604,7 +516,6 @@
     initCookieConsent();
     initCookieManage();
     initServiceWorker();
-    initPwaInstall();
 
     // WHY: Log initialization for debugging (Section 1.13)
     console.log('[KapalPro] Application initialized');
