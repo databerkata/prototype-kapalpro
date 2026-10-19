@@ -3483,7 +3483,14 @@ html {
   .vessel-breadcrumb,
   .save-btn,
   .whatsapp-btn,
-  .btn {
+  .btn,
+  /* WHY 2026-10-19: hasil cetak halaman kapal dibatasi sampai
+     spesifikasi singkat — anatomi, dokumen, FAQ, dan kapal sejenis
+     tidak ikut tercetak (sebelumnya bisa 11 halaman). */
+  .vessel-anatomy,
+  .vessel-docs,
+  .vessel-faq-section,
+  section:has(#related-vessels) {
     display: none !important;
   }
 
