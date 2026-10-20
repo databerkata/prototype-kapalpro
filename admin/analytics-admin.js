@@ -109,6 +109,64 @@
     bars(document.getElementById('an-status-bars'), p30 ? d.status_30 : d.status_7);
   }
 
+  function fmtPrice(p) {
+    if (p == null || p === '') return 'Hubungi Kami';
+    p = Number(p);
+    if (isNaN(p)) return String(p);
+    if (p >= 1e9) { var m = p / 1e9; return 'Rp ' + (Math.round(m * 10) / 10).toLocaleString('id-ID') + ' M'; }
+    if (p >= 1e6) return 'Rp ' + Math.round(p / 1e6).toLocaleString('id-ID') + ' jt';
+    return 'Rp ' + fmt(p);
+  }
+  function statusLabel(s) {
+    return { available: 'Tersedia', sold: 'Terjual', reserved: 'Direservasi' }[s] || (s || '-');
+  }
+
+  function renderContact(d) {
+    var wrap = document.getElementById('an-contact-cards');
+    var note = document.getElementById('an-contact-note');
+    wrap.textContent = '';
+    var c = d.contact || { wa: {}, tel: {} };
+    var f = d.forms || {};
+    function card(label, value, sub) {
+      var cd = el('div', 'an-card');
+      cd.appendChild(el('div', 'an-card-label', label));
+      cd.appendChild(el('div', 'an-card-value', value));
+      cd.appendChild(el('div', 'an-card-sub', sub));
+      wrap.appendChild(cd);
+    }
+    card('Klik WhatsApp (7 hari)', fmt(c.wa.d7),
+      'Hari ini ' + fmt(c.wa.today) + ' · 30 hari ' + fmt(c.wa.d30));
+    card('Klik Telepon (7 hari)', fmt(c.tel.d7),
+      'Hari ini ' + fmt(c.tel.today) + ' · 30 hari ' + fmt(c.tel.d30));
+    if (f.error) {
+      card('Form Inquiry', '—', 'Data form tidak tersedia sementara');
+      card('Form Kontak', '—', 'Data form tidak tersedia sementara');
+      note.textContent = 'Statistik form gagal dimuat pada pembaruan terakhir. Klik WhatsApp/telepon tetap tercatat.';
+    } else {
+      card('Inquiry Asli Masuk', fmt(f.inquiry.real),
+        '7 hari ' + fmt(f.inquiry.real_d7) + ' · 30 hari ' + fmt(f.inquiry.real_d30) +
+        ' · ' + fmt(f.inquiry.tests) + ' entri tes tidak dihitung');
+      card('Pesan Kontak Asli', fmt(f.contact.real),
+        '7 hari ' + fmt(f.contact.real_d7) + ' · 30 hari ' + fmt(f.contact.real_d30) +
+        ' · ' + fmt(f.contact.tests) + ' entri tes tidak dihitung');
+      note.textContent = 'Klik WhatsApp/telepon dihitung sejak 20 Okt 2026 (sebelumnya tidak tercatat). ' +
+        'Form = data asli dari Google Forms, diperbarui tiap 1 jam; entri bertanda tes otomatis disaring dan tidak dihitung sebagai leads.';
+    }
+  }
+
+  function renderVessels(d) {
+    table(document.getElementById('an-vessels-table'),
+      ['Kapal', 'Status', 'Harga', 'Dilihat 7 hari', 'Dilihat 30 hari', 'Inquiry'],
+      (d.vessels || []).map(function (v) {
+        return [
+          (v.name || v.id) + ' (' + v.id + ')',
+          statusLabel(v.status),
+          fmtPrice(v.price),
+          fmt(v.views7), fmt(v.views30), fmt(v.inquiries)
+        ];
+      }));
+  }
+
   function render(d) {
     DATA = d;
     document.getElementById('an-status').hidden = true;
@@ -149,6 +207,8 @@
       }), 5);
 
     renderPeriod();
+    renderContact(d);
+    renderVessels(d);
   }
 
   document.querySelectorAll('.an-period-btn').forEach(function (b) {
