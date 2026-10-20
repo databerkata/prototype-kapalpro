@@ -28,13 +28,6 @@
 
   // ---- Helpers -------------------------------------------------------
   function fmt(n) { return Number(n || 0).toLocaleString('id-ID'); }
-  function fmtBytes(b) {
-    b = Number(b || 0);
-    if (b > 1073741824) return (b / 1073741824).toFixed(2) + ' GB';
-    if (b > 1048576) return (b / 1048576).toFixed(1) + ' MB';
-    if (b > 1024) return (b / 1024).toFixed(1) + ' KB';
-    return b + ' B';
-  }
   function el(tag, cls, text) {
     var n = document.createElement(tag);
     if (cls) n.className = cls;
@@ -124,6 +117,7 @@
   function renderContact(d) {
     var wrap = document.getElementById('an-contact-cards');
     var note = document.getElementById('an-contact-note');
+    var leadLine = document.getElementById('an-lead-line');
     wrap.textContent = '';
     var c = d.contact || { wa: {}, tel: {} };
     var f = d.forms || {};
@@ -134,23 +128,33 @@
       cd.appendChild(el('div', 'an-card-sub', sub));
       wrap.appendChild(cd);
     }
-    card('Klik WhatsApp (7 hari)', fmt(c.wa.d7),
-      'Hari ini ' + fmt(c.wa.today) + ' · 30 hari ' + fmt(c.wa.d30));
-    card('Klik Telepon (7 hari)', fmt(c.tel.d7),
-      'Hari ini ' + fmt(c.tel.today) + ' · 30 hari ' + fmt(c.tel.d30));
+    card('Klik WhatsApp', fmt(c.wa.d7),
+      'minggu ini · hari ini ' + fmt(c.wa.today) + ' · bulan ini ' + fmt(c.wa.d30));
+    card('Klik Telepon', fmt(c.tel.d7),
+      'minggu ini · hari ini ' + fmt(c.tel.today) + ' · bulan ini ' + fmt(c.tel.d30));
     if (f.error) {
-      card('Form Inquiry', '—', 'Data form tidak tersedia sementara');
-      card('Form Kontak', '—', 'Data form tidak tersedia sementara');
-      note.textContent = 'Statistik form gagal dimuat pada pembaruan terakhir. Klik WhatsApp/telepon tetap tercatat.';
+      card('Formulir Inquiry', '—', 'sedang tidak terbaca, coba lagi nanti');
+      card('Pesan Kontak', '—', 'sedang tidak terbaca, coba lagi nanti');
+      note.textContent = 'Data formulir gagal dimuat pada pembaruan terakhir. Klik WhatsApp/telepon tetap tercatat.';
+      leadLine.textContent = '';
+      leadLine.className = 'an-lead-line';
     } else {
-      card('Inquiry Asli Masuk', fmt(f.inquiry.real),
-        '7 hari ' + fmt(f.inquiry.real_d7) + ' · 30 hari ' + fmt(f.inquiry.real_d30) +
-        ' · ' + fmt(f.inquiry.tests) + ' entri tes tidak dihitung');
-      card('Pesan Kontak Asli', fmt(f.contact.real),
-        '7 hari ' + fmt(f.contact.real_d7) + ' · 30 hari ' + fmt(f.contact.real_d30) +
-        ' · ' + fmt(f.contact.tests) + ' entri tes tidak dihitung');
-      note.textContent = 'Klik WhatsApp/telepon dihitung sejak 20 Okt 2026 (sebelumnya tidak tercatat). ' +
-        'Form = data asli dari Google Forms, diperbarui tiap 1 jam; entri bertanda tes otomatis disaring dan tidak dihitung sebagai leads.';
+      card('Formulir Inquiry', fmt(f.inquiry.real),
+        'calon pembeli bertanya soal kapal · minggu ini ' + fmt(f.inquiry.real_d7));
+      card('Pesan Kontak', fmt(f.contact.real),
+        'pesan dari halaman kontak · minggu ini ' + fmt(f.contact.real_d7));
+      var totalLeads = Number(c.wa.d30 || 0) + Number(c.tel.d30 || 0) +
+        Number(f.inquiry.real || 0) + Number(f.contact.real || 0);
+      if (totalLeads > 0) {
+        leadLine.textContent = 'Ada calon pembeli yang sudah menghubungi — cek WhatsApp dan formulir masuk.';
+        leadLine.className = 'an-lead-line an-lead-ok';
+      } else {
+        leadLine.textContent = 'Belum ada calon pembeli yang menghubungi.';
+        leadLine.className = 'an-lead-line an-lead-zero';
+      }
+      var tests = Number(f.inquiry.tests || 0) + Number(f.contact.tests || 0);
+      note.textContent = 'Klik WhatsApp/telepon mulai dihitung 20 Okt 2026. Formulir dari Google Forms' +
+        (tests ? '; ' + fmt(tests) + ' entri tes tidak dihitung.' : '.');
     }
   }
 
@@ -167,6 +171,60 @@
       }));
   }
 
+  function renderSummary(d) {
+    var box = document.getElementById('an-summary');
+    box.textContent = '';
+    var s7 = d.totals.d7;
+    box.appendChild(el('p', 'an-sum-main',
+      'Minggu ini situs dibuka ' + fmt(s7.pageViews) + ' kali oleh sekitar ' +
+      fmt(s7.uniques) + ' pengunjung.'));
+    var vs = (d.vessels || []).slice().sort(function (a, b) { return (b.views30 || 0) - (a.views30 || 0); });
+    if (vs.length && vs[0].views30 > 0) {
+      box.appendChild(el('p', 'an-sum-sub',
+        'Kapal paling banyak dilihat: ' + (vs[0].name || vs[0].id) +
+        ' — ' + fmt(vs[0].views30) + ' kali dalam 30 hari.'));
+    }
+    var c = d.contact || { wa: {}, tel: {} };
+    var f = d.forms || {};
+    var leadsWeek = Number((c.wa || {}).d7 || 0) + Number((c.tel || {}).d7 || 0) +
+      (f.inquiry ? Number(f.inquiry.real_d7 || 0) : 0) +
+      (f.contact ? Number(f.contact.real_d7 || 0) : 0);
+    box.appendChild(el('p', leadsWeek > 0 ? 'an-sum-lead' : 'an-sum-sub',
+      leadsWeek > 0
+        ? leadsWeek + ' calon pembeli menghubungi minggu ini — cek bagian "Yang Menghubungi" di bawah.'
+        : 'Belum ada calon pembeli yang menghubungi minggu ini.'));
+  }
+
+  function renderTop5(d) {
+    var wrap = document.getElementById('an-top5');
+    wrap.textContent = '';
+    var vs = (d.vessels || []).slice()
+      .sort(function (a, b) { return (b.views30 || 0) - (a.views30 || 0); })
+      .slice(0, 5);
+    if (!vs.length) { wrap.appendChild(el('p', 'an-hint', 'Belum ada data.')); return; }
+    var max = Math.max.apply(null, vs.map(function (v) { return v.views30 || 0; }).concat([1]));
+    vs.forEach(function (v, i) {
+      var row = el('div', 'an-top-row');
+      row.appendChild(el('div', 'an-top-rank', String(i + 1)));
+      var main = el('div', 'an-top-main');
+      var nameLine = el('div', 'an-top-name', (v.name || v.id) + ' ');
+      nameLine.appendChild(el('span', 'an-top-code', v.id));
+      if (v.status === 'sold') nameLine.appendChild(el('span', 'an-top-sold', 'Terjual'));
+      main.appendChild(nameLine);
+      var sub = fmtPrice(v.price);
+      if (Number(v.inquiries || 0) > 0) sub += ' · ' + fmt(v.inquiries) + ' orang bertanya soal kapal ini';
+      main.appendChild(el('div', 'an-top-sub', sub));
+      var track = el('div', 'an-bar-track'), fill = el('div', 'an-bar-fill');
+      fill.style.width = Math.max(2, Math.round((v.views30 || 0) / max * 100)) + '%';
+      track.appendChild(fill); main.appendChild(track);
+      row.appendChild(main);
+      var num = el('div', 'an-top-num', fmt(v.views30));
+      num.appendChild(el('span', null, 'dilihat'));
+      row.appendChild(num);
+      wrap.appendChild(row);
+    });
+  }
+
   function render(d) {
     DATA = d;
     document.getElementById('an-status').hidden = true;
@@ -176,13 +234,13 @@
         'Diperbarui ' + new Date(d.generated_at).toLocaleString('id-ID', { timeZone: 'Asia/Jakarta' }) + ' WIB';
     }
 
+    renderSummary(d);
+
     var t = d.today, s7 = d.totals.d7, s30 = d.totals.d30;
     var cards = [
-      ['Page Views (hari ini)', fmt(t.pageViews), 'Requests ' + fmt(t.requests) + ' · Unik ' + fmt(t.uniques)],
-      ['Page Views (7 hari)', fmt(s7.pageViews), '30 hari: ' + fmt(s30.pageViews)],
-      ['Pengunjung Unik (7 hari)', fmt(s7.uniques), '30 hari: ' + fmt(s30.uniques)],
-      ['Total Requests (7 hari)', fmt(s7.requests), '30 hari: ' + fmt(s30.requests)],
-      ['Bandwidth (7 hari)', fmtBytes(s7.bytes), '30 hari: ' + fmtBytes(s30.bytes)]
+      ['Pengunjung hari ini', fmt(t.uniques), 'membuka ' + fmt(t.pageViews) + ' halaman'],
+      ['Dibuka minggu ini', fmt(s7.pageViews), 'oleh sekitar ' + fmt(s7.uniques) + ' pengunjung'],
+      ['Dibuka bulan ini', fmt(s30.pageViews), '30 hari terakhir · sekitar ' + fmt(s30.uniques) + ' pengunjung']
     ];
     var wrap = document.getElementById('an-cards');
     wrap.textContent = '';
@@ -193,6 +251,14 @@
       card.appendChild(el('div', 'an-card-sub', c[2]));
       wrap.appendChild(card);
     });
+
+    vchart(document.getElementById('an-chart14'), document.getElementById('an-xlabels14'),
+      d.daily.slice(-14).map(function (day) {
+        return { label: day.date.slice(5), value: day.pageViews,
+          title: day.date + ' — dibuka ' + fmt(day.pageViews) + ' kali, ' + fmt(day.uniques) + ' pengunjung' };
+      }), 3);
+
+    renderTop5(d);
 
     vchart(document.getElementById('an-hourly-chart'), document.getElementById('an-hourly-labels'),
       d.hourly_today.map(function (h) {

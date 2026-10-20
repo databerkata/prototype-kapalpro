@@ -136,77 +136,93 @@
 
     <section id="tab-analytics" hidden>
       <div class="admin-toolbar">
-        <h2>Analitik Kunjungan</h2>
+        <h2>Analitik</h2>
         <span id="an-updated" class="admin-count"></span>
       </div>
       <p id="an-status" class="admin-count">Memuat data analitik…</p>
       <div id="an-content" hidden>
+        <div class="an-summary" id="an-summary"></div>
         <div class="an-cards" id="an-cards"></div>
         <div class="an-panel">
-          <h3>Trafik Hari Ini per Jam (WIB)</h3>
-          <p class="an-hint">Page views per jam sejak tengah malam. Arahkan kursor untuk angka lengkap.</p>
-          <div class="an-chart" id="an-hourly-chart"></div>
-          <div class="an-xlabels" id="an-hourly-labels"></div>
-        </div>
-        <div class="an-panel">
-          <h3>Trafik Harian — 30 Hari Terakhir</h3>
-          <p class="an-hint">Tinggi batang = page views per hari. Arahkan kursor untuk angka lengkap.</p>
-          <div class="an-chart" id="an-chart"></div>
-          <div class="an-xlabels" id="an-xlabels"></div>
-        </div>
-        <div class="an-period" role="group" aria-label="Periode daftar teratas">
-          <span>Periode daftar di bawah:</span>
-          <button type="button" class="an-period-btn is-active" data-period="7">7 Hari</button>
-          <button type="button" class="an-period-btn" data-period="30">30 Hari</button>
-        </div>
-        <div class="an-cols">
-          <div class="an-panel">
-            <h3>Halaman Kapal Teratas (<span class="an-per-label">7 hari</span>)</h3>
-            <table class="an-table" id="an-vessel-table"></table>
-          </div>
-          <div class="an-panel">
-            <h3>Semua Halaman Teratas (<span class="an-per-label">7 hari</span>)</h3>
-            <table class="an-table" id="an-pages-table"></table>
-          </div>
-        </div>
-        <div class="an-cols">
-          <div class="an-panel">
-            <h3>Negara Pengunjung (<span class="an-per-label">7 hari</span>)</h3>
-            <div id="an-countries"></div>
-          </div>
-          <div class="an-panel">
-            <h3>Browser (<span class="an-per-label">7 hari</span>)</h3>
-            <div id="an-browsers"></div>
-          </div>
-        </div>
-        <div class="an-cols">
-          <div class="an-panel">
-            <h3>Perangkat (<span class="an-per-label">7 hari</span>)</h3>
-            <div id="an-devices"></div>
-          </div>
-          <div class="an-panel">
-            <h3>Sistem Operasi (<span class="an-per-label">7 hari</span>)</h3>
-            <div id="an-os"></div>
-          </div>
-        </div>
-        <div class="an-panel">
-          <h3>Status HTTP (<span class="an-per-label">7 hari</span>)</h3>
-          <p class="an-hint">2xx = berhasil, 3xx = pengalihan, 4xx = tidak ditemukan/ditolak (termasuk pindaian bot ke alamat acak), 5xx = error server.</p>
-          <div id="an-status-bars"></div>
-        </div>
-        <div class="an-panel">
-          <h3>Kontak &amp; Leads</h3>
+          <h3>Yang Menghubungi</h3>
+          <p class="an-hint">Calon pembeli yang klik WhatsApp / telepon, atau mengisi formulir di situs.</p>
           <div class="an-cards" id="an-contact-cards"></div>
+          <p class="an-lead-line" id="an-lead-line"></p>
           <p class="an-hint" id="an-contact-note"></p>
         </div>
         <div class="an-panel">
-          <h3>Per Kapal — Semua Listing</h3>
-          <p class="an-hint">Dilihat = kunjungan ke halaman kapal (data Cloudflare). Inquiry = jumlah form inquiry asli yang menyebut kapal ini.</p>
-          <div class="an-table-wrap">
-            <table class="an-table" id="an-vessels-table"></table>
-          </div>
+          <h3>Kapal Paling Dilihat — 30 Hari Terakhir</h3>
+          <div id="an-top5"></div>
         </div>
-        <p class="login-note">Sumber: Cloudflare — semua trafik asli yang masuk ke server, diperbarui otomatis tiap 1 jam. Angka requests/page views ikut menghitung bot &amp; crawler (termasuk crawler Google yang mengindeks situs); "Pengunjung Unik" paling mendekati jumlah pengunjung sebenarnya. Data sumber kunjungan (referrer) tidak tersedia di plan Cloudflare gratis. Klik WhatsApp/telepon tercatat sejak 20 Okt 2026; form bersumber dari Google Forms (entri tes disaring).</p>
+        <div class="an-panel">
+          <h3>Kunjungan — 14 Hari Terakhir</h3>
+          <p class="an-hint">Tinggi batang = berapa kali halaman situs dibuka hari itu. Arahkan kursor untuk angka lengkap.</p>
+          <div class="an-chart" id="an-chart14"></div>
+          <div class="an-xlabels" id="an-xlabels14"></div>
+        </div>
+        <details class="an-details">
+          <summary>Detail teknis (grafik lengkap, perangkat, semua kapal)</summary>
+          <div class="an-panel">
+            <h3>Trafik Hari Ini per Jam (WIB)</h3>
+            <p class="an-hint">Page views per jam sejak tengah malam. Arahkan kursor untuk angka lengkap.</p>
+            <div class="an-chart" id="an-hourly-chart"></div>
+            <div class="an-xlabels" id="an-hourly-labels"></div>
+          </div>
+          <div class="an-panel">
+            <h3>Trafik Harian — 30 Hari Terakhir</h3>
+            <p class="an-hint">Tinggi batang = page views per hari. Arahkan kursor untuk angka lengkap.</p>
+            <div class="an-chart" id="an-chart"></div>
+            <div class="an-xlabels" id="an-xlabels"></div>
+          </div>
+          <div class="an-period" role="group" aria-label="Periode daftar teratas">
+            <span>Periode daftar di bawah:</span>
+            <button type="button" class="an-period-btn is-active" data-period="7">7 Hari</button>
+            <button type="button" class="an-period-btn" data-period="30">30 Hari</button>
+          </div>
+          <div class="an-cols">
+            <div class="an-panel">
+              <h3>Halaman Kapal Teratas (<span class="an-per-label">7 hari</span>)</h3>
+              <table class="an-table" id="an-vessel-table"></table>
+            </div>
+            <div class="an-panel">
+              <h3>Semua Halaman Teratas (<span class="an-per-label">7 hari</span>)</h3>
+              <table class="an-table" id="an-pages-table"></table>
+            </div>
+          </div>
+          <div class="an-cols">
+            <div class="an-panel">
+              <h3>Negara Pengunjung (<span class="an-per-label">7 hari</span>)</h3>
+              <div id="an-countries"></div>
+            </div>
+            <div class="an-panel">
+              <h3>Browser (<span class="an-per-label">7 hari</span>)</h3>
+              <div id="an-browsers"></div>
+            </div>
+          </div>
+          <div class="an-cols">
+            <div class="an-panel">
+              <h3>Perangkat (<span class="an-per-label">7 hari</span>)</h3>
+              <div id="an-devices"></div>
+            </div>
+            <div class="an-panel">
+              <h3>Sistem Operasi (<span class="an-per-label">7 hari</span>)</h3>
+              <div id="an-os"></div>
+            </div>
+          </div>
+          <div class="an-panel">
+            <h3>Status HTTP (<span class="an-per-label">7 hari</span>)</h3>
+            <p class="an-hint">2xx = berhasil, 3xx = pengalihan, 4xx = tidak ditemukan/ditolak (termasuk pindaian bot ke alamat acak), 5xx = error server.</p>
+            <div id="an-status-bars"></div>
+          </div>
+          <div class="an-panel">
+            <h3>Per Kapal — Semua Listing</h3>
+            <p class="an-hint">Dilihat = kunjungan ke halaman kapal (data Cloudflare). Inquiry = jumlah form inquiry asli yang menyebut kapal ini.</p>
+            <div class="an-table-wrap">
+              <table class="an-table" id="an-vessels-table"></table>
+            </div>
+          </div>
+          <p class="login-note">Sumber: Cloudflare — semua trafik asli yang masuk ke server, diperbarui otomatis tiap 1 jam. Angka kunjungan ikut menghitung robot Google &amp; crawler; "Pengunjung" paling mendekati jumlah orang sebenarnya. Klik WhatsApp/telepon tercatat sejak 20 Okt 2026; formulir bersumber dari Google Forms (entri tes disaring).</p>
+        </details>
       </div>
     </section>
   </main>
