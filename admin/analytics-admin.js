@@ -225,9 +225,9 @@
 
     var t = d.today, s7 = d.totals.d7, s30 = d.totals.d30;
     var cards = [
-      ['Pengunjung hari ini', fmt(t.uniques), 'membuka ' + fmt(t.pageViews) + ' halaman'],
-      ['Dibuka minggu ini', fmt(s7.pageViews), 'oleh sekitar ' + fmt(s7.uniques) + ' pengunjung'],
-      ['Dibuka bulan ini', fmt(s30.pageViews), '30 hari terakhir · sekitar ' + fmt(s30.uniques) + ' pengunjung']
+      ['Pengunjung hari ini', fmt(t.uniques)],
+      ['Dibuka minggu ini', fmt(s7.pageViews)],
+      ['Dibuka bulan ini', fmt(s30.pageViews)]
     ];
     var wrap = document.getElementById('an-cards');
     wrap.textContent = '';
@@ -235,7 +235,6 @@
       var card = el('div', 'an-card');
       card.appendChild(el('div', 'an-card-label', c[0]));
       card.appendChild(el('div', 'an-card-value', c[1]));
-      card.appendChild(el('div', 'an-card-sub', c[2]));
       wrap.appendChild(card);
     });
 
