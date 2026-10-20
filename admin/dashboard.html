@@ -143,32 +143,58 @@
       <div id="an-content" hidden>
         <div class="an-cards" id="an-cards"></div>
         <div class="an-panel">
+          <h3>Trafik Hari Ini per Jam (WIB)</h3>
+          <p class="an-hint">Page views per jam sejak tengah malam. Arahkan kursor untuk angka lengkap.</p>
+          <div class="an-chart" id="an-hourly-chart"></div>
+          <div class="an-xlabels" id="an-hourly-labels"></div>
+        </div>
+        <div class="an-panel">
           <h3>Trafik Harian — 30 Hari Terakhir</h3>
           <p class="an-hint">Tinggi batang = page views per hari. Arahkan kursor untuk angka lengkap.</p>
           <div class="an-chart" id="an-chart"></div>
           <div class="an-xlabels" id="an-xlabels"></div>
         </div>
+        <div class="an-period" role="group" aria-label="Periode daftar teratas">
+          <span>Periode daftar di bawah:</span>
+          <button type="button" class="an-period-btn is-active" data-period="7">7 Hari</button>
+          <button type="button" class="an-period-btn" data-period="30">30 Hari</button>
+        </div>
         <div class="an-cols">
           <div class="an-panel">
-            <h3>Halaman Kapal Teratas (7 hari)</h3>
+            <h3>Halaman Kapal Teratas (<span class="an-per-label">7 hari</span>)</h3>
             <table class="an-table" id="an-vessel-table"></table>
           </div>
           <div class="an-panel">
-            <h3>Semua Halaman Teratas (7 hari)</h3>
+            <h3>Semua Halaman Teratas (<span class="an-per-label">7 hari</span>)</h3>
             <table class="an-table" id="an-pages-table"></table>
           </div>
         </div>
         <div class="an-cols">
           <div class="an-panel">
-            <h3>Negara Pengunjung (7 hari)</h3>
+            <h3>Negara Pengunjung (<span class="an-per-label">7 hari</span>)</h3>
             <div id="an-countries"></div>
           </div>
           <div class="an-panel">
-            <h3>Browser (7 hari)</h3>
+            <h3>Browser (<span class="an-per-label">7 hari</span>)</h3>
             <div id="an-browsers"></div>
           </div>
         </div>
-        <p class="login-note">Sumber: Cloudflare (data tepi jaringan, termasuk bot &amp; crawler). Data diperbarui otomatis tiap 6 jam.</p>
+        <div class="an-cols">
+          <div class="an-panel">
+            <h3>Perangkat (<span class="an-per-label">7 hari</span>)</h3>
+            <div id="an-devices"></div>
+          </div>
+          <div class="an-panel">
+            <h3>Sistem Operasi (<span class="an-per-label">7 hari</span>)</h3>
+            <div id="an-os"></div>
+          </div>
+        </div>
+        <div class="an-panel">
+          <h3>Status HTTP (<span class="an-per-label">7 hari</span>)</h3>
+          <p class="an-hint">2xx = berhasil, 3xx = pengalihan, 4xx = tidak ditemukan/ditolak (termasuk pindaian bot ke alamat acak), 5xx = error server.</p>
+          <div id="an-status-bars"></div>
+        </div>
+        <p class="login-note">Sumber: Cloudflare — semua trafik asli yang masuk ke server, diperbarui otomatis tiap 1 jam. Angka requests/page views ikut menghitung bot &amp; crawler (termasuk crawler Google yang mengindeks situs); "Pengunjung Unik" paling mendekati jumlah pengunjung sebenarnya. Data sumber kunjungan (referrer) tidak tersedia di plan Cloudflare gratis.</p>
       </div>
     </section>
   </main>

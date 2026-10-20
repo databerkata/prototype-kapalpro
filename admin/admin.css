@@ -335,3 +335,8 @@ body.admin-body {
 .an-bar-track { flex: 1; background: #eef3f8; border-radius: 5px; height: 16px; overflow: hidden; }
 .an-bar-fill { height: 100%; background: #0e5aa8; border-radius: 5px; }
 .an-bar-num { width: 64px; text-align: right; font-weight: 700; color: #0b3c6d; }
+
+/* ---- Toggle periode analitik ---- */
+.an-period { display: flex; align-items: center; gap: 8px; margin: 4px 0 16px; font-size: 14px; color: #374151; }
+.an-period-btn { background: #eef3f8; border: 1px solid #c9d8e8; color: #0b3c6d; border-radius: 999px; padding: 6px 16px; font: inherit; font-weight: 600; cursor: pointer; }
+.an-period-btn.is-active { background: #0e5aa8; border-color: #0e5aa8; color: #fff; }
