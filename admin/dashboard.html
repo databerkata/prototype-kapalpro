@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <!-- CSP ketat: tidak ada script inline maupun event handler inline,
+       semuanya lewat admin/admin.js (event delegation). -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; font-src 'self'; base-uri 'self'; form-action 'self'; object-src 'none'">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Halaman internal: tidak untuk mesin pencari -->
+  <meta name="robots" content="noindex, nofollow">
+  <title>Dashboard Admin - KapalPro</title>
+  <link rel="icon" href="../assets/favicon.svg">
+  <link rel="stylesheet" href="admin.css">
+  <!-- sanitize.js dipakai untuk escapeHtml (satu kebijakan dengan situs utama) -->
+  <script src="../js/sanitize.js" defer></script>
+  <script src="admin.js?v=2" defer></script>
+  <script src="analytics-admin.js" defer></script>
+</head>
+<body class="admin-body">
+  <header class="admin-topbar">
+    <div class="admin-topbar-inner">
+      <p class="admin-brand">KapalPro <span>Admin</span></p>
+      <div class="admin-topbar-user">
+        <a href="../index.html">Lihat beranda</a>
+        <span aria-hidden="true">&middot;</span>
+        <span>Pemilik</span>
+        <button type="button" id="logout-btn" class="btn btn-secondary btn-sm">Logout</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="admin-main">
+    <nav class="admin-tabs" aria-label="Bagian admin">
+      <button type="button" class="admin-tab is-active" data-tab="tab-ads">Iklan Kapal</button>
+      <button type="button" class="admin-tab" data-tab="tab-analytics">Analitik</button>
+    </nav>
+
+    <section id="tab-ads">
+    <div class="admin-toolbar">
+      <h2>Iklan Kapal</h2>
+      <div class="admin-toolbar-actions">
+        <button type="button" id="export-btn" class="btn btn-secondary">⬇ Export vessels.json</button>
+        <button type="button" id="add-btn" class="btn btn-primary">+ Tambah Iklan</button>
+      </div>
+    </div>
+    <p id="ads-count" class="admin-count"></p>
+
+    <section id="form-panel" class="form-panel" hidden aria-labelledby="form-title">
+      <h3 id="form-title">Tambah Iklan Kapal</h3>
+      <form id="ads-form" novalidate>
+        <div class="form-grid">
+          <div class="field field-full">
+            <label for="f-name">Nama kapal *</label>
+            <input type="text" id="f-name" name="name" required>
+          </div>
+
+          <div class="field">
+            <label for="f-price">Harga (Rupiah) *</label>
+            <input type="text" id="f-price" name="price" inputmode="numeric" placeholder="contoh: 3.500.000.000">
+            <p class="field-hint">Kosongkan bila harga &ldquo;Hubungi Kami&rdquo;.</p>
+          </div>
+          <div class="field">
+            <label for="f-type">Jenis</label>
+            <select id="f-type" name="type">
+              <option value="tongkang">Tongkang</option>
+              <option value="tugboat">Tugboat</option>
+              <option value="lct">LCT</option>
+              <option value="spob">SPOB</option>
+              <option value="oil_barge">Oil Barge</option>
+              <option value="tanker">Tanker</option>
+              <option value="other">Lainnya</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="f-location">Lokasi</label>
+            <input type="text" id="f-location" name="location" placeholder="contoh: Samarinda">
+          </div>
+          <div class="field">
+            <label for="f-status">Status</label>
+            <select id="f-status" name="status">
+              <option value="available">Tersedia</option>
+              <option value="reserved">Direservasi</option>
+              <option value="sold">Terjual</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="f-photo">Foto (upload)</label>
+            <input type="file" id="f-photo" name="photo" accept="image/*">
+            <p class="field-hint">Dikecilkan otomatis &le;1000px sebelum disimpan.</p>
+          </div>
+          <div class="field">
+            <label for="f-photo-url">atau URL foto</label>
+            <input type="url" id="f-photo-url" name="photoUrl" placeholder="https://&hellip;">
+            <p class="field-hint">URL eksternal hanya tampil di beranda bila hostnya diizinkan situs.</p>
+          </div>
+
+          <div class="field field-full">
+            <span class="field-label">Pratinjau foto</span>
+            <img id="photo-preview" class="photo-preview" alt="Pratinjau foto kapal" hidden>
+            <button type="button" id="photo-clear" class="btn btn-secondary btn-sm" hidden>Kosongkan foto</button>
+          </div>
+
+          <div class="field field-full">
+            <label for="f-desc">Deskripsi</label>
+            <textarea id="f-desc" name="description"></textarea>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" id="save-btn" class="btn btn-primary">Simpan</button>
+          <button type="button" id="cancel-btn" class="btn btn-secondary">Batal</button>
+        </div>
+      </form>
+    </section>
+
+    <div class="table-wrap">
+      <table class="ads-table">
+        <thead>
+          <tr>
+            <th scope="col">Foto</th>
+            <th scope="col">Nama</th>
+            <th scope="col">Harga</th>
+            <th scope="col">Status</th>
+            <th scope="col">Aksi</th>
+          </tr>
+        </thead>
+        <tbody id="ads-tbody"></tbody>
+      </table>
+      <p id="ads-empty" class="ads-empty" hidden>Belum ada iklan kapal. Klik &ldquo;Tambah Iklan&rdquo; untuk membuat yang pertama.</p>
+    </div>
+
+    <p class="login-note">Perubahan tersimpan di browser ini (localStorage &ldquo;kapal_ads&rdquo;) dan langsung tampil di beranda setelah halaman dimuat ulang.</p>
+    </section>
+
+    <section id="tab-analytics" hidden>
+      <div class="admin-toolbar">
+        <h2>Analitik Kunjungan</h2>
+        <span id="an-updated" class="admin-count"></span>
+      </div>
+      <p id="an-status" class="admin-count">Memuat data analitik…</p>
+      <div id="an-content" hidden>
+        <div class="an-cards" id="an-cards"></div>
+        <div class="an-panel">
+          <h3>Trafik Harian — 30 Hari Terakhir</h3>
+          <p class="an-hint">Tinggi batang = page views per hari. Arahkan kursor untuk angka lengkap.</p>
+          <div class="an-chart" id="an-chart"></div>
+          <div class="an-xlabels" id="an-xlabels"></div>
+        </div>
+        <div class="an-cols">
+          <div class="an-panel">
+            <h3>Halaman Kapal Teratas (7 hari)</h3>
+            <table class="an-table" id="an-vessel-table"></table>
+          </div>
+          <div class="an-panel">
+            <h3>Semua Halaman Teratas (7 hari)</h3>
+            <table class="an-table" id="an-pages-table"></table>
+          </div>
+        </div>
+        <div class="an-cols">
+          <div class="an-panel">
+            <h3>Negara Pengunjung (7 hari)</h3>
+            <div id="an-countries"></div>
+          </div>
+          <div class="an-panel">
+            <h3>Browser (7 hari)</h3>
+            <div id="an-browsers"></div>
+          </div>
+        </div>
+        <p class="login-note">Sumber: Cloudflare (data tepi jaringan, termasuk bot &amp; crawler). Data diperbarui otomatis tiap 6 jam.</p>
+      </div>
+    </section>
+  </main>
+
+  <p id="admin-toast" class="admin-toast" role="status" aria-live="polite" hidden></p>
+</body>
+</html>
