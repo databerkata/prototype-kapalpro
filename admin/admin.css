@@ -345,12 +345,11 @@ body.admin-body {
 .an-table-wrap { overflow-x: auto; }
 #an-vessels-table td:first-child { word-break: normal; min-width: 180px; }
 
-/* ---- Analitik versi awam (ringkasan & daftar sederhana) ---- */
-.an-summary { background: #0e5aa8; border-radius: 10px; padding: 18px 20px; margin-bottom: 18px; color: #fff; }
-.an-sum-main { margin: 0 0 6px; font-size: 19px; font-weight: 700; line-height: 1.45; }
-.an-sum-sub { margin: 0 0 4px; font-size: 15px; color: #d7e6f5; }
-.an-sum-sub:last-child { margin-bottom: 0; }
-.an-sum-lead { margin: 0; font-size: 15px; font-weight: 700; color: #fde68a; }
+/* ---- Analitik versi awam (daftar sederhana & grafik berangka) ---- */
+.an-chart-num { padding-top: 22px; }
+.an-col { flex: 1; align-self: stretch; position: relative; }
+.an-col .an-bar { position: absolute; bottom: 0; left: 0; right: 0; }
+.an-bar-val { position: absolute; left: -4px; right: -4px; text-align: center; font-size: 11px; font-weight: 700; color: #0b3c6d; transform: translateY(-3px); white-space: nowrap; }
 .an-lead-line { margin: 12px 0 4px; padding: 10px 14px; border-radius: 8px; font-size: 15px; font-weight: 600; }
 .an-lead-zero { background: #f4f5f7; color: #6b7280; }
 .an-lead-ok { background: #d1fae5; color: #065f46; }
@@ -370,7 +369,7 @@ body.admin-body {
 
 /* ---- Font disamakan dengan landing page (SF Pro Display/Text) ---- */
 .login-card h1, .admin-brand, .admin-toolbar h2, .form-panel h3,
-.an-panel h3, .an-card-value, .an-top-num, .an-sum-main,
+.an-panel h3, .an-card-value, .an-top-num,
 .an-details > summary, .ads-name {
   font-family: var(--font-display);
 }

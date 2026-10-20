@@ -66,14 +66,27 @@
     });
   }
   // Grafik batang vertikal generik. rows: [{label, value, title}]
-  function vchart(chartEl, labelEl, rows, labelEvery) {
+  // showValues=true: angka nilai tampil di atas tiap batang.
+  function vchart(chartEl, labelEl, rows, labelEvery, showValues) {
     chartEl.textContent = ''; labelEl.textContent = '';
     var max = Math.max.apply(null, rows.map(function (r) { return r.value; }).concat([1]));
     rows.forEach(function (r, i) {
-      var bar = el('div', 'an-bar');
-      bar.style.height = Math.max(1, Math.round(r.value / max * 100)) + '%';
-      bar.title = r.title;
-      chartEl.appendChild(bar);
+      var pct = Math.max(1, Math.round(r.value / max * 100));
+      if (showValues) {
+        var col = el('div', 'an-col');
+        var val = el('div', 'an-bar-val', fmt(r.value));
+        val.style.bottom = pct + '%';
+        var barIn = el('div', 'an-bar');
+        barIn.style.height = pct + '%';
+        barIn.title = r.title;
+        col.appendChild(val); col.appendChild(barIn);
+        chartEl.appendChild(col);
+      } else {
+        var bar = el('div', 'an-bar');
+        bar.style.height = pct + '%';
+        bar.title = r.title;
+        chartEl.appendChild(bar);
+      }
       labelEl.appendChild(el('span', null,
         (i % labelEvery === 0 || i === rows.length - 1) ? r.label : ''));
     });
@@ -171,30 +184,6 @@
       }));
   }
 
-  function renderSummary(d) {
-    var box = document.getElementById('an-summary');
-    box.textContent = '';
-    var s7 = d.totals.d7;
-    box.appendChild(el('p', 'an-sum-main',
-      'Minggu ini situs dibuka ' + fmt(s7.pageViews) + ' kali oleh sekitar ' +
-      fmt(s7.uniques) + ' pengunjung.'));
-    var vs = (d.vessels || []).slice().sort(function (a, b) { return (b.views30 || 0) - (a.views30 || 0); });
-    if (vs.length && vs[0].views30 > 0) {
-      box.appendChild(el('p', 'an-sum-sub',
-        'Kapal paling banyak dilihat: ' + (vs[0].name || vs[0].id) +
-        ' — ' + fmt(vs[0].views30) + ' kali dalam 30 hari.'));
-    }
-    var c = d.contact || { wa: {}, tel: {} };
-    var f = d.forms || {};
-    var leadsWeek = Number((c.wa || {}).d7 || 0) + Number((c.tel || {}).d7 || 0) +
-      (f.inquiry ? Number(f.inquiry.real_d7 || 0) : 0) +
-      (f.contact ? Number(f.contact.real_d7 || 0) : 0);
-    box.appendChild(el('p', leadsWeek > 0 ? 'an-sum-lead' : 'an-sum-sub',
-      leadsWeek > 0
-        ? leadsWeek + ' calon pembeli menghubungi minggu ini — cek bagian "Yang Menghubungi" di bawah.'
-        : 'Belum ada calon pembeli yang menghubungi minggu ini.'));
-  }
-
   function renderTop5(d) {
     var wrap = document.getElementById('an-top5');
     wrap.textContent = '';
@@ -234,8 +223,6 @@
         'Diperbarui ' + new Date(d.generated_at).toLocaleString('id-ID', { timeZone: 'Asia/Jakarta' }) + ' WIB';
     }
 
-    renderSummary(d);
-
     var t = d.today, s7 = d.totals.d7, s30 = d.totals.d30;
     var cards = [
       ['Pengunjung hari ini', fmt(t.uniques), 'membuka ' + fmt(t.pageViews) + ' halaman'],
@@ -256,7 +243,7 @@
       d.daily.slice(-14).map(function (day) {
         return { label: day.date.slice(5), value: day.pageViews,
           title: day.date + ' — dibuka ' + fmt(day.pageViews) + ' kali, ' + fmt(day.uniques) + ' pengunjung' };
-      }), 3);
+      }), 3, true);
 
     renderTop5(d);
 
