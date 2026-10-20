@@ -31,11 +31,11 @@
 
   <main class="admin-main">
     <nav class="admin-tabs" aria-label="Bagian admin">
-      <button type="button" class="admin-tab is-active" data-tab="tab-ads">Iklan Kapal</button>
-      <button type="button" class="admin-tab" data-tab="tab-analytics">Analitik</button>
+      <button type="button" class="admin-tab" data-tab="tab-ads">Iklan Kapal</button>
+      <button type="button" class="admin-tab is-active" data-tab="tab-analytics">Analitik</button>
     </nav>
 
-    <section id="tab-ads">
+    <section id="tab-ads" hidden>
     <div class="admin-toolbar">
       <h2>Iklan Kapal</h2>
       <div class="admin-toolbar-actions">
@@ -134,7 +134,7 @@
     <p class="login-note">Perubahan tersimpan di browser ini (localStorage &ldquo;kapal_ads&rdquo;) dan langsung tampil di beranda setelah halaman dimuat ulang.</p>
     </section>
 
-    <section id="tab-analytics" hidden>
+    <section id="tab-analytics">
       <div class="admin-toolbar">
         <h2>Analitik</h2>
         <span id="an-updated" class="admin-count"></span>

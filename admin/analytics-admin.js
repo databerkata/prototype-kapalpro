@@ -298,4 +298,11 @@
         status.textContent = 'Gagal memuat analitik: ' + e.message;
       });
   }
+
+  // Tab Analitik adalah tab default: muat data langsung saat halaman dibuka.
+  var defaultBtn = document.querySelector('.admin-tab.is-active');
+  if (defaultBtn && defaultBtn.getAttribute('data-tab') === 'tab-analytics' && !loaded) {
+    loaded = true;
+    load();
+  }
 })();
