@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-tZqmasilAl6RTvAzblDqCwq9l3dtedMk2WUpKo1bvis=' https://plausible.io https://docs.google.com; style-src 'self' 'unsafe-inline'; img-src 'self' https: data:; connect-src 'self' https://plausible.io https://docs.google.com; font-src 'self'; frame-src https://docs.google.com; form-action 'self' https://docs.google.com https://wa.me; base-uri 'self'; object-src 'none'; frame-ancestors 'self'">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <!-- WHY: Dua meta theme-color (terang & gelap) membiarkan browser memilih
+       warna chrome-nya sendiri sebelum JavaScript dieksekusi, sehingga tidak
+       ada kedipan warna salah. Nilai keduanya harus sama persis dengan
+       applyTheme() di js/theme.js - tools/validate-meta.js menjaga itu. -->
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0f172a">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <!-- WHY: Skrip anti-flash tema, WAJIB inline di sini. js/theme.js memakai
+       defer sehingga baru jalan setelah HTML selesai diurai; tanpa skrip ini
+       pengunjung bertema gelap melihat kedipan putih. Hash CSP-nya
+       dihitung dari tools/theme-boot.inline.js oleh tools/validate-meta.js
+       - ubah salah satu dari keduanya tanpa mengubah yang lain akan
+       membuat validator gagal. -->
+  <script>
+/* WHY: Skrip ini WAJIB inline di <head> dan berjalan sebelum halaman
+ * digambar. js/theme.js memakai defer, jadi baru jalan setelah HTML
+ * selesai diurai - waktu itu cukup untuk menampilkan kedipan putih
+ * pada pengunjung bertema gelap. Skrip ini juga yang menulis theme-color
+ * sesuai tema aktif, sehingga warna address bar tidak sempat salah.
+ * Hash CSP-nya ada di tools/validate-meta.js dan WAJIB ikut diperbarui
+ * setiap kali isi skrip ini berubah. */
+(function () {
+  try {
+    var t = localStorage.getItem('kapalpro-theme');
+    // WHY: Default tetap light, tidak mengikuti sistem (sama seperti
+    // js/theme.js) karena foto kapal & kartu produk dirancang untuk
+    // latar terang.
+    t = (t === 'dark' || t === 'light') ? t : 'light';
+    document.documentElement.setAttribute('data-theme', t);
+    // WHY: Dua meta theme-color (light & dark) membiarkan browser
+    // memilih sendiri sebelum JavaScript jalan. Setelah tema diketahui,
+    // keduanya ditulis ulang agar warna chrome pasti sama dengan tema.
+    var m = document.querySelectorAll('meta[name="theme-color"]');
+    for (var i = 0; i < m.length; i++) {
+      m[i].setAttribute('content', t === 'dark' ? '#0f172a' : '#ffffff');
+    }
+  } catch (e) {}
+})();
+  </script>
+  <title>Jual Kapal Cepat Indonesia — Fast Crew Boat Dijual | KapalPro</title>
+  <meta name="description" content="Jual kapal cepat (fast crew boat / FCB) di Indonesia: kapal crew siap operasi offshore dengan foto asli, spesifikasi lengkap, dan harga transparan. Ajukan Letter of Intent sekarang.">
+  <meta name="keywords" content="jual kapal cepat, kapal cepat indonesia, jual fast crew boat, fast crew boat indonesia, kapal crew boat">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://kapalpro.web.id/kapal-cepat.html">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Jual Kapal Cepat Indonesia — Fast Crew Boat Dijual | KapalPro">
+  <meta property="og:description" content="Jual kapal cepat (fast crew boat / FCB) di Indonesia: kapal crew siap operasi offshore dengan foto asli, spesifikasi lengkap, dan harga transparan. Ajukan Letter of Intent sekarang.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://kapalpro.web.id/kapal-cepat.html">
+  <meta property="og:site_name" content="KapalPro">
+  <meta property="og:locale" content="id_ID">
+  <meta property="og:image" content="https://kapalpro.web.id/assets/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Jual Kapal Cepat Indonesia — Fast Crew Boat Dijual | KapalPro">
+  <meta name="twitter:description" content="Jual kapal cepat (fast crew boat / FCB) di Indonesia: kapal crew siap operasi offshore dengan foto asli, spesifikasi lengkap, dan harga transparan. Ajukan Letter of Intent sekarang.">
+  <meta name="twitter:image" content="https://kapalpro.web.id/assets/og-image.jpg">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="stylesheet" href="css/style.css?v=832baba2">
+  <link rel="stylesheet" href="css/search-autocomplete.css?v=832baba2">
+
+  <script type="application/ld+json" id="category-schema">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "Jual Kapal Cepat (Fast Crew Boat) di Indonesia",
+  "description": "Jual kapal cepat (fast crew boat / FCB) di Indonesia: kapal crew siap operasi offshore dengan foto asli, spesifikasi lengkap, dan harga transparan. Ajukan Letter of Intent sekarang.",
+  "url": "https://kapalpro.web.id/kapal-cepat.html",
+  "inLanguage": "id-ID",
+  "provider": {
+    "@type": "Organization",
+    "name": "KapalPro",
+    "url": "https://kapalpro.web.id"
+  },
+  "mainEntity": {
+    "@type": "ItemList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "url": "https://kapalpro.web.id/vessel-FCB001.html",
+        "name": "Floating Crane Barge 20M"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "url": "https://kapalpro.web.id/vessel-FCB002.html",
+        "name": "Floating Crane Barge 75M 2013"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "url": "https://kapalpro.web.id/vessel-FCB003.html",
+        "name": "Floating Crane Barge 75M 2014"
+      }
+    ]
+  }
+}
+  </script>
+  <script type="application/ld+json" id="category-faq">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Berapa harga kapal cepat / fast crew boat di Indonesia?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Harga fast crew boat di KapalPro berkisar Rp 20 M sampai Rp 75 M tergantung tahun, kapasitas penumpang, dan kondisi mesin (data listing KapalPro, Oktober 2026). Harga kapal cepat sangat dipengaruhi jam operasi mesin dan kelengkapan sertifikasi offshore."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Apa itu fast crew boat (FCB)?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Fast crew boat (FCB) adalah kapal cepat yang dirancang khusus mengangkut kru dan kargo ringan ke fasilitas lepas pantai seperti rig dan platform migas. Ciri khasnya: lambung aluminium ringan, kecepatan jelajah tinggi, dan kursi penumpang bergaya kabin pesawat."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Dokumen apa yang perlu dicek saat membeli kapal cepat?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Cek Surat Laut / Pas Besar, sertifikat keselamatan, sertifikat klasifikasi (BKI atau badan klasifikasi lain), Gross Akta kepemilikan, dan status pajak serta hipotek kapal. Panduan lengkapnya ada di halaman Panduan Dokumen Kapal KapalPro."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Bagaimana cara membeli kapal cepat di KapalPro?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Pilih kapal cepat di halaman ini, ajukan Letter of Intent via form, lakukan survei kapal, negosiasi harga, tanda tangan MOA, lalu serah terima kapal beserta dokumennya."
+      }
+    }
+  ]
+}
+  </script>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Lompat ke konten utama</a>
+
+<body>
+  <!-- Skip Link (Section 1.9 - Accessibility) -->
+  <a href="#main-content" class="skip-link">Lompat ke konten utama</a>
+
+  <!-- Header -->
+  <header class="header" role="banner">
+    <div class="container header-inner">
+      <!-- Logo -->
+      <a href="index.html" class="logo" aria-label="KapalPro - Beranda">
+        <svg class="logo-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+          <path d="M4 24h24M8 24V16l8-8 8 8v8M16 8v-4M12 20h8M16 20v4"></path>
+        </svg>
+        <span>KapalPro</span>
+      </a>
+
+      <!-- Navigation (Desktop) -->
+      <nav class="nav" role="navigation" aria-label="Navigasi utama">
+        <a href="index.html" class="nav-link">Beranda</a>
+        <a href="catalog.html" class="nav-link active">Katalog</a>
+        <a href="contact.html" class="nav-link">Kontak</a>
+        <a href="about.html" class="nav-link">Tentang Kami</a>
+      </nav>
+
+      <!-- Header Actions -->
+      <div class="header-actions">
+
+        <!-- Theme Toggle (Section 1.3) -->
+        <div class="header-search kp-search" data-search-autocomplete data-search-mode="hero">
+          <div class="kp-search-box">
+            <span class="kp-search-icon" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+            </span>
+            <input type="text" class="kp-search-input" placeholder="Cari kapal..." aria-label="Cari kapal">
+          </div>
+        </div>
+        <button id="theme-toggle" class="theme-toggle" aria-label="Ganti ke mode gelap">
+          <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+
+        <!-- Mobile Menu Button -->
+        <button id="mobile-menu-btn" class="mobile-menu-btn" aria-label="Buka menu" aria-expanded="false" aria-controls="mobile-menu">
+          <svg class="menu-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+          <svg class="close-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" style="display: none;">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="mobile-menu" role="navigation" aria-label="Navigasi mobile">
+      <div class="mobile-search kp-search" data-search-autocomplete data-search-mode="hero">
+        <div class="kp-search-box">
+          <span class="kp-search-icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+          </span>
+          <input type="text" class="kp-search-input" placeholder="Cari kapal: tugboat, tongkang, LCT..." aria-label="Cari kapal">
+        </div>
+      </div>
+      
+      <a href="index.html" class="mobile-menu-link">Beranda</a>
+      <a href="catalog.html" class="mobile-menu-link">Katalog</a>
+      <a href="contact.html" class="mobile-menu-link">Kontak</a>
+      <a href="about.html" class="mobile-menu-link">Tentang Kami</a>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <nav aria-label="Breadcrumb" class="container" style="padding-top: var(--space-4);">
+      <ol class="breadcrumb">
+        <li><a href="index.html">Beranda</a></li>
+        <li><a href="catalog.html">Katalog</a></li>
+        <li aria-current="page">Kapal Cepat</li>
+      </ol>
+    </nav>
+
+    <section class="section">
+      <div class="container">
+        <h1>Jual Kapal Cepat (Fast Crew Boat) di Indonesia</h1>
+        <p class="lead"><strong>KapalPro menjual kapal cepat / fast crew boat (FCB)</strong> berbendera Indonesia yang siap operasi untuk antar-jemput kru offshore, dengan foto asli, spesifikasi lengkap, dan harga transparan Rp 20 M–Rp 75 M.</p>
+        <p>Fast crew boat adalah kapal cepat berbahan aluminium yang dirancang mengangkut kru dan logistik ringan ke anjungan lepas pantai (offshore) dengan kecepatan tinggi. Di Indonesia, kapal cepat jenis FCB menjadi tulang punggung operasi migas dan pendukungnya di Natuna, Jawa, dan Kalimantan.</p>
+        <p>Setiap kapal cepat di KapalPro dapat disurvei langsung sebelum transaksi. Proses pembelian diawali Letter of Intent, dilanjutkan survei independen, negosiasi, penandatanganan MOA, dan serah terima kapal beserta dokumen.</p>
+        <p style="color: var(--text-muted); font-size: 0.9em;">Diperbarui: Oktober 2026</p>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top: 0;">
+      <div class="container">
+        <h2>Kapal Cepat Tersedia</h2>
+        <div class="vessels-grid">
+          <a href="vessel-FCB001.html" class="vessel-card">
+            <div class="vessel-card-image">
+              <img src="assets/vessels/FCB001/main.jpg" alt="Floating Crane Barge 20M - Kapal cepat fast crew boat dijual di KapalPro" loading="lazy">
+            </div>
+            <div class="vessel-card-body">
+              <h3>Floating Crane Barge 20M</h3>
+              <p class="vessel-card-price">Rp 20 M</p>
+            </div>
+          </a>
+          <a href="vessel-FCB002.html" class="vessel-card">
+            <div class="vessel-card-image">
+              <img src="assets/vessels/FCB002/main.jpg" alt="Floating Crane Barge 75M 2013 - Kapal cepat fast crew boat dijual di KapalPro" loading="lazy">
+            </div>
+            <div class="vessel-card-body">
+              <h3>Floating Crane Barge 75M 2013</h3>
+              <p class="vessel-card-price">Rp 75 M</p>
+            </div>
+          </a>
+          <a href="vessel-FCB003.html" class="vessel-card">
+            <div class="vessel-card-image">
+              <img src="assets/vessels/FCB003/main.jpg" alt="Floating Crane Barge 75M 2014 - Kapal cepat fast crew boat dijual di KapalPro" loading="lazy">
+            </div>
+            <div class="vessel-card-body">
+              <h3>Floating Crane Barge 75M 2014</h3>
+              <p class="vessel-card-price">Rp 75 M</p>
+            </div>
+          </a>
+        </div>
+        <p style="margin-top: var(--space-6);"><a href="catalog.html" class="btn btn-secondary">Lihat Semua Kapal</a></p>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top: 0;">
+      <div class="container">
+        <h2>Pertanyaan Umum tentang Kapal Cepat</h2>
+        <div class="vessel-faq">
+          <details class="vessel-faq-item">
+            <summary class="vessel-faq-q">Berapa harga kapal cepat / fast crew boat di Indonesia?</summary>
+            <p class="vessel-faq-a">Harga fast crew boat di KapalPro berkisar Rp 20 M sampai Rp 75 M tergantung tahun, kapasitas penumpang, dan kondisi mesin (data listing KapalPro, Oktober 2026). Harga kapal cepat sangat dipengaruhi jam operasi mesin dan kelengkapan sertifikasi offshore.</p>
+          </details>
+          <details class="vessel-faq-item">
+            <summary class="vessel-faq-q">Apa itu fast crew boat (FCB)?</summary>
+            <p class="vessel-faq-a">Fast crew boat (FCB) adalah kapal cepat yang dirancang khusus mengangkut kru dan kargo ringan ke fasilitas lepas pantai seperti rig dan platform migas. Ciri khasnya: lambung aluminium ringan, kecepatan jelajah tinggi, dan kursi penumpang bergaya kabin pesawat.</p>
+          </details>
+          <details class="vessel-faq-item">
+            <summary class="vessel-faq-q">Dokumen apa yang perlu dicek saat membeli kapal cepat?</summary>
+            <p class="vessel-faq-a">Cek Surat Laut / Pas Besar, sertifikat keselamatan, sertifikat klasifikasi (BKI atau badan klasifikasi lain), Gross Akta kepemilikan, dan status pajak serta hipotek kapal. Panduan lengkapnya ada di halaman Panduan Dokumen Kapal KapalPro.</p>
+          </details>
+          <details class="vessel-faq-item">
+            <summary class="vessel-faq-q">Bagaimana cara membeli kapal cepat di KapalPro?</summary>
+            <p class="vessel-faq-a">Pilih kapal cepat di halaman ini, ajukan Letter of Intent via form, lakukan survei kapal, negosiasi harga, tanda tangan MOA, lalu serah terima kapal beserta dokumennya.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="section cta-section">
+      <div class="container" data-animate>
+        <h2>Tertarik dengan Kapal Kami?</h2>
+        <p>Ajukan Letter of Intent sekarang, kami respon dalam 1 hari kerja</p>
+        <div class="hero-actions">
+          <a href="contact.html" class="btn btn-primary btn-lg">Ajukan Letter of Intent</a>
+          <a href="https://wa.me/6285648048730" class="btn btn-secondary btn-lg" target="_blank" rel="noopener">Chat WhatsApp</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+<!-- Footer -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <!-- Brand -->
+        <div class="footer-brand">
+          <a href="index.html" class="logo" aria-label="KapalPro - Beranda">
+            <svg class="logo-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <path d="M4 24h24M8 24V16l8-8 8 8v8M16 8v-4M12 20h8M16 20v4"></path>
+            </svg>
+            <span>KapalPro</span>
+          </a>
+          <p>Platform terpercaya untuk jual beli kapal marine di Indonesia.</p>
+        </div>
+
+        <!-- Quick Links -->
+        <div>
+          <h3 class="footer-heading">Tautan Cepat</h3>
+          <nav aria-label="Navigasi footer">
+            <a href="index.html" class="footer-link">Beranda</a>
+            <a href="catalog.html" class="footer-link">Katalog</a>
+            <a href="about.html" class="footer-link">Tentang Kami</a>
+            <a href="contact.html" class="footer-link">Kontak</a>
+          </nav>
+        </div>
+        <!-- Resources -->
+        <div>
+          <h3 class="footer-heading">Sumber Daya</h3>
+          <nav aria-label="Navigasi sumber daya">
+            <a href="indeks-harga.html" class="footer-link">Indeks Harga Kapal</a>
+            <a href="tongkang.html" class="footer-link">Katalog Tongkang</a>
+                        <a href="tugboat.html" class="footer-link">Katalog Tugboat</a>
+            <a href="kapal-cepat.html" class="footer-link">Katalog Kapal Cepat</a>
+            <a href="kapal-bekas.html" class="footer-link">Kapal Bekas</a>
+            <a href="kapal-murah.html" class="footer-link">Kapal Murah</a>
+            <a href="kapal-bendera-indonesia.html" class="footer-link">Kapal Bendera Indonesia</a>
+            <a href="panduan-membeli-tongkang.html" class="footer-link">Panduan Membeli Tongkang</a>
+            <a href="panduan-dokumen-kapal.html" class="footer-link">Panduan Dokumen Kapal</a>
+          </nav>
+        </div>
+
+
+
+        <!-- Contact -->
+        <div>
+          <h3 class="footer-heading">Kontak</h3>
+          <a href="tel:+6285648048730" class="footer-link" data-tel>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" style="margin-right: 8px;">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+            </svg>
+            <span data-phone-text data-nosnippet>+62 856-4804-8730</span>
+          </a>
+        </div>
+
+        <!-- Legal -->
+        <div>
+          <h3 class="footer-heading">Legal</h3>
+          <a href="privacy.html" class="footer-link">Kebijakan Privasi</a>
+          <a href="accessibility.html" class="footer-link">Aksesibilitas</a>
+        </div>
+      </div>
+
+      <!-- Footer Bottom -->
+      <div class="footer-bottom">
+        <p class="footer-copyright">© 2026 KapalPro. Hak cipta dilindungi.</p>
+        <div class="footer-legal">
+          <button type="button" class="footer-link" data-manage-cookies style="background:none;border:0;cursor:pointer;padding:0;">Kelola Cookie</button>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Cookie Consent (Section 10.3) -->
+  <div id="cookie-consent" class="cookie-consent" role="dialog" aria-label="Persetujuan cookie">
+    <div class="cookie-consent-inner">
+      <p class="cookie-consent-text">
+        Website ini menggunakan cookies untuk analitik dan pengalaman yang lebih baik.
+        Dengan menggunakan website ini, Anda menyetujui penggunaan cookies.
+      </p>
+      <div class="cookie-consent-actions">
+        <button class="btn btn-primary btn-sm cookie-accept">Terima</button>
+        <button class="btn btn-ghost btn-sm cookie-decline">Tolak</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- Scripts (deferred for performance) -->
+  <script src="js/config.js?v=832baba2" defer></script>
+  <!-- WHY: data.js WAJIB sebelum about.js - about.js memanggil
+       VesselData.getVessels() untuk stats & daftar kota. Tanpa ini
+       modul gagal diam-diam dan angka statis di HTML dipakai. -->
+  <script src="js/data.js?v=832baba2" defer></script>
+  <script src="js/about.js?v=832baba2" defer></script>
+  <script src="js/theme.js?v=832baba2" defer></script>
+  <script src="js/app.js?v=832baba2" defer></script>
+  <script src="js/anim.js?v=832baba2" defer></script>
+  <script src="js/analytics.js?v=832baba2" defer></script>
+  <script src="js/perf.js?v=832baba2" defer></script>
+
+  <script src="js/search-autocomplete.js?v=832baba2" defer></script>
+
+</body>
+</html>
