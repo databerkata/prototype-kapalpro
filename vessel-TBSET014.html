@@ -281,15 +281,15 @@
     .vessel-main-image{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:12px;background:#f1f5f9}
   </style>
   
-  <link rel="stylesheet" href="css/style.css?v=20261018d">
-  <link rel="stylesheet" href="css/search-autocomplete.css?v=20261018d">
+  <link rel="stylesheet" href="css/style.css?v=20261019e">
+  <link rel="stylesheet" href="css/search-autocomplete.css?v=20261019e">
   <!-- WHY: Redirect ke URL bersih harus jalan SEBELUM halaman digambar.
          Kalau script-nya defer, pengunjung sempat melihat "Loading..."
          lalu lompat - perceptible flash pada koneksi lambat. File
          eksternal, bukan inline, supaya tidak perlu menambah hash baru
          ke CSP. .htaccess dan _redirects melakukan 301 sejati lebih
          dulu, jadi ini hanya cadangan untuk host tanpa konfigurasi. -->
-  <script src="js/vessel-redirect.js?v=20261018d"></script>
+  <script src="js/vessel-redirect.js?v=20261019e"></script>
 </head>
 <body data-vessel-id="TBSET014">
   <!-- Skip Link -->
@@ -512,6 +512,9 @@
               <h2 style="font-size: var(--text-xl); margin-bottom: var(--space-4);">Anatomi Kapal</h2>
               <div class="card" style="overflow: hidden; padding: var(--space-2);">
                 <iframe src="assets/anatomy/tbset014.html" title="Diagram anatomi kapal TBSET014" loading="lazy" scrolling="no" style="width: 100%; aspect-ratio: 148/100; border: 0; display: block; border-radius: var(--radius-sm); background: #ffffff;"></iframe>
+              </div>
+              <div class="card" style="overflow: hidden; padding: var(--space-2); margin-top: var(--space-4);">
+                <iframe src="assets/anatomy/tbset014-tug.html" title="Diagram anatomi tugboat TBSET014" loading="lazy" scrolling="no" style="width: 100%; aspect-ratio: 148/100; border: 0; display: block; border-radius: var(--radius-sm); background: #ffffff;"></iframe>
               </div>
             </section>
 
@@ -1495,18 +1498,18 @@
        semuanya defer, jadi urutan di sini adalah urutan eksekusi.
        Generator halaman kapal membaca berkas ini sebagai satu-satunya
        sumber markup, jadi perubahan ini ikut ke 15 vessel-*.html. -->
-  <script src="js/sanitize.js?v=20261018d" defer></script>
-  <script src="js/config.js?v=20261018d" defer></script>
-  <script src="js/theme.js?v=20261018d" defer></script>
-  <script src="js/data.js?v=20261018d" defer></script>
-  <script src="js/shortlist.js?v=20261018d" defer></script>
-  <script src="js/vessel-actions.js?v=20261018d" defer></script>
-  <script src="js/app.js?v=20261018d" defer></script>
-  <script src="js/anim.js?v=20261018d" defer></script>
-  <script src="js/vessel.js?v=20261018d" defer></script>
-  <script src="js/analytics.js?v=20261018d" defer></script>
-  <script src="js/perf.js?v=20261018d" defer></script>
-  <script src="js/search-autocomplete.js?v=20261018d" defer></script>
+  <script src="js/sanitize.js?v=20261019e" defer></script>
+  <script src="js/config.js?v=20261019e" defer></script>
+  <script src="js/theme.js?v=20261019e" defer></script>
+  <script src="js/data.js?v=20261019e" defer></script>
+  <script src="js/shortlist.js?v=20261019e" defer></script>
+  <script src="js/vessel-actions.js?v=20261019e" defer></script>
+  <script src="js/app.js?v=20261019e" defer></script>
+  <script src="js/anim.js?v=20261019e" defer></script>
+  <script src="js/vessel.js?v=20261019e" defer></script>
+  <script src="js/analytics.js?v=20261019e" defer></script>
+  <script src="js/perf.js?v=20261019e" defer></script>
+  <script src="js/search-autocomplete.js?v=20261019e" defer></script>
 
 </body>
 </html>
