@@ -58,14 +58,14 @@
   function bars(elm, rows) {
     elm.textContent = '';
     if (!rows || !rows.length) { elm.appendChild(el('p', 'an-hint', 'Belum ada data.')); return; }
-    var max = Math.max.apply(null, rows.map(function (r) { return r.views; }));
+    var max = Math.max.apply(null, rows.map(function (r) { return r.count; }));
     rows.slice(0, 8).forEach(function (r) {
       var row = el('div', 'an-bar-row');
       row.appendChild(el('div', 'an-bar-label', r.name));
       var track = el('div', 'an-bar-track'), fill = el('div', 'an-bar-fill');
-      fill.style.width = Math.max(2, Math.round(r.views / max * 100)) + '%';
+      fill.style.width = Math.max(2, Math.round(r.count / max * 100)) + '%';
       track.appendChild(fill); row.appendChild(track);
-      row.appendChild(el('div', 'an-bar-num', fmt(r.views)));
+      row.appendChild(el('div', 'an-bar-num', fmt(r.count)));
       elm.appendChild(row);
     });
   }
@@ -87,7 +87,7 @@
             'Diperbarui ' + new Date(d.generated_at).toLocaleString('id-ID', { timeZone: 'Asia/Jakarta' }) + ' WIB';
         }
 
-        var s7 = d.summary['7d'], s30 = d.summary['30d'];
+        var s7 = d.totals.d7, s30 = d.totals.d30;
         var cards = [
           ['Page Views (7 hari)', fmt(s7.pageViews), '30 hari: ' + fmt(s30.pageViews)],
           ['Pengunjung Unik (7 hari)', fmt(s7.uniques), '30 hari: ' + fmt(s30.uniques)],
@@ -106,7 +106,7 @@
 
         var chart = document.getElementById('an-chart');
         chart.textContent = '';
-        var daily = d.daily.slice().reverse(); // API: terbaru dulu -> gambar kronologis
+        var daily = d.daily; // API: urut kronologis menaik
         var max = Math.max.apply(null, daily.map(function (x) { return x.pageViews; }).concat([1]));
         var step = Math.ceil(daily.length / 6);
         var labels = [];
