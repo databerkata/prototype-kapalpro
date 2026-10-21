@@ -10,9 +10,9 @@
  * CARA GANTI NOMOR KAMU:
  *   1. Ubah `whatsappNumber` di bawah (format internasional TANPA
  *      tanda '+', TANPA spasi, contoh: 6285648048730).
- *   2. Selesai. Semua link WhatsApp, link tel:, dan tampilan nomor
+ *   2. Selesai. Semua link WhatsApp dan tampilan nomor
  *      di seluruh situs ikut berubah otomatis saat halaman dimuat.
- *   3. Untuk SEO, hasil akhir tetap ditulis ke HTML (link tel: dan
+ *   3. Untuk SEO, hasil akhir tetap ditulis ke HTML (link WhatsApp dan
  *      teks footer) sehingga crawler tanpa JS tetap membaca nomor
  *      yang benar.
  */
@@ -22,9 +22,6 @@
 window.KAPALPRO_CONFIG = {
   // ---------- Kontak (GANTI DI SINI) ----------
   whatsappNumber: '6285648048730',
-
-  // Nomor untuk link tel: (format E.164, boleh '+' atau tidak)
-  telephoneNumber: '6285648048730',
 
   // Tampilan nomor di footer/kartu kontak (format manusia)
   displayPhone: '+62 856-4804-8730',
@@ -94,9 +91,6 @@ window.KAPALPRO_CONFIG = {
       // WHY: wa.me menerima ?text= URL-encoded; pesan opsional.
       return message ? base + '?text=' + encodeURIComponent(message) : base;
     },
-    telHref: function() {
-      return 'tel:+' + c.telephoneNumber;
-    },
     displayPhone: function() {
       return c.displayPhone;
     },
@@ -152,7 +146,6 @@ window.KAPALPRO_CONFIG = {
  * Atribut yang dikenali:
  *   data-wa          -> href = wa.me + pesan dari data-wa-msg
  *   data-wa-msg      -> pesan opsional pada link WhatsApp
- *   data-tel         -> href = tel:+<nomor>
  *   data-phone-text  -> teks tampilan nomor
  *   data-email-link  -> href = mailto:<email>
  *   data-phone-jsonld-> teks untuk JSON-LD ContactPoint
@@ -163,10 +156,6 @@ window.KAPALPRO_CONFIG = {
 
   function apply(root) {
     var scope = root || document;
-
-    Array.prototype.forEach.call(scope.querySelectorAll('[data-tel]'), function(el) {
-      el.setAttribute('href', contact.telHref());
-    });
 
     Array.prototype.forEach.call(scope.querySelectorAll('[data-phone-text]'), function(el) {
       el.textContent = contact.displayPhone();
@@ -190,7 +179,7 @@ window.KAPALPRO_CONFIG = {
         try {
           var parsed = JSON.parse(s.textContent);
           var changed = false;
-          if (parsed.telephone) { parsed.telephone = '+' + c.telephoneNumber; changed = true; }
+          if (parsed.telephone) { parsed.telephone = '+' + c.whatsappNumber; changed = true; }
           if (parsed.contactPoint) {
             // WHY: schema.org mengizinkan contactPoint sebagai SATU objek
             // atau array. Handle keduanya supaya tidak melempar TypeError.
@@ -198,7 +187,7 @@ window.KAPALPRO_CONFIG = {
               ? parsed.contactPoint
               : [parsed.contactPoint];
             points.forEach(function(cp) {
-              if (cp && cp.telephone) { cp.telephone = '+' + c.telephoneNumber; changed = true; }
+              if (cp && cp.telephone) { cp.telephone = '+' + c.whatsappNumber; changed = true; }
             });
           }
           if (changed) s.textContent = JSON.stringify(parsed, null, 2);
