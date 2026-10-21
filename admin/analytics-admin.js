@@ -134,28 +134,23 @@
     wrap.textContent = '';
     var c = d.contact || { wa: {}, tel: {} };
     var f = d.forms || {};
-    function card(label, value, sub) {
+    function card(label, value) {
       var cd = el('div', 'an-card');
       cd.appendChild(el('div', 'an-card-label', label));
       cd.appendChild(el('div', 'an-card-value', value));
-      cd.appendChild(el('div', 'an-card-sub', sub));
       wrap.appendChild(cd);
     }
-    card('Klik WhatsApp', fmt(c.wa.d7),
-      'minggu ini · hari ini ' + fmt(c.wa.today) + ' · bulan ini ' + fmt(c.wa.d30));
-    card('Klik Telepon', fmt(c.tel.d7),
-      'minggu ini · hari ini ' + fmt(c.tel.today) + ' · bulan ini ' + fmt(c.tel.d30));
+    card('Klik WhatsApp', fmt(c.wa.d7));
+    card('Klik Telepon', fmt(c.tel.d7));
     if (f.error) {
-      card('Formulir Inquiry', '—', 'sedang tidak terbaca, coba lagi nanti');
-      card('Pesan Kontak', '—', 'sedang tidak terbaca, coba lagi nanti');
+      card('Formulir Inquiry', '—');
+      card('Pesan Kontak', '—');
       note.textContent = 'Data formulir gagal dimuat pada pembaruan terakhir. Klik WhatsApp/telepon tetap tercatat.';
       leadLine.textContent = '';
       leadLine.className = 'an-lead-line';
     } else {
-      card('Formulir Inquiry', fmt(f.inquiry.real),
-        'calon pembeli bertanya soal kapal · minggu ini ' + fmt(f.inquiry.real_d7));
-      card('Pesan Kontak', fmt(f.contact.real),
-        'pesan dari halaman kontak · minggu ini ' + fmt(f.contact.real_d7));
+      card('Formulir Inquiry', fmt(f.inquiry.real));
+      card('Pesan Kontak', fmt(f.contact.real));
       var totalLeads = Number(c.wa.d30 || 0) + Number(c.tel.d30 || 0) +
         Number(f.inquiry.real || 0) + Number(f.contact.real || 0);
       if (totalLeads > 0) {
