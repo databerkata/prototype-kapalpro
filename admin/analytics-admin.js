@@ -139,16 +139,13 @@
       cd.appendChild(el('div', 'an-card-value', value));
       wrap.appendChild(cd);
     }
-    card('Klik WhatsApp', fmt(c.wa.d7));
-    card('Klik Telepon', fmt(c.tel.d7));
+    card('Klik Kontak', fmt(Number(c.wa.d7 || 0) + Number(c.tel.d7 || 0)));
     if (f.error) {
-      card('Formulir Inquiry', '-');
-      card('Pesan Kontak', '-');
+      card('Formulir', '-');
       leadLine.textContent = '';
       leadLine.className = 'an-lead-line';
     } else {
-      card('Formulir Inquiry', fmt(f.inquiry.real));
-      card('Pesan Kontak', fmt(f.contact.real));
+      card('Formulir', fmt(Number(f.inquiry.real || 0) + Number(f.contact.real || 0)));
       var totalLeads = Number(c.wa.d30 || 0) + Number(c.tel.d30 || 0) +
         Number(f.inquiry.real || 0) + Number(f.contact.real || 0);
       if (totalLeads > 0) {
