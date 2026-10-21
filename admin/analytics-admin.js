@@ -104,14 +104,10 @@
     document.querySelectorAll('.an-period-btn').forEach(function (b) {
       b.classList.toggle('is-active', b.getAttribute('data-period') === period);
     });
-    table(document.getElementById('an-vessel-table'), ['Halaman', 'Views'],
-      (p30 ? d.top_vessel_pages_30 : d.top_vessel_pages).map(function (r) { return [r.path, fmt(r.views)]; }));
     table(document.getElementById('an-pages-table'), ['Halaman', 'Views'],
       (p30 ? d.top_pages_30 : d.top_pages).map(function (r) { return [r.path, fmt(r.views)]; }));
     bars(document.getElementById('an-countries'), p30 ? d.top_countries_30 : d.top_countries);
-    bars(document.getElementById('an-browsers'), p30 ? d.top_browsers_30 : d.top_browsers);
     bars(document.getElementById('an-devices'), p30 ? d.devices_30 : d.devices_7);
-    bars(document.getElementById('an-os'), p30 ? d.os_30 : d.os_7);
     bars(document.getElementById('an-status-bars'), p30 ? d.status_30 : d.status_7);
   }
 
@@ -167,15 +163,30 @@
 
   function renderVessels(d) {
     table(document.getElementById('an-vessels-table'),
-      ['Kapal', 'Status', 'Harga', 'Dilihat 7 hari', 'Dilihat 30 hari', 'Inquiry'],
+      ['Kapal', 'Status', 'Harga', 'Dilihat 7 hari', 'Dilihat 30 hari', 'Inquiry', 'Klik'],
       (d.vessels || []).map(function (v) {
         return [
           (v.name || v.id) + ' (' + v.id + ')',
           statusLabel(v.status),
           fmtPrice(v.price),
-          fmt(v.views7), fmt(v.views30), fmt(v.inquiries)
+          fmt(v.views7), fmt(v.views30), fmt(v.inquiries), fmt(v.clicks30)
         ];
       }));
+  }
+
+  function renderClickRecent(d) {
+    var box = document.getElementById('an-click-recent');
+    box.textContent = '';
+    ((d.contact || {}).recent || []).slice(0, 5).forEach(function (ev) {
+      box.appendChild(el('div', 'an-recent-row', ev.label + ' · ' + ev.ch + ' · ' + ev.src));
+    });
+  }
+
+  function renderSources(d) {
+    var w = d.web_analytics || {};
+    var total = document.getElementById('an-source-total');
+    total.textContent = w.d7 ? fmt(w.d7) + ' kunjungan browser asli · minggu ini' : '';
+    bars(document.getElementById('an-sources'), w.referrers || []);
   }
 
   function renderSplit(d) {
@@ -244,8 +255,9 @@
     }
 
     var t = d.today, s7 = d.totals.d7, s30 = d.totals.d30;
+    var yest = d.daily[d.daily.length - 2] || t;
     var cards = [
-      ['Hari Ini', fmt(t.pageViews)],
+      ['Kemarin', fmt(yest.pageViews)],
       ['Minggu Ini', fmt(s7.pageViews)],
       ['Bulan Ini', fmt(s30.pageViews)]
     ];
@@ -273,14 +285,10 @@
           title: 'Jam ' + h.hour + ' WIB · ' + fmt(h.pageViews) + ' views, ' + fmt(h.uniques) + ' unik, ' + fmt(h.requests) + ' requests' };
       }), 3);
 
-    vchart(document.getElementById('an-chart'), document.getElementById('an-xlabels'),
-      d.daily.map(function (day) {
-        return { label: day.date.slice(5), value: day.pageViews,
-          title: day.date + ' · ' + fmt(day.pageViews) + ' views, ' + fmt(day.uniques) + ' unik' };
-      }), 5);
-
     renderPeriod();
     renderContact(d);
+    renderClickRecent(d);
+    renderSources(d);
     renderVessels(d);
   }
 
