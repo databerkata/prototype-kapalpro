@@ -232,9 +232,9 @@
 
     var t = d.today, s7 = d.totals.d7, s30 = d.totals.d30;
     var cards = [
-      ['Pengunjung hari ini', fmt(t.uniques)],
-      ['Dibuka minggu ini', fmt(s7.pageViews)],
-      ['Dibuka bulan ini', fmt(s30.pageViews)]
+      ['Hari Ini', fmt(t.pageViews)],
+      ['Minggu Ini', fmt(s7.pageViews)],
+      ['Bulan Ini', fmt(s30.pageViews)]
     ];
     var wrap = document.getElementById('an-cards');
     wrap.textContent = '';
