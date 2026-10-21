@@ -364,9 +364,13 @@ body.admin-body {
 .an-details { margin-top: 6px; border-top: 2px dashed #d9dee5; padding-top: 14px; }
 .an-details > summary { cursor: pointer; font-weight: 700; color: #0b3c6d; font-size: 15px; padding: 6px 0 14px; }
 .an-details > summary:hover { text-decoration: underline; }
-.an-split { display: flex; height: 18px; border-radius: 6px; overflow: hidden; background: #eef3f8; margin: 6px 0 8px; }
-.an-split > div { height: 100%; }
-.an-split-legend { font-size: 13.5px; color: #374151; margin: 0; }
+.an-donut-row { display: flex; align-items: center; gap: 26px; }
+.an-donut { width: 150px; height: 150px; border-radius: 50%; background: #374151; display: flex; align-items: center; justify-content: center; flex: none; }
+.an-donut-hole { width: 104px; height: 104px; border-radius: 50%; background: #fff; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.an-donut-hole > span:first-child { font-family: var(--font-display); font-size: 30px; font-weight: 800; color: #0b3c6d; line-height: 1; }
+.an-donut-sub { font-size: 12.5px; color: #5b7a99; margin-top: 3px; }
+.an-donut-legend { font-size: 15px; color: #374151; line-height: 2; }
+.an-dot { display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: 8px; vertical-align: -1px; }
 
 /* ---- Font disamakan dengan landing page (SF Pro Display/Text) ---- */
 .login-card h1, .admin-brand, .admin-toolbar h2, .form-panel h3,
