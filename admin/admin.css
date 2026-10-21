@@ -366,6 +366,9 @@ body.admin-body {
 .an-details { margin-top: 6px; border-top: 2px dashed #d9dee5; padding-top: 14px; }
 .an-details > summary { cursor: pointer; font-weight: 700; color: #0b3c6d; font-size: 15px; padding: 6px 0 14px; }
 .an-details > summary:hover { text-decoration: underline; }
+.an-split { display: flex; height: 18px; border-radius: 6px; overflow: hidden; background: #eef3f8; margin: 6px 0 8px; }
+.an-split > div { height: 100%; }
+.an-split-legend { font-size: 13.5px; color: #374151; margin: 0; }
 
 /* ---- Font disamakan dengan landing page (SF Pro Display/Text) ---- */
 .login-card h1, .admin-brand, .admin-toolbar h2, .form-panel h3,

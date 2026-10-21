@@ -184,6 +184,23 @@
       }));
   }
 
+  function renderSplit(d) {
+    var s = (d.traffic_split || {}).d7;
+    var bar = document.getElementById('an-split');
+    var legend = document.getElementById('an-split-legend');
+    bar.textContent = ''; legend.textContent = '';
+    if (!s) { legend.textContent = 'Belum ada data.'; return; }
+    [['human', '#0e5aa8'], ['grey', '#b8c9da'], ['bot', '#374151']].forEach(function (seg) {
+      var div = el('div', null);
+      div.style.width = s[seg[0] + '_pct'] + '%';
+      div.style.background = seg[1];
+      div.title = seg[0] + ' ' + s[seg[0] + '_pct'] + '%';
+      bar.appendChild(div);
+    });
+    legend.textContent = 'Kemungkinan manusia ' + s.human_pct + '% · Abu-abu ' + s.grey_pct +
+      '% · Robot ' + s.bot_pct + '% — dari ' + fmt(s.total) + ' request minggu ini.';
+  }
+
   function renderTop5(d) {
     var wrap = document.getElementById('an-top5');
     wrap.textContent = '';
@@ -244,6 +261,7 @@
           title: day.date + ' — dibuka ' + fmt(day.pageViews) + ' kali, ' + fmt(day.uniques) + ' pengunjung' };
       }), 3, true);
 
+    renderSplit(d);
     renderTop5(d);
 
     vchart(document.getElementById('an-hourly-chart'), document.getElementById('an-hourly-labels'),
