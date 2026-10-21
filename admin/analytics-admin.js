@@ -136,7 +136,6 @@
       wrap.appendChild(cd);
     }
     card('Klik WhatsApp', fmt(c.wa.d7));
-    card('Klik Telepon', fmt(c.tel.d7));
     if (f.error) {
       card('Formulir Inquiry', '-');
       card('Pesan Kontak', '-');
@@ -145,12 +144,11 @@
     } else {
       card('Formulir Inquiry', fmt(f.inquiry.real));
       card('Pesan Kontak', fmt(f.contact.real));
-      var totalLeads = Number(c.wa.d30 || 0) + Number(c.tel.d30 || 0) +
+      var totalLeads = Number(c.wa.d30 || 0) +
         Number(f.inquiry.real || 0) + Number(f.contact.real || 0);
       if (totalLeads > 0) {
         var actions = [];
         if (Number(c.wa.d30 || 0) > 0) actions.push('cek WhatsApp');
-        if (Number(c.tel.d30 || 0) > 0) actions.push('cek riwayat panggilan');
         if (Number(f.inquiry.real || 0) + Number(f.contact.real || 0) > 0) actions.push('cek formulir masuk');
         leadLine.textContent = 'Ada calon pembeli yang sudah menghubungi: ' + actions.join(' · ') + '.';
         leadLine.className = 'an-lead-line an-lead-ok';
