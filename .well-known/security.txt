@@ -1,0 +1,4 @@
+Contact: mailto:info.databerkata@gmail.com
+Expires: 2027-10-21T05:00:00.000Z
+Preferred-Languages: id, en
+Canonical: https://kapalpro.web.id/.well-known/security.txt
