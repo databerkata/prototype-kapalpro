@@ -129,7 +129,6 @@
 
   function renderContact(d) {
     var wrap = document.getElementById('an-contact-cards');
-    var note = document.getElementById('an-contact-note');
     var leadLine = document.getElementById('an-lead-line');
     wrap.textContent = '';
     var c = d.contact || { wa: {}, tel: {} };
@@ -143,9 +142,8 @@
     card('Klik WhatsApp', fmt(c.wa.d7));
     card('Klik Telepon', fmt(c.tel.d7));
     if (f.error) {
-      card('Formulir Inquiry', '—');
-      card('Pesan Kontak', '—');
-      note.textContent = 'Data formulir gagal dimuat pada pembaruan terakhir. Klik WhatsApp/telepon tetap tercatat.';
+      card('Formulir Inquiry', '-');
+      card('Pesan Kontak', '-');
       leadLine.textContent = '';
       leadLine.className = 'an-lead-line';
     } else {
@@ -154,15 +152,12 @@
       var totalLeads = Number(c.wa.d30 || 0) + Number(c.tel.d30 || 0) +
         Number(f.inquiry.real || 0) + Number(f.contact.real || 0);
       if (totalLeads > 0) {
-        leadLine.textContent = 'Ada calon pembeli yang sudah menghubungi — cek WhatsApp dan formulir masuk.';
+        leadLine.textContent = 'Ada calon pembeli yang sudah menghubungi: cek WhatsApp dan formulir masuk.';
         leadLine.className = 'an-lead-line an-lead-ok';
       } else {
         leadLine.textContent = 'Belum ada calon pembeli yang menghubungi.';
         leadLine.className = 'an-lead-line an-lead-zero';
       }
-      var tests = Number(f.inquiry.tests || 0) + Number(f.contact.tests || 0);
-      note.textContent = 'Klik WhatsApp/telepon mulai dihitung 20 Okt 2026. Formulir dari Google Forms' +
-        (tests ? '; ' + fmt(tests) + ' entri tes tidak dihitung.' : '.');
     }
   }
 
@@ -193,7 +188,7 @@
       bar.appendChild(div);
     });
     legend.textContent = 'Kemungkinan manusia ' + s.human_pct + '% · Abu-abu ' + s.grey_pct +
-      '% · Robot ' + s.bot_pct + '% — dari ' + fmt(s.total) + ' request minggu ini.';
+      '% · Robot ' + s.bot_pct + '% · dari ' + fmt(s.total) + ' request minggu ini.';
   }
 
   function renderTop5(d) {
@@ -253,7 +248,7 @@
     vchart(document.getElementById('an-chart14'), document.getElementById('an-xlabels14'),
       d.daily.slice(-14).map(function (day) {
         return { label: day.date.slice(5), value: day.pageViews,
-          title: day.date + ' — dibuka ' + fmt(day.pageViews) + ' kali, ' + fmt(day.uniques) + ' pengunjung' };
+          title: day.date + ' · dibuka ' + fmt(day.pageViews) + ' kali, ' + fmt(day.uniques) + ' pengunjung' };
       }), 3, true);
 
     renderSplit(d);
@@ -262,13 +257,13 @@
     vchart(document.getElementById('an-hourly-chart'), document.getElementById('an-hourly-labels'),
       d.hourly_today.map(function (h) {
         return { label: h.hour.slice(0, 2), value: h.pageViews,
-          title: 'Jam ' + h.hour + ' WIB — ' + fmt(h.pageViews) + ' views, ' + fmt(h.uniques) + ' unik, ' + fmt(h.requests) + ' requests' };
+          title: 'Jam ' + h.hour + ' WIB · ' + fmt(h.pageViews) + ' views, ' + fmt(h.uniques) + ' unik, ' + fmt(h.requests) + ' requests' };
       }), 3);
 
     vchart(document.getElementById('an-chart'), document.getElementById('an-xlabels'),
       d.daily.map(function (day) {
         return { label: day.date.slice(5), value: day.pageViews,
-          title: day.date + ' — ' + fmt(day.pageViews) + ' views, ' + fmt(day.uniques) + ' unik' };
+          title: day.date + ' · ' + fmt(day.pageViews) + ' views, ' + fmt(day.uniques) + ' unik' };
       }), 5);
 
     renderPeriod();
